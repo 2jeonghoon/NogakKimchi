@@ -12,25 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a7bcf6fcbb6c844d906e040c534dc62, type: 3}
   m_Name: Tower01Cannon
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 6541577686761330561, guid: 6217866aa3e5da942943b2fb97694c09,
+  towerPrefab: {fileID: 5887261285876969649, guid: d0ac58464a39fca4cbc270ae87c90655,
     type: 3}
-  followTowerPrefab: {fileID: 943704362587023468, guid: 72c738fd62f4edd4ab633a69ae563c28,
+  followTowerPrefab: {fileID: 8498523484413667391, guid: 26f2e7db1ab131b44a515e403d64a51d,
     type: 3}
   weapon:
-  - sprite: {fileID: 21300000, guid: 13873cc7578093547a6fd34245a1b9c9, type: 3}
+  - sprite: {fileID: 278872809, guid: 76b9cd6b492c12a40867e5ec466aaf59, type: 3}
     damage: 1
+    slow: 0
+    buff: 0
     rate: 0.5
     range: 2
     cost: 50
     sell: 25
-  - sprite: {fileID: 21300000, guid: 15672000093d2ba4483ee055c208d477, type: 3}
+  - sprite: {fileID: 504956139, guid: 76b9cd6b492c12a40867e5ec466aaf59, type: 3}
     damage: 1.5
+    slow: 0
+    buff: 0
     rate: 0.4
     range: 2.3
     cost: 100
     sell: 75
-  - sprite: {fileID: 21300000, guid: 4a2e218b865489a4b9ff8921607b0ff0, type: 3}
+  - sprite: {fileID: -663852771, guid: 76b9cd6b492c12a40867e5ec466aaf59, type: 3}
     damage: 2
+    slow: 0
+    buff: 0
     rate: 0.3
     range: 2.5
     cost: 150

@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public enum WeaponType	{ Cannon = 0, Laser, Slow, Buff, }
-public enum WeaponState { SearchTarget = 0, TryAttackCannon, TryAttackLaser, }
+public enum WeaponType	{ Gun = 0, Laser, Slow, Buff, Mortar, }
+public enum WeaponState { SearchTarget = 0, TryAttackGun, TryAttackLaser, TryAttackMortar, }
 
 public class TowerWeapon : MonoBehaviour
 {
@@ -15,7 +15,7 @@ public class TowerWeapon : MonoBehaviour
 	private	WeaponType		weaponType;								// 무기 속성 설정
 	public	TowerWeapon		buffTower;
 
-	[Header("Cannon")]
+	[Header("Gun")]
 	[SerializeField]
 	private	GameObject		projectilePrefab;						// 발사체 프리팹
 
@@ -70,7 +70,7 @@ public class TowerWeapon : MonoBehaviour
 		this.ownerTile		= ownerTile;
 		
 		// 무기 속성이 캐논, 레이저일 때
-		if ( weaponType == WeaponType.Cannon || weaponType == WeaponType.Laser )
+		if ( weaponType == WeaponType.Gun || weaponType == WeaponType.Laser || weaponType == WeaponType.Mortar )
 		{
 			// 최초 상태를 WeaponState.SearchTarget으로 설정
 			ChangeState(WeaponState.SearchTarget);
@@ -89,10 +89,11 @@ public class TowerWeapon : MonoBehaviour
 
 	private void Update()
 	{
+		/*
 		if ( attackTarget != null )
 		{
 			RotateToTarget();
-		}
+		}*/
 	}
 	
 	private void RotateToTarget()
@@ -117,13 +118,17 @@ public class TowerWeapon : MonoBehaviour
 
 			if ( attackTarget != null )
 			{
-				if ( weaponType == WeaponType.Cannon )
+				if ( weaponType == WeaponType.Gun )
 				{
-					ChangeState(WeaponState.TryAttackCannon);
+					ChangeState(WeaponState.TryAttackGun);
 				}
 				else if ( weaponType == WeaponType.Laser )
 				{
 					ChangeState(WeaponState.TryAttackLaser);
+				}
+				else if ( weaponType == WeaponType.Mortar) 
+				{
+					ChangeState(WeaponState.TryAttackMortar);
 				}
 			}
 
@@ -131,7 +136,7 @@ public class TowerWeapon : MonoBehaviour
 		}
 	}
 
-	private	IEnumerator TryAttackCannon()
+	private	IEnumerator TryAttackGun()
 	{
 		while ( true )
 		{
@@ -173,6 +178,25 @@ public class TowerWeapon : MonoBehaviour
 		}
 	}
 
+	private	IEnumerator TryAttackMortar()
+	{
+		while ( true )
+		{
+			// target을 공격하는게 가능한지 검사
+			if ( IsPossibleToAttackTarget() == false )
+			{
+				ChangeState(WeaponState.SearchTarget);
+				break;
+			}
+
+			// attackRate 시간만큼 대기
+			yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
+			
+			// 캐논 공격 (발사체 생성)
+			SpawnProjectile();
+		}
+	}
+
 	public void OnBuffAroundTower()
 	{
 		// 현재 맵에 배치된 "Tower" 태그를 가진 모든 오브젝트 탐색
@@ -192,7 +216,7 @@ public class TowerWeapon : MonoBehaviour
 			if ( Vector3.Distance(weapon.transform.position, transform.position) <= towerTemplate.weapon[level].range )
 			{
 				// 공격이 가능한 캐논, 레이저 타워이면
-				if ( weapon.WeaponType == WeaponType.Cannon || weapon.WeaponType == WeaponType.Laser )
+				if ( weapon.WeaponType == WeaponType.Gun || weapon.WeaponType == WeaponType.Laser )
 				{
 					// 버프에 의해 공격력 증가
 					weapon.AddedDamage = weapon.Damage * (towerTemplate.weapon[level].buff);
@@ -351,7 +375,7 @@ public class TowerWeapon : MonoBehaviour
  *	: ChangeState() - 코루틴을 이용한 FSM에서 상태 변경 함수
  *	: RotateToTarget() - target 방향으로 회전
  *	: SearchTarget() - 현재 타워에 가장 근접한 적 탐색
- *	: TryAttackCannon() - target으로 설정된 대상에게 캐논 공격
+ *	: TryAttackGun() - target으로 설정된 대상에게 캐논 공격
  *	: TryAttackLaser() - target으로 설정된 대상에게 레이저 공격
  *	: FindClosestAttackTarget() - 현재 타워에 가장 근접한 공격 대상(적) 탐색
  *	: IsPossibleToAttackTarget() - AttackTarget이 있는지, 공격 가능한지 검사

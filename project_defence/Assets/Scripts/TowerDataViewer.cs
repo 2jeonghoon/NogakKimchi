@@ -62,7 +62,7 @@ public class TowerDataViewer : MonoBehaviour
 
 	private void UpdateTowerData()
 	{
-		if ( currentTower.WeaponType == WeaponType.Cannon || currentTower.WeaponType == WeaponType.Laser )
+		if ( currentTower.WeaponType == WeaponType.Gun || currentTower.WeaponType == WeaponType.Laser )
 		{
 			imageTower.rectTransform.sizeDelta = new Vector2(88, 59);
 			textDamage.text = "Damage : " + currentTower.Damage

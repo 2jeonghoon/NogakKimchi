@@ -23,6 +23,18 @@ public class WaveSystem : MonoBehaviour
 			enemySpawner.StartWave(waves[currentWaveIndex]);
 		}
 	}
+
+	public void SpeedUp() {
+		if(Time.timeScale < 4) {
+			Time.timeScale += 0.5f;
+		}
+	}
+
+	public void SpeedDown() {
+		if(Time.timeScale > 0.5f) {
+			Time.timeScale -= 0.5f;
+		}
+	}
 }
 
 [System.Serializable]
