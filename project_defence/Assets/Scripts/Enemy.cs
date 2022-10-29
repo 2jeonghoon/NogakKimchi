@@ -37,9 +37,6 @@ public class Enemy : MonoBehaviour
 
 		while ( true )
 		{
-			// 적 오브젝트 회전
-			transform.Rotate(Vector3.forward * 10);
-
 			// 적의 현재위치와 목표위치의 거리가 0.02 * movement2D.MoveSpeed보다 작을 때 if 조건문 실행
 			// Tip. movement2D.MoveSpeed를 곱해주는 이유는 속도가 빠르면 한 프레임에 0.02보다 크게 움직이기 때문에
 			// if 조건문에 걸리지 않고 경로를 탈주하는 오브젝트가 발생할 수 있다.
@@ -58,6 +55,7 @@ public class Enemy : MonoBehaviour
 		// 아직 이동할 wayPoints가 남아있다면
 		if ( currentIndex < wayPointCount - 1 )
 		{
+			// 방향벡터가 +일 때 -일 때 이미지 다르게 출력(오른쪽 볼 때, 왼쪽 볼 때)
 			// 적의 위치를 정확하게 목표 위치로 설정
 			transform.position = wayPoints[currentIndex].position;
 			// 이동 방향 설정 => 다음 목표지점(wayPoints)
