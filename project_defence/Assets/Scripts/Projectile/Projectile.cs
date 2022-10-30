@@ -2,12 +2,11 @@
 
 public class Projectile : MonoBehaviour
 {
-	private	Movement2D	movement2D;
-	private	Transform	target;
-	//private	int			damage;
-	private	float		damage;
+	protected	Movement2D	movement2D;
+	protected	Transform	target;
+	protected float		damage;
 
-	public void Setup(Transform target, float damage)
+	public virtual void Setup(Transform target, float damage)
 	{
 		movement2D	= GetComponent<Movement2D>();
 		this.target	= target;						// 타워가 설정해준 target
@@ -41,7 +40,8 @@ public class Projectile : MonoBehaviour
 
 
 /*
- * File : Projectile.cs
+ * File : Projectile
+ * .cs
  * Desc
  *	: 타워가 발사하는 기본 발사체에 부착
  *	
