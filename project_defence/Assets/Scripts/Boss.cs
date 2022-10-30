@@ -12,6 +12,10 @@ public class Boss : Enemy
     // 복사되는 클론
     [SerializeField]
     private GameObject boss_clone;
+    // 소환하는 enemy
+    [SerializeField]
+    private GameObject[] enemys;
+
 
     // 웅크리기 지속시간
     private float crouch_time = 0.5f;
@@ -71,7 +75,7 @@ public class Boss : Enemy
         else if (phase == PHASE.THREE)
         {
             Debug.Log("리콜");
-            recall();
+            StartCoroutine("recall", delay_time);
         }
         yield return new WaitForSeconds(delay_time);
         StartCoroutine("skill", delay_time);
@@ -110,7 +114,10 @@ public class Boss : Enemy
         // HP 바 생성
         enemySpawner.SpawnEnemyHPSlider(clone);
 
+        // 적 리스트에 추가
         enemySpawner.EnemyList.Add(enemy);
+
+        // 소환된 클론 체력 깎기
         enemy.GetComponent<EnemyHP>().TakeDamage((this.GetComponent<EnemyHP>().MaxHP - this.GetComponent<EnemyHP>().CurrentHP)*1.5f);
 
         yield return new WaitForSeconds(crouch_time);
@@ -118,9 +125,32 @@ public class Boss : Enemy
         movement2D.MoveSpeed = speed;
     }
 
-
-    private void recall()
+    private IEnumerator recall()
     {
+        float speed = movement2D.MoveSpeed;
+        float defense = state.getDefense();
 
+        movement2D.MoveSpeed = 0;
+
+        // 복사
+        for(int i = 0; i < enemys.Length; i++)
+        {
+            GameObject clone = Instantiate(enemys[i]);
+            Enemy enemy = clone.GetComponent<Enemy>();  // 방금 생성된 적의 Enemy 컴포넌트된 클론 위치 세팅
+            enemy.Setup(enemySpawner, this);      // 보스의 way데이터를 가지고 클론을 만듬.
+            enemy.transform.position = this.transform.position;
+            enemy.transform.rotation = this.transform.rotation;
+
+            // HP 바 생성
+            enemySpawner.SpawnEnemyHPSlider(clone);
+
+            // 적 리스트에 추가
+            enemySpawner.EnemyList.Add(enemy);
+        }
+
+        yield return new WaitForSeconds(crouch_time);
+        state.SetDefense(defense);
+        movement2D.MoveSpeed = speed;
     }
+
 }

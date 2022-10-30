@@ -149,3 +149,8 @@ MonoBehaviour:
   delay_time: 10
   boss_clone: {fileID: 4286712872766883678, guid: 9d131067c8887614cbec9ecbe31bfdb4,
     type: 3}
+  enemys:
+  - {fileID: 4286712872766883678, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+  - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+  - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+  - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
