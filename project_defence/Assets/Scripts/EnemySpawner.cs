@@ -90,7 +90,7 @@ public class EnemySpawner : MonoBehaviour
 		Destroy(enemy.gameObject);
 	}
 
-	private void SpawnEnemyHPSlider(GameObject enemy)
+	public void SpawnEnemyHPSlider(GameObject enemy)
 	{
 		// 적 체력을 나타내는 Slider UI 생성
 		GameObject sliderClone = Instantiate(enemyHPSliderPrefab);

@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public enum WeaponType	{ Gun = 0, Laser, Slow, Buff, Mortar, Machinegun}
-public enum WeaponState { SearchTarget = 0, TryAttackGun, TryAttackLaser, TryAttackMortar, TryAttackMachinegun}
+public enum WeaponType	{ Gun = 0, Laser, Slow, Buff, Mortar, }
+public enum WeaponState { SearchTarget = 0, TryAttackGun, TryAttackLaser, TryAttackMortar, }
 
 public class TowerWeapon : MonoBehaviour
 {
@@ -70,7 +70,7 @@ public class TowerWeapon : MonoBehaviour
 		this.ownerTile		= ownerTile;
 		
 		// 무기 속성이 캐논, 레이저일 때
-		if ( weaponType == WeaponType.Gun || weaponType == WeaponType.Laser || weaponType == WeaponType.Mortar || weaponType == WeaponType.Machinegun )
+		if ( weaponType == WeaponType.Gun || weaponType == WeaponType.Laser || weaponType == WeaponType.Mortar )
 		{
 			// 최초 상태를 WeaponState.SearchTarget으로 설정
 			ChangeState(WeaponState.SearchTarget);
@@ -130,16 +130,12 @@ public class TowerWeapon : MonoBehaviour
 				{
 					ChangeState(WeaponState.TryAttackMortar);
 				}
-				else if ( weaponType == WeaponType.Machinegun) {
-					ChangeState(WeaponState.TryAttackMachinegun);
-				}
 			}
 
 			yield return null;
 		}
 	}
 
-	// 단발 사격
 	private	IEnumerator TryAttackGun()
 	{
 		while ( true )
@@ -156,27 +152,6 @@ public class TowerWeapon : MonoBehaviour
 			
 			// 캐논 공격 (발사체 생성)
 			SpawnProjectile();
-		}
-	}
-
-	// 다발사격
-	private	IEnumerator TryAttackMachinegun()
-	{
-		Debug.Log("머신건 공격 시도 코루턴");
-		while ( true )
-		{
-			// target을 공격하는게 가능한지 검사
-			if ( IsPossibleToAttackTarget() == false )
-			{
-				ChangeState(WeaponState.SearchTarget);
-				break;
-			}
-
-			// attackRate 시간만큼 대기
-			yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
-			Debug.Log("멀티플 함수");
-			// 캐논 공격 (발사체 생성)
-			SpawnProjectile_Multiple();
 		}
 	}
 
@@ -245,7 +220,6 @@ public class TowerWeapon : MonoBehaviour
 				{
 					// 버프에 의해 공격력 증가
 					weapon.AddedDamage = weapon.Damage * (towerTemplate.weapon[level].buff);
-					Debug.Log($"{weapon.AddedDamage} = {weapon.Damage} * {towerTemplate.weapon[level].buff}");
 					// 타워가 받고 있는 버프 레벨 설정
 					weapon.BuffLevel = Level;
 					weapon.buffTower = this;
@@ -292,7 +266,6 @@ public class TowerWeapon : MonoBehaviour
 		return true;
 	}
 
-	// 단발 사격 Projectile 생성 함수
 	private void SpawnProjectile()
 	{
 		GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
@@ -302,21 +275,6 @@ public class TowerWeapon : MonoBehaviour
 		clone.GetComponent<Projectile>().Setup(attackTarget, damage);
 	}
 
-	// 다발 사격 Projectile 생성 함수
-	private void SpawnProjectile_Multiple()
-	{
-		Debug.Log("클론 생성");
-		GameObject clone1 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-		GameObject clone2 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-		GameObject clone3 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-		// 생성된 발사체에게 공격대상(attackTarget) 정보 제공
-		// 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
-		float damage = towerTemplate.weapon[level].damage + AddedDamage;
-		clone1.GetComponent<Projectile_Multiple>().Setup(attackTarget.position + Vector3.left, damage);
-		clone2.GetComponent<Projectile_Multiple>().Setup(attackTarget.position + Vector3.right, damage);
-		clone3.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage);
-		
-	}
 	private void EnableLaser()
 	{
 		lineRenderer.gameObject.SetActive(true);

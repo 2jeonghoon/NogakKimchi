@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 5887261285876969649, guid: d0ac58464a39fca4cbc270ae87c90655,
     type: 3}
-  followTowerPrefab: {fileID: 8498523484413667391, guid: 26f2e7db1ab131b44a515e403d64a51d,
+  followTowerPrefab: {fileID: 5433810566527308713, guid: 72c738fd62f4edd4ab633a69ae563c28,
     type: 3}
   weapon:
   - sprite: {fileID: 278872809, guid: 76b9cd6b492c12a40867e5ec466aaf59, type: 3}

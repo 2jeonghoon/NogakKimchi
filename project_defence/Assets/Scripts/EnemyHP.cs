@@ -5,10 +5,11 @@ public class EnemyHP : MonoBehaviour
 {
     [SerializeField]
     private float           maxHP;          // 최대 체력
+    [SerializeField]
     private float           currentHP;      // 현재 체력
     private bool            isDie = false;  // 적이 사망 상태이면 isDie를 true로 설정
     [SerializeField]
-    private int             defense;        // 방어력
+    private float             defense;        // 방어력
     private Enemy           enemy;
     private SpriteRenderer  spriteRenderer;
     
@@ -21,8 +22,35 @@ public class EnemyHP : MonoBehaviour
         enemy           = GetComponent<Enemy>();
         spriteRenderer  = GetComponent<SpriteRenderer>();
     }
-    
-    
+
+
+    public float getDefense()
+    {
+        return defense;
+    }
+    // 방어력 세팅
+    public void SetDefense(float defense)
+    {
+        this.defense = defense;
+    }
+
+
+    // 회복
+    public void TakeRecovery(float heal)
+    {
+        if (isDie == true) return;
+
+        // 체력이 최대 체력을 넘어가지 않도록
+        if (currentHP+heal >= maxHP)
+        {
+            currentHP = maxHP;
+        }
+        else
+        {
+            currentHP += heal;
+        }
+    }
+
     public void TakeDamage(float damage)
     {
         // Tip. 적의 체력이 damage 만큼 감소해서 죽을 상황일 때 여러 타워의 공격을 동시에 받으면
@@ -32,7 +60,10 @@ public class EnemyHP : MonoBehaviour
         if ( isDie == true ) return;
     
         // 현재 체력을 damage - defense(방어력)만큼 감소
-        currentHP -= (damage - defense);
+        if(damage - defense >= 0)
+        {
+            currentHP -= (damage - defense);
+        }
     
         StopCoroutine("HitAlphaAnimation");
         StartCoroutine("HitAlphaAnimation");

@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4220155419024176004}
   - component: {fileID: 6302987254606757765}
   - component: {fileID: 6665912798234042456}
-  - component: {fileID: 5241647052692723452}
   - component: {fileID: -3643329299626539831}
   - component: {fileID: 8499049250408766590}
+  - component: {fileID: 1107960611412643031}
   m_Layer: 8
   m_Name: Enemy05
   m_TagString: Enemy
@@ -102,19 +102,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1.5
   moveDirection: {x: 0, y: 0, z: 0}
---- !u!114 &5241647052692723452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4286712872766883678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f644cd44177daf4e9283fa86a717b9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gold: 50
 --- !u!58 &-3643329299626539831
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -143,5 +130,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a7c36ed98a42194788486a6867c2475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 3
+  maxHP: 1000
+  currentHP: 0
   defense: 0
+--- !u!114 &1107960611412643031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4286712872766883678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 330ed266a6f06fa4b95cbf3cefd5897e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gold: 50
+  delay_time: 10
+  boss_clone: {fileID: 4286712872766883678, guid: 9d131067c8887614cbec9ecbe31bfdb4,
+    type: 3}
+  enemys:
+  - {fileID: 4286712872766883678, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+  - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+  - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+  - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
