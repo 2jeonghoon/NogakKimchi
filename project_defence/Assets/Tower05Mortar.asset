@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a7bcf6fcbb6c844d906e040c534dc62, type: 3}
+  m_Name: Tower05Mortar
+  m_EditorClassIdentifier: 
+  towerPrefab: {fileID: 3318578265759658224, guid: 7383ef9c0f93ef7458dee4ea8fbdcd4b,
+    type: 3}
+  followTowerPrefab: {fileID: 8041963687318815524, guid: 2abde7283078ddc41887bbd2352a5bd6,
+    type: 3}
+  weapon:
+  - sprite: {fileID: -1404912121, guid: e6e012b3a894d1845a97395a905c8604, type: 3}
+    damage: 3
+    slow: 0
+    buff: 0
+    rate: 2
+    range: 5
+    cost: 100
+    sell: 50
+  - sprite: {fileID: 636679129, guid: e6e012b3a894d1845a97395a905c8604, type: 3}
+    damage: 3
+    slow: 0
+    buff: 0
+    rate: 2
+    range: 5
+    cost: 100
+    sell: 50
+  - sprite: {fileID: 110800513, guid: e6e012b3a894d1845a97395a905c8604, type: 3}
+    damage: 3
+    slow: 0
+    buff: 0
+    rate: 2
+    range: 5
+    cost: 100
+    sell: 50
