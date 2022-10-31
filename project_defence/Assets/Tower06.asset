@@ -18,7 +18,7 @@ MonoBehaviour:
     type: 3}
   weapon:
   - sprite: {fileID: 21300000, guid: 54767b9ec8a176b449ef06622a2a37d4, type: 3}
-    damage: 3
+    damage: 1
     slow: 0
     buff: 0
     rate: 2
@@ -26,7 +26,7 @@ MonoBehaviour:
     cost: 100
     sell: 50
   - sprite: {fileID: 636679129, guid: e6e012b3a894d1845a97395a905c8604, type: 3}
-    damage: 3
+    damage: 1
     slow: 0
     buff: 0
     rate: 2
@@ -34,7 +34,7 @@ MonoBehaviour:
     cost: 100
     sell: 50
   - sprite: {fileID: 110800513, guid: e6e012b3a894d1845a97395a905c8604, type: 3}
-    damage: 3
+    damage: 1
     slow: 0
     buff: 0
     rate: 2

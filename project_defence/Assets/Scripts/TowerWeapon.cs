@@ -192,9 +192,12 @@ public class TowerWeapon : MonoBehaviour
 
 			// attackRate 시간만큼 대기
 			yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
-			
+
 			// 박격포 공격 (발사체 생성)
-			SpawnMortarProjectile();
+			if (attackTarget != null)
+			{
+				SpawnMortarProjectile();
+			}
 		}
 	}
 
@@ -270,12 +273,13 @@ public class TowerWeapon : MonoBehaviour
 	// 박격포 총알 생성
 	private void SpawnMortarProjectile()
 	{
+		Debug.Log("spawn_point : " + spawnPoint.position);
 		GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
 		// 생성된 발사체에게 공격대상(attackTarget) 정보 제공
 		// 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
 		float damage = towerTemplate.weapon[level].damage + AddedDamage;
-		
-		clone.GetComponent<ProjectileMortar>().Setup(attackTarget, damage);
+
+		clone.GetComponent<ProjectileMortar>().Setup(attackTarget, damage, enemySpawner);
 	}
 
 	private void SpawnProjectile()

@@ -27,7 +27,7 @@ public class Projectile : MonoBehaviour
 			Destroy(gameObject);
 		}
 	}
-
+	
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if ( !collision.CompareTag("Enemy") )	return;			// 적이 아닌 대상과 부딪히면
