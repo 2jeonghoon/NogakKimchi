@@ -58,11 +58,11 @@ public class Boss : Enemy
             this.phase = PHASE.TWO;
         }
 
-        Debug.Log("보스 스킬!");
+        //Debug.Log("보스 스킬!");
         // 1페이즈
         if (phase == PHASE.ONE)
         {
-            Debug.Log("웅크리기");
+            //Debug.Log("웅크리기");
             StartCoroutine("crouch", delay_time);
         }
         // 2페이즈
