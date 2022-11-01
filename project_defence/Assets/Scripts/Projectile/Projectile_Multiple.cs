@@ -1,21 +1,39 @@
 using UnityEngine;
 using System.Collections;
+using Unity.Profiling;
 
 public class Projectile_Multiple : MonoBehaviour
 {
 	private	Movement2D	movement2D;
-	private	Vector3	targetPos;
 	//private	int			damage;
 	private	float		damage;
     private Vector3 direction;
+    private Vector3 direction2;
 
-	public void Setup(Vector3 targetPos, float damage)
+    public void Setup(Vector3 targetPos, float damage)
 	{
 		movement2D	= GetComponent<Movement2D>();
-		this.targetPos	= targetPos;						// 타워가 설정해준 target
 		this.damage	= damage;						// 타워의 공격력
         this.direction = (targetPos - transform.position).normalized;
+        direction2 = direction;
 	}
+
+    public void Setup(Vector3 targetPos, float damage, int y)
+    {
+        movement2D = GetComponent<Movement2D>();
+        targetPos.y += y;
+        this.damage = damage;           				// 타워의 공격력
+        this.direction = (targetPos - transform.position);
+        direction2 = direction;
+        if (y == 1)
+        {
+            direction = (direction * Mathf.Cos(45)).normalized;
+        }
+        else
+        {
+            direction = (direction * Mathf.Sin(45)).normalized;
+        }
+    }
 
     private void Start() {
         StartCoroutine("Destroy_Projectile");

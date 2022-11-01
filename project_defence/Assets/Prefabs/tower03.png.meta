@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4027460b55814414ea8428db5e031d1e
+guid: 20eccf616d37f084298432904c618b22
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -104,28 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tower01_2
-      rect:
-        serializedVersion: 2
-        x: 540
-        y: 0
-        width: 270
-        height: 599
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 275f6feb724787743a850740f3092906
-      internalID: -663852771
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tower01_0
+      name: tower03_0
       rect:
         serializedVersion: 2
         x: 0
@@ -139,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b3457d68c4e6a944495929d2ec25a749
-      internalID: 278872809
+      spriteID: 82c19e5a01a6b6b45a68d4dfe7b64e2c
+      internalID: -418443001
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tower01_1
+      name: tower03_1
       rect:
         serializedVersion: 2
         x: 270
@@ -160,8 +139,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b2a4f08edc84c7d488148b7812e375ac
-      internalID: 504956139
+      spriteID: 9a83a41b82ac78e4e96e006cb76788ce
+      internalID: -1616525152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tower03_2
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 0
+        width: 270
+        height: 599
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a93599d349d81394dbfb8466fa907f02
+      internalID: -1237379144
       vertices: []
       indices: 
       edges: []
@@ -177,9 +177,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      tower01_0: 278872809
-      tower01_2: -663852771
-      tower01_1: 504956139
+      tower03_1: -1616525152
+      tower03_0: -418443001
+      tower03_2: -1237379144
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a7bcf6fcbb6c844d906e040c534dc62, type: 3}
-  m_Name: Tower06Shotgun
+  m_Name: Tower06
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 8005673473863267078, guid: 9601135ca226acb4ba6fc597e59afb45,
     type: 3}
@@ -21,23 +21,23 @@ MonoBehaviour:
     damage: 1
     slow: 0
     buff: 0
-    rate: 0.5
-    range: 2
-    cost: 50
-    sell: 25
-  - sprite: {fileID: 812282432, guid: 0c72b9632bc830449a503cd352889cd5, type: 3}
-    damage: 1.5
-    slow: 0
-    buff: 0
-    rate: 0.4
-    range: 2.3
+    rate: 2
+    range: 10
     cost: 100
-    sell: 75
-  - sprite: {fileID: 202613257, guid: 0c72b9632bc830449a503cd352889cd5, type: 3}
-    damage: 2
+    sell: 50
+  - sprite: {fileID: 812282432, guid: 0c72b9632bc830449a503cd352889cd5, type: 3}
+    damage: 1
     slow: 0
     buff: 0
-    rate: 0.3
-    range: 2.5
-    cost: 150
-    sell: 150
+    rate: 2
+    range: 10
+    cost: 100
+    sell: 50
+  - sprite: {fileID: 202613257, guid: 0c72b9632bc830449a503cd352889cd5, type: 3}
+    damage: 1
+    slow: 0
+    buff: 0
+    rate: 2
+    range: 10
+    cost: 100
+    sell: 50

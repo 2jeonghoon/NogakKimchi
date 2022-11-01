@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: TileRoads
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: 21300000, guid: f579ebf54e6d2af4e8f6aceddc3f9854, type: 3}
-  m_DefaultGameObject: {fileID: 0}
+  m_DefaultGameObject: {fileID: 1193580928581430626, guid: 81401c01447c9794cae1cddf6706733a,
+    type: 3}
   m_DefaultColliderType: 2
   m_TilingRules:
   - m_Id: 0

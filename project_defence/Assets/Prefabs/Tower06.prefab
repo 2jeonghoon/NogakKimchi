@@ -99,17 +99,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8bcbf7212426e74fbeb59bbcaa5d6a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerTemplate: {fileID: 11400000, guid: b7054c9d7e1b5864e92cd7a79e8958c9, type: 2}
+  towerTemplate: {fileID: 11400000, guid: 4bfa8f53c8b54c249921602b8dca82eb, type: 2}
   spawnPoint: {fileID: 699455394101526497}
   weaponType: 5
   buffTower: {fileID: 0}
-  projectilePrefab: {fileID: 279960896359782389, guid: cd51bfb7a5a99d348be087880e120d8f,
+  projectilePrefab: {fileID: 4461503835666675623, guid: 39f676f0c1b70dc4eafb5f2eddbabb70,
     type: 3}
   lineRenderer: {fileID: 0}
   hitEffect: {fileID: 0}
   targetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
 --- !u!65 &6917852394268630576
 BoxCollider:
   m_ObjectHideFlags: 0
