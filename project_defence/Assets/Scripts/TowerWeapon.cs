@@ -273,7 +273,6 @@ public class TowerWeapon : MonoBehaviour
 	// 박격포 총알 생성
 	private void SpawnMortarProjectile()
 	{
-		Debug.Log("spawn_point : " + spawnPoint.position);
 		GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
 		// 생성된 발사체에게 공격대상(attackTarget) 정보 제공
 		// 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력

@@ -18,7 +18,7 @@ MonoBehaviour:
     type: 3}
   weapon:
   - sprite: {fileID: -1404912121, guid: e6e012b3a894d1845a97395a905c8604, type: 3}
-    damage: 3
+    damage: 10
     slow: 0
     buff: 0
     rate: 2
