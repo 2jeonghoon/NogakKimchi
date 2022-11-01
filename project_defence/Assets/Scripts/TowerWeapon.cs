@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public enum WeaponType	{ Gun = 0, Laser, Slow, Buff, Mortar, }
-public enum WeaponState { SearchTarget = 0, TryAttackGun, TryAttackLaser, TryAttackMortar, }
+public enum WeaponType	{ Gun = 0, Laser, Slow, Buff, Mortar}
+public enum WeaponState { SearchTarget = 0, TryAttackGun, TryAttackLaser, TryAttackMortar}
 
 public class TowerWeapon : MonoBehaviour
 {
@@ -70,7 +70,8 @@ public class TowerWeapon : MonoBehaviour
 		this.ownerTile		= ownerTile;
 		
 		// 무기 속성이 캐논, 레이저일 때
-		if ( weaponType == WeaponType.Gun || weaponType == WeaponType.Laser || weaponType == WeaponType.Mortar )
+		if ( weaponType == WeaponType.Gun || weaponType == WeaponType.Laser ||
+			weaponType == WeaponType.Mortar)
 		{
 			// 최초 상태를 WeaponState.SearchTarget으로 설정
 			ChangeState(WeaponState.SearchTarget);
@@ -191,9 +192,12 @@ public class TowerWeapon : MonoBehaviour
 
 			// attackRate 시간만큼 대기
 			yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
-			
-			// 캐논 공격 (발사체 생성)
-			SpawnProjectile();
+
+			// 박격포 공격 (발사체 생성)
+			if (attackTarget != null)
+			{
+				SpawnMortarProjectile();
+			}
 		}
 	}
 
@@ -264,6 +268,17 @@ public class TowerWeapon : MonoBehaviour
 		}
 
 		return true;
+	}
+
+	// 박격포 총알 생성
+	private void SpawnMortarProjectile()
+	{
+		GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+		// 생성된 발사체에게 공격대상(attackTarget) 정보 제공
+		// 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
+		float damage = towerTemplate.weapon[level].damage + AddedDamage;
+
+		clone.GetComponent<ProjectileMortar>().Setup(attackTarget, damage, enemySpawner);
 	}
 
 	private void SpawnProjectile()
