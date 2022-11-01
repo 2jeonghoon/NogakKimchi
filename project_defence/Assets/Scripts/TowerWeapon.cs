@@ -1,8 +1,9 @@
 ﻿using System.Collections;
+using System.Diagnostics;
 using UnityEngine;
 
-public enum WeaponType	{ Gun = 0, Laser, Slow, Buff, Mortar}
-public enum WeaponState { SearchTarget = 0, TryAttackGun, TryAttackLaser, TryAttackMortar}
+public enum WeaponType	{ Gun = 0, Laser, Slow, Buff, Mortar, Shotgun}
+public enum WeaponState { SearchTarget = 0, TryAttackGun, TryAttackLaser, TryAttackMortar, TryAttackShotgun}
 
 public class TowerWeapon : MonoBehaviour
 {
@@ -71,7 +72,7 @@ public class TowerWeapon : MonoBehaviour
 		
 		// 무기 속성이 캐논, 레이저일 때
 		if ( weaponType == WeaponType.Gun || weaponType == WeaponType.Laser ||
-			weaponType == WeaponType.Mortar)
+			weaponType == WeaponType.Mortar || weaponType == WeaponType.Shotgun )
 		{
 			// 최초 상태를 WeaponState.SearchTarget으로 설정
 			ChangeState(WeaponState.SearchTarget);
@@ -131,7 +132,11 @@ public class TowerWeapon : MonoBehaviour
 				{
 					ChangeState(WeaponState.TryAttackMortar);
 				}
-			}
+                else if (weaponType == WeaponType.Shotgun)
+                {
+                    ChangeState(WeaponState.TryAttackShotgun);
+                }
+            }
 
 			yield return null;
 		}
@@ -201,7 +206,26 @@ public class TowerWeapon : MonoBehaviour
 		}
 	}
 
-	public void OnBuffAroundTower()
+    // 샷건 타워 공격
+    private IEnumerator TryAttackShotgun()
+    {
+        while (true)
+        {
+            // target을 공격하는게 가능한지 검사
+            if (IsPossibleToAttackTarget() == false)
+            {
+                ChangeState(WeaponState.SearchTarget);
+                break;
+            }
+
+            // attackRate 시간만큼 대기
+            yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
+            // 샷건 공격 (발사체 생성)
+            SpawnProjectile_Multiple();
+        }
+    }
+
+    public void OnBuffAroundTower()
 	{
 		// 현재 맵에 배치된 "Tower" 태그를 가진 모든 오브젝트 탐색
 		GameObject[] towers = GameObject.FindGameObjectsWithTag("Tower");
@@ -273,7 +297,6 @@ public class TowerWeapon : MonoBehaviour
 	// 박격포 총알 생성
 	private void SpawnMortarProjectile()
 	{
-		Debug.Log("spawn_point : " + spawnPoint.position);
 		GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
 		// 생성된 발사체에게 공격대상(attackTarget) 정보 제공
 		// 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
@@ -282,7 +305,26 @@ public class TowerWeapon : MonoBehaviour
 		clone.GetComponent<ProjectileMortar>().Setup(attackTarget, damage, enemySpawner);
 	}
 
-	private void SpawnProjectile()
+    // 다발 사격 Projectile 생성 함수
+    private void SpawnProjectile_Multiple()
+    {
+        if (attackTarget != null)
+        {
+            GameObject clone1 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+            GameObject clone2 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+            GameObject clone3 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+            // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
+            // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
+            float damage = towerTemplate.weapon[level].damage + AddedDamage;
+            // 세 갈래로 나누어지는 공격을 위해 Vector3.left, right를 더해줌
+            clone1.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage, -1);
+            clone2.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage);
+            clone3.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage, 1);
+        }
+
+    }
+
+    private void SpawnProjectile()
 	{
 		GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
 		// 생성된 발사체에게 공격대상(attackTarget) 정보 제공
@@ -371,7 +413,6 @@ public class TowerWeapon : MonoBehaviour
 		{
 			towers[i].GetComponent<TowerWeapon>().BuffLevel = 0;
 			towers[i].GetComponent<TowerWeapon>().AddedDamage = 0;
-			Debug.Log(towers[i].GetComponent<TowerWeapon>().AddedDamage);
 		}
 		towerSpawner.OnBuffAllBuffTowers();
 
@@ -395,6 +436,7 @@ public class TowerWeapon : MonoBehaviour
  *	: FindClosestAttackTarget() - 현재 타워에 가장 근접한 공격 대상(적) 탐색
  *	: IsPossibleToAttackTarget() - AttackTarget이 있는지, 공격 가능한지 검사
  *	: SpawnProjectile() - 캐논 발사체 생성
+ *	: SpawnProjectile_Multiple() - 샷건 발사체 생성
  *	: EnableLaser() - 레이저, 레이저 타격 효과 활성화
  *	: DisableLaser() - 레이저, 레이저 타격 효과 비활성화
  *	: SpawnLaser() - 레이저 공격, 레이저 타격 효과, 적 체력 감소
