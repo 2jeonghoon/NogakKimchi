@@ -10,34 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a7bcf6fcbb6c844d906e040c534dc62, type: 3}
-  m_Name: Tower_Spear
+  m_Name: T7melonsoda_succession
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 8005673473863267078, guid: 03dd4d800fe9cc94181722f6a9533f12,
     type: 3}
-  followTowerPrefab: {fileID: 8166587275253779454, guid: c5c55270fe852974fbc95f29863154db,
+  followTowerPrefab: {fileID: 8166587275253779454, guid: cd40a6bca777fef49a89bdc48d542f34,
     type: 3}
   weapon:
   - sprite: {fileID: 21300000, guid: 9e18076067e103e4297e9f16bb9f6eba, type: 3}
+    damage: 3
+    slow: 0
+    buff: 0
+    rate: 0.3
+    range: 3
+    cost: 200
+    sell: 100
+  - sprite: {fileID: 21300000, guid: 54767b9ec8a176b449ef06622a2a37d4, type: 3}
+    damage: 5
+    slow: 0
+    buff: 0
+    rate: 0.2
+    range: 4
+    cost: 400
+    sell: 200
+  - sprite: {fileID: 21300000, guid: 715befdf70f55284282b9800b10c2b47, type: 3}
     damage: 10
     slow: 0
     buff: 0
-    rate: 2
+    rate: 0.1
     range: 5
-    cost: 80
-    sell: 50
-  - sprite: {fileID: 21300000, guid: 9e18076067e103e4297e9f16bb9f6eba, type: 3}
-    damage: 1
-    slow: 0
-    buff: 0
-    rate: 2
-    range: 5
-    cost: 100
-    sell: 50
-  - sprite: {fileID: 21300000, guid: 9e18076067e103e4297e9f16bb9f6eba, type: 3}
-    damage: 1
-    slow: 0
-    buff: 0
-    rate: 2
-    range: 5
-    cost: 100
-    sell: 50
+    cost: 800
+    sell: 400
