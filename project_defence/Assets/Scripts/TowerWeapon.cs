@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System.Diagnostics;
-using UnityEngine;
 
-public enum WeaponType	{ Gun = 0, Laser, Slow, Buff, Mortar, Shotgun}
-public enum WeaponState { SearchTarget = 0, TryAttackGun, TryAttackLaser, TryAttackMortar, TryAttackShotgun}
+using UnityEngine;
+using System.Collections;
+
+public enum WeaponType	{ Gun = 0, Laser, Slow, Buff, Mortar, Shotgun, Spear}
+public enum WeaponState { SearchTarget = 0, TryAttackGun, TryAttackLaser, TryAttackMortar, TryAttackShotgun, TryAttackSpaer}
+
 
 public class TowerWeapon : MonoBehaviour
 {
@@ -30,7 +31,8 @@ public class TowerWeapon : MonoBehaviour
 
 	private	int				level = 0;								// 타워 레벨
 	private	WeaponState		weaponState = WeaponState.SearchTarget;	// 타워 무기의 상태
-	private	Transform		attackTarget = null;					// 공격 대상
+	private	Transform		attackTarget = null;                    // 공격 대상
+	private Transform		pre_attackTarget = null;                  // 이전 공격 대상
 	private	SpriteRenderer	spriteRenderer;							// 타워 오브젝트 이미지 변경용
 	private	TowerSpawner	towerSpawner;
 	private	EnemySpawner	enemySpawner;							// 게임에 존재하는 적 정보 획득용
@@ -72,7 +74,7 @@ public class TowerWeapon : MonoBehaviour
 		
 		// 무기 속성이 캐논, 레이저일 때
 		if ( weaponType == WeaponType.Gun || weaponType == WeaponType.Laser ||
-			weaponType == WeaponType.Mortar || weaponType == WeaponType.Shotgun )
+			weaponType == WeaponType.Mortar || weaponType == WeaponType.Shotgun || weaponType == WeaponType.Spear)
 		{
 			// 최초 상태를 WeaponState.SearchTarget으로 설정
 			ChangeState(WeaponState.SearchTarget);
@@ -136,6 +138,10 @@ public class TowerWeapon : MonoBehaviour
                 {
                     ChangeState(WeaponState.TryAttackShotgun);
                 }
+				else if(weaponType == WeaponType.Spear)
+                {
+					ChangeState(WeaponState.TryAttackSpaer);
+				}
             }
 
 			yield return null;
@@ -225,7 +231,27 @@ public class TowerWeapon : MonoBehaviour
         }
     }
 
-    public void OnBuffAroundTower()
+	// 관통 타워 공격
+	private IEnumerator TryAttackSpaer()
+	{
+		while (true)
+		{
+			// target을 공격하는게 가능한지 검사
+			if (IsPossibleToAttackTarget() == false)
+			{
+				ChangeState(WeaponState.SearchTarget);
+				break;
+			}
+
+			// attackRate 시간만큼 대기
+			yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
+			// 관통 공격 (발사체 생성)
+			SpawnProjectile_Spear();
+		}
+	}
+
+
+	public void OnBuffAroundTower()
 	{
 		// 현재 맵에 배치된 "Tower" 태그를 가진 모든 오브젝트 탐색
 		GameObject[] towers = GameObject.FindGameObjectsWithTag("Tower");
@@ -271,6 +297,7 @@ public class TowerWeapon : MonoBehaviour
 				attackTarget	= enemySpawner.EnemyList[i].transform;
 			}
 		}
+
 
 		return attackTarget;
 	}
@@ -324,7 +351,19 @@ public class TowerWeapon : MonoBehaviour
 
     }
 
-    private void SpawnProjectile()
+	private void SpawnProjectile_Spear()
+	{
+		if(attackTarget != null)
+        {
+			GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+			// 생성된 발사체에게 공격대상(attackTarget) 정보 제공
+			// 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
+			float damage = towerTemplate.weapon[level].damage + AddedDamage;
+			clone.GetComponent<Projectile_Spear>().Setup(attackTarget, damage, Range);
+		}
+	}
+
+	private void SpawnProjectile()
 	{
 		GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
 		// 생성된 발사체에게 공격대상(attackTarget) 정보 제공
@@ -368,6 +407,7 @@ public class TowerWeapon : MonoBehaviour
 			}
 		}
 	}
+
 
 	public bool Upgrade()
 	{
@@ -413,6 +453,7 @@ public class TowerWeapon : MonoBehaviour
 		{
 			towers[i].GetComponent<TowerWeapon>().BuffLevel = 0;
 			towers[i].GetComponent<TowerWeapon>().AddedDamage = 0;
+			Debug.Log(towers[i].GetComponent<TowerWeapon>().AddedDamage);
 		}
 		towerSpawner.OnBuffAllBuffTowers();
 
@@ -436,7 +477,6 @@ public class TowerWeapon : MonoBehaviour
  *	: FindClosestAttackTarget() - 현재 타워에 가장 근접한 공격 대상(적) 탐색
  *	: IsPossibleToAttackTarget() - AttackTarget이 있는지, 공격 가능한지 검사
  *	: SpawnProjectile() - 캐논 발사체 생성
- *	: SpawnProjectile_Multiple() - 샷건 발사체 생성
  *	: EnableLaser() - 레이저, 레이저 타격 효과 활성화
  *	: DisableLaser() - 레이저, 레이저 타격 효과 비활성화
  *	: SpawnLaser() - 레이저 공격, 레이저 타격 효과, 적 체력 감소
