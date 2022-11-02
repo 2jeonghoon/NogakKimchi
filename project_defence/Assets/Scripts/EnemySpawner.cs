@@ -48,9 +48,6 @@ public class EnemySpawner : MonoBehaviour
 		// 현재 웨이브에서 생성되어야 하는 적의 숫자만큼 적을 생성하고 코루틴 종료
 		while ( spawnEnemyCount < currentWave.maxEnemyCount )
 		{
-			// wave에서 count
-			WaveSystem.spawnEnemyCount++;
-
 			// 웨이브에 등장하는 적의 종류가 여러 종류일 때 임의의 적이 등장하도록 설정하고, 적 오브젝트 생성
 			int			enemyIndex	= Random.Range(0, currentWave.enemyPrefabs.Length);
 			GameObject	clone		= Instantiate(currentWave.enemyPrefabs[enemyIndex]);

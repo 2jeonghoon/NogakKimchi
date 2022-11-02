@@ -17,8 +17,8 @@ MonoBehaviour:
   followTowerPrefab: {fileID: 7217997222853961455, guid: 2abde7283078ddc41887bbd2352a5bd6,
     type: 3}
   weapon:
-  - sprite: {fileID: -1404912121, guid: e6e012b3a894d1845a97395a905c8604, type: 3}
-    damage: 10
+  - sprite: {fileID: -1404912121, guid: 54c9e3f7f5d202149bebbc27ca91b9d3, type: 3}
+    damage: 3
     slow: 0
     buff: 0
     rate: 2

@@ -61,6 +61,7 @@ public class ProjectileMortar : Projectile
 
         fV_X = -(vStartPos.x - vEndPos.x)*2.04f / fEndTime;
         fV_Z = -(vStartPos.x - vEndPos.x) / fEndTime;
+        Debug.Log("startPos : " + vStartPos);
         this.enemySpawner = enemySpawner;
         // 도착 타일
         Tile = FindTile(target);
@@ -124,6 +125,7 @@ public class ProjectileMortar : Projectile
         // 타겟타일 색깔 가져오기
         if(tile != null)
         {
+            Debug.Log("Tile");
             sr = tile.GetComponent<SpriteRenderer>();
             sr.color = new Color(1, 0, 0, 0.5f);
         }
@@ -133,6 +135,7 @@ public class ProjectileMortar : Projectile
     private void FindEnemy(GameObject tile)
     {
         Enemy enemy;
+        int count = 0;
         // EnemySpawner의 EnemyList에 있는 현재 맵에 존재하는 모든 적 검사
         for (int i = 0; i < enemySpawner.EnemyList.Count; ++i)
         {
@@ -143,6 +146,7 @@ public class ProjectileMortar : Projectile
                 tile.transform.position.y + explosionRange >= enemy.transform.position.y &&
                 tile.transform.position.y - explosionRange <= enemy.transform.position.y)
             {
+                Debug.Log(damage);
                 enemy.GetComponent<EnemyHP>().TakeDamage(damage);
             }
         }
