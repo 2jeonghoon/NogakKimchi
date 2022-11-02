@@ -1,8 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
-public enum WeaponType	{ Gun = 0, Laser, Slow, Buff, Mortar, Shotgun, Spear}
-public enum WeaponState { SearchTarget = 0, TryAttackGun, TryAttackLaser, TryAttackMortar, TryAttackShotgun, TryAttackSpaer}
+public enum WeaponType	{ Gun = 0, Laser, Slow, Buff, Mortar, Shotgun, Spear, Explosion}
+public enum WeaponState { SearchTarget = 0, TryAttackGun, TryAttackLaser, TryAttackMortar, 
+							TryAttackShotgun, TryAttackSpaer, TryAttackExplosion}
 
 public class TowerWeapon : MonoBehaviour
 {
@@ -30,7 +31,6 @@ public class TowerWeapon : MonoBehaviour
 	private	int				level = 0;								// 타워 레벨
 	private	WeaponState		weaponState = WeaponState.SearchTarget;	// 타워 무기의 상태
 	private	Transform		attackTarget = null;                    // 공격 대상
-	private Transform		pre_attackTarget = null;                  // 이전 공격 대상
 	private	SpriteRenderer	spriteRenderer;							// 타워 오브젝트 이미지 변경용
 	private	TowerSpawner	towerSpawner;
 	private	EnemySpawner	enemySpawner;							// 게임에 존재하는 적 정보 획득용
@@ -72,7 +72,8 @@ public class TowerWeapon : MonoBehaviour
 		
 		// 무기 속성이 캐논, 레이저일 때
 		if ( weaponType == WeaponType.Gun || weaponType == WeaponType.Laser ||
-			weaponType == WeaponType.Mortar || weaponType == WeaponType.Shotgun || weaponType == WeaponType.Spear )
+			weaponType == WeaponType.Mortar || weaponType == WeaponType.Shotgun ||
+			weaponType == WeaponType.Spear  || weaponType == WeaponType.Explosion)
 		{
 			// 최초 상태를 WeaponState.SearchTarget으로 설정
 			ChangeState(WeaponState.SearchTarget);
@@ -140,7 +141,11 @@ public class TowerWeapon : MonoBehaviour
                 {
 					ChangeState(WeaponState.TryAttackSpaer);
 				}
-            }
+				else if (weaponType == WeaponType.Explosion)
+				{
+					ChangeState(WeaponState.TryAttackExplosion);
+				}
+			}
 
 			yield return null;
 		}
@@ -248,6 +253,25 @@ public class TowerWeapon : MonoBehaviour
 		}
 	}
 
+	// 폭발 타워 공격
+	private IEnumerator TryAttackExplosion()
+	{
+		while (true)
+		{
+			// target을 공격하는게 가능한지 검사
+			if (IsPossibleToAttackTarget() == false)
+			{
+				ChangeState(WeaponState.SearchTarget);
+				break;
+			}
+
+			// attackRate 시간만큼 대기
+			yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
+			// 관통 공격 (발사체 생성)
+			SpawnProjectile_Explosion();
+		}
+	}
+
 
 	public void OnBuffAroundTower()
 	{
@@ -349,6 +373,7 @@ public class TowerWeapon : MonoBehaviour
 
     }
 
+	// 관통 총알 생성
 	private void SpawnProjectile_Spear()
 	{
 		if(attackTarget != null)
@@ -358,6 +383,20 @@ public class TowerWeapon : MonoBehaviour
 			// 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
 			float damage = towerTemplate.weapon[level].damage + AddedDamage;
 			clone.GetComponent<Projectile_Spear>().Setup(attackTarget, damage, Range);
+		}
+	}
+
+	// 폭발 총알 생성
+	private void SpawnProjectile_Explosion()
+	{
+		Debug.Log("발사");
+		if (attackTarget != null)
+		{
+			GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+			// 생성된 발사체에게 공격대상(attackTarget) 정보 제공
+			// 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
+			float damage = towerTemplate.weapon[level].damage + AddedDamage;
+			clone.GetComponent<Projectile_Explosion>().Setup(attackTarget, damage);
 		}
 	}
 

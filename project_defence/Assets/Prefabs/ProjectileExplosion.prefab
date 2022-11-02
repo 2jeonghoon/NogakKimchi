@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 3910000170776866425}
   - component: {fileID: 9129527048580606695}
   - component: {fileID: 6339248814932543829}
-  - component: {fileID: 6024426147299452030}
+  - component: {fileID: 295562656517487888}
   m_Layer: 0
-  m_Name: ProjectileMortar
+  m_Name: ProjectileExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 288d7fee1068849458d43eb560e20942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 8
   moveDirection: {x: 0, y: 0, z: 0}
 --- !u!58 &9129527048580606695
 CircleCollider2D:
@@ -139,7 +139,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6024426147299452030
+--- !u!114 &295562656517487888
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4461503835666675623}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce045f0a0d328c64c841ec796c4e3549, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f55f748cb1f1db48ae2fbd3690c6871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   explosionRange: 1

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a7bcf6fcbb6c844d906e040c534dc62, type: 3}
   m_Name: Tower_Spear
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 8005673473863267078, guid: 03dd4d800fe9cc94181722f6a9533f12,
+  towerPrefab: {fileID: 4461503835666675623, guid: af01022ebb850f141bc49d45ce50d61c,
     type: 3}
   followTowerPrefab: {fileID: 8166587275253779454, guid: c5c55270fe852974fbc95f29863154db,
     type: 3}
