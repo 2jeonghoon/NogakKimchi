@@ -1746,7 +1746,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 708123768}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4210,32 +4210,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - spawnTime: 0.3
-    maxEnemyCount: 50
-    enemyPrefabs:
-    - {fileID: 4286712872766883678, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
-  - spawnTime: 0.5
-    maxEnemyCount: 20
-    enemyPrefabs:
-    - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
-  - spawnTime: 0.5
-    maxEnemyCount: 50
-    enemyPrefabs:
-    - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
-    - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
-  - spawnTime: 0.5
-    maxEnemyCount: 80
-    enemyPrefabs:
-    - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
-    - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
-    - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
-  - spawnTime: 0.5
-    maxEnemyCount: 100
-    enemyPrefabs:
-    - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
-    - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
-    - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
-    - {fileID: 4286712872766883678, guid: 4878148eb0d7a8c46b4df9d7202a708c, type: 3}
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 10
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+    - spawnTime: 0.5
+      maxEnemyCount: 10
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+    - spawnTime: 1
+      maxEnemyCount: 10
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
   enemySpawner: {fileID: 266347680}
 --- !u!1001 &266556900
 PrefabInstance:
@@ -6860,8 +6847,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 400, y: 125}
-  m_SizeDelta: {x: 300, y: 250}
+  m_AnchoredPosition: {x: 375, y: 125}
+  m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &431702196
 MonoBehaviour:
@@ -9658,7 +9645,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 708123768}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11026,6 +11013,7 @@ GameObject:
   - component: {fileID: 708123770}
   - component: {fileID: 708123769}
   - component: {fileID: 708123771}
+  - component: {fileID: 708123772}
   m_Layer: 5
   m_Name: PanelInventory
   m_TagString: Untagged
@@ -11045,11 +11033,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1993078044}
   - {fileID: 748484292}
   - {fileID: 780071986}
   - {fileID: 133699446}
   - {fileID: 580364342}
+  - {fileID: 1993078044}
   - {fileID: 348300697}
   - {fileID: 1145984728}
   - {fileID: 133182685}
@@ -11116,6 +11104,19 @@ MonoBehaviour:
   textPlayerGold: {fileID: 780071987}
   textEnemyCount: {fileID: 580364343}
   playerGold: {fileID: 2026522984}
+  enemySpawner: {fileID: 266347680}
+--- !u!114 &708123772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708123767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d304d6d7463b98e4ba0701e813556a3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   enemySpawner: {fileID: 266347680}
 --- !u!1 &708202257 stripped
 GameObject:
@@ -11601,7 +11602,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 708123768}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11990,7 +11991,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 708123768}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16172,9 +16173,9 @@ RectTransform:
   m_Father: {fileID: 1883651203}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -40, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 893, y: 100}
   m_SizeDelta: {x: 650, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1074482577
@@ -28993,7 +28994,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1600, y: 900}
+  m_ReferenceResolution: {x: 1920, y: 1020}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
@@ -31453,7 +31454,7 @@ RectTransform:
   m_Children:
   - {fileID: 1082522419}
   m_Father: {fileID: 708123768}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -31503,7 +31504,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1993078046}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 708123772}
+        m_TargetAssemblyTypeName: PlayerSkill, Assembly-CSharp
+        m_MethodName: OnSkill_Instagram
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1993078046
 MonoBehaviour:
   m_ObjectHideFlags: 0
