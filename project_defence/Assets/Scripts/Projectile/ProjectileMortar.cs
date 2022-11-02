@@ -3,49 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// ¹Ú°ÝÆ÷ ÃÑ¾Ë
+// ï¿½Ú°ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½
 public class ProjectileMortar : Projectile
 {
-    //Æø¹ß ¹üÀ§
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     [SerializeField]
     private float explosionRange;
+    [SerializeField]
+    private GameObject explosionPrefab;
 
-    //µµÂø Å¸ÀÏ
+    //ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½
     private GameObject Tile;
 
-    // Ãâ¹ßÁö
+    // ï¿½ï¿½ï¿½ï¿½ï¿½
     private Vector3 vStartPos;
-    // ¸ñÀûÁö
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private Vector3 vEndPos;
-    // ÇöÀç À§Ä¡
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡
     private Vector3 vPos;
 
-    private float fV_X; // xÃàÀ¸·Î ¼Óµµ
-    private float fV_Y; // yÃàÀ¸·Î ¼Óµµ
-    private float fV_Z; // zÃàÀ¸·Î ¼Óµµ
+    private float fV_X; // xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½
+    private float fV_Y; // yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½
+    private float fV_Z; // zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½
 
-    private float fg; // YÃàÀ¸·ÎÀÇ Áß·Â°¡¼Óµµ
-    private float fEndTime; // µµÂøÁöÁ¡ µµ´Þ ½Ã°£
-    private float fMaxHeight; // ÃÖ´ë ³ôÀÌ
-    private float fHeight; // ÃÖ´ë ³ôÀÌÀÇ Y - ½ÃÀÛ³ôÀÌÀÇ Y
-    private float fEndHeight; // µµÂøÁöÁ¡ ³ôÀÌ Y - ½ÃÀÛÁöÁ¡ ³ôÀÌ Y
-    private float fTime = 0f; // Èå¸£´Â ½Ã°£
-    private float fMaxTime = 1f; // ÃÖ´ë³ôÀÌ±îÁö °¡´Â ½Ã°£
+    private float fg; // Yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß·Â°ï¿½ï¿½Óµï¿½
+    private float fEndTime; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
+    private float fMaxHeight; // ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½
+    private float fHeight; // ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Y - ï¿½ï¿½ï¿½Û³ï¿½ï¿½ï¿½ï¿½ï¿½ Y
+    private float fEndHeight; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Y - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Y
+    private float fTime = 0f; // ï¿½å¸£ï¿½ï¿½ ï¿½Ã°ï¿½
+    private float fMaxTime = 1f; // ï¿½Ö´ï¿½ï¿½ï¿½Ì±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
 
-    private SpriteRenderer sr; // Å¸ÀÏ »ö±ò Á¤º¸
-    private EnemySpawner enemySpawner;
-    private Enemy[] targetEnemy;
 
     public void Setup(Transform target, float damage, EnemySpawner enemySpawner)
     {
         movement2D = GetComponent<Movement2D>();
-        this.damage = damage;                       // Å¸¿öÀÇ °ø°Ý·Â
+        this.damage = damage;                       // Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý·ï¿½
 
 
-        // Æ÷¹°¼± ÀÌµ¿À» À§ÇØ ÇÊ¿äÇÑ Á¤º¸
-        vStartPos = this.transform.position; // ½ÃÀÛÁöÁ¡
-        vEndPos = target.position;      // µµÂøÁöÁ¡
-        fMaxHeight = vEndPos.y + 10f; // Æ÷¹°¼± ÃÖ´ë³ôÀÌ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        vStartPos = this.transform.position; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        vEndPos = target.position;      // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        fMaxHeight = vEndPos.y + 10f; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ï¿½
 
         fEndHeight = vEndPos.y - vStartPos.y;
         fHeight = fMaxHeight - vStartPos.y;
@@ -61,90 +60,36 @@ public class ProjectileMortar : Projectile
 
         fV_X = -(vStartPos.x - vEndPos.x)*2.04f / fEndTime;
         fV_Z = -(vStartPos.x - vEndPos.x) / fEndTime;
-        this.enemySpawner = enemySpawner;
-        // µµÂø Å¸ÀÏ
-        Tile = FindTile(target);
     }
 
     private void Update()
     {
-        // ¹ß»çÃ¼¸¦ targetÀÇ À§Ä¡·Î ÀÌµ¿
+        // ï¿½ß»ï¿½Ã¼ï¿½ï¿½ targetï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ìµï¿½
         fTime += Time.deltaTime;
         vPos.x = vStartPos.x + fV_X * fTime;
-        vPos.y = vStartPos.y + (fV_Y * fTime) - (1f * fg * fTime * fTime); // ¶³¾îÁö´Â ¼Óµµ
+        vPos.y = vStartPos.y + (fV_Y * fTime) - (1f * fg * fTime * fTime); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½
         vPos.z = 0;
         this.transform.position = vPos;
 
 
-        if (fTime >= fMaxTime && this.transform.position.y <= vEndPos.y && Tile != null)
+        if (fTime >= fMaxTime-0.5f && this.transform.position.y <= vEndPos.y)
         {
-            // È¤½Ã ¸ø¸ÂÃß°í ¶³¾îÁ®µµ µ¥¹ÌÁö´Â µé¾î°¡°Ô, ÃÑ¾Ë »ç¶óÁö±â
-            sr = Tile.GetComponent<SpriteRenderer>();
-
-            // Å¸°Ù Å¸ÀÏ »ö±ò º¯°æ
-            sr.color = new Color(255, 0, 0, 0);
-
-            FindEnemy(Tile);
-            Destroy(gameObject);
+            GameObject clone = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
+            clone.GetComponent<Explosion>().Setup(damage, explosionRange);
+            Destroy(gameObject);                                    // ï¿½ß»ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //if (vPos.y >= 0) return;    // ÃÑ¾ËÀÌ ¶³¾îÁö´Â ÁßÀÌ ¾Æ´Ï¶ó¸é..?
+        //if (vPos.y >= 0) return;    // ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¶ï¿½ï¿½..?
         if (Tile == null) return;
-        if (!collision.CompareTag("TileRoad")) return;         // ±æÅ¸ÀÏÀÌ ¾Æ´Ñ ´ë»ó°ú ºÎµúÈ÷¸é;
-        if (collision.transform != Tile.transform) return;          // ÇöÀç ¸ÂÀº°Ô Å¸°ÙÅ¸ÀÏÀÌ ¾Æ´Ï¸é
+        if (!collision.CompareTag("TileRoad")) return;         // ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½;
+        if (collision.transform != Tile.transform) return;          // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½
 
-        // Å¸°Ù Å¸ÀÏ »ö±ò º¯°æ
-        sr.color = new Color(255, 0, 0, 0);
-        FindEnemy(Tile);
-        Destroy(gameObject);                                    // ¹ß»çÃ¼ ¿ÀºêÁ§Æ® »èÁ¦
+        GameObject clone = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
+        clone.GetComponent<Explosion>().Setup(damage, explosionRange);
+        Destroy(gameObject);                                    // ï¿½ß»ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
     }
 
-    private GameObject FindTile(Transform target)
-    {
-        List<GameObject> FoundObjects;
-        float shortDis;
-        FoundObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("TileRoad"));
-        shortDis = Vector3.Distance(target.transform.position, FoundObjects[0].transform.position); // Ã¹¹øÂ°¸¦ ±âÁØÀ¸·Î Àâ¾ÆÁÖ±â 
-        GameObject tile = FoundObjects[0]; // Ã¹¹øÂ°¸¦ ¸ÕÀú 
-
-        foreach (GameObject found in FoundObjects)
-        {
-            float Distance = Vector3.Distance(target.transform.position, found.transform.position);
-
-            if (Distance < shortDis) // À§¿¡¼­ ÀâÀº ±âÁØÀ¸·Î °Å¸® Àç±â
-            {
-                tile = found;
-                shortDis = Distance;
-            }
-        }
-
-        // Å¸°ÙÅ¸ÀÏ »ö±ò °¡Á®¿À±â
-        if(tile != null)
-        {
-            sr = tile.GetComponent<SpriteRenderer>();
-            sr.color = new Color(1, 0, 0, 0.5f);
-        }
-        return tile;
-    }
-
-    private void FindEnemy(GameObject tile)
-    {
-        Enemy enemy;
-        // EnemySpawnerÀÇ EnemyList¿¡ ÀÖ´Â ÇöÀç ¸Ê¿¡ Á¸ÀçÇÏ´Â ¸ðµç Àû °Ë»ç
-        for (int i = 0; i < enemySpawner.EnemyList.Count; ++i)
-        {
-            enemy = enemySpawner.EnemyList[i];
-            // ÇöÀç °Ë»çÁßÀÎ Àû°úÀÇ °Å¸®°¡ °ø°Ý¹üÀ§ ³»¿¡ ÀÖ°í, ÇöÀç±îÁö °Ë»çÇÑ Àûº¸´Ù °Å¸®°¡ °¡±î¿ì¸é
-            if (tile.transform.position.x + explosionRange >= enemy.transform.position.x &&
-                tile.transform.position.x - explosionRange <= enemy.transform.position.x &&
-                tile.transform.position.y + explosionRange >= enemy.transform.position.y &&
-                tile.transform.position.y - explosionRange <= enemy.transform.position.y)
-            {
-                enemy.GetComponent<EnemyHP>().TakeDamage(damage);
-            }
-        }
-    }
 }
