@@ -12,20 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a7bcf6fcbb6c844d906e040c534dc62, type: 3}
   m_Name: Tower06
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 5798284826614995138, guid: c6b4c1f32c7bf8b4883e8d3e8a69e3e1,
+  towerPrefab: {fileID: 8005673473863267078, guid: 9601135ca226acb4ba6fc597e59afb45,
     type: 3}
-  followTowerPrefab: {fileID: 8041963687318815524, guid: 2abde7283078ddc41887bbd2352a5bd6,
+  followTowerPrefab: {fileID: 8166587275253779454, guid: e9a91ccc481de2748b45207b5f8a1edf,
     type: 3}
   weapon:
   - sprite: {fileID: 21300000, guid: 54767b9ec8a176b449ef06622a2a37d4, type: 3}
     damage: 10
+
     slow: 0
     buff: 0
     rate: 2
     range: 10
     cost: 100
     sell: 50
-  - sprite: {fileID: 636679129, guid: e6e012b3a894d1845a97395a905c8604, type: 3}
+  - sprite: {fileID: 812282432, guid: 0c72b9632bc830449a503cd352889cd5, type: 3}
     damage: 1
     slow: 0
     buff: 0
@@ -33,7 +34,7 @@ MonoBehaviour:
     range: 10
     cost: 100
     sell: 50
-  - sprite: {fileID: 110800513, guid: e6e012b3a894d1845a97395a905c8604, type: 3}
+  - sprite: {fileID: 202613257, guid: 0c72b9632bc830449a503cd352889cd5, type: 3}
     damage: 1
     slow: 0
     buff: 0

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:project_defence/Assets/Prefabs/Projectil_Spear.prefab.meta
 guid: 36ee9807713eff04ea5ef99b0edb981e
+========
+guid: 4539221020f32084c8be55214d137079
+>>>>>>>> Sh(cp):project_defence/Assets/Prefabs/tower01_2.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 
