@@ -106,15 +106,7 @@ public class Enemy : MonoBehaviour
 		enemySpawner.DestroyEnemy(type, this, gold);
 	}
 
-	public float GetMoveSpeed()
-	{
-		return movement2D.MoveSpeed;
-	}
-
-    public void SetMoveSpeed(float speed)
-    {
-		movement2D.MoveSpeed = speed;
-    }
+	
 }
 
 
@@ -128,6 +120,5 @@ public class Enemy : MonoBehaviour
  *	: OnMove() - 경로를 따라 적 이동
  *	: NextMoveTo() - 다음 목표 위치 설정 or 마지막 위치이면 적 삭제
  *	: OnDie() - 적 사망 시 호출. EnemySpawner에게 본인을 삭제하도록 요청
- *	: GetMoveSpeed() - protected movement2D.MoveSpeed 값을 return해주는 public method
- *	: SetMoveSpeed() - protected movement2D.MoveSpeed 값을 Set해주는 public method
+ *	
  */

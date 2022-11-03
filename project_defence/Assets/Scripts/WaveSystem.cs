@@ -54,7 +54,7 @@ public class WaveSystem : MonoBehaviour
 	}
 
 	public void SpeedUp() {
-		if(Time.timeScale < 2) {
+		if(Time.timeScale < 4) {
 			Time.timeScale += 0.5f;
 		}
 	}
