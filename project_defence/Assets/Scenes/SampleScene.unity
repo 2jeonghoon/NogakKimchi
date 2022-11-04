@@ -11142,6 +11142,7 @@ GameObject:
   - component: {fileID: 708123770}
   - component: {fileID: 708123769}
   - component: {fileID: 708123771}
+  - component: {fileID: 708123772}
   m_Layer: 5
   m_Name: PanelInventory
   m_TagString: Untagged
@@ -11232,6 +11233,19 @@ MonoBehaviour:
   textPlayerGold: {fileID: 780071987}
   textEnemyCount: {fileID: 580364343}
   playerGold: {fileID: 2026522984}
+  enemySpawner: {fileID: 266347680}
+--- !u!114 &708123772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708123767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d304d6d7463b98e4ba0701e813556a3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   enemySpawner: {fileID: 266347680}
 --- !u!1 &708202257 stripped
 GameObject:
@@ -16494,7 +16508,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: Instagram
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -29101,7 +29115,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1600, y: 900}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
@@ -31611,7 +31625,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1993078046}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 708123772}
+        m_TargetAssemblyTypeName: PlayerSkill, Assembly-CSharp
+        m_MethodName: OnSkill_Instagram
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1993078046
 MonoBehaviour:
   m_ObjectHideFlags: 0
