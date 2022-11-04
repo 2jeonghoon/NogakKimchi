@@ -12,7 +12,7 @@ public class Title : MonoBehaviour
 
     private IEnumerator TitleController()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
         Destroy(gameObject);
     }
 }

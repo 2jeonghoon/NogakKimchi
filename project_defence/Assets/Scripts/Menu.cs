@@ -25,13 +25,13 @@ public class Menu : MonoBehaviour
     // 5 + 여유시간(0.5초)뒤 버튼 활성화 
     private IEnumerator ButtonOn()
     {
-        yield return new WaitForSeconds(5.5f);
+        yield return new WaitForSeconds(3.5f);
         gameStartButton.interactable = true;
         gameQuitButton.interactable = true;
     }
 
     public void StartButton()
     {
-        SceneManager.LoadScene("game");
+        SceneManager.LoadScene("SampleScene");
     }
 }

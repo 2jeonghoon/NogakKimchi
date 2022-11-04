@@ -106,14 +106,14 @@ public class Enemy : MonoBehaviour
 		enemySpawner.DestroyEnemy(type, this, gold);
 	}
 
-	public float GetMoveSpeed()
-	{
-		return movement2D.MoveSpeed;
-	}
+    public float GetMoveSpeed()
+    {
+        return movement2D.MoveSpeed;
+    }
 
     public void SetMoveSpeed(float speed)
     {
-		movement2D.MoveSpeed = speed;
+        movement2D.MoveSpeed = speed;
     }
 }
 
