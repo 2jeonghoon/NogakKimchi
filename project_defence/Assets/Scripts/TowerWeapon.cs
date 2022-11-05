@@ -38,9 +38,16 @@ public class TowerWeapon : MonoBehaviour
 	private	Tile			ownerTile;								// 현재 타워가 배치되어 있는 타일
 
 	private	float			addedDamage;							// 버프에 의해 추가된 데미지
-	private	int				buffLevel;								// 버프를 받는지 여부 설정 (0 : 버프X, 1~3 : 받는 버프 레벨)
+	private	int				buffLevel;                              // 버프를 받는지 여부 설정 (0 : 버프X, 1~3 : 받는 버프 레벨)
 
-	public	Sprite		TowerSprite	=> towerTemplate.weapon[level].sprite;
+	// 타워 설치 오디오 클립
+	public AudioClip buildClip;
+	// 타워 업그레이드 오디오 클립
+	public AudioClip upgradeClip;
+	// 타워 판매 오디오 클립
+	public AudioClip sellClip;
+
+	public Sprite		TowerSprite	=> towerTemplate.weapon[level].sprite;
 	public	float		Damage		=> towerTemplate.weapon[level].damage;
 	public	float		Rate		=> towerTemplate.weapon[level].rate;
 	public	float		Range		=> towerTemplate.weapon[level].range;
@@ -64,6 +71,8 @@ public class TowerWeapon : MonoBehaviour
 
 	public void Setup(TowerSpawner towerSpawner, EnemySpawner enemySpawner, PlayerGold playerGold, Tile ownerTile)
 	{
+		// 타워 설치 사운드 재생
+		SoundManager.instance.SFXPlay("TowerSetUp", buildClip);
 		spriteRenderer		= GetComponent<SpriteRenderer>();
 		this.towerSpawner	= towerSpawner;
 		this.enemySpawner	= enemySpawner;
@@ -448,6 +457,8 @@ public class TowerWeapon : MonoBehaviour
 
 	public bool Upgrade()
 	{
+		// 타워 설치 사운드 재생
+		SoundManager.instance.SFXPlay("TowerUpgrade", upgradeClip);
 		// 타워 업그레이드에 필요한 골드가 충분한지 검사
 		if ( playerGold.CurrentGold < towerTemplate.weapon[level+1].cost )
 		{
@@ -478,6 +489,8 @@ public class TowerWeapon : MonoBehaviour
 
 	public void Sell()
 	{
+		// 타워 판매 사운드 재생
+		SoundManager.instance.SFXPlay("TowerSell", sellClip);
 		// 골드 증가
 		playerGold.CurrentGold += towerTemplate.weapon[level].sell;
 		// 현재 타일에 다시 타워 건설이 가능하도록 설정

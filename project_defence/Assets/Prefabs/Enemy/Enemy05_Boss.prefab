@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gold: 2000
+  clip: {fileID: 8300000, guid: e58d8bd078f188a4ba314e933b98528b, type: 3}
   delay_time: 10
   boss_clone: {fileID: 4286712872766883678, guid: 9d131067c8887614cbec9ecbe31bfdb4,
     type: 3}
