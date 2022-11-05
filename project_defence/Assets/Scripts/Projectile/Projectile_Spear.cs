@@ -13,6 +13,8 @@ public class Projectile_Spear : Projectile
 
 	public void Setup(Transform target, float damage, float range)
 	{
+		// 발사 사운드 재생
+		SoundManager.instance.SFXPlay("Spear", clip);
 		movement2D = GetComponent<Movement2D>();
 		this.target = target;                       // 타워가 설정해준 target
 		this.damage = damage;                       // 타워의 공격력

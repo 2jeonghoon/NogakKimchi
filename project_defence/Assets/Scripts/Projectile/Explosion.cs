@@ -8,8 +8,13 @@ public class Explosion : MonoBehaviour
 
     private float fTime = 0;
 
+    // 폭발 사운드
+    public AudioClip clip;
+
     public void Setup(float damage,float scale)
     {
+        // 폭발 사운드 재생
+        SoundManager.instance.SFXPlay("boom", clip);
         Debug.Log("폭발");
         this.damage = damage;                       // 타워의 공격력
         this.transform.localScale = new Vector3(1, 1, 1) * scale;

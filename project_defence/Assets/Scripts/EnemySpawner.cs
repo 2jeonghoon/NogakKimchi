@@ -16,7 +16,8 @@ public class EnemySpawner : MonoBehaviour
 	private	PlayerGold	playerGold;				// 플레이어의 골드 정보
 	private	Wave		currentWave;			// 현재 웨이브 정보
 	private	int			currentEnemyCount;		// 현재 웨이브에 남아있는 적 숫자 (웨이브 시작시 max로 설정, 적 사망 시 -1)
-	private	List<Enemy>	enemyList;				// 현재 맵에 존재하는 모든 적의 정보
+	private	List<Enemy>	enemyList;              // 현재 맵에 존재하는 모든 적의 정보
+
 
 	// 적의 생성과 삭제는 EnemySpawner에서 하기 때문에 Set은 필요 없다.
 	public	List<Enemy> EnemyList => enemyList;
