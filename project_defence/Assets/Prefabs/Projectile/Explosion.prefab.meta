@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:project_defence/Assets/Prefabs/Projectile/Explosion.prefab.meta
 guid: 3e17251b17f66474daea65106be1c349
-========
-guid: af01022ebb850f141bc49d45ce50d61c
->>>>>>>> 01f4c590068f2713aab098c31b0e9274e36fb1c4:project_defence/Assets/Prefabs/Projectile/ProjectileExplosion.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 
