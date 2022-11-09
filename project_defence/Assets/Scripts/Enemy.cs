@@ -14,6 +14,9 @@ public class Enemy : MonoBehaviour
 	[SerializeField]
 	protected int				gold;           // 적 사망 시 획득 가능한 골드
 
+	// 적 사망 사운드
+	public AudioClip clip;
+
 	// 클론을 위한 셋업
 	public virtual void Setup(EnemySpawner enemySpawner, Enemy enemy)
 	{
@@ -98,6 +101,10 @@ public class Enemy : MonoBehaviour
 
 	public void OnDie(EnemyDestroyType type)
 	{
+		// 적 사망 사운드 재생
+		SoundManager.instance.SFXPlay("EnemyDie", clip);
+
+
 		// Enemy
 		//
 		//
@@ -106,14 +113,14 @@ public class Enemy : MonoBehaviour
 		enemySpawner.DestroyEnemy(type, this, gold);
 	}
 
-	public float GetMoveSpeed()
-	{
-		return movement2D.MoveSpeed;
-	}
+    public float GetMoveSpeed()
+    {
+        return movement2D.MoveSpeed;
+    }
 
     public void SetMoveSpeed(float speed)
     {
-		movement2D.MoveSpeed = speed;
+        movement2D.MoveSpeed = speed;
     }
 }
 

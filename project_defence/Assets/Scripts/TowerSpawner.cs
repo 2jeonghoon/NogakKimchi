@@ -13,7 +13,7 @@ public class TowerSpawner : MonoBehaviour
 	private	SystemTextViewer	systemTextViewer;			// 돈 부족, 건설 불가와 같은 시스템 메시지 출력
 	private	bool				isOnTowerButton = false;	// 타워 건설 버튼을 눌렀는지 체크
 	private	GameObject			followTowerClone = null;	// 임시 타워 사용 완료 시 삭제를 위해 저장하는 변수
-	private	int					towerType;					// 타워 속성
+	private	int					towerType;                  // 타워 속성
 
 	public	bool				IsOnTowerButton => isOnTowerButton;
 
@@ -70,6 +70,8 @@ public class TowerSpawner : MonoBehaviour
 		playerGold.CurrentGold -= towerTemplate[towerType].weapon[0].cost;
 		// 선택한 타일의 위치에 타워 건설 (타일보다 z축 -1의 위치에 배치)
 		Vector3 position = tileTransform.position + Vector3.back;
+		// 타워 설치 사운드 재생
+		GetComponent<AudioSource>().Play();
 		GameObject clone = Instantiate(towerTemplate[towerType].towerPrefab, position, Quaternion.identity);
 		// 타워 무기에 enemySpawner, playerGold, tile 정보 전달
 		clone.GetComponent<TowerWeapon>().Setup(this, enemySpawner, playerGold, tile);

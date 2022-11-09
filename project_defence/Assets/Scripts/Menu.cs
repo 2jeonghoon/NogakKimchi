@@ -10,6 +10,9 @@ public class Menu : MonoBehaviour
     Button gameStartButton;
     [SerializeField]
     Button gameQuitButton;
+    [SerializeField]
+    GameObject introBook;
+
     //[SerializeField]
     //Button SettingButton;
     // Start is called before the first frame update
@@ -19,19 +22,31 @@ public class Menu : MonoBehaviour
         gameStartButton.interactable = false;
         gameQuitButton.interactable = false;
 
+
+
         StartCoroutine("ButtonOn");
     }
 
     // 5 + 여유시간(0.5초)뒤 버튼 활성화 
     private IEnumerator ButtonOn()
     {
-        yield return new WaitForSeconds(5.5f);
+        yield return new WaitForSeconds(3.5f);
         gameStartButton.interactable = true;
         gameQuitButton.interactable = true;
     }
 
+
+    private void IntroBook()
+    {
+        introBook.SetActive(true);
+    }
+
     public void StartButton()
     {
-        SceneManager.LoadScene("game");
+        // 버튼 비활성화 후 IntroBook 실행
+        gameStartButton.interactable = false;
+        gameQuitButton.interactable = false;
+
+        IntroBook();
     }
 }

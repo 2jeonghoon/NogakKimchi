@@ -9,6 +9,8 @@ public class ProjectileMortar : Projectile
     //폭발 범위
     [SerializeField]
     private float explosionRange;
+    [SerializeField]
+    private GameObject explosionPrefab;
 
     //도착 타일
     private GameObject Tile;
@@ -32,12 +34,11 @@ public class ProjectileMortar : Projectile
     private float fTime = 0f; // 흐르는 시간
     private float fMaxTime = 1f; // 최대높이까지 가는 시간
 
-    private SpriteRenderer sr; // 타일 색깔 정보
-    private EnemySpawner enemySpawner;
-    private Enemy[] targetEnemy;
 
     public void Setup(Transform target, float damage, EnemySpawner enemySpawner)
     {
+        // 발사 사운드 재생
+        SoundManager.instance.SFXPlay("Mortar", clip);
         movement2D = GetComponent<Movement2D>();
         this.damage = damage;                       // 타워의 공격력
 
@@ -61,9 +62,6 @@ public class ProjectileMortar : Projectile
 
         fV_X = -(vStartPos.x - vEndPos.x)*2.04f / fEndTime;
         fV_Z = -(vStartPos.x - vEndPos.x) / fEndTime;
-        this.enemySpawner = enemySpawner;
-        // 도착 타일
-        Tile = FindTile(target);
     }
 
     private void Update()
@@ -76,16 +74,11 @@ public class ProjectileMortar : Projectile
         this.transform.position = vPos;
 
 
-        if (fTime >= fMaxTime && this.transform.position.y <= vEndPos.y && Tile != null)
+        if (fTime >= fMaxTime-0.5f && this.transform.position.y <= vEndPos.y)
         {
-            // 혹시 못맞추고 떨어져도 데미지는 들어가게, 총알 사라지기
-            sr = Tile.GetComponent<SpriteRenderer>();
-
-            // 타겟 타일 색깔 변경
-            sr.color = new Color(255, 0, 0, 0);
-
-            FindEnemy(Tile);
-            Destroy(gameObject);
+            GameObject clone = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
+            clone.GetComponent<Explosion>().Setup(damage, explosionRange);
+            Destroy(gameObject);                                    // 발사체 오브젝트 삭제
         }
     }
 
@@ -96,55 +89,9 @@ public class ProjectileMortar : Projectile
         if (!collision.CompareTag("TileRoad")) return;         // 길타일이 아닌 대상과 부딪히면;
         if (collision.transform != Tile.transform) return;          // 현재 맞은게 타겟타일이 아니면
 
-        // 타겟 타일 색깔 변경
-        sr.color = new Color(255, 0, 0, 0);
-        FindEnemy(Tile);
+        GameObject clone = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
+        clone.GetComponent<Explosion>().Setup(damage, explosionRange);
         Destroy(gameObject);                                    // 발사체 오브젝트 삭제
     }
 
-    private GameObject FindTile(Transform target)
-    {
-        List<GameObject> FoundObjects;
-        float shortDis;
-        FoundObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("TileRoad"));
-        shortDis = Vector3.Distance(target.transform.position, FoundObjects[0].transform.position); // 첫번째를 기준으로 잡아주기 
-        GameObject tile = FoundObjects[0]; // 첫번째를 먼저 
-
-        foreach (GameObject found in FoundObjects)
-        {
-            float Distance = Vector3.Distance(target.transform.position, found.transform.position);
-
-            if (Distance < shortDis) // 위에서 잡은 기준으로 거리 재기
-            {
-                tile = found;
-                shortDis = Distance;
-            }
-        }
-
-        // 타겟타일 색깔 가져오기
-        if(tile != null)
-        {
-            sr = tile.GetComponent<SpriteRenderer>();
-            sr.color = new Color(1, 0, 0, 0.5f);
-        }
-        return tile;
-    }
-
-    private void FindEnemy(GameObject tile)
-    {
-        Enemy enemy;
-        // EnemySpawner의 EnemyList에 있는 현재 맵에 존재하는 모든 적 검사
-        for (int i = 0; i < enemySpawner.EnemyList.Count; ++i)
-        {
-            enemy = enemySpawner.EnemyList[i];
-            // 현재 검사중인 적과의 거리가 공격범위 내에 있고, 현재까지 검사한 적보다 거리가 가까우면
-            if (tile.transform.position.x + explosionRange >= enemy.transform.position.x &&
-                tile.transform.position.x - explosionRange <= enemy.transform.position.x &&
-                tile.transform.position.y + explosionRange >= enemy.transform.position.y &&
-                tile.transform.position.y - explosionRange <= enemy.transform.position.y)
-            {
-                enemy.GetComponent<EnemyHP>().TakeDamage(damage);
-            }
-        }
-    }
 }
