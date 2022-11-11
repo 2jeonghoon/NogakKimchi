@@ -4201,7 +4201,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7c47b20bb9874304a809dc5580d403ba, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.77
+  m_Volume: 0.5
   m_Pitch: 0.6
   Loop: 0
   Mute: 1
@@ -4904,6 +4904,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
+  - wave:
+    - spawnTime: 0.1
+      maxEnemyCount: 30
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+  - wave:
+    - spawnTime: 0.1
+      maxEnemyCount: 30
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
   - wave:
     - spawnTime: 0.1
       maxEnemyCount: 30
