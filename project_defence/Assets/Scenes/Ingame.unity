@@ -4905,26 +4905,82 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - wave:
-    - spawnTime: 0.1
+    - spawnTime: 0.5
+      maxEnemyCount: 30
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 30
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+    - spawnTime: 0.8
+      maxEnemyCount: 5
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 30
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 30
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+  - wave:
+    - spawnTime: 0.5
       maxEnemyCount: 30
       enemyPrefabs:
       - {fileID: 4286712872766883678, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
       - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
       - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
   - wave:
-    - spawnTime: 0.1
-      maxEnemyCount: 30
+    - spawnTime: 0.5
+      maxEnemyCount: 60
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 4286712872766883678, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+  - wave:
+    - spawnTime: 0.3
+      maxEnemyCount: 60
       enemyPrefabs:
       - {fileID: 4286712872766883678, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
       - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+  - wave:
+    - spawnTime: 0.3
+      maxEnemyCount: 60
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 4286712872766883678, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 4286712872766883678, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
       - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
   - wave:
-    - spawnTime: 0.1
+    - spawnTime: 0.2
+      maxEnemyCount: 60
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+    - spawnTime: 0.5
       maxEnemyCount: 30
       enemyPrefabs:
       - {fileID: 4286712872766883678, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
-      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
-      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+  - wave:
+    - spawnTime: 0.3
+      maxEnemyCount: 10
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: 4878148eb0d7a8c46b4df9d7202a708c, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
   enemySpawner: {fileID: 266347680}
 --- !u!1001 &266556900
 PrefabInstance:
@@ -7391,7 +7447,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: $100
+  m_text: $600
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8817,7 +8873,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: $150
+  m_text: $700
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12423,7 +12479,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: $100
+  m_text: $350
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -13672,7 +13728,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: $200
+  m_text: $400
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -16594,7 +16650,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: $200
+  m_text: $900
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -18153,7 +18209,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: $100
+  m_text: $1200
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -28843,7 +28899,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: $50
+  m_text: $200
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -34438,7 +34494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imageScreen: {fileID: 1701104212}
-  maxHP: 20
+  maxHP: 150
 --- !u!4 &2026522983
 Transform:
   m_ObjectHideFlags: 0
@@ -34466,7 +34522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61135f547115e3548bd09440203e8a58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentGold: 10000
+  currentGold: 500
 --- !u!1001 &2028308002
 PrefabInstance:
   m_ObjectHideFlags: 0
