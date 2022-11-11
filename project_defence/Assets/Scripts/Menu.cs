@@ -10,28 +10,37 @@ public class Menu : MonoBehaviour
     Button gameStartButton;
     [SerializeField]
     Button gameQuitButton;
+
     //[SerializeField]
     //Button SettingButton;
     // Start is called before the first frame update
     void Awake()
     {
-        // °ÔÀÓÀÌ ½ÃÀÛµÇ¸é Å¸ÀÌÆ² ¿µ»óÀÌ ³¡³¯ ¶§±îÁö ¹öÆ° ºñÈ°¼ºÈ­
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ÛµÇ¸ï¿½ Å¸ï¿½ï¿½Æ² ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½È°ï¿½ï¿½È­
         gameStartButton.interactable = false;
         gameQuitButton.interactable = false;
+
 
         StartCoroutine("ButtonOn");
     }
 
-    // 5 + ¿©À¯½Ã°£(0.5ÃÊ)µÚ ¹öÆ° È°¼ºÈ­ 
+    // 5 + ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½(0.5ï¿½ï¿½)ï¿½ï¿½ ï¿½ï¿½Æ° È°ï¿½ï¿½È­ 
     private IEnumerator ButtonOn()
     {
         yield return new WaitForSeconds(3.5f);
         gameStartButton.interactable = true;
         gameQuitButton.interactable = true;
+        gameStartButton.gameObject.SetActive(true);
+        gameQuitButton.gameObject.SetActive(true);
     }
+
 
     public void StartButton()
     {
-        SceneManager.LoadScene("SampleScene");
+        // ï¿½ï¿½Æ° ï¿½ï¿½È°ï¿½ï¿½È­ ï¿½ï¿½ IntroBook ï¿½ï¿½ï¿½ï¿½
+        gameStartButton.interactable = false;
+        gameQuitButton.interactable = false;
+
+        SceneManager.LoadScene("Book");
     }
 }

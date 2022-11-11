@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f55f748cb1f1db48ae2fbd3690c6871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: 8401456349c492a489ed90469e317e43, type: 3}
   explosionRange: 1
   explosionPrefab: {fileID: 7684957893073054618, guid: 3e17251b17f66474daea65106be1c349,
     type: 3}
