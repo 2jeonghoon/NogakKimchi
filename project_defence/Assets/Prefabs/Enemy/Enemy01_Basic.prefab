@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 288d7fee1068849458d43eb560e20942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 1
   moveDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &5241647052692723452
 MonoBehaviour:
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f644cd44177daf4e9283fa86a717b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gold: 125
+  gold: 5
   clip: {fileID: 8300000, guid: e58d8bd078f188a4ba314e933b98528b, type: 3}
 --- !u!58 &-3643329299626539831
 CircleCollider2D:
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a7c36ed98a42194788486a6867c2475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 10
+  maxHP: 3
   currentHP: 0
   defense: 0
 --- !u!82 &-7513707406599262599

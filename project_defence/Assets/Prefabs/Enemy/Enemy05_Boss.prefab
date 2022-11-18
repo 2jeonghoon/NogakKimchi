@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 288d7fee1068849458d43eb560e20942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 1
   moveDirection: {x: 0, y: 0, z: 0}
 --- !u!58 &-3643329299626539831
 CircleCollider2D:
@@ -130,9 +130,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a7c36ed98a42194788486a6867c2475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 1000
+  maxHP: 100
   currentHP: 0
-  defense: 5
+  defense: 2
 --- !u!114 &1107960611412643031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 330ed266a6f06fa4b95cbf3cefd5897e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gold: 2000
+  gold: 100
   clip: {fileID: 8300000, guid: e58d8bd078f188a4ba314e933b98528b, type: 3}
   delay_time: 10
   boss_clone: {fileID: 4286712872766883678, guid: 9d131067c8887614cbec9ecbe31bfdb4,

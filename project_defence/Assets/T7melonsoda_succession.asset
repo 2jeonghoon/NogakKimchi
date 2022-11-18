@@ -23,16 +23,16 @@ MonoBehaviour:
     buff: 0
     rate: 0.3
     range: 3
-    cost: 200
-    sell: 100
+    cost: 600
+    sell: 480
   - sprite: {fileID: 21300000, guid: 54767b9ec8a176b449ef06622a2a37d4, type: 3}
     damage: 5
     slow: 0
     buff: 0
     rate: 0.2
     range: 4
-    cost: 400
-    sell: 200
+    cost: 200
+    sell: 640
   - sprite: {fileID: 21300000, guid: 715befdf70f55284282b9800b10c2b47, type: 3}
     damage: 10
     slow: 0
@@ -40,4 +40,4 @@ MonoBehaviour:
     rate: 0.1
     range: 5
     cost: 800
-    sell: 400
+    sell: 1280
