@@ -523,7 +523,7 @@ public class TowerWeapon : MonoBehaviour
  *	
  * Functions
  *	: ChangeState() - 코루틴을 이용한 FSM에서 상태 변경 함수
- *	: RotateToTarget() - target 방향으로 회전
+ *	: RotateToTarget() - target 방향으로 o
  *	: SearchTarget() - 현재 타워에 가장 근접한 적 탐색
  *	: TryAttackGun() - target으로 설정된 대상에게 캐논 공격
  *	: TryAttackLaser() - target으로 설정된 대상에게 레이저 공격

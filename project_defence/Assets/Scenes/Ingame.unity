@@ -4979,7 +4979,7 @@ MonoBehaviour:
     - spawnTime: 0.5
       maxEnemyCount: 30
       enemyPrefabs:
-      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
   - wave:
     - spawnTime: 0.5
       maxEnemyCount: 30
