@@ -68,8 +68,9 @@ public class TowerSpawner : MonoBehaviour
 		tile.IsBuildTower = true;
 		// 타워 건설에 필요한 골드만큼 감소
 		playerGold.CurrentGold -= towerTemplate[towerType].weapon[0].cost;
-		// 선택한 타일의 위치에 타워 건설 (타일보다 z축 -1의 위치에 배치)
-		Vector3 position = tileTransform.position + Vector3.back;
+		// 선택한 타일의 위치에 타워 건설 (타일보다 z축 -1의 위치에 배치, y축 0.5위로 배치)
+		Vector3 position = tileTransform.position + Vector3.back + Vector3.up/2;
+		
 		// 타워 설치 사운드 재생
 		GetComponent<AudioSource>().Play();
 		GameObject clone = Instantiate(towerTemplate[towerType].towerPrefab, position, Quaternion.identity);

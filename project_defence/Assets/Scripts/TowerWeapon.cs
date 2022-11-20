@@ -78,7 +78,9 @@ public class TowerWeapon : MonoBehaviour
 		this.enemySpawner	= enemySpawner;
 		this.playerGold		= playerGold;
 		this.ownerTile		= ownerTile;
-		
+		//y좌표가 낮을수록 앞으로 나오게
+		this.GetComponent<SpriteRenderer>().sortingOrder = -(int)this.transform.position.y+10;
+
 		// 무기 속성이 캐논, 레이저일 때
 		if ( weaponType == WeaponType.Gun || weaponType == WeaponType.Laser ||
 			weaponType == WeaponType.Mortar || weaponType == WeaponType.Shotgun ||
