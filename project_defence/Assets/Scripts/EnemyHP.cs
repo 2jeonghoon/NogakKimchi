@@ -13,6 +13,9 @@ public class EnemyHP : MonoBehaviour
     private Enemy           enemy;
     private SpriteRenderer  spriteRenderer;
 
+    [SerializeField]
+    private ParticleSystem heal_effect;
+
 
     public  float MaxHP => maxHP;
     public  float CurrentHP => currentHP;
@@ -44,6 +47,7 @@ public class EnemyHP : MonoBehaviour
         // 체력이 최대 체력을 넘어가지 않도록
         if (currentHP+heal >= maxHP)
         {
+            heal_effect.Play();
             currentHP = maxHP;
         }
         else

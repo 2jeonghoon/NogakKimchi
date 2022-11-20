@@ -4,6 +4,7 @@ using System.Collections;
 public enum WeaponType	{ Gun = 0, Laser, Slow, Buff, Mortar, Shotgun, Spear, Explosion}
 public enum WeaponState { SearchTarget = 0, TryAttackGun, TryAttackLaser, TryAttackMortar, 
 							TryAttackShotgun, TryAttackSpaer, TryAttackExplosion}
+public enum TileType { One, Two};
 
 public class TowerWeapon : MonoBehaviour
 {

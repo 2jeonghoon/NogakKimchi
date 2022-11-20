@@ -25,6 +25,7 @@ MonoBehaviour:
     range: 3
     cost: 700
     sell: 560
+    tileType: 1
   - sprite: {fileID: -1616525152, guid: efc9c24898a5a7945b5b50be8e7cb173, type: 3}
     damage: 5
     slow: 0
@@ -33,6 +34,7 @@ MonoBehaviour:
     range: 3
     cost: 200
     sell: 720
+    tileType: 1
   - sprite: {fileID: -1237379144, guid: efc9c24898a5a7945b5b50be8e7cb173, type: 3}
     damage: 5
     slow: 0
@@ -41,3 +43,4 @@ MonoBehaviour:
     range: 3
     cost: 250
     sell: 920
+    tileType: 1
