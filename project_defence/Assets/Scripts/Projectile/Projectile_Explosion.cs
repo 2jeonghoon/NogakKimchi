@@ -33,10 +33,8 @@ public class Projectile_Explosion : Projectile
     private void Update()
     {
         move_distance = (transform.position - start_position).magnitude;
-        Debug.Log(move_distance);
         if(move_distance > range)
         {
-            Debug.Log(move_distance);
             boom();
         }
         if (target != null) // target이 존재하면
