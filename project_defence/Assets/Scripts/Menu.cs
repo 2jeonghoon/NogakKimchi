@@ -17,6 +17,7 @@ public class Menu : MonoBehaviour
 
     public void StartButton()
     {
+        Time.timeScale = 1;
         // ��ư ��Ȱ��ȭ �� IntroBook ����
         gameStartButton.interactable = false;
         gameQuitButton.interactable = false;
