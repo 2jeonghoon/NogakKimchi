@@ -32,6 +32,7 @@ public class PauseMenu : MonoBehaviour
     public void ClickExit()
     {
         Debug.Log("게임 종료");
-        Application.Quit();  // 게임 종료 (에디터 상 실행이기 때문에 종료 눌러도 변화 X)
+        SceneManager.LoadScene("MainMenu");
+        //Application.Quit();  // 게임 종료 (에디터 상 실행이기 때문에 종료 눌러도 변화 X)
     }
 }

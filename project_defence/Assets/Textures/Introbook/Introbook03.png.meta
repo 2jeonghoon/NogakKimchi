@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e51a0f73a16ece64cb5673d2e8b9f459
+guid: fe27cdf441d33c249962e970152e9cd1
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -49,7 +49,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -100,6 +100,18 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -109,8 +121,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 640
-        height: 720
+        width: 1280
+        height: 1440
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,8 +130,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aadfb32306a720a41970bd5f780a8d7c
-      internalID: 817150408
+      spriteID: 2542e0401f167434a99a2daf0bd7ae9b
+      internalID: 1692046961
       vertices: []
       indices: 
       edges: []
@@ -128,10 +140,10 @@ TextureImporter:
       name: Introbook03_1
       rect:
         serializedVersion: 2
-        x: 640
+        x: 1280
         y: 0
-        width: 640
-        height: 720
+        width: 1280
+        height: 1440
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,8 +151,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43222ee2414b6cc4d8c1dbf2602559c8
-      internalID: -448777761
+      spriteID: 4668b625ef0a650458c2e06aa3cd85c6
+      internalID: 1586981505
       vertices: []
       indices: 
       edges: []
@@ -156,8 +168,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Introbook03_0: 817150408
-      Introbook03_1: -448777761
+      Introbook03_0: 1692046961
+      Introbook03_1: 1586981505
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
