@@ -14,6 +14,7 @@ public class EnemyHP : MonoBehaviour
     private SpriteRenderer  spriteRenderer;
 
 
+
     public  float MaxHP => maxHP;
     public  float CurrentHP => currentHP;
     

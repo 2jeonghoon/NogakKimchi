@@ -17,27 +17,27 @@ MonoBehaviour:
   followTowerPrefab: {fileID: 5785049388285805106, guid: c5a427d76f5683e45a754e632575fde1,
     type: 3}
   weapon:
-  - sprite: {fileID: 1079634740, guid: d6146632214145e448dc7ea051b7da09, type: 3}
-    damage: 30
+  - sprite: {fileID: 21300000, guid: d3bc36f4a3ac37a4699e101d281c9609, type: 3}
+    damage: 5
     slow: 0
     buff: 0
     rate: 1
-    range: 6
-    cost: 200
-    sell: 100
+    range: 10
+    cost: 900
+    sell: 720
   - sprite: {fileID: 1993673439, guid: d6146632214145e448dc7ea051b7da09, type: 3}
-    damage: 40
-    slow: 0
-    buff: 0
-    rate: 0.8
-    range: 7
-    cost: 400
-    sell: 200
-  - sprite: {fileID: -612658542, guid: d6146632214145e448dc7ea051b7da09, type: 3}
-    damage: 50
+    damage: 5
     slow: 0
     buff: 0
     rate: 0.5
-    range: 8
-    cost: 800
-    sell: 400
+    range: 10
+    cost: 180
+    sell: 864
+  - sprite: {fileID: -612658542, guid: d6146632214145e448dc7ea051b7da09, type: 3}
+    damage: 20
+    slow: 0
+    buff: 0
+    rate: 0.5
+    range: 10
+    cost: 400
+    sell: 1184
