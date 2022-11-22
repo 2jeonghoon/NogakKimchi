@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1685315662021623705}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8404493632679895380}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -2044403703, guid: 15a6af29f12885c4988d0cc7164c9a8b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e59fd75c9f8bc734eb3009d95225de9d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -103,6 +103,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 8404493632679895380}
   weaponType: 5
   buffTower: {fileID: 0}
+  tileType: 0
   projectilePrefab: {fileID: 4461503835666675623, guid: 39f676f0c1b70dc4eafb5f2eddbabb70,
     type: 3}
   lineRenderer: {fileID: 0}
@@ -124,8 +125,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.7, y: 5.99, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.7, y: 3, z: 0.2}
+  m_Center: {x: 0, y: -1.5, z: 0}
 --- !u!1 &9197815489819143991
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,8 +150,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9197815489819143991}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.15, y: 1.46, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

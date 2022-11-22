@@ -290,6 +290,7 @@ public class Book : MonoBehaviour {
     public void DragRightPageToPoint(Vector3 point)
     {
         if (currentPage >= bookPages.Length) return;
+        
         pageDragging = true;
         mode = FlipMode.RightToLeft;
         f = point;

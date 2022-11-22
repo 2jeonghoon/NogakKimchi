@@ -13,6 +13,10 @@ public class SoundManager : MonoBehaviour
     public AudioSource bgSound;
     public AudioClip[] bglist;
 
+    // 버튼 사운드
+    [SerializeField]
+    public AudioClip buttonSoundClip;
+
     public static SoundManager instance;
 
     private void Awake()
@@ -33,9 +37,9 @@ public class SoundManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
-        for(int i = 0; i < bglist.Length; i++)
+        for (int i = 0; i < bglist.Length; i++)
         {
-            if(arg0.name + "BGM" == bglist[i].name)
+            if (arg0.name + "BGM" == bglist[i].name)
             {
                 Debug.Log("bgm 재생");
                 BgSoundPlay(bglist[i]);
@@ -54,6 +58,18 @@ public class SoundManager : MonoBehaviour
         Destroy(go, clip.length);
     }
 
+    // 버튼 사운드 출력
+    public void onClickButton()
+    {
+        Debug.Log("button click");
+        GameObject go = new GameObject("ButtonSound");
+        AudioSource audiosource = go.AddComponent<AudioSource>();
+        audiosource.outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];
+        audiosource.clip = buttonSoundClip;
+        audiosource.Play();
+        Destroy(go, buttonSoundClip.length);
+    }
+
     public void BgSoundPlay(AudioClip clip)
     {
         bgSound.outputAudioMixerGroup = mixer.FindMatchingGroups("BGsound")[0];
@@ -62,4 +78,5 @@ public class SoundManager : MonoBehaviour
         bgSound.volume = 0.1f;
         bgSound.Play();
     }
+
 }
