@@ -21,6 +21,7 @@ MonoBehaviour:
     damage: 0
     slow: 0.2
     buff: 0
+<<<<<<< Updated upstream:project_defence/Assets/Tower03Slow.asset
     rate: 0
     range: 2
     cost: 400
@@ -36,6 +37,25 @@ MonoBehaviour:
   - sprite: {fileID: -1237379144, guid: efc9c24898a5a7945b5b50be8e7cb173, type: 3}
     damage: 0
     slow: 0.4
+=======
+    rate: 0.5
+    range: 3
+    cost: 700
+    sell: 560
+    tileType: 1
+  - sprite: {fileID: 21300000, guid: 760c75742dc91fc43a92ea995e94ff40, type: 3}
+    damage: 5
+    slow: 0
+    buff: 0
+    rate: 0.5
+    range: 3
+    cost: 200
+    sell: 720
+    tileType: 1
+  - sprite: {fileID: 21300000, guid: 760c75742dc91fc43a92ea995e94ff40, type: 3}
+    damage: 5
+    slow: 0
+>>>>>>> Stashed changes:project_defence/Assets/T3icecream_explosion.asset
     buff: 0
     rate: 0
     range: 2
