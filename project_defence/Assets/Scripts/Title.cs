@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Title : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class Title : MonoBehaviour
 
     private IEnumerator TitleController()
     {
-        yield return new WaitForSeconds(5);
-        Destroy(gameObject);
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("MainMenu");
     }
 }

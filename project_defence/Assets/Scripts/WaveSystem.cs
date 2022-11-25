@@ -46,16 +46,19 @@ public class WaveSystem : MonoBehaviour
 
     private IEnumerator WaveSpawnEnemy()
     {
-		for (int i = 0; i < waves[currentWaveIndex].wave.Length; i++)
-		{
-			spawnEnemyCount = 0;
-			Wave wave = waves[currentWaveIndex].wave[i];
-			enemySpawner.StartWave(wave);
-			// 현재 wave에서 소환이 다 끝날 때까지 기다리기
-			while (wave.maxEnemyCount > spawnEnemyCount)
-            {
-				yield return new WaitForSeconds(0.5f);
-			}
+		int wave_enemy_amount = 0 ;
+		for(int i = 0; i < waves[currentWaveIndex].wave.Length; i++)
+        {
+			wave_enemy_amount += waves[currentWaveIndex].wave[i].maxEnemyCount;
+
+		}
+		waves[currentWaveIndex].maxEnemyCount = wave_enemy_amount;
+		spawnEnemyCount = 0;
+		enemySpawner.StartWave(waves[currentWaveIndex]);
+		// 현재 wave에서 소환이 다 끝날 때까지 기다리기
+		while (waves[currentWaveIndex].maxEnemyCount > spawnEnemyCount)
+        {
+			yield return new WaitForSeconds(0.5f);
 		}
 	}
 
@@ -76,18 +79,12 @@ public class WaveSystem : MonoBehaviour
 		}
 	}
 
-<<<<<<< Updated upstream
-	public void SpeedDown() {
-		if(Time.timeScale > 0.5f) {
-			Time.timeScale -= 0.5f;
-=======
 	public void GamePause()
     {
         if (!isfause)
         {
 			Time.timeScale = 0f;
 			isfause = true;
->>>>>>> Stashed changes
 		}
         else
         {
@@ -102,6 +99,7 @@ public class WaveSystem : MonoBehaviour
 public struct WaveEnemy
 {
 	public Wave[] wave;
+	public int maxEnemyCount; // 현재 웨이브 적 등장 숫자
 }
 
 [System.Serializable]

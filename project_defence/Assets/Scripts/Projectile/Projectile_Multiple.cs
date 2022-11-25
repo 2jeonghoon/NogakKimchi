@@ -2,17 +2,16 @@ using UnityEngine;
 using System.Collections;
 using Unity.Profiling;
 
-public class Projectile_Multiple : MonoBehaviour
+public class Projectile_Multiple : Projectile
 {
-	private	Movement2D	movement2D;
-	//private	int			damage;
-	private	float		damage;
     private Vector3 direction;
     private Vector3 direction2;
 
     public void Setup(Vector3 targetPos, float damage)
 	{
-		movement2D	= GetComponent<Movement2D>();
+        // 발사 사운드 재생
+        SoundManager.instance.SFXPlay("ShotGun", clip);
+        movement2D	= GetComponent<Movement2D>();
 		this.damage	= damage;						// 타워의 공격력
         this.direction = (targetPos - transform.position).normalized;
         direction2 = direction;

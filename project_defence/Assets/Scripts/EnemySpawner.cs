@@ -14,15 +14,16 @@ public class EnemySpawner : MonoBehaviour
 	private	PlayerHP	playerHP;				// 플레이어의 체력 정보
 	[SerializeField]
 	private	PlayerGold	playerGold;				// 플레이어의 골드 정보
-	private	Wave		currentWave;			// 현재 웨이브 정보
+	private WaveEnemy	currentWave;			// 현재 웨이브 정보
 	private	int			currentEnemyCount;		// 현재 웨이브에 남아있는 적 숫자 (웨이브 시작시 max로 설정, 적 사망 시 -1)
-	private	List<Enemy>	enemyList;				// 현재 맵에 존재하는 모든 적의 정보
+	private	List<Enemy>	enemyList;              // 현재 맵에 존재하는 모든 적의 정보
+
 
 	// 적의 생성과 삭제는 EnemySpawner에서 하기 때문에 Set은 필요 없다.
 	public	List<Enemy> EnemyList => enemyList;
 	// 현재 웨이브의 남아있는 적, 최대 적 숫자
 	public	int			CurrentEnemyCount => currentEnemyCount;
-	public	int			MaxEnemyCount => currentWave.maxEnemyCount;
+	public int			MaxEnemyCount => currentWave.maxEnemyCount;
 
 	private void Awake()
 	{
@@ -30,43 +31,49 @@ public class EnemySpawner : MonoBehaviour
 		enemyList = new List<Enemy>();
 	}
 
-	public void StartWave(Wave wave)
+	public void StartWave(WaveEnemy waves)
 	{
 		// 매개변수로 받아온 웨이브 정보 저장
-		currentWave			= wave;
+		currentWave			= waves;
 		// 현재 웨이브의 최대 적 숫자를 저장
-		currentEnemyCount	= currentWave.maxEnemyCount;
+		currentEnemyCount	+= waves.maxEnemyCount;
 		// 현재 웨이브 시작
 		StartCoroutine("SpawnEnemy");
 	}
 
 	private IEnumerator SpawnEnemy()
 	{
-		// 현재 웨이브에서 생성한 적 숫자
-		int spawnEnemyCount = 0;
 
+		Wave wave;
 		// 현재 웨이브에서 생성되어야 하는 적의 숫자만큼 적을 생성하고 코루틴 종료
-		while ( spawnEnemyCount < currentWave.maxEnemyCount )
+		for (int i = 0; i < currentWave.wave.Length; i++)
 		{
-			// wave에서 count
-			WaveSystem.spawnEnemyCount++;
+			// 현재 웨이브에서 생성한 적 숫자
+			int spawnEnemyCount = 0;
+			wave = currentWave.wave[i];
+			Debug.Log(wave.maxEnemyCount);
+			while (spawnEnemyCount < wave.maxEnemyCount)
+			{
+				// wave에서 count
+				WaveSystem.spawnEnemyCount++;
 
-			// 웨이브에 등장하는 적의 종류가 여러 종류일 때 임의의 적이 등장하도록 설정하고, 적 오브젝트 생성
-			int			enemyIndex	= Random.Range(0, currentWave.enemyPrefabs.Length);
-			GameObject	clone		= Instantiate(currentWave.enemyPrefabs[enemyIndex]);
-			Enemy		enemy		= clone.GetComponent<Enemy>();	// 방금 생성된 적의 Enemy 컴포넌트
-			
-			// this는 나 자신 (자신의 EnemySpawner 정보)
-			enemy.Setup(this, wayPoints);							// wayPoint 정보를 매개변수로 Setup() 호출
-			enemyList.Add(enemy);									// 리스트에 방금 생성된 적 정보 저장
+				// 웨이브에 등장하는 적의 종류가 여러 종류일 때 임의의 적이 등장하도록 설정하고, 적 오브젝트 생성
+				int enemyIndex = Random.Range(0, wave.enemyPrefabs.Length);
+				GameObject clone = Instantiate(wave.enemyPrefabs[enemyIndex]);
+				Enemy enemy = clone.GetComponent<Enemy>();  // 방금 생성된 적의 Enemy 컴포넌트
 
-			SpawnEnemyHPSlider(clone);								// 적 체력을 나타내는 Slider UI 생성 및 설정
+				// this는 나 자신 (자신의 EnemySpawner 정보)
+				enemy.Setup(this, wayPoints);                           // wayPoint 정보를 매개변수로 Setup() 호출
+				enemyList.Add(enemy);                                   // 리스트에 방금 생성된 적 정보 저장
 
-			// 현재 웨이브에서 생성한 적의 숫자 +1
-			spawnEnemyCount ++;
+				SpawnEnemyHPSlider(clone);                              // 적 체력을 나타내는 Slider UI 생성 및 설정
 
-			// 각 웨이브마다 spawnTime이 다를 수 있기 때문에 현재 웨이브(currentWave)의 spawnTime 사용
-			yield return new WaitForSeconds(currentWave.spawnTime);	// spawnTime 시간 동안 대기
+				// 현재 웨이브에서 생성한 적의 숫자 +1
+				spawnEnemyCount++;
+
+				// 각 웨이브마다 spawnTime이 다를 수 있기 때문에 현재 웨이브(currentWave)의 spawnTime 사용
+				yield return new WaitForSeconds(wave.spawnTime); // spawnTime 시간 동안 대기
+			}
 		}
 	}
 	

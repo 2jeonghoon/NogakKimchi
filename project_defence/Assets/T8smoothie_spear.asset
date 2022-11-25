@@ -10,43 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a7bcf6fcbb6c844d906e040c534dc62, type: 3}
-<<<<<<< Updated upstream:project_defence/Assets/Tower05Mortar.asset
-  m_Name: Tower05Mortar
-=======
   m_Name: T8smoothie_spear
->>>>>>> Stashed changes:project_defence/Assets/T8smoothie_spear.asset
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 3318578265759658224, guid: 7383ef9c0f93ef7458dee4ea8fbdcd4b,
     type: 3}
   followTowerPrefab: {fileID: 8166587275253779454, guid: 1b4dd4fce3b29f547b568624e1a9c9e3,
     type: 3}
   weapon:
-  - sprite: {fileID: -1404912121, guid: e6e012b3a894d1845a97395a905c8604, type: 3}
-    damage: 10
-    slow: 0
-    buff: 0
-<<<<<<< Updated upstream:project_defence/Assets/Tower05Mortar.asset
-    rate: 2
-    range: 5
-    cost: 100
-    sell: 50
-  - sprite: {fileID: 636679129, guid: 54c9e3f7f5d202149bebbc27ca91b9d3, type: 3}
+  - sprite: {fileID: 21300000, guid: 2599fd82a968cca41892c51dc20ee6c1, type: 3}
     damage: 3
     slow: 0
     buff: 0
-    rate: 2
-    range: 5
-    cost: 100
-    sell: 50
-  - sprite: {fileID: 110800513, guid: 54c9e3f7f5d202149bebbc27ca91b9d3, type: 3}
-    damage: 3
-    slow: 0
-    buff: 0
-    rate: 2
-    range: 5
-    cost: 100
-    sell: 50
-=======
     rate: 0.5
     range: 4
     cost: 1200
@@ -70,4 +44,3 @@ MonoBehaviour:
     cost: 800
     sell: 1600
     tileType: 0
->>>>>>> Stashed changes:project_defence/Assets/T8smoothie_spear.asset

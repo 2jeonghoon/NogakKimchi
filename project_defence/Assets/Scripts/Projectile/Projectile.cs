@@ -6,8 +6,13 @@ public class Projectile : MonoBehaviour
 	protected	Transform	target;
 	protected float		damage;
 
+	// 총알 발사 사운드
+	public AudioClip clip;
+
 	public virtual void Setup(Transform target, float damage)
 	{
+		// 발사 사운드 재생
+		SoundManager.instance.SFXPlay("shot", clip);
 		movement2D	= GetComponent<Movement2D>();
 		this.target	= target;						// 타워가 설정해준 target
 		this.damage	= damage;						// 타워의 공격력

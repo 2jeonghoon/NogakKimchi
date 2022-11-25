@@ -12,7 +12,9 @@ public class EnemyHP : MonoBehaviour
     private float             defense;        // 방어력
     private Enemy           enemy;
     private SpriteRenderer  spriteRenderer;
-    
+
+
+
     public  float MaxHP => maxHP;
     public  float CurrentHP => currentHP;
     
@@ -55,7 +57,7 @@ public class EnemyHP : MonoBehaviour
     {
         // Tip. 적의 체력이 damage 만큼 감소해서 죽을 상황일 때 여러 타워의 공격을 동시에 받으면
         // enemy.OnDie() 함수가 여러 번 실행될 수 있다.
-    
+
         // 현재 적의 상태가 사망 상태이면 아래 코드를 실행하지 않는다.
         if ( isDie == true ) return;
     

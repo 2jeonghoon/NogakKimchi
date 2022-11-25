@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a7bcf6fcbb6c844d906e040c534dc62, type: 3}
+  m_Name: T3icecream_explosion
+  m_EditorClassIdentifier: 
+  towerPrefab: {fileID: 4828683234446073015, guid: 25e222ea3e990c84082c4835f0f309b0,
+    type: 3}
+  followTowerPrefab: {fileID: 2891944846589090831, guid: 4cdd4323ce915a7499361c9b3f3a54e2,
+    type: 3}
+  weapon:
+  - sprite: {fileID: 21300000, guid: 760c75742dc91fc43a92ea995e94ff40, type: 3}
+    damage: 3
+    slow: 0
+    buff: 0
+    rate: 0.5
+    range: 3
+    cost: 700
+    sell: 560
+    tileType: 1
+  - sprite: {fileID: 21300000, guid: 760c75742dc91fc43a92ea995e94ff40, type: 3}
+    damage: 5
+    slow: 0
+    buff: 0
+    rate: 0.5
+    range: 3
+    cost: 200
+    sell: 720
+    tileType: 1
+  - sprite: {fileID: 21300000, guid: 760c75742dc91fc43a92ea995e94ff40, type: 3}
+    damage: 5
+    slow: 0
+    buff: 0
+    rate: 0.3
+    range: 3
+    cost: 250
+    sell: 920
+    tileType: 1

@@ -1,16 +1,10 @@
-﻿using System.Collections;
-using System.Diagnostics;
 using UnityEngine;
+using System.Collections;
 
-<<<<<<< Updated upstream
-public enum WeaponType	{ Gun = 0, Laser, Slow, Buff, Mortar, Shotgun}
-public enum WeaponState { SearchTarget = 0, TryAttackGun, TryAttackLaser, TryAttackMortar, TryAttackShotgun}
-=======
 public enum WeaponType	{ Gun = 0, Laser, Slow, Buff, Mortar, Shotgun, Spear, Explosion, Melee}
 public enum WeaponState { SearchTarget = 0, TryAttackGun, TryAttackLaser, TryAttackMortar, 
 							TryAttackShotgun, TryAttackSpaer, TryAttackExplosion, TryMeleeAttack}
 public enum TileType { One, Two};
->>>>>>> Stashed changes
 
 public class TowerWeapon : MonoBehaviour
 {
@@ -37,7 +31,7 @@ public class TowerWeapon : MonoBehaviour
 
 	private	int				level = 0;								// 타워 레벨
 	private	WeaponState		weaponState = WeaponState.SearchTarget;	// 타워 무기의 상태
-	private	Transform		attackTarget = null;					// 공격 대상
+	private	Transform		attackTarget = null;                    // 공격 대상
 	private	SpriteRenderer	spriteRenderer;							// 타워 오브젝트 이미지 변경용
 	private	TowerSpawner	towerSpawner;
 	private	EnemySpawner	enemySpawner;							// 게임에 존재하는 적 정보 획득용
@@ -45,9 +39,16 @@ public class TowerWeapon : MonoBehaviour
 	private	Tile			ownerTile;								// 현재 타워가 배치되어 있는 타일
 
 	private	float			addedDamage;							// 버프에 의해 추가된 데미지
-	private	int				buffLevel;								// 버프를 받는지 여부 설정 (0 : 버프X, 1~3 : 받는 버프 레벨)
+	private	int				buffLevel;                              // 버프를 받는지 여부 설정 (0 : 버프X, 1~3 : 받는 버프 레벨)
 
-	public	Sprite		TowerSprite	=> towerTemplate.weapon[level].sprite;
+	// 타워 설치 오디오 클립
+	public AudioClip buildClip;
+	// 타워 업그레이드 오디오 클립
+	public AudioClip upgradeClip;
+	// 타워 판매 오디오 클립
+	public AudioClip sellClip;
+
+	public Sprite		TowerSprite	=> towerTemplate.weapon[level].sprite;
 	public	float		Damage		=> towerTemplate.weapon[level].damage;
 	public	float		Rate		=> towerTemplate.weapon[level].rate;
 	public	float		Range		=> towerTemplate.weapon[level].range;
@@ -71,20 +72,20 @@ public class TowerWeapon : MonoBehaviour
 
 	public void Setup(TowerSpawner towerSpawner, EnemySpawner enemySpawner, PlayerGold playerGold, Tile ownerTile)
 	{
+		// 타워 설치 사운드 재생
+		SoundManager.instance.SFXPlay("TowerSetUp", buildClip);
 		spriteRenderer		= GetComponent<SpriteRenderer>();
 		this.towerSpawner	= towerSpawner;
 		this.enemySpawner	= enemySpawner;
 		this.playerGold		= playerGold;
 		this.ownerTile		= ownerTile;
-		
+		//y좌표가 낮을수록 앞으로 나오게
+		this.GetComponent<SpriteRenderer>().sortingOrder = -(int)this.transform.position.y+10;
+
 		// 무기 속성이 캐논, 레이저일 때
 		if ( weaponType == WeaponType.Gun || weaponType == WeaponType.Laser ||
-<<<<<<< Updated upstream
-			weaponType == WeaponType.Mortar || weaponType == WeaponType.Shotgun )
-=======
 			weaponType == WeaponType.Mortar || weaponType == WeaponType.Shotgun ||
 			weaponType == WeaponType.Spear  || weaponType == WeaponType.Explosion || weaponType == WeaponType.Melee)
->>>>>>> Stashed changes
 		{
 			// 최초 상태를 WeaponState.SearchTarget으로 설정
 			ChangeState(WeaponState.SearchTarget);
@@ -144,13 +145,6 @@ public class TowerWeapon : MonoBehaviour
 				{
 					ChangeState(WeaponState.TryAttackMortar);
 				}
-<<<<<<< Updated upstream
-                else if (weaponType == WeaponType.Shotgun)
-                {
-                    ChangeState(WeaponState.TryAttackShotgun);
-                }
-            }
-=======
 				else if (weaponType == WeaponType.Shotgun)
 				{
 					ChangeState(WeaponState.TryAttackShotgun);
@@ -168,7 +162,6 @@ public class TowerWeapon : MonoBehaviour
                     ChangeState(WeaponState.TryMeleeAttack);
                 }
 			}
->>>>>>> Stashed changes
 
 			yield return null;
 		}
@@ -257,8 +250,6 @@ public class TowerWeapon : MonoBehaviour
         }
     }
 
-<<<<<<< Updated upstream
-=======
 	// 관통 타워 공격
 	private IEnumerator TryAttackSpaer()
 	{
@@ -315,7 +306,6 @@ public class TowerWeapon : MonoBehaviour
         }
     }
 
->>>>>>> Stashed changes
     public void OnBuffAroundTower()
 	{
 		// 현재 맵에 배치된 "Tower" 태그를 가진 모든 오브젝트 탐색
@@ -362,6 +352,7 @@ public class TowerWeapon : MonoBehaviour
 				attackTarget	= enemySpawner.EnemyList[i].transform;
 			}
 		}
+
 
 		return attackTarget;
 	}
@@ -415,7 +406,34 @@ public class TowerWeapon : MonoBehaviour
 
     }
 
-    private void SpawnProjectile()
+	// 관통 총알 생성
+	private void SpawnProjectile_Spear()
+	{
+		if(attackTarget != null)
+        {
+			GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+			// 생성된 발사체에게 공격대상(attackTarget) 정보 제공
+			// 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
+			float damage = towerTemplate.weapon[level].damage + AddedDamage;
+			clone.GetComponent<Projectile_Spear>().Setup(attackTarget, damage, Range);
+		}
+	}
+
+	// 폭발 총알 생성
+	private void SpawnProjectile_Explosion()
+	{
+		Debug.Log("발사");
+		if (attackTarget != null)
+		{
+			GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+			// 생성된 발사체에게 공격대상(attackTarget) 정보 제공
+			// 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
+			float damage = towerTemplate.weapon[level].damage + AddedDamage;
+			clone.GetComponent<Projectile_Explosion>().Setup(attackTarget, damage, Range);
+		}
+	}
+
+	private void SpawnProjectile()
 	{
 		GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
 		// 생성된 발사체에게 공격대상(attackTarget) 정보 제공
@@ -469,8 +487,11 @@ public class TowerWeapon : MonoBehaviour
 		}
 	}
 
+
 	public bool Upgrade()
 	{
+		// 타워 설치 사운드 재생
+		SoundManager.instance.SFXPlay("TowerUpgrade", upgradeClip);
 		// 타워 업그레이드에 필요한 골드가 충분한지 검사
 		if ( playerGold.CurrentGold < towerTemplate.weapon[level+1].cost )
 		{
@@ -501,6 +522,8 @@ public class TowerWeapon : MonoBehaviour
 
 	public void Sell()
 	{
+		// 타워 판매 사운드 재생
+		SoundManager.instance.SFXPlay("TowerSell", sellClip);
 		// 골드 증가
 		playerGold.CurrentGold += towerTemplate.weapon[level].sell;
 		// 현재 타일에 다시 타워 건설이 가능하도록 설정
@@ -513,6 +536,7 @@ public class TowerWeapon : MonoBehaviour
 		{
 			towers[i].GetComponent<TowerWeapon>().BuffLevel = 0;
 			towers[i].GetComponent<TowerWeapon>().AddedDamage = 0;
+			Debug.Log(towers[i].GetComponent<TowerWeapon>().AddedDamage);
 		}
 		towerSpawner.OnBuffAllBuffTowers();
 
@@ -529,14 +553,13 @@ public class TowerWeapon : MonoBehaviour
  *	
  * Functions
  *	: ChangeState() - 코루틴을 이용한 FSM에서 상태 변경 함수
- *	: RotateToTarget() - target 방향으로 회전
+ *	: RotateToTarget() - target 방향으로 o
  *	: SearchTarget() - 현재 타워에 가장 근접한 적 탐색
  *	: TryAttackGun() - target으로 설정된 대상에게 캐논 공격
  *	: TryAttackLaser() - target으로 설정된 대상에게 레이저 공격
  *	: FindClosestAttackTarget() - 현재 타워에 가장 근접한 공격 대상(적) 탐색
  *	: IsPossibleToAttackTarget() - AttackTarget이 있는지, 공격 가능한지 검사
  *	: SpawnProjectile() - 캐논 발사체 생성
- *	: SpawnProjectile_Multiple() - 샷건 발사체 생성
  *	: EnableLaser() - 레이저, 레이저 타격 효과 활성화
  *	: DisableLaser() - 레이저, 레이저 타격 효과 비활성화
  *	: SpawnLaser() - 레이저 공격, 레이저 타격 효과, 적 체력 감소

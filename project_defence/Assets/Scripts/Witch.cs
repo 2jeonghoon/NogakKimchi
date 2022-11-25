@@ -45,7 +45,7 @@ public class Witch : Enemy
         while (true)
         {
             // 적 오브젝트 회전
-            transform.Rotate(Vector3.forward * 10);
+            //transform.Rotate(Vector3.forward * 10);
 
             // 적의 현재위치와 목표위치의 거리가 0.02 * movement2D.MoveSpeed보다 작을 때 if 조건문 실행
             // Tip. movement2D.MoveSpeed를 곱해주는 이유는 속도가 빠르면 한 프레임에 0.02보다 크게 움직이기 때문에
