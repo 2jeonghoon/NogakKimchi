@@ -12,6 +12,7 @@ public class WaveSystem : MonoBehaviour
 	private	int				currentWaveIndex = -1;  // 현재 웨이브 인덱스
 	[SerializeField]
 	private TextMeshProUGUI textGameSpeed; // 배속
+	private PlayerGold playerGold;	
 	bool isfause = false;
 	float gameSpeed= 1;
 
@@ -34,6 +35,7 @@ public class WaveSystem : MonoBehaviour
 			Debug.Log(waves[currentWaveIndex].wave.Length);
 			StartCoroutine("WaveSpawnEnemy");
 		}
+
 	}
 
     private void Update()
@@ -42,6 +44,7 @@ public class WaveSystem : MonoBehaviour
 		{
 			StopCoroutine("WaveSpawnEnemy");
 		}
+		
 	}
 
     private IEnumerator WaveSpawnEnemy()

@@ -4958,8 +4958,6 @@ MonoBehaviour:
   maxHP: 7
   currentHP: 0
   defense: 2
-  heal_effect: {fileID: 1067983694759708551, guid: f4f51504a91138946b7d44a439e90a8b,
-    type: 3}
 --- !u!114 &7577280758431253331
 MonoBehaviour:
   m_ObjectHideFlags: 0
