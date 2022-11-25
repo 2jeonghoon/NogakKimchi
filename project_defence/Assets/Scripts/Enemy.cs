@@ -91,11 +91,13 @@ public class Enemy : MonoBehaviour
 
             if (wayPoints[currentIndex].position.x < transform.position.x)
             {
-				transform.rotation = Quaternion.Euler(0, 180, 0);
+				transform.rotation = Quaternion.Euler(0, 0, 180);
+				transform.GetComponent<SpriteRenderer>().flipY = true;
             }
             else
             {
 				transform.rotation = Quaternion.Euler(0, 0, 0);
+				transform.GetComponent<SpriteRenderer>().flipY = false;
 			}
 			
 			movement2D.MoveTo(direction);

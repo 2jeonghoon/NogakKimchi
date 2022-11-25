@@ -15,6 +15,8 @@ public class TowerSpawner : MonoBehaviour
 	private	GameObject			followTowerClone = null;	// 임시 타워 사용 완료 시 삭제를 위해 저장하는 변수
 	private	int					towerType;                  // 타워 속성
 
+	private Ray ray;
+	private RaycastHit hit;
 	public	bool				IsOnTowerButton => isOnTowerButton;
 
 	public void ReadyToSpawnTower(int type)
@@ -53,7 +55,6 @@ public class TowerSpawner : MonoBehaviour
 		}
 		
 		Tile tile = tileTransform.GetComponent<Tile>();
-
 		// 2. 현재 타일의 위치에 이미 타워가 건설되어 있으면 타워 건설 X
 		if ( tile.IsBuildTower == true )
 		{
@@ -61,19 +62,45 @@ public class TowerSpawner : MonoBehaviour
 			systemTextViewer.PrintText(SystemType.Build);
 			return;
 		}
+		// 2칸 타워을 건설할 수 없는 곳이면 건설X
+		else if (towerTemplate[towerType].weapon[0].tileType == TileType.Two)
+        {
+			if (Physics.Raycast(tile.transform.position, transform.right, out hit, 1))
+			{
+				if (hit.transform.tag == "TileRoad")
+				{
+					// 현재 위치에 타워 건설이 불가능하다고 출력
+					systemTextViewer.PrintText(SystemType.Build);
+					return;
+				}
+			}
+		}
 
-		// 다시 타워 건설 버튼을 눌러서 타워를 건설하도록 변수 설정
-		isOnTowerButton = false;
+
+			// 다시 타워 건설 버튼을 눌러서 타워를 건설하도록 변수 설정
+			isOnTowerButton = false;
 		// 타워가 건설되어 있음으로 설정
 		tile.IsBuildTower = true;
 		// 타워 건설에 필요한 골드만큼 감소
 		playerGold.CurrentGold -= towerTemplate[towerType].weapon[0].cost;
-		// 선택한 타일의 위치에 타워 건설 (타일보다 z축 -1의 위치에 배치, y축 0.5위로 배치)
-		Vector3 position = tileTransform.position + Vector3.back + Vector3.up/2;
-		
+		Vector3 position;
+		// 타워 TileType이 1이면 1칸 사용, 2면 2칸 사용
+		if (towerTemplate[towerType].weapon[0].tileType == TileType.One)
+        {
+			// 1칸인 경우
+			// 선택한 타일의 위치에 타워 건설 (타일보다 z축 -1의 위치에 배치, y축 0.5위로 배치)
+			position = tileTransform.position + Vector3.back + Vector3.up / 2;
+		}
+        else
+        {
+			// 2칸인 경우
+			position = tileTransform.position + Vector3.right/2 + Vector3.back + Vector3.up / 2;
+		}
 		// 타워 설치 사운드 재생
 		GetComponent<AudioSource>().Play();
 		GameObject clone = Instantiate(towerTemplate[towerType].towerPrefab, position, Quaternion.identity);
+
+
 		// 타워 무기에 enemySpawner, playerGold, tile 정보 전달
 		clone.GetComponent<TowerWeapon>().Setup(this, enemySpawner, playerGold, tile);
 

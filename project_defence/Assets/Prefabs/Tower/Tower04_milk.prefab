@@ -134,6 +134,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 3425613385867092419}
   weaponType: 4
   buffTower: {fileID: 0}
+  tileType: 0
   projectilePrefab: {fileID: 4461503835666675623, guid: 5fa79304d91df0640a5005443b0155d0,
     type: 3}
   lineRenderer: {fileID: 0}

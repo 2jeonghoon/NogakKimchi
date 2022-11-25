@@ -4,6 +4,7 @@ using System.Collections;
 public enum WeaponType	{ Gun = 0, Laser, Slow, Buff, Mortar, Shotgun, Spear, Explosion}
 public enum WeaponState { SearchTarget = 0, TryAttackGun, TryAttackLaser, TryAttackMortar, 
 							TryAttackShotgun, TryAttackSpaer, TryAttackExplosion}
+public enum TileType { One, Two};
 
 public class TowerWeapon : MonoBehaviour
 {
@@ -407,7 +408,7 @@ public class TowerWeapon : MonoBehaviour
 			// 생성된 발사체에게 공격대상(attackTarget) 정보 제공
 			// 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
 			float damage = towerTemplate.weapon[level].damage + AddedDamage;
-			clone.GetComponent<Projectile_Explosion>().Setup(attackTarget, damage);
+			clone.GetComponent<Projectile_Explosion>().Setup(attackTarget, damage, Range);
 		}
 	}
 
@@ -522,7 +523,7 @@ public class TowerWeapon : MonoBehaviour
  *	
  * Functions
  *	: ChangeState() - 코루틴을 이용한 FSM에서 상태 변경 함수
- *	: RotateToTarget() - target 방향으로 회전
+ *	: RotateToTarget() - target 방향으로 o
  *	: SearchTarget() - 현재 타워에 가장 근접한 적 탐색
  *	: TryAttackGun() - target으로 설정된 대상에게 캐논 공격
  *	: TryAttackLaser() - target으로 설정된 대상에게 레이저 공격
