@@ -8,7 +8,12 @@ public class Lock : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        imageLock.SetActive(true);
+        //imageLock.SetActive(true);
+    }
+
+    public void LockOn()
+    {
+        imageLock.SetActive(false);
     }
 
     public void LockOff()

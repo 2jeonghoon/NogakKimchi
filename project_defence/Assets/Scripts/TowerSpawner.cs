@@ -20,7 +20,19 @@ public class TowerSpawner : MonoBehaviour
 	public	bool				IsOnTowerButton => isOnTowerButton;
 
 
-	public void ReadyToSpawnTower(int type)
+    public void set_lock(GameObject[] _Lock)
+    {
+        for(int i = 0; i < towerTemplate.Length; i++)
+        {
+			Debug.Log(towerTemplate[i].weapon[0].isLock);
+			if (!towerTemplate[i].weapon[0].isLock)
+            {
+				_Lock[i].GetComponent<Lock>().LockOff();
+			}
+        }
+    }
+
+    public void ReadyToSpawnTower(int type)
 	{
 		towerType = type;
 		if (!towerTemplate[towerType].weapon[0].isLock)

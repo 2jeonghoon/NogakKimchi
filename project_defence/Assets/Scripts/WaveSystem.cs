@@ -30,6 +30,7 @@ public class WaveSystem : MonoBehaviour
     {
 		towerSpawner.SetTowerLock(_Lock[0], 0, false);
 		towerSpawner.SetTowerLock(_Lock[1], 1, false);
+		towerSpawner.set_lock(_Lock);
 	}
 
     private void Update()
