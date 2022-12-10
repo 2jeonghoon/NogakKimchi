@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a7bcf6fcbb6c844d906e040c534dc62, type: 3}
+  m_Name: T5milk_mortar
+  m_EditorClassIdentifier: 
+  towerPrefab: {fileID: 4010770763800204608, guid: a991292349cdb4b40849172cc5efd658,
+    type: 3}
+  followTowerPrefab: {fileID: 5785049388285805106, guid: c5a427d76f5683e45a754e632575fde1,
+    type: 3}
+  weapon:
+  - sprite: {fileID: 21300000, guid: d3bc36f4a3ac37a4699e101d281c9609, type: 3}
+    damage: 5
+    slow: 0
+    buff: 0
+    rate: 1
+    range: 10
+    cost: 900
+    sell: 720
+    tileType: 0
+    isLock: 1
+  - sprite: {fileID: 21300000, guid: d3bc36f4a3ac37a4699e101d281c9609, type: 3}
+    damage: 5
+    slow: 0
+    buff: 0
+    rate: 0.5
+    range: 10
+    cost: 180
+    sell: 864
+    tileType: 0
+    isLock: 1
+  - sprite: {fileID: 21300000, guid: d3bc36f4a3ac37a4699e101d281c9609, type: 3}
+    damage: 20
+    slow: 0
+    buff: 0
+    rate: 0.5
+    range: 10
+    cost: 400
+    sell: 1184
+    tileType: 0
+    isLock: 1

@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a7bcf6fcbb6c844d906e040c534dc62, type: 3}
+  m_Name: T6_coffee
+  m_EditorClassIdentifier: 
+  towerPrefab: {fileID: 3318578265759658224, guid: 95b6b8cd48d4dfe49a73c114ed4339cf,
+    type: 3}
+  followTowerPrefab: {fileID: 7217997222853961455, guid: 2abde7283078ddc41887bbd2352a5bd6,
+    type: 3}
+  weapon:
+  - sprite: {fileID: 21300000, guid: 2599fd82a968cca41892c51dc20ee6c1, type: 3}
+    damage: 0
+    slow: 0
+    buff: 1
+    rate: 0
+    range: 1
+    cost: 300
+    sell: 150
+    tileType: 0
+    isLock: 1
+  - sprite: {fileID: 21300000, guid: 2599fd82a968cca41892c51dc20ee6c1, type: 3}
+    damage: 0
+    slow: 0
+    buff: 1
+    rate: 0
+    range: 0
+    cost: 300
+    sell: 300
+    tileType: 0
+    isLock: 1
+  - sprite: {fileID: 21300000, guid: 2599fd82a968cca41892c51dc20ee6c1, type: 3}
+    damage: 0
+    slow: 0
+    buff: 1
+    rate: 0
+    range: 1
+    cost: 300
+    sell: 450
+    tileType: 0
+    isLock: 1

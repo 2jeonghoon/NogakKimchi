@@ -5,7 +5,8 @@ public class TowerTemplate : ScriptableObject
 {
 	public	GameObject	towerPrefab;		// 타워 생성을 위한 프리팹
 	public	GameObject	followTowerPrefab;	// 임시 타워 프리팹
-	public	Weapon[]	weapon;				// 레벨별 타워(무기) 정보
+	public	Weapon[]	weapon;             // 레벨별 타워(무기) 정보
+
 
 	[System.Serializable]
 	public struct Weapon
@@ -19,6 +20,7 @@ public class TowerTemplate : ScriptableObject
 		public	int		cost;	// 필요 골드 (0레벨 : 건설, 1~레벨 : 업그레이드)
 		public	int		sell;   // 타워 판매 시 획득 골드
 		public TileType tileType;
+		public bool isLock; // 라운드 별 잠금 해제를 위한 Lock
 	}
 }
 
