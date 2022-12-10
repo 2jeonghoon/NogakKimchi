@@ -1,9 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
-public enum WeaponType	{ Gun = 0, Laser, Slow, Buff, Mortar, Shotgun, Spear, Explosion}
+public enum WeaponType	{ Gun = 0, Laser, Slow, Buff, Mortar, Shotgun, Spear, Explosion, Melee}
 public enum WeaponState { SearchTarget = 0, TryAttackGun, TryAttackLaser, TryAttackMortar, 
-							TryAttackShotgun, TryAttackSpaer, TryAttackExplosion}
+							TryAttackShotgun, TryAttackSpaer, TryAttackExplosion, TryMeleeAttack}
 public enum TileType { One, Two};
 
 public class TowerWeapon : MonoBehaviour
@@ -85,7 +85,7 @@ public class TowerWeapon : MonoBehaviour
 		// 무기 속성이 캐논, 레이저일 때
 		if ( weaponType == WeaponType.Gun || weaponType == WeaponType.Laser ||
 			weaponType == WeaponType.Mortar || weaponType == WeaponType.Shotgun ||
-			weaponType == WeaponType.Spear  || weaponType == WeaponType.Explosion)
+			weaponType == WeaponType.Spear  || weaponType == WeaponType.Explosion || weaponType == WeaponType.Melee)
 		{
 			// 최초 상태를 WeaponState.SearchTarget으로 설정
 			ChangeState(WeaponState.SearchTarget);
@@ -133,30 +133,34 @@ public class TowerWeapon : MonoBehaviour
 
 			if ( attackTarget != null )
 			{
-				if ( weaponType == WeaponType.Gun )
+				if (weaponType == WeaponType.Gun)
 				{
 					ChangeState(WeaponState.TryAttackGun);
 				}
-				else if ( weaponType == WeaponType.Laser )
+				else if (weaponType == WeaponType.Laser)
 				{
 					ChangeState(WeaponState.TryAttackLaser);
 				}
-				else if ( weaponType == WeaponType.Mortar) 
+				else if (weaponType == WeaponType.Mortar)
 				{
 					ChangeState(WeaponState.TryAttackMortar);
 				}
-                else if (weaponType == WeaponType.Shotgun)
-                {
-                    ChangeState(WeaponState.TryAttackShotgun);
-                }
-				else if(weaponType == WeaponType.Spear)
-                {
+				else if (weaponType == WeaponType.Shotgun)
+				{
+					ChangeState(WeaponState.TryAttackShotgun);
+				}
+				else if (weaponType == WeaponType.Spear)
+				{
 					ChangeState(WeaponState.TryAttackSpaer);
 				}
 				else if (weaponType == WeaponType.Explosion)
 				{
 					ChangeState(WeaponState.TryAttackExplosion);
 				}
+				else if (weaponType == WeaponType.Melee)
+				{
+                    ChangeState(WeaponState.TryMeleeAttack);
+                }
 			}
 
 			yield return null;
@@ -284,8 +288,25 @@ public class TowerWeapon : MonoBehaviour
 		}
 	}
 
+    private IEnumerator TryMeleeAttack()
+    {
+        while (true)
+        {
+            // target을 공격하는게 가능한지 검사
+            if (IsPossibleToAttackTarget() == false)
+            {
+                ChangeState(WeaponState.SearchTarget);
+                break;
+            }
 
-	public void OnBuffAroundTower()
+            // attackRate 시간만큼 대기
+            yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
+			MeleeAttack();
+            // 근접 공격
+        }
+    }
+
+    public void OnBuffAroundTower()
 	{
 		// 현재 맵에 배치된 "Tower" 태그를 가진 모든 오브젝트 탐색
 		GameObject[] towers = GameObject.FindGameObjectsWithTag("Tower");
@@ -421,7 +442,16 @@ public class TowerWeapon : MonoBehaviour
 		clone.GetComponent<Projectile>().Setup(attackTarget, damage);
 	}
 
-	private void EnableLaser()
+    private void MeleeAttack()
+    {
+        GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+        // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
+        // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
+        float damage = towerTemplate.weapon[level].damage + AddedDamage;
+        clone.GetComponent<Projectile>().Setup(attackTarget, damage);
+    }
+
+    private void EnableLaser()
 	{
 		lineRenderer.gameObject.SetActive(true);
 		hitEffect.gameObject.SetActive(true);
