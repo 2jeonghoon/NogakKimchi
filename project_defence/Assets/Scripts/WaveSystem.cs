@@ -6,7 +6,9 @@ using TMPro;
 public class WaveSystem : MonoBehaviour
 {
 	[SerializeField]
-	private	WaveEnemy[]			waves;					// 현재 스테이지의 모든 웨이브 정보
+	private	WaveEnemy[]			waves;                  // 현재 스테이지의 모든 웨이브 정보
+	[SerializeField]
+	private TowerSpawner towerSpawner;
 	[SerializeField]
 	private	EnemySpawner	enemySpawner;
 	private	int				currentWaveIndex = -1;  // 현재 웨이브 인덱스
@@ -15,6 +17,8 @@ public class WaveSystem : MonoBehaviour
 	bool isfause = false;
 	float gameSpeed= 1;
 
+	[SerializeField]
+	public GameObject[] _Lock;
 
 	static public int spawnEnemyCount; // 스폰한 몬스터 숫자
 
@@ -22,6 +26,20 @@ public class WaveSystem : MonoBehaviour
 	public	int				CurrentWave => currentWaveIndex+1;		// 시작이 0이기 때문에 +1
 	public	int				MaxWave => waves.Length;
 
+    private void Start()
+    {
+		towerSpawner.SetTowerLock(_Lock[0], 0, false);
+		towerSpawner.SetTowerLock(_Lock[1], 1, false);
+	}
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StopCoroutine("WaveSpawnEnemy");
+        }
+    }
+    
 	public void StartWave()
 	{
 		// 현재 맵에 적이 없고, Wave가 남아있으면
@@ -30,19 +48,29 @@ public class WaveSystem : MonoBehaviour
 			Debug.Log("wave 시작");
 			// 인덱스의 시작이 -1이기 때문에 웨이브 인덱스 증가를 제일 먼저 함
 			currentWaveIndex ++;
-			// EnemySpawner의 StartWave() 함수 호출. 현재 웨이브 정보 제공
-			Debug.Log(waves[currentWaveIndex].wave.Length);
+            
+			if (currentWaveIndex == 1)
+			{
+				towerSpawner.SetTowerLock(_Lock[2], 2, false);
+                towerSpawner.SetTowerLock(_Lock[3], 3, false);
+            }
+            else if (currentWaveIndex == 2)
+            {
+                towerSpawner.SetTowerLock(_Lock[4], 4, false);
+                towerSpawner.SetTowerLock(_Lock[5], 5, false);
+            }
+            else if (currentWaveIndex == 3)
+            {
+                towerSpawner.SetTowerLock(_Lock[6], 6, false);
+                towerSpawner.SetTowerLock(_Lock[7], 7, false);
+            }
+            // EnemySpawner의 StartWave() 함수 호출. 현재 웨이브 정보 제공
+            Debug.Log(waves[currentWaveIndex].wave.Length);
 			StartCoroutine("WaveSpawnEnemy");
 		}
 	}
 
-    private void Update()
-    {
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			StopCoroutine("WaveSpawnEnemy");
-		}
-	}
+
 
     private IEnumerator WaveSpawnEnemy()
     {
