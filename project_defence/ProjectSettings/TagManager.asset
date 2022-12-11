@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Tower
   - TileRoad
+  - Tooltip
   layers:
   - Default
   - TransparentFX
