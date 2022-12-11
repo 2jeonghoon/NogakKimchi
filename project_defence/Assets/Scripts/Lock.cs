@@ -6,9 +6,11 @@ public class Lock : MonoBehaviour
 {
     public GameObject imageLock;
     public GameObject imageTower;
+    public bool isLockOff = true;
     // Start is called before the first frame update
     void Start()
     {
+        isLockOff = true;
         //imageLock.SetActive(true);
     }
 
@@ -19,10 +21,11 @@ public class Lock : MonoBehaviour
 
     public void LockOffImage()
     {
-        if (imageLock.active)
+        if (isLockOff)
         {
             Debug.Log("On");
             imageTower.SetActive(true);
+            isLockOff = false;
         }
     }
     public void ImageTowerOff()

@@ -28,8 +28,6 @@ public class WaveSystem : MonoBehaviour
 
     private void Start()
     {
-		Debug.Log("Current Wave : " + CurrentWave);
-		Debug.Log("Max : " + MaxWave);
 
 		// 시작 시 열릴 타워 설정, restart해도 타워들은 열려있음.
 		towerSpawner.SetTowerLock(_Lock[0], 0, false);
