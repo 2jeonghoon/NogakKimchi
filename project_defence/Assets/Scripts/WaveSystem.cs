@@ -35,6 +35,14 @@ public class WaveSystem : MonoBehaviour
 		towerSpawner.set_lock(_Lock);
 	}
 
+	public void cheat()
+    {
+		for(int i = 0; i < _Lock.Length; i++)
+        {
+			towerSpawner.SetTowerLock(_Lock[i], i, false);
+		}
+	}
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))

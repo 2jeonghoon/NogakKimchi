@@ -18,6 +18,9 @@ public class TowerWeapon : MonoBehaviour
 	private Transform spawnPoint;                               // 발사체 생성 위치
 	[SerializeField]
 	private WeaponType weaponType;                              // 무기 속성 설정
+
+	[SerializeField]
+	private TileType tileType;
 	public TowerWeapon buffTower;
 
 	[Header("Gun")]
@@ -62,6 +65,8 @@ public class TowerWeapon : MonoBehaviour
 	public float Slow => towerTemplate.weapon[level].slow;
 	public float Buff => towerTemplate.weapon[level].buff;
 	public WeaponType WeaponType => weaponType;
+	public TileType TileType => tileType;
+
 	public float AddedDamage
 	{
 		set => addedDamage = Mathf.Max(0, value);

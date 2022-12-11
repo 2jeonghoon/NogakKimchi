@@ -130,9 +130,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8bcbf7212426e74fbeb59bbcaa5d6a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerTemplate: {fileID: 11400000, guid: 09b088856a5a93c4e83000fd8f12cf26, type: 2}
+  towerTemplate: {fileID: 11400000, guid: e410e7ec6d889ec4799cd0835c76f807, type: 2}
   spawnPoint: {fileID: 4406233821235667900}
   weaponType: 3
+  tileType: 0
   buffTower: {fileID: 0}
   projectilePrefab: {fileID: 0}
   lineRenderer: {fileID: 0}
