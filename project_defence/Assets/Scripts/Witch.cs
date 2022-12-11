@@ -83,7 +83,7 @@ public class Witch : Enemy
     // È¸º¹ ÇÔ¼ö
     private IEnumerator Recovery(float delay_time)
     {
-        Debug.Log("Èú!");
+        //Debug.Log("Èú!");
         int count = getEnemyHP();
         for (int i = 0; i < count; ++i)
         {

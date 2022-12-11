@@ -40,7 +40,7 @@ public class Projectile_Spear : Projectile
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		Debug.Log("충돌");
+		//Debug.Log("충돌");
 		if (!collision.CompareTag("Enemy")) return;         // 적이 아닌 대상과 부딪히면
 		collision.GetComponent<EnemyHP>().TakeDamage(damage);   // 적 체력을 damage만큼 감소
 	}

@@ -134,7 +134,6 @@ MonoBehaviour:
   spawnPoint: {fileID: 4406233821235667900}
   weaponType: 7
   buffTower: {fileID: 0}
-  tileType: 0
   projectilePrefab: {fileID: 4461503835666675623, guid: af01022ebb850f141bc49d45ce50d61c,
     type: 3}
   lineRenderer: {fileID: 0}
@@ -143,7 +142,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   buildClip: {fileID: 8300000, guid: 7c47b20bb9874304a809dc5580d403ba, type: 3}
-  upgradeClip: {fileID: 8300000, guid: 6cf9c85b5a3b88c468b21b9d21250adf, type: 3}
+  upgradeClip: {fileID: 8300000, guid: c5cb2ac29e89dbf43a9b644caaad45e6, type: 3}
   sellClip: {fileID: 8300000, guid: abdbbfd33a46f4549987385f85c536b5, type: 3}
 --- !u!65 &-7490905961186918384
 BoxCollider:

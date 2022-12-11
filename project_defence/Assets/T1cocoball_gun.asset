@@ -26,6 +26,7 @@ MonoBehaviour:
     cost: 200
     sell: 160
     tileType: 0
+    isLock: 0
   - sprite: {fileID: 21300000, guid: 0633646f643a68048bd084595beedc76, type: 3}
     damage: 3
     slow: 0
@@ -35,6 +36,7 @@ MonoBehaviour:
     cost: 140
     sell: 272
     tileType: 0
+    isLock: 1
   - sprite: {fileID: 21300000, guid: 0633646f643a68048bd084595beedc76, type: 3}
     damage: 4
     slow: 0
@@ -44,3 +46,4 @@ MonoBehaviour:
     cost: 160
     sell: 400
     tileType: 0
+    isLock: 1
