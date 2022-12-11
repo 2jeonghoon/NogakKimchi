@@ -10,7 +10,7 @@ public class ToolTip : MonoBehaviour,
     private GameObject tooltip;
 
     void Start() {
-        tooltip = transform.GetChild(2).gameObject; // tooltip object는 버튼에 idx num 2번에 위치하게 세팅
+        tooltip = transform.GetChild(2).gameObject; // tooltip object??버튼??idx num 2번에 ?�치?�게 ?�팅
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -27,6 +27,6 @@ public class ToolTip : MonoBehaviour,
 /*
  * File : ToolTip.cs
  * Desc
- *	: 타워 정보를 보여주는 툴팁 출력
+ *	: ?�???�보�?보여주는 ?�팁 출력
  *
  */

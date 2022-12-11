@@ -20,7 +20,7 @@ public class Projectile_Explosion : Projectile
     public void Setup(Transform target, float damage, float range)
     {
         // 발사 사운드 재생
-        SoundManager.instance.SFXPlay("ExplosionShot", clip);
+        //SoundManager.instance.SFXPlay("ExplosionShot", clip);
         Debug.Log("발사");
         movement2D = GetComponent<Movement2D>();
         this.damage = damage;                       // 타워의 공격력

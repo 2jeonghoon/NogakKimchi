@@ -62,7 +62,9 @@ public class TowerDataViewer : MonoBehaviour
 
 	private void UpdateTowerData()
 	{
-		if ( currentTower.WeaponType == WeaponType.Gun || currentTower.WeaponType == WeaponType.Laser )
+		if ( currentTower.WeaponType == WeaponType.Gun || currentTower.WeaponType == WeaponType.Laser || 
+			currentTower.WeaponType == WeaponType.Explosion || currentTower.WeaponType == WeaponType.Mortar||
+			currentTower.WeaponType == WeaponType.Shotgun || currentTower.WeaponType == WeaponType.Spear)
 		{
 			imageTower.rectTransform.sizeDelta = new Vector2(88, 59);
 			textDamage.text = "Damage : " + currentTower.Damage
@@ -79,7 +81,7 @@ public class TowerDataViewer : MonoBehaviour
 			else if ( currentTower.WeaponType == WeaponType.Buff )
 			{
 				textDamage.text = "Buff : " + currentTower.Buff * 100 + "%";
-			}
+            }
 		}
 
 		imageTower.sprite	 = currentTower.TowerSprite;

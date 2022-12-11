@@ -328,7 +328,9 @@ public class TowerWeapon : MonoBehaviour
 			if (Vector3.Distance(weapon.transform.position, transform.position) <= towerTemplate.weapon[level].range)
 			{
 				// 공격이 가능한 캐논, 레이저 타워이면
-				if (weapon.WeaponType == WeaponType.Gun || weapon.WeaponType == WeaponType.Laser)
+				if (weapon.WeaponType == WeaponType.Gun || weapon.WeaponType == WeaponType.Laser ||
+					weapon.WeaponType == WeaponType.Explosion || weapon.WeaponType == WeaponType.Mortar ||
+					weapon.WeaponType == WeaponType.Shotgun || weapon.WeaponType == WeaponType.Spear)
 				{
 					// 버프에 의해 공격력 증가
 					weapon.AddedDamage = weapon.Damage * (towerTemplate.weapon[level].buff);
@@ -425,7 +427,7 @@ public class TowerWeapon : MonoBehaviour
 	// 폭발 총알 생성
 	private void SpawnProjectile_Explosion()
 	{
-		Debug.Log("발사");
+		//Debug.Log("발사");
 		if (attackTarget != null)
 		{
 			GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);

@@ -24,7 +24,7 @@ public class TowerSpawner : MonoBehaviour
     {
         for(int i = 0; i < towerTemplate.Length; i++)
         {
-			Debug.Log(towerTemplate[i].weapon[0].isLock);
+			//Debug.Log(towerTemplate[i].weapon[0].isLock);
 			if (!towerTemplate[i].weapon[0].isLock)
             {
 				_Lock[i].GetComponent<Lock>().LockOff();
@@ -165,6 +165,10 @@ public class TowerSpawner : MonoBehaviour
 	public void SetTowerLock(GameObject _Lock, int towerType, bool setLock)
 	{
 		towerTemplate[towerType].weapon[0].isLock = setLock;
+		if (towerType > 1)
+		{
+			_Lock.GetComponent<Lock>().LockOffImage();
+		}
 		_Lock.GetComponent<Lock>().LockOff();
 	}
 }
