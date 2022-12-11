@@ -28,6 +28,7 @@ public class WaveSystem : MonoBehaviour
 
     private void Start()
     {
+		// 시작 시 열릴 타워 설정, restart해도 타워들은 열려있음.
 		towerSpawner.SetTowerLock(_Lock[0], 0, false);
 		towerSpawner.SetTowerLock(_Lock[1], 1, false);
 		towerSpawner.set_lock(_Lock);
@@ -50,6 +51,7 @@ public class WaveSystem : MonoBehaviour
 			// 인덱스의 시작이 -1이기 때문에 웨이브 인덱스 증가를 제일 먼저 함
 			currentWaveIndex ++;
             
+			// wave 진행 후 열릴 타워 설정
 			if (currentWaveIndex == 1)
 			{
 				towerSpawner.SetTowerLock(_Lock[2], 2, false);
