@@ -15,10 +15,13 @@ public class Boss : Enemy
     // 소환하는 enemy
     [SerializeField]
     private GameObject[] enemys;
-
+    [SerializeField]
+    private GameObject skillEffect;
+    private Animator Bossanimator;
 
     // 웅크리기 지속시간
-    private float crouch_time = 0.5f;
+    [SerializeField]
+    private float crouch_time;
     // 보스 상태
     private EnemyHP state;
 
@@ -26,6 +29,8 @@ public class Boss : Enemy
 
     public override void Setup(EnemySpawner enemySpawner, Transform[] wayPoints)
     {
+        Bossanimator = GetComponent<Animator>();
+
         this.state = GetComponent<EnemyHP>();
 
         movement2D = GetComponent<Movement2D>();
@@ -47,38 +52,50 @@ public class Boss : Enemy
     private IEnumerator skill(float delay_time)
     {
         float currentHPPercent = state.CurrentHP / state.MaxHP;
+
+
         // 체력 30퍼센트 이하 3페이즈
         if (currentHPPercent < 0.3f)
         {
             this.phase = PHASE.THREE;
         }
         // 체력 70퍼센트 이하 2페이즈
-        else if(currentHPPercent < 0.7f)
+        else if (currentHPPercent < 0.7f)
         {
+            Bossanimator.SetTrigger("Phase2");
             this.phase = PHASE.TWO;
         }
 
         //Debug.Log("보스 스킬!");
         // 1페이즈
+        skillEffect.SetActive(true);
+        
+        skillEffect.GetComponent<EnemyDieEffect>().BossSkillEffect();
         if (phase == PHASE.ONE)
         {
+            Bossanimator.SetTrigger("Phase1_skill");
             Debug.Log("웅크리기");
+            //StartCoroutine("hallucination", delay_time);
             StartCoroutine("crouch", delay_time);
         }
         // 2페이즈
         else if (phase == PHASE.TWO)
         {
+            Bossanimator.SetTrigger("Phase2_skill");
             Debug.Log("할루시네이션");
             StartCoroutine("hallucination", delay_time);
         }
         // 3페이즈
         else if (phase == PHASE.THREE)
         {
+            Bossanimator.SetTrigger("Phase2_skill");
             Debug.Log("리콜");
             //StartCoroutine("hallucination", delay_time);
             StartCoroutine("recall", delay_time);
         }
+
         yield return new WaitForSeconds(delay_time);
+        skillEffect.SetActive(false);
         StartCoroutine("skill", delay_time);
     }
 
@@ -86,6 +103,7 @@ public class Boss : Enemy
 
     private IEnumerator crouch()
     {
+
         float speed = movement2D.MoveSpeed;
         float defense = state.getDefense();
 
@@ -93,6 +111,7 @@ public class Boss : Enemy
         // 방어력 올려서 데미지0
         state.SetDefense(1000f);
         yield return new WaitForSeconds(crouch_time);
+        Bossanimator.SetTrigger("Phase1_idle");
         state.SetDefense(defense);
         movement2D.MoveSpeed = speed;
     }
@@ -108,6 +127,7 @@ public class Boss : Enemy
         // 복사
         GameObject clone = Instantiate(boss_clone);
         Enemy enemy = clone.GetComponent<Enemy>();	// 방금 생성된 적의 Enemy 컴포넌트
+        clone.GetComponent<Animator>().SetBool("isClone", true);
         // 생성된 클론 위치 세팅
         enemy.Setup(enemySpawner, this);      // 보스의 way데이터를 가지고 클론을 만듬.
         enemy.transform.position = this.transform.position;
@@ -119,9 +139,12 @@ public class Boss : Enemy
         enemySpawner.EnemyList.Add(enemy);
 
         // 소환된 클론 체력 깎기
-        enemy.GetComponent<EnemyHP>().TakeDamage((this.GetComponent<EnemyHP>().MaxHP - this.GetComponent<EnemyHP>().CurrentHP)*1.5f);
+        enemy.GetComponent<EnemyHP>().TakeDamage((this.GetComponent<EnemyHP>().MaxHP * 0.5f));
+        enemy.GetComponent<EnemyHP>().SetDefense(GetComponent<EnemyHP>().getDefense() * 0.5f);
+
 
         yield return new WaitForSeconds(crouch_time);
+        Bossanimator.SetTrigger("Phase2_idle");
         state.SetDefense(defense);
         movement2D.MoveSpeed = speed;
     }
@@ -150,6 +173,7 @@ public class Boss : Enemy
         }
 
         yield return new WaitForSeconds(crouch_time);
+        Bossanimator.SetTrigger("Phase2_idle");
         state.SetDefense(defense);
         movement2D.MoveSpeed = speed;
     }
