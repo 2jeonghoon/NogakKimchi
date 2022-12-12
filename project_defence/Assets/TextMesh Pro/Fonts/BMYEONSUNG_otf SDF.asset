@@ -1950,13 +1950,10 @@ MonoBehaviour:
     m_GlyphIndex: 1
     m_Scale: 1
   - m_ElementType: 1
-<<<<<<< HEAD
-=======
     m_Unicode: 13
     m_GlyphIndex: 1
     m_Scale: 1
   - m_ElementType: 1
->>>>>>> origin/Jeonghoon
     m_Unicode: 32
     m_GlyphIndex: 1
     m_Scale: 1

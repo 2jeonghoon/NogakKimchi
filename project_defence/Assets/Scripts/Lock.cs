@@ -5,18 +5,12 @@ using UnityEngine;
 public class Lock : MonoBehaviour
 {
     public GameObject imageLock;
-<<<<<<< HEAD
-    // Start is called before the first frame update
-    void Start()
-    {
-=======
     public GameObject imageTower;
     public bool isLockOff = true;
     // Start is called before the first frame update
     void Start()
     {
         isLockOff = true;
->>>>>>> origin/Jeonghoon
         //imageLock.SetActive(true);
     }
 
@@ -25,8 +19,6 @@ public class Lock : MonoBehaviour
         imageLock.SetActive(false);
     }
 
-<<<<<<< HEAD
-=======
     public void LockOffImage()
     {
         if (isLockOff)
@@ -41,7 +33,6 @@ public class Lock : MonoBehaviour
         imageTower.SetActive(false);
     }
 
->>>>>>> origin/Jeonghoon
     public void LockOff()
     {
         imageLock.SetActive(false);

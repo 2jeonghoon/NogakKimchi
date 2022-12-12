@@ -19,28 +19,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 30
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> main
     width: 1920
     height: 947
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-<<<<<<< HEAD
-  controlID: 32059
-=======
-    width: 1904
-    height: 887
-  m_MinSize: {x: 300, y: 200}
-  m_MaxSize: {x: 24288, y: 16192}
-  vertical: 0
-  controlID: 85
->>>>>>> origin/Jeonghoon
-=======
   controlID: 16889
->>>>>>> main
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -62,24 +46,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-<<<<<<< HEAD
-<<<<<<< HEAD
-    x: 215
-    y: 73
-    width: 1237
-    height: 559
-=======
-    x: 221
-    y: 81
-    width: 1227
-    height: 524
->>>>>>> origin/Jeonghoon
-=======
     x: 215
     y: 73
     width: 1237
     height: 561
->>>>>>> main
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -117,7 +87,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -126,49 +96,16 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-<<<<<<< HEAD
-<<<<<<< HEAD
-      width: 1237
-      height: 538
-    m_Scale: {x: 0.49814814, y: 0.49814814}
-    m_Translation: {x: 618.5, y: 269}
-=======
-      width: 1227
-      height: 503
-    m_Scale: {x: 0.47971296, y: 0.47971296}
-    m_Translation: {x: 613.5, y: 253.135}
->>>>>>> origin/Jeonghoon
-=======
       width: 1237
       height: 540
     m_Scale: {x: 0.5, y: 0.5}
     m_Translation: {x: 618.5, y: 270}
->>>>>>> main
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-<<<<<<< HEAD
-<<<<<<< HEAD
-      x: -1241.5985
-      y: -540
-      width: 2483.197
-      height: 1080
-    m_MinimalGUI: 1
-  m_defaultScale: 0.49814814
-  m_LastWindowPixelSize: {x: 1237, y: 559}
-=======
-      x: -1278.8898
-      y: -527.6801
-      width: 2557.7795
-      height: 1048.5437
-    m_MinimalGUI: 1
-  m_defaultScale: 0.46574074
-  m_LastWindowPixelSize: {x: 1227, y: 524}
->>>>>>> origin/Jeonghoon
-=======
       x: -1237
       y: -540
       width: 2474
@@ -176,7 +113,6 @@ MonoBehaviour:
     m_MinimalGUI: 1
   m_defaultScale: 0.5
   m_LastWindowPixelSize: {x: 1237, y: 561}
->>>>>>> main
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -201,28 +137,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> main
     width: 1454
     height: 947
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-<<<<<<< HEAD
-  controlID: 32060
-=======
-    width: 1442
-    height: 887
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 16192, y: 16192}
-  vertical: 1
-  controlID: 86
->>>>>>> origin/Jeonghoon
-=======
   controlID: 16890
->>>>>>> main
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -242,30 +162,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-<<<<<<< HEAD
-<<<<<<< HEAD
-    width: 1454
-    height: 580
-  m_MinSize: {x: 200, y: 100}
-  m_MaxSize: {x: 16192, y: 8096}
-  vertical: 0
-  controlID: 32061
-=======
-    width: 1442
-    height: 545
-  m_MinSize: {x: 200, y: 100}
-  m_MaxSize: {x: 16192, y: 8096}
-  vertical: 0
-  controlID: 87
->>>>>>> origin/Jeonghoon
-=======
     width: 1454
     height: 582
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
   controlID: 16891
->>>>>>> main
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -283,22 +185,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-<<<<<<< HEAD
-<<<<<<< HEAD
-    width: 215
-    height: 580
-=======
-    width: 213
-    height: 545
->>>>>>> origin/Jeonghoon
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
-=======
     width: 215
     height: 582
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
->>>>>>> main
   m_ActualView: {fileID: 6}
   m_Panes:
   - {fileID: 6}
@@ -325,24 +215,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-<<<<<<< HEAD
-<<<<<<< HEAD
-    x: 0
-    y: 73
-    width: 214
-    height: 559
-=======
-    x: 8
-    y: 81
-    width: 212
-    height: 524
->>>>>>> origin/Jeonghoon
-=======
     x: 0
     y: 73
     width: 214
     height: 561
->>>>>>> main
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -350,21 +226,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-<<<<<<< HEAD
-<<<<<<< HEAD
-      m_SelectedIDs: 46840000
-      m_LastClickedID: 33862
-      m_ExpandedIDs: 5c13ffff281bffffdecbffffecccffffb4830000d68300006c8500007485000030870000c88700003e8c0000848c0000
-=======
-      m_SelectedIDs: c4530000fa530000
-      m_LastClickedID: 21498
-      m_ExpandedIDs: 26fbffff80530000
->>>>>>> origin/Jeonghoon
-=======
       m_SelectedIDs: 00550000
       m_LastClickedID: 0
       m_ExpandedIDs: 02adffff44faffff26fbffff365700006a5a00007e5d00004460000012620000
->>>>>>> main
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -403,24 +267,10 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-<<<<<<< HEAD
-<<<<<<< HEAD
-    x: 215
-    y: 0
-    width: 1239
-    height: 580
-=======
-    x: 213
-    y: 0
-    width: 1229
-    height: 545
->>>>>>> origin/Jeonghoon
-=======
     x: 215
     y: 0
     width: 1239
     height: 582
->>>>>>> main
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 2}
@@ -455,14 +305,7 @@ MonoBehaviour:
     x: 215
     y: 73
     width: 1237
-<<<<<<< HEAD
-    height: 559
-=======
     height: 561
-<<<<<<< HEAD
->>>>>>> origin/Jeonghoon
-=======
->>>>>>> main
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -686,21 +529,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-<<<<<<< HEAD
-<<<<<<< HEAD
-    m_Target: {x: 1.1891631, y: -0.2753238, z: 1.2899646}
-    speed: 2
-    m_Value: {x: 1.1891631, y: -0.2753238, z: 1.2899646}
-=======
-    m_Target: {x: 5.5752425, y: 0.27169108, z: -0.08643207}
-    speed: 2
-    m_Value: {x: 5.5752425, y: 0.27169108, z: -0.08643207}
->>>>>>> origin/Jeonghoon
-=======
     m_Target: {x: 1293.303, y: 885.21295, z: -0.4223216}
     speed: 2
     m_Value: {x: 1293.303, y: 885.21295, z: -0.4223216}
->>>>>>> main
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -751,21 +582,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-<<<<<<< HEAD
-<<<<<<< HEAD
-    m_Target: 7.159464
-    speed: 2
-    m_Value: 7.159464
-=======
-    m_Target: 17.72196
-    speed: 2
-    m_Value: 17.72196
->>>>>>> origin/Jeonghoon
-=======
     m_Target: 360.3075
     speed: 2
     m_Value: 360.3075
->>>>>>> main
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -811,17 +630,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-<<<<<<< HEAD
-    x: 245
-    y: 73
-    width: 1084
-    height: 554
-=======
     x: 215
     y: 73
     width: 824
     height: 561
->>>>>>> main
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -856,41 +668,16 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-<<<<<<< HEAD
-<<<<<<< HEAD
-    x: 215
-    y: 73
-    width: 1237
-    height: 559
-=======
-=======
->>>>>>> main
     x: 245
     y: 73
     width: 1084
     height: 554
-<<<<<<< HEAD
->>>>>>> origin/Jeonghoon
-=======
->>>>>>> main
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
     m_SaveData: []
   m_ViewTransforms:
     m_KeySerializationHelper:
-<<<<<<< HEAD
-    - {fileID: 3493327921104011847, guid: 0a36254731816fd408ef626fcc3f5422, type: 2}
-    m_ValueSerializationHelper:
-    - e00: 0.7785462
-      e01: 0
-      e02: 0
-      e03: 77.78003
-      e10: 0
-      e11: 0.7785462
-      e12: 0
-      e13: 169.1086
-=======
     - {fileID: 6619157423353756647, guid: 232d2b067fe7cb54f80dec56461c4a93, type: 2}
     m_ValueSerializationHelper:
     - e00: 0.5631579
@@ -901,7 +688,6 @@ MonoBehaviour:
       e11: 0.5631579
       e12: 0
       e13: 176.13158
->>>>>>> origin/Jeonghoon
       e20: 0
       e21: 0
       e22: 1
@@ -911,17 +697,10 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-<<<<<<< HEAD
-  m_AnimatorController: {fileID: 9100000, guid: 4e5d6bf67b896714290fb6d733a3be25,
-    type: 2}
-  m_BreadCrumbs:
-  - m_Target: {fileID: -6950521195057238912, guid: 4e5d6bf67b896714290fb6d733a3be25,
-=======
   m_AnimatorController: {fileID: 9100000, guid: 232d2b067fe7cb54f80dec56461c4a93,
     type: 2}
   m_BreadCrumbs:
   - m_Target: {fileID: 6619157423353756647, guid: 232d2b067fe7cb54f80dec56461c4a93,
->>>>>>> origin/Jeonghoon
       type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
@@ -945,56 +724,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-<<<<<<< HEAD
-  m_Name: ProjectBrowser
-=======
   m_Name: AudioMixerWindow
->>>>>>> main
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
     x: 0
-<<<<<<< HEAD
-<<<<<<< HEAD
-    y: 580
-    width: 1454
-    height: 367
-  m_MinSize: {x: 231, y: 271}
-  m_MaxSize: {x: 10001, y: 10021}
-  m_ActualView: {fileID: 13}
-=======
-    y: 545
-    width: 1442
-    height: 342
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 12}
->>>>>>> origin/Jeonghoon
-=======
     y: 582
     width: 1454
     height: 365
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
->>>>>>> main
   m_Panes:
   - {fileID: 12}
   - {fileID: 13}
   - {fileID: 14}
-<<<<<<< HEAD
-<<<<<<< HEAD
-  m_Selected: 1
-  m_LastSelected: 0
-=======
-  m_Selected: 0
-  m_LastSelected: 1
->>>>>>> origin/Jeonghoon
-=======
   m_Selected: 2
   m_LastSelected: 0
->>>>>>> main
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1016,24 +763,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-<<<<<<< HEAD
-<<<<<<< HEAD
-    x: 0
-    y: 653
-    width: 1453
-    height: 346
-=======
-    x: 8
-    y: 626
-    width: 1441
-    height: 321
->>>>>>> origin/Jeonghoon
-=======
     x: 0
     y: 655
     width: 1453
     height: 344
->>>>>>> main
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -1060,21 +793,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-<<<<<<< HEAD
-<<<<<<< HEAD
-    y: 653
-    width: 1453
-    height: 346
-=======
     y: 655
     width: 1453
     height: 344
->>>>>>> origin/Jeonghoon
-=======
-    y: 655
-    width: 1453
-    height: 344
->>>>>>> main
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -1092,52 +813,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-<<<<<<< HEAD
-<<<<<<< HEAD
-    - Assets/Textures/tower
-=======
-    - Assets/Scripts
->>>>>>> origin/Jeonghoon
-=======
     - "Assets/Textures/Enemy/boss/\uD638\uBC00_\uC2A4\uD0E0\uB529"
->>>>>>> main
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-<<<<<<< HEAD
-<<<<<<< HEAD
-  - Assets/Textures/tower
-=======
-  - Assets/Scripts
->>>>>>> origin/Jeonghoon
-=======
   - "Assets/Textures/Enemy/boss/\uD638\uBC00_\uC2A4\uD0E0\uB529"
->>>>>>> main
   m_LastFoldersGridSize: 16
   m_LastProjectPath: "D:\\Unity_project\\\uAC9C\uC18C\uAC1C\\NogakKimchi\\project_defence"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-<<<<<<< HEAD
-<<<<<<< HEAD
-    scrollPos: {x: 0, y: 218}
-    m_SelectedIDs: 64970000
-    m_LastClickedID: 38756
-    m_ExpandedIDs: 00000000e8810000f4810000fe8100000e8200004891000084940000ce960000969d0000de9d00005e9e0000dca200008ac4010000ca9a3bffffff7f
-=======
-    scrollPos: {x: 0, y: 255}
-    m_SelectedIDs: 10640000
-    m_LastClickedID: 25616
-    m_ExpandedIDs: 00000000ee540000f0540000f2540000f4540000f6540000f8540000
->>>>>>> origin/Jeonghoon
-=======
     scrollPos: {x: 0, y: 60}
     m_SelectedIDs: a6750000
     m_LastClickedID: 30118
     m_ExpandedIDs: 00000000ee540000f0540000f2540000f4540000f6540000f8540000205500005665000000ca9a3bffffff7f
->>>>>>> main
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1165,15 +856,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-<<<<<<< HEAD
-<<<<<<< HEAD
-    m_ExpandedIDs: 00000000e8810000f4810000fe8100000e8200004891000084940000ce960000969d0000de9d00005e9e0000dca200008ac4010000ca9a3bffffff7f
-=======
-    m_ExpandedIDs: 00000000ee540000f0540000f2540000f4540000f6540000f8540000
->>>>>>> origin/Jeonghoon
-=======
     m_ExpandedIDs: 00000000ee540000f0540000f2540000f4540000f6540000f854000000ca9a3bffffff7f
->>>>>>> main
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1198,24 +881,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-<<<<<<< HEAD
-<<<<<<< HEAD
-    m_SelectedInstanceIDs: 46840000
-    m_LastClickedInstanceID: 33862
-    m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c6230000ce6100006c6100007a610000246300002863000080610000b4830000ec6000007060000062600000d0630000e8630000285e0000d05e0000da5e0000e47f0000587f00002a8000001e800000867f00007e11000084630000b4600000646000007e7a0000d47c000098790000
-=======
-    m_SelectedInstanceIDs: 4c8e0000
-    m_LastClickedInstanceID: 36428
-    m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c6230000ce6100006c6100007a610000246300002863000080610000b4830000ec6000007060000062600000d0630000e8630000285e0000d05e0000da5e0000e47f0000587f00002a8000001e800000867f00007e11000084630000b460000064600000a06f02009c6f02002e610000107d0200a6600000eecc020056610000
->>>>>>> origin/Jeonghoon
-=======
     m_SelectedInstanceIDs: c8750000
     m_LastClickedInstanceID: 30152
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000ce6100006c6100007a610000246300002863000080610000b4830000ec6000007060000062600000d0630000e8630000285e0000d05e0000da5e0000e47f0000587f00002a8000001e800000867f00007e11000084630000b460000064600000a06f02009c6f02002e610000107d0200a6600000eecc0200566100004c660000
->>>>>>> main
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1264,23 +933,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-<<<<<<< HEAD
-    x: 8
-    y: 651
-    width: 1441
-    height: 340
-=======
     x: 0
-<<<<<<< HEAD
-    y: 581
-    width: 1409
-    height: 418
->>>>>>> origin/Jeonghoon
-=======
     y: 655
     width: 1453
     height: 344
->>>>>>> main
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -1404,30 +1060,12 @@ MonoBehaviour:
       oldMaxSizes: 
       oldSplitSize: 0
     m_HorizontalSplitter:
-<<<<<<< HEAD
-<<<<<<< HEAD
-      ID: 209
-      splitterInitialOffset: 223
-      currentActiveSplitter: -1
-      realSizes:
-      - 227
-      - 1214
-=======
-      ID: 1077
-      splitterInitialOffset: 223
-      currentActiveSplitter: -1
-      realSizes:
-      - 222
-      - 1187
->>>>>>> origin/Jeonghoon
-=======
       ID: 16971
       splitterInitialOffset: 223
       currentActiveSplitter: -1
       realSizes:
       - 229
       - 1224
->>>>>>> main
       relativeSizes:
       - 0.15755855
       - 0.84244144
@@ -1437,15 +1075,7 @@ MonoBehaviour:
       maxSizes:
       - 0
       - 0
-<<<<<<< HEAD
-<<<<<<< HEAD
-      lastTotalSize: 1441
-=======
-      lastTotalSize: 1409
->>>>>>> origin/Jeonghoon
-=======
       lastTotalSize: 1453
->>>>>>> main
       splitSize: 6
       xOffset: 0
       m_Version: 1
@@ -1474,27 +1104,12 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> main
     x: 1454
     y: 0
     width: 466
     height: 947
   m_MinSize: {x: 276, y: 71}
   m_MaxSize: {x: 4001, y: 4021}
-<<<<<<< HEAD
-=======
-    x: 1442
-    y: 0
-    width: 462
-    height: 887
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
->>>>>>> origin/Jeonghoon
-=======
->>>>>>> main
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -1521,23 +1136,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> main
     x: 1454
     y: 73
     width: 465
     height: 926
-<<<<<<< HEAD
-=======
-    x: 1450
-    y: 81
-    width: 461
-    height: 866
->>>>>>> origin/Jeonghoon
-=======
->>>>>>> main
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
