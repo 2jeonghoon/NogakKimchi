@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerTemplate: {fileID: 11400000, guid: 9bf957cc8ba204642b405ce32a3175a9, type: 2}
   spawnPoint: {fileID: 699455394101526497}
-  weaponType: 6
+  weaponType: 1
   tileType: 1
   buffTower: {fileID: 0}
   projectilePrefab: {fileID: 3989452062942650229, guid: 36ee9807713eff04ea5ef99b0edb981e,

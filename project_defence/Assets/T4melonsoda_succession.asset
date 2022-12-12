@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a7bcf6fcbb6c844d906e040c534dc62, type: 3}
   m_Name: T4melonsoda_succession
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 8005673473863267078, guid: 3dc85e96b2e81dc438a3a96ab8f0267c,
+  towerPrefab: {fileID: 3182184880974809888, guid: b77e794af13bb9946b55eccdf31b43cf,
     type: 3}
   followTowerPrefab: {fileID: 8166587275253779454, guid: cd40a6bca777fef49a89bdc48d542f34,
     type: 3}
   weapon:
   - sprite: {fileID: 21300000, guid: 876cd14bc5005a74eb7599c73384073d, type: 3}
-    damage: 3
+    damage: 10
     slow: 0
     buff: 0
     rate: 0.3
@@ -28,7 +28,7 @@ MonoBehaviour:
     tileType: 1
     isLock: 1
   - sprite: {fileID: 21300000, guid: 876cd14bc5005a74eb7599c73384073d, type: 3}
-    damage: 5
+    damage: 20
     slow: 0
     buff: 0
     rate: 0.2
@@ -38,7 +38,7 @@ MonoBehaviour:
     tileType: 1
     isLock: 1
   - sprite: {fileID: 21300000, guid: 876cd14bc5005a74eb7599c73384073d, type: 3}
-    damage: 10
+    damage: 50
     slow: 0
     buff: 0
     rate: 0.1

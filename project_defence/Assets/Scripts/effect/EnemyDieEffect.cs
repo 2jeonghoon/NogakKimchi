@@ -22,6 +22,12 @@ public class EnemyDieEffect : MonoBehaviour
         StartCoroutine("WaitForAnimation");
     }
 
+    public void BossSkillEffect()
+    {
+        //Debug.Log("Boom");
+        animator.SetTrigger("Boom");
+    }
+
 
     // 애니메이션 끝날 때 까지 대기 (1초)
     IEnumerator WaitForAnimation()
