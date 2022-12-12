@@ -26,7 +26,8 @@ MonoBehaviour:
     cost: 400
     sell: 320
     tileType: 0
-    isLock: 1
+    isLock: 0
+    explosionRange: 0
   - sprite: {fileID: 21300000, guid: c364b4e04d3ac96458efc67e2f2cc762, type: 3}
     damage: 3
     slow: 10
@@ -37,6 +38,7 @@ MonoBehaviour:
     sell: 448
     tileType: 0
     isLock: 1
+    explosionRange: 0
   - sprite: {fileID: 21300000, guid: c364b4e04d3ac96458efc67e2f2cc762, type: 3}
     damage: 3
     slow: 10
@@ -47,6 +49,7 @@ MonoBehaviour:
     sell: 736
     tileType: 0
     isLock: 1
+    explosionRange: 0
   - sprite: {fileID: 21300000, guid: c364b4e04d3ac96458efc67e2f2cc762, type: 3}
     damage: 3
     slow: 10
@@ -57,4 +60,5 @@ MonoBehaviour:
     sell: 736
     tileType: 0
     isLock: 1
+    explosionRange: 0
   maxTowerLV: 3

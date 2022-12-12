@@ -57,7 +57,7 @@ public class Explosion : MonoBehaviour
         float time = 0f;
 
         //while (true == animator.GetCurrentAnimatorStateInfo(0).IsName(name)) {
-        while (time <= 1)
+        while (time <= 0.5)
         {
             time += Time.deltaTime;
             yield return new WaitForEndOfFrame();

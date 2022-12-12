@@ -120,7 +120,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 11067
+  controlID: 18
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 11072
+  controlID: 130
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 11073
+  controlID: 131
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -216,8 +216,8 @@ MonoBehaviour:
     y: 0
     width: 925
     height: 715
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 16}
@@ -225,7 +225,7 @@ MonoBehaviour:
   - {fileID: 17}
   - {fileID: 13}
   m_Selected: 1
-  m_LastSelected: 0
+  m_LastSelected: 3
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -337,6 +337,8 @@ MonoBehaviour:
   m_ViewTransforms:
     m_KeySerializationHelper:
     - {fileID: 7839913241070033958, guid: a9620abc49d2320448655c820c0a535c, type: 2}
+    - {fileID: 7073862948940461129, guid: 56429f1cc21b61e40a36c28e19e8a5b9, type: 2}
+    - {fileID: 7073862948940461129, guid: b9b2668f5fd27954fb0bc59b84aaef7d, type: 2}
     m_ValueSerializationHelper:
     - e00: 0.58680034
       e01: 0
@@ -354,11 +356,43 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
+    - e00: 1.2074322
+      e01: 0
+      e02: 0
+      e03: -179.4096
+      e10: 0
+      e11: 1.2074322
+      e12: 0
+      e13: 143.73917
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.5729167
+      e01: 0
+      e02: 0
+      e03: -7.916687
+      e10: 0
+      e11: 0.5729167
+      e12: 0
+      e13: 287.39584
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: a9620abc49d2320448655c820c0a535c,
+  m_AnimatorController: {fileID: 9100000, guid: b9b2668f5fd27954fb0bc59b84aaef7d,
     type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 7839913241070033958, guid: a9620abc49d2320448655c820c0a535c,
+  - m_Target: {fileID: 7073862948940461129, guid: b9b2668f5fd27954fb0bc59b84aaef7d,
       type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
@@ -497,23 +531,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 4a5e0000
-      m_LastClickedID: 24138
-      m_ExpandedIDs: 26fbfffff4ffffff4a5e0000
+      m_SelectedIDs: 90600000
+      m_LastClickedID: 0
+      m_ExpandedIDs: 08daffff5ce8ffff98eeffff18fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: EnemySpawner
-        m_OriginalName: EnemySpawner
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 21652
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 8}
       m_SearchString: 
@@ -771,9 +805,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.35900748, y: 9.776736, z: 0.09030511}
+    m_Target: {x: 1086.9342, y: 23.588154, z: -3.4764378}
     speed: 2
-    m_Value: {x: -0.35900748, y: 9.776736, z: 0.09030511}
+    m_Value: {x: 1086.9342, y: 23.588154, z: -3.4764378}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -824,9 +858,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 1.0189985
+    m_Target: 687.6802
     speed: 2
-    m_Value: 1.0189985
+    m_Value: 687.6802
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1137,24 +1171,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/effect
-    - Assets/Scripts/effect
+    - Assets
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Prefabs/effect
-  - Assets/Scripts/effect
+  - Assets
   m_LastFoldersGridSize: 16
   m_LastProjectPath: "D:\\Unity_project\\\uAC9C\uC18C\uAC1C\\NogakKimchi\\project_defence"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: f46d0000c8010100
-    m_LastClickedID: 65992
-    m_ExpandedIDs: 000000001264000034640000386400003e6400004e640000c2650000f46d0000486e00007c770000207800002c7e000000ca9a3bffffff7f
+    m_SelectedIDs: 92640000
+    m_LastClickedID: 25746
+    m_ExpandedIDs: 0000000092640000a0640000a46400005e6e000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1170,7 +1202,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 10}
+      m_ClientGUIView: {fileID: 11}
     m_SearchString: 
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
@@ -1182,7 +1214,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000001264000000ca9a3bffffff7f
+    m_ExpandedIDs: 0000000092640000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1213,15 +1245,15 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: c6230000ce6100006c6100007a610000246300002863000080610000b4830000ec6000007060000062600000d0630000e8630000285e0000d05e0000da5e0000e47f0000587f00002a8000001e800000867f00007e11000084630000b460000064600000a06f02009c6f02002e610000107d0200a6600000eecc0200566100004c66000060630000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: TowerBuildEffect
-      m_OriginalName: TowerBuildEffect
+      m_Name: T3icecream_explosion
+      m_OriginalName: T3icecream_explosion
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 65996
+      m_UserData: 24714
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
