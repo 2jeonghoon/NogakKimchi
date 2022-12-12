@@ -1,393 +1,404 @@
 using UnityEngine;
 using System.Collections;
 
-public enum WeaponType	{ Gun = 0, Laser, Slow, Buff, Mortar, Shotgun, Spear, Explosion, Melee}
-public enum WeaponState { SearchTarget = 0, TryAttackGun, TryAttackLaser, TryAttackMortar, 
-							TryAttackShotgun, TryAttackSpaer, TryAttackExplosion, TryMeleeAttack}
-public enum TileType { One, Two};
+public enum WeaponType { Gun = 0, Laser, Slow, Buff, Mortar, Shotgun, Spear, Explosion, Melee }
+public enum WeaponState
+{
+    SearchTarget = 0, TryAttackGun, TryAttackLaser, TryAttackMortar,
+    TryAttackShotgun, TryAttackSpaer, TryAttackExplosion, TryMeleeAttack
+}
+public enum TileType { One, Two };
 
 public class TowerWeapon : MonoBehaviour
 {
-	[Header("Commons")]
-	[SerializeField]
-	private	TowerTemplate	towerTemplate;							// íƒ€ì›Œ ì •ë³´ (ê³µê²©ë ¥, ê³µê²©ì†ë„ ë“±)
-	[SerializeField]
-	private	Transform		spawnPoint;								// ë°œì‚¬ì²´ ìƒì„± ìœ„ì¹˜
-	[SerializeField]
-	private	WeaponType		weaponType;								// ë¬´ê¸° ì†ì„± ì„¤ì •
-	public	TowerWeapon		buffTower;
+    [Header("Commons")]
+    [SerializeField]
+    private TowerTemplate towerTemplate;                            // Å¸¿ö Á¤º¸ (°ø°İ·Â, °ø°İ¼Óµµ µî)
+    [SerializeField]
+    private Transform spawnPoint;                               // ¹ß»çÃ¼ »ı¼º À§Ä¡
+    [SerializeField]
+    private WeaponType weaponType;                              // ¹«±â ¼Ó¼º ¼³Á¤
 
-	[Header("Gun")]
-	[SerializeField]
-	private	GameObject		projectilePrefab;						// ë°œì‚¬ì²´ í”„ë¦¬íŒ¹
+    [SerializeField]
+    private TileType tileType;
+    public TowerWeapon buffTower;
 
-	[Header("Laser")]
-	[SerializeField]
-	private	LineRenderer	lineRenderer;							// ë ˆì´ì €ë¡œ ì‚¬ìš©ë˜ëŠ” ì„ (LineRenderer)
-	[SerializeField]
-	private	Transform		hitEffect;								// íƒ€ê²© íš¨ê³¼
-	[SerializeField]
-	private	LayerMask		targetLayer;							// ê´‘ì„ ì— ë¶€ë”ªíˆëŠ” ë ˆì´ì–´ ì„¤ì •
+    [Header("Gun")]
+    [SerializeField]
+    private GameObject projectilePrefab;                        // ¹ß»çÃ¼ ÇÁ¸®ÆÕ
 
-	private	int				level = 0;								// íƒ€ì›Œ ë ˆë²¨
-	private	WeaponState		weaponState = WeaponState.SearchTarget;	// íƒ€ì›Œ ë¬´ê¸°ì˜ ìƒíƒœ
-	private	Transform		attackTarget = null;                    // ê³µê²© ëŒ€ìƒ
-	private	SpriteRenderer	spriteRenderer;							// íƒ€ì›Œ ì˜¤ë¸Œì íŠ¸ ì´ë¯¸ì§€ ë³€ê²½ìš©
-	private	TowerSpawner	towerSpawner;
-	private	EnemySpawner	enemySpawner;							// ê²Œì„ì— ì¡´ì¬í•˜ëŠ” ì  ì •ë³´ íšë“ìš©
-	private	PlayerGold		playerGold;								// í”Œë ˆì´ì–´ì˜ ê³¨ë“œ ì •ë³´ íšë“ ë° ì„¤ì •
-	private	Tile			ownerTile;								// í˜„ì¬ íƒ€ì›Œê°€ ë°°ì¹˜ë˜ì–´ ìˆëŠ” íƒ€ì¼
+    [Header("Laser")]
+    [SerializeField]
+    private LineRenderer lineRenderer;                          // ·¹ÀÌÀú·Î »ç¿ëµÇ´Â ¼±(LineRenderer)
+    [SerializeField]
+    private Transform hitEffect;                                // Å¸°İ È¿°ú
+    [SerializeField]
+    private LayerMask targetLayer;                          // ±¤¼±¿¡ ºÎµúÈ÷´Â ·¹ÀÌ¾î ¼³Á¤
 
-	private	float			addedDamage;							// ë²„í”„ì— ì˜í•´ ì¶”ê°€ëœ ë°ë¯¸ì§€
-	private	int				buffLevel;                              // ë²„í”„ë¥¼ ë°›ëŠ”ì§€ ì—¬ë¶€ ì„¤ì • (0 : ë²„í”„X, 1~3 : ë°›ëŠ” ë²„í”„ ë ˆë²¨)
+    private int level = 0;                              // Å¸¿ö ·¹º§
+    private WeaponState weaponState = WeaponState.SearchTarget; // Å¸¿ö ¹«±âÀÇ »óÅÂ
+    private Transform attackTarget = null;                    // °ø°İ ´ë»ó
+    private SpriteRenderer spriteRenderer;                          // Å¸¿ö ¿ÀºêÁ§Æ® ÀÌ¹ÌÁö º¯°æ¿ë
+    private TowerSpawner towerSpawner;
+    private EnemySpawner enemySpawner;                          // °ÔÀÓ¿¡ Á¸ÀçÇÏ´Â Àû Á¤º¸ È¹µæ¿ë
+    private PlayerGold playerGold;                              // ÇÃ·¹ÀÌ¾îÀÇ °ñµå Á¤º¸ È¹µæ ¹× ¼³Á¤
+    private Tile ownerTile;                             // ÇöÀç Å¸¿ö°¡ ¹èÄ¡µÇ¾î ÀÖ´Â Å¸ÀÏ
 
-	// íƒ€ì›Œ ì„¤ì¹˜ ì˜¤ë””ì˜¤ í´ë¦½
-	public AudioClip buildClip;
-	// íƒ€ì›Œ ì—…ê·¸ë ˆì´ë“œ ì˜¤ë””ì˜¤ í´ë¦½
-	public AudioClip upgradeClip;
-	// íƒ€ì›Œ íŒë§¤ ì˜¤ë””ì˜¤ í´ë¦½
-	public AudioClip sellClip;
+    private float addedDamage;                          // ¹öÇÁ¿¡ ÀÇÇØ Ãß°¡µÈ µ¥¹ÌÁö
+    private int buffLevel;                              // ¹öÇÁ¸¦ ¹Ş´ÂÁö ¿©ºÎ ¼³Á¤ (0 : ¹öÇÁX, 1~3 : ¹Ş´Â ¹öÇÁ ·¹º§)
 
-	public Sprite		TowerSprite	=> towerTemplate.weapon[level].sprite;
-	public	float		Damage		=> towerTemplate.weapon[level].damage;
-	public	float		Rate		=> towerTemplate.weapon[level].rate;
-	public	float		Range		=> towerTemplate.weapon[level].range;
-	public	int			UpgradeCost	=> Level < MaxLevel ? towerTemplate.weapon[level+1].cost : 0;
-	public	int			SellCost	=> towerTemplate.weapon[level].sell;
-	public	int			Level		=> level + 1;
-	public	int			MaxLevel	=> towerTemplate.weapon.Length;
-	public	float		Slow		=> towerTemplate.weapon[level].slow;
-	public	float		Buff		=> towerTemplate.weapon[level].buff;
-	public	WeaponType	WeaponType	=> weaponType;
-	public	float		AddedDamage
-	{
-		set => addedDamage = Mathf.Max(0, value);
-		get => addedDamage;
-	}
-	public	int			BuffLevel
-	{
-		set => buffLevel = Mathf.Max(0, value);
-		get => buffLevel;
-	}
+    // Å¸¿ö ¼³Ä¡ ¿Àµğ¿À Å¬¸³
+    public AudioClip buildClip;
+    // Å¸¿ö ¾÷±×·¹ÀÌµå ¿Àµğ¿À Å¬¸³
+    public AudioClip upgradeClip;
+    // Å¸¿ö ÆÇ¸Å ¿Àµğ¿À Å¬¸³
+    public AudioClip sellClip;
 
-	public void Setup(TowerSpawner towerSpawner, EnemySpawner enemySpawner, PlayerGold playerGold, Tile ownerTile)
-	{
-		// íƒ€ì›Œ ì„¤ì¹˜ ì‚¬ìš´ë“œ ì¬ìƒ
-		SoundManager.instance.SFXPlay("TowerSetUp", buildClip);
-		spriteRenderer		= GetComponent<SpriteRenderer>();
-		this.towerSpawner	= towerSpawner;
-		this.enemySpawner	= enemySpawner;
-		this.playerGold		= playerGold;
-		this.ownerTile		= ownerTile;
-		//yì¢Œí‘œê°€ ë‚®ì„ìˆ˜ë¡ ì•ìœ¼ë¡œ ë‚˜ì˜¤ê²Œ
-		this.GetComponent<SpriteRenderer>().sortingOrder = -(int)this.transform.position.y+10;
+    public Sprite TowerSprite => towerTemplate.weapon[level].sprite;
+    public float Damage => towerTemplate.weapon[level].damage;
+    public float Rate => towerTemplate.weapon[level].rate;
+    public float Range => towerTemplate.weapon[level].range;
+    public int UpgradeCost => Level < MaxLevel ? towerTemplate.weapon[level + 1].cost : 0;
+    public int UpgradeCost2 => Level < MaxLevel ? towerTemplate.weapon[level + 2].cost : 0;
+    public int SellCost => towerTemplate.weapon[level].sell;
+    public int Level => level + 1;
+    public int MaxLevel => towerTemplate.maxTowerLV;
+    public float Slow => towerTemplate.weapon[level].slow;
+    public float Buff => towerTemplate.weapon[level].buff;
+    public WeaponType WeaponType => weaponType;
+    public TileType TileType => tileType;
 
-		// ë¬´ê¸° ì†ì„±ì´ ìºë…¼, ë ˆì´ì €ì¼ ë•Œ
-		if ( weaponType == WeaponType.Gun || weaponType == WeaponType.Laser ||
-			weaponType == WeaponType.Mortar || weaponType == WeaponType.Shotgun ||
-			weaponType == WeaponType.Spear  || weaponType == WeaponType.Explosion || weaponType == WeaponType.Melee)
-		{
-			// ìµœì´ˆ ìƒíƒœë¥¼ WeaponState.SearchTargetìœ¼ë¡œ ì„¤ì •
-			ChangeState(WeaponState.SearchTarget);
-		}
-	}
+    public float AddedDamage
+    {
+        set => addedDamage = Mathf.Max(0, value);
+        get => addedDamage;
+    }
+    public int BuffLevel
+    {
+        set => buffLevel = Mathf.Max(0, value);
+        get => buffLevel;
+    }
 
-	public void ChangeState(WeaponState newState)
-	{
-		// ì´ì „ì— ì¬ìƒì¤‘ì´ë˜ ìƒíƒœ ì¢…ë£Œ
-		StopCoroutine(weaponState.ToString());
-		// ìƒíƒœ ë³€ê²½
-		weaponState = newState;
-		// ìƒˆë¡œìš´ ìƒíƒœ ì¬ìƒ
-		StartCoroutine(weaponState.ToString());
-	}
+    public void Setup(TowerSpawner towerSpawner, EnemySpawner enemySpawner, PlayerGold playerGold, Tile ownerTile)
+    {
+        // Å¸¿ö ¼³Ä¡ »ç¿îµå Àç»ı
+        SoundManager.instance.SFXPlay("TowerSetUp", buildClip);
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        this.towerSpawner = towerSpawner;
+        this.enemySpawner = enemySpawner;
+        this.playerGold = playerGold;
+        this.ownerTile = ownerTile;
+        //yÁÂÇ¥°¡ ³·À»¼ö·Ï ¾ÕÀ¸·Î ³ª¿À°Ô
+        this.GetComponent<SpriteRenderer>().sortingOrder = -(int)this.transform.position.y + 10;
 
-	private void Update()
-	{
-		/*
+        // ¹«±â ¼Ó¼ºÀÌ Ä³³í, ·¹ÀÌÀúÀÏ ¶§
+        if (weaponType == WeaponType.Gun || weaponType == WeaponType.Laser ||
+            weaponType == WeaponType.Mortar || weaponType == WeaponType.Shotgun ||
+            weaponType == WeaponType.Spear || weaponType == WeaponType.Explosion || weaponType == WeaponType.Melee)
+        {
+            // ÃÖÃÊ »óÅÂ¸¦ WeaponState.SearchTargetÀ¸·Î ¼³Á¤
+            ChangeState(WeaponState.SearchTarget);
+        }
+    }
+
+    public void ChangeState(WeaponState newState)
+    {
+        // ÀÌÀü¿¡ Àç»ıÁßÀÌ´ø »óÅÂ Á¾·á
+        StopCoroutine(weaponState.ToString());
+        // »óÅÂ º¯°æ
+        weaponState = newState;
+        // »õ·Î¿î »óÅÂ Àç»ı
+        StartCoroutine(weaponState.ToString());
+    }
+
+    private void Update()
+    {
+        /*
 		if ( attackTarget != null )
 		{
 			RotateToTarget();
 		}*/
-	}
-	
-	private void RotateToTarget()
-	{
-		// ì›ì ìœ¼ë¡œë¶€í„°ì˜ ê±°ë¦¬ì™€ ìˆ˜í‰ì¶•ìœ¼ë¡œë¶€í„°ì˜ ê°ë„ë¥¼ ì´ìš©í•´ ìœ„ì¹˜ë¥¼ êµ¬í•˜ëŠ” ê·¹ ì¢Œí‘œê³„ ì´ìš©
-		// ê°ë„ = arctan(y/x)
-		// x, y ë³€ìœ„ê°’ êµ¬í•˜ê¸°
-		float dx = attackTarget.position.x - transform.position.x;
-		float dy = attackTarget.position.y - transform.position.y;
-		// x, y ë³€ìœ„ê°’ì„ ë°”íƒ•ìœ¼ë¡œ ê°ë„ êµ¬í•˜ê¸°
-		// ê°ë„ê°€ radian ë‹¨ìœ„ì´ê¸° ë•Œë¬¸ì— Mathf.Rad2Degë¥¼ ê³±í•´ ë„ ë‹¨ìœ„ë¥¼ êµ¬í•¨
-		float degree = Mathf.Atan2(dy, dx) * Mathf.Rad2Deg;
-		transform.rotation = Quaternion.Euler(0, 0, degree);
-	}
+    }
 
-	private IEnumerator SearchTarget()
-	{
-		while ( true )
-		{
-			// í˜„ì¬ íƒ€ì›Œì— ê°€ì¥ ê°€ê¹Œì´ ìˆëŠ” ê³µê²© ëŒ€ìƒ(ì ) íƒìƒ‰
-			attackTarget = FindClosestAttackTarget();
+    private void RotateToTarget()
+    {
+        // ¿øÁ¡À¸·ÎºÎÅÍÀÇ °Å¸®¿Í ¼öÆòÃàÀ¸·ÎºÎÅÍÀÇ °¢µµ¸¦ ÀÌ¿ëÇØ À§Ä¡¸¦ ±¸ÇÏ´Â ±Ø ÁÂÇ¥°è ÀÌ¿ë
+        // °¢µµ = arctan(y/x)
+        // x, y º¯À§°ª ±¸ÇÏ±â
+        float dx = attackTarget.position.x - transform.position.x;
+        float dy = attackTarget.position.y - transform.position.y;
+        // x, y º¯À§°ªÀ» ¹ÙÅÁÀ¸·Î °¢µµ ±¸ÇÏ±â
+        // °¢µµ°¡ radian ´ÜÀ§ÀÌ±â ¶§¹®¿¡ Mathf.Rad2Deg¸¦ °öÇØ µµ ´ÜÀ§¸¦ ±¸ÇÔ
+        float degree = Mathf.Atan2(dy, dx) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, degree);
+    }
 
-			if ( attackTarget != null )
-			{
-				if (weaponType == WeaponType.Gun)
-				{
-					ChangeState(WeaponState.TryAttackGun);
-				}
-				else if (weaponType == WeaponType.Laser)
-				{
-					ChangeState(WeaponState.TryAttackLaser);
-				}
-				else if (weaponType == WeaponType.Mortar)
-				{
-					ChangeState(WeaponState.TryAttackMortar);
-				}
-				else if (weaponType == WeaponType.Shotgun)
-				{
-					ChangeState(WeaponState.TryAttackShotgun);
-				}
-				else if (weaponType == WeaponType.Spear)
-				{
-					ChangeState(WeaponState.TryAttackSpaer);
-				}
-				else if (weaponType == WeaponType.Explosion)
-				{
-					ChangeState(WeaponState.TryAttackExplosion);
-				}
-				else if (weaponType == WeaponType.Melee)
-				{
-                    ChangeState(WeaponState.TryMeleeAttack);
-                }
-			}
-
-			yield return null;
-		}
-	}
-
-	private	IEnumerator TryAttackGun()
-	{
-		while ( true )
-		{
-			// targetì„ ê³µê²©í•˜ëŠ”ê²Œ ê°€ëŠ¥í•œì§€ ê²€ì‚¬
-			if ( IsPossibleToAttackTarget() == false )
-			{
-				ChangeState(WeaponState.SearchTarget);
-				break;
-			}
-
-			// attackRate ì‹œê°„ë§Œí¼ ëŒ€ê¸°
-			yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
-			
-			// ìºë…¼ ê³µê²© (ë°œì‚¬ì²´ ìƒì„±)
-			SpawnProjectile();
-		}
-	}
-
-	private IEnumerator TryAttackLaser()
-	{
-		// ë ˆì´ì €, ë ˆì´ì € íƒ€ê²© íš¨ê³¼ í™œì„±í™”
-		EnableLaser();
-
-		while ( true )
-		{
-			// targetì„ ê³µê²©í•˜ëŠ”ê²Œ ê°€ëŠ¥í•œì§€ ê²€ì‚¬
-			if ( IsPossibleToAttackTarget() == false )
-			{
-				// ë ˆì´ì €, ë ˆì´ì € íƒ€ê²© íš¨ê³¼ ë¹„í™œì„±í™”
-				DisableLaser();
-				ChangeState(WeaponState.SearchTarget);
-				break;
-			}
-
-			// ë ˆì´ì € ê³µê²©
-			SpawnLaser();
-
-			yield return null;
-		}
-	}
-
-	private	IEnumerator TryAttackMortar()
-	{
-		while ( true )
-		{
-			// targetì„ ê³µê²©í•˜ëŠ”ê²Œ ê°€ëŠ¥í•œì§€ ê²€ì‚¬
-			if ( IsPossibleToAttackTarget() == false )
-			{
-				ChangeState(WeaponState.SearchTarget);
-				break;
-			}
-
-			// attackRate ì‹œê°„ë§Œí¼ ëŒ€ê¸°
-			yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
-
-			// ë°•ê²©í¬ ê³µê²© (ë°œì‚¬ì²´ ìƒì„±)
-			if (attackTarget != null)
-			{
-				SpawnMortarProjectile();
-			}
-		}
-	}
-
-    // ìƒ·ê±´ íƒ€ì›Œ ê³µê²©
-    private IEnumerator TryAttackShotgun()
+    private IEnumerator SearchTarget()
     {
         while (true)
         {
-            // targetì„ ê³µê²©í•˜ëŠ”ê²Œ ê°€ëŠ¥í•œì§€ ê²€ì‚¬
+            // ÇöÀç Å¸¿ö¿¡ °¡Àå °¡±îÀÌ ÀÖ´Â °ø°İ ´ë»ó(Àû) Å½»ö
+            attackTarget = FindClosestAttackTarget();
+
+            if (attackTarget != null)
+            {
+                if (weaponType == WeaponType.Gun)
+                {
+                    ChangeState(WeaponState.TryAttackGun);
+                }
+                else if (weaponType == WeaponType.Laser)
+                {
+                    ChangeState(WeaponState.TryAttackLaser);
+                }
+                else if (weaponType == WeaponType.Mortar)
+                {
+                    ChangeState(WeaponState.TryAttackMortar);
+                }
+                else if (weaponType == WeaponType.Shotgun)
+                {
+                    ChangeState(WeaponState.TryAttackShotgun);
+                }
+                else if (weaponType == WeaponType.Spear)
+                {
+                    ChangeState(WeaponState.TryAttackSpaer);
+                }
+                else if (weaponType == WeaponType.Explosion)
+                {
+                    ChangeState(WeaponState.TryAttackExplosion);
+                }
+                else if (weaponType == WeaponType.Melee)
+                {
+                    ChangeState(WeaponState.TryMeleeAttack);
+                }
+            }
+
+            yield return null;
+        }
+    }
+
+    private IEnumerator TryAttackGun()
+    {
+        while (true)
+        {
+            // targetÀ» °ø°İÇÏ´Â°Ô °¡´ÉÇÑÁö °Ë»ç
             if (IsPossibleToAttackTarget() == false)
             {
                 ChangeState(WeaponState.SearchTarget);
                 break;
             }
 
-            // attackRate ì‹œê°„ë§Œí¼ ëŒ€ê¸°
+            // attackRate ½Ã°£¸¸Å­ ´ë±â
             yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
-            // ìƒ·ê±´ ê³µê²© (ë°œì‚¬ì²´ ìƒì„±)
+
+            // Ä³³í °ø°İ (¹ß»çÃ¼ »ı¼º)
+            SpawnProjectile();
+        }
+    }
+
+    private IEnumerator TryAttackLaser()
+    {
+        // ·¹ÀÌÀú, ·¹ÀÌÀú Å¸°İ È¿°ú È°¼ºÈ­
+        EnableLaser();
+
+        while (true)
+        {
+            // targetÀ» °ø°İÇÏ´Â°Ô °¡´ÉÇÑÁö °Ë»ç
+            if (IsPossibleToAttackTarget() == false)
+            {
+                // ·¹ÀÌÀú, ·¹ÀÌÀú Å¸°İ È¿°ú ºñÈ°¼ºÈ­
+                DisableLaser();
+                ChangeState(WeaponState.SearchTarget);
+                break;
+            }
+
+            // ·¹ÀÌÀú °ø°İ
+            SpawnLaser();
+
+            yield return null;
+        }
+    }
+
+    private IEnumerator TryAttackMortar()
+    {
+        while (true)
+        {
+            // targetÀ» °ø°İÇÏ´Â°Ô °¡´ÉÇÑÁö °Ë»ç
+            if (IsPossibleToAttackTarget() == false)
+            {
+                ChangeState(WeaponState.SearchTarget);
+                break;
+            }
+
+            // attackRate ½Ã°£¸¸Å­ ´ë±â
+            yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
+
+            // ¹Ú°İÆ÷ °ø°İ (¹ß»çÃ¼ »ı¼º)
+            if (attackTarget != null)
+            {
+                SpawnMortarProjectile();
+            }
+        }
+    }
+
+    // ¼¦°Ç Å¸¿ö °ø°İ
+    private IEnumerator TryAttackShotgun()
+    {
+        while (true)
+        {
+            // targetÀ» °ø°İÇÏ´Â°Ô °¡´ÉÇÑÁö °Ë»ç
+            if (IsPossibleToAttackTarget() == false)
+            {
+                ChangeState(WeaponState.SearchTarget);
+                break;
+            }
+
+            // attackRate ½Ã°£¸¸Å­ ´ë±â
+            yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
+            // ¼¦°Ç °ø°İ (¹ß»çÃ¼ »ı¼º)
             SpawnProjectile_Multiple();
         }
     }
 
-	// ê´€í†µ íƒ€ì›Œ ê³µê²©
-	private IEnumerator TryAttackSpaer()
-	{
-		while (true)
-		{
-			// targetì„ ê³µê²©í•˜ëŠ”ê²Œ ê°€ëŠ¥í•œì§€ ê²€ì‚¬
-			if (IsPossibleToAttackTarget() == false)
-			{
-				ChangeState(WeaponState.SearchTarget);
-				break;
-			}
+    // °üÅë Å¸¿ö °ø°İ
+    private IEnumerator TryAttackSpaer()
+    {
+        while (true)
+        {
+            // targetÀ» °ø°İÇÏ´Â°Ô °¡´ÉÇÑÁö °Ë»ç
+            if (IsPossibleToAttackTarget() == false)
+            {
+                ChangeState(WeaponState.SearchTarget);
+                break;
+            }
 
-			// attackRate ì‹œê°„ë§Œí¼ ëŒ€ê¸°
-			yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
-			// ê´€í†µ ê³µê²© (ë°œì‚¬ì²´ ìƒì„±)
-			SpawnProjectile_Spear();
-		}
-	}
+            // attackRate ½Ã°£¸¸Å­ ´ë±â
+            yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
+            // °üÅë °ø°İ (¹ß»çÃ¼ »ı¼º)
+            SpawnProjectile_Spear();
+        }
+    }
 
-	// í­ë°œ íƒ€ì›Œ ê³µê²©
-	private IEnumerator TryAttackExplosion()
-	{
-		while (true)
-		{
-			// targetì„ ê³µê²©í•˜ëŠ”ê²Œ ê°€ëŠ¥í•œì§€ ê²€ì‚¬
-			if (IsPossibleToAttackTarget() == false)
-			{
-				ChangeState(WeaponState.SearchTarget);
-				break;
-			}
+    // Æø¹ß Å¸¿ö °ø°İ
+    private IEnumerator TryAttackExplosion()
+    {
+        while (true)
+        {
+            // targetÀ» °ø°İÇÏ´Â°Ô °¡´ÉÇÑÁö °Ë»ç
+            if (IsPossibleToAttackTarget() == false)
+            {
+                ChangeState(WeaponState.SearchTarget);
+                break;
+            }
 
-			// attackRate ì‹œê°„ë§Œí¼ ëŒ€ê¸°
-			yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
-			// ê´€í†µ ê³µê²© (ë°œì‚¬ì²´ ìƒì„±)
-			SpawnProjectile_Explosion();
-		}
-	}
+            // attackRate ½Ã°£¸¸Å­ ´ë±â
+            yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
+            // °üÅë °ø°İ (¹ß»çÃ¼ »ı¼º)
+            SpawnProjectile_Explosion();
+        }
+    }
 
     private IEnumerator TryMeleeAttack()
     {
         while (true)
         {
-            // targetì„ ê³µê²©í•˜ëŠ”ê²Œ ê°€ëŠ¥í•œì§€ ê²€ì‚¬
+            // targetÀ» °ø°İÇÏ´Â°Ô °¡´ÉÇÑÁö °Ë»ç
             if (IsPossibleToAttackTarget() == false)
             {
                 ChangeState(WeaponState.SearchTarget);
                 break;
             }
 
-            // attackRate ì‹œê°„ë§Œí¼ ëŒ€ê¸°
+            // attackRate ½Ã°£¸¸Å­ ´ë±â
             yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
-			MeleeAttack();
-            // ê·¼ì ‘ ê³µê²©
+            MeleeAttack();
+            // ±ÙÁ¢ °ø°İ
         }
     }
 
     public void OnBuffAroundTower()
-	{
-		// í˜„ì¬ ë§µì— ë°°ì¹˜ëœ "Tower" íƒœê·¸ë¥¼ ê°€ì§„ ëª¨ë“  ì˜¤ë¸Œì íŠ¸ íƒìƒ‰
-		GameObject[] towers = GameObject.FindGameObjectsWithTag("Tower");
-		
-		for ( int i = 0; i < towers.Length; ++ i )
-		{
-			TowerWeapon weapon = towers[i].GetComponent<TowerWeapon>();
+    {
+        // ÇöÀç ¸Ê¿¡ ¹èÄ¡µÈ "Tower" ÅÂ±×¸¦ °¡Áø ¸ğµç ¿ÀºêÁ§Æ® Å½»ö
+        GameObject[] towers = GameObject.FindGameObjectsWithTag("Tower");
 
-			// ì´ë¯¸ ë²„í”„ë¥¼ ë°›ê³  ìˆê³ , í˜„ì¬ ë²„í”„ íƒ€ì›Œì˜ ë ˆë²¨ë³´ë‹¤ ë†’ì€ ë²„í”„ì´ë©´ íŒ¨ìŠ¤
-			if ( weapon.BuffLevel > Level )
-			{
-				continue;
-			}
+        for (int i = 0; i < towers.Length; ++i)
+        {
+            TowerWeapon weapon = towers[i].GetComponent<TowerWeapon>();
 
-			// í˜„ì¬ ë²„í”„ íƒ€ì›Œì™€ ë‹¤ë¥¸ íƒ€ì›Œì˜ ê±°ë¦¬ë¥¼ ê²€ì‚¬í•´ì„œ ë²”ìœ„ ì•ˆì— íƒ€ì›Œê°€ ìˆìœ¼ë©´
-			if ( Vector3.Distance(weapon.transform.position, transform.position) <= towerTemplate.weapon[level].range )
-			{
-				// ê³µê²©ì´ ê°€ëŠ¥í•œ ìºë…¼, ë ˆì´ì € íƒ€ì›Œì´ë©´
-				if ( weapon.WeaponType == WeaponType.Gun || weapon.WeaponType == WeaponType.Laser )
-				{
-					// ë²„í”„ì— ì˜í•´ ê³µê²©ë ¥ ì¦ê°€
-					weapon.AddedDamage = weapon.Damage * (towerTemplate.weapon[level].buff);
-					// íƒ€ì›Œê°€ ë°›ê³  ìˆëŠ” ë²„í”„ ë ˆë²¨ ì„¤ì •
-					weapon.BuffLevel = Level;
-					weapon.buffTower = this;
-				}
-			}
-		}
-	}
+            // ÀÌ¹Ì ¹öÇÁ¸¦ ¹Ş°í ÀÖ°í, ÇöÀç ¹öÇÁ Å¸¿öÀÇ ·¹º§º¸´Ù ³ôÀº ¹öÇÁÀÌ¸é ÆĞ½º
+            if (weapon.BuffLevel > Level)
+            {
+                continue;
+            }
 
-	private Transform FindClosestAttackTarget()
-	{
-		// ì œì¼ ê°€ê¹Œì´ ìˆëŠ” ì ì„ ì°¾ê¸° ìœ„í•´ ìµœì´ˆ ê±°ë¦¬ë¥¼ ìµœëŒ€í•œ í¬ê²Œ ì„¤ì •
-		float closestDistSqr = Mathf.Infinity;
-		// EnemySpawnerì˜ EnemyListì— ìˆëŠ” í˜„ì¬ ë§µì— ì¡´ì¬í•˜ëŠ” ëª¨ë“  ì  ê²€ì‚¬
-		for ( int i = 0; i < enemySpawner.EnemyList.Count; ++ i )
-		{
-			float distance = Vector3.Distance(enemySpawner.EnemyList[i].transform.position, transform.position);
-			// í˜„ì¬ ê²€ì‚¬ì¤‘ì¸ ì ê³¼ì˜ ê±°ë¦¬ê°€ ê³µê²©ë²”ìœ„ ë‚´ì— ìˆê³ , í˜„ì¬ê¹Œì§€ ê²€ì‚¬í•œ ì ë³´ë‹¤ ê±°ë¦¬ê°€ ê°€ê¹Œìš°ë©´
-			if ( distance <= towerTemplate.weapon[level].range && distance <= closestDistSqr )
-			{
-				closestDistSqr	= distance;
-				attackTarget	= enemySpawner.EnemyList[i].transform;
-			}
-		}
+            // ÇöÀç ¹öÇÁ Å¸¿ö¿Í ´Ù¸¥ Å¸¿öÀÇ °Å¸®¸¦ °Ë»çÇØ¼­ ¹üÀ§ ¾È¿¡ Å¸¿ö°¡ ÀÖÀ¸¸é
+            if (Vector3.Distance(weapon.transform.position, transform.position) <= towerTemplate.weapon[level].range)
+            {
+                // °ø°İÀÌ °¡´ÉÇÑ Ä³³í, ·¹ÀÌÀú Å¸¿öÀÌ¸é
+                if (weapon.WeaponType == WeaponType.Gun || weapon.WeaponType == WeaponType.Laser ||
+                    weapon.WeaponType == WeaponType.Explosion || weapon.WeaponType == WeaponType.Mortar ||
+                    weapon.WeaponType == WeaponType.Shotgun || weapon.WeaponType == WeaponType.Spear)
+                {
+                    // ¹öÇÁ¿¡ ÀÇÇØ °ø°İ·Â Áõ°¡
+                    weapon.AddedDamage = weapon.Damage * (towerTemplate.weapon[level].buff);
+                    // Å¸¿ö°¡ ¹Ş°í ÀÖ´Â ¹öÇÁ ·¹º§ ¼³Á¤
+                    weapon.BuffLevel = Level;
+                    weapon.buffTower = this;
+                }
+            }
+        }
+    }
+
+    private Transform FindClosestAttackTarget()
+    {
+        // Á¦ÀÏ °¡±îÀÌ ÀÖ´Â ÀûÀ» Ã£±â À§ÇØ ÃÖÃÊ °Å¸®¸¦ ÃÖ´ëÇÑ Å©°Ô ¼³Á¤
+        float closestDistSqr = Mathf.Infinity;
+        // EnemySpawnerÀÇ EnemyList¿¡ ÀÖ´Â ÇöÀç ¸Ê¿¡ Á¸ÀçÇÏ´Â ¸ğµç Àû °Ë»ç
+        for (int i = 0; i < enemySpawner.EnemyList.Count; ++i)
+        {
+            float distance = Vector3.Distance(enemySpawner.EnemyList[i].transform.position, transform.position);
+            // ÇöÀç °Ë»çÁßÀÎ Àû°úÀÇ °Å¸®°¡ °ø°İ¹üÀ§ ³»¿¡ ÀÖ°í, ÇöÀç±îÁö °Ë»çÇÑ Àûº¸´Ù °Å¸®°¡ °¡±î¿ì¸é
+            if (distance <= towerTemplate.weapon[level].range && distance <= closestDistSqr)
+            {
+                closestDistSqr = distance;
+                attackTarget = enemySpawner.EnemyList[i].transform;
+            }
+        }
 
 
-		return attackTarget;
-	}
+        return attackTarget;
+    }
 
-	private bool IsPossibleToAttackTarget()
-	{
-		// targetì´ ìˆëŠ”ì§€ ê²€ì‚¬ (ë‹¤ë¥¸ ë°œì‚¬ì²´ì— ì˜í•´ ì œê±°, Goal ì§€ì ê¹Œì§€ ì´ë™í•´ ì‚­ì œ ë“±)
-		if ( attackTarget == null )
-		{
-			return false;
-		}
-		
-		// targetì´ ê³µê²© ë²”ìœ„ ì•ˆì— ìˆëŠ”ì§€ ê²€ì‚¬ (ê³µê²© ë²”ìœ„ë¥¼ ë²—ì–´ë‚˜ë©´ ìƒˆë¡œìš´ ì  íƒìƒ‰)
-		float distance = Vector3.Distance(attackTarget.position, transform.position);
-		if ( distance > towerTemplate.weapon[level].range )
-		{
-			attackTarget = null;
-			return false;
-		}
+    private bool IsPossibleToAttackTarget()
+    {
+        // targetÀÌ ÀÖ´ÂÁö °Ë»ç (´Ù¸¥ ¹ß»çÃ¼¿¡ ÀÇÇØ Á¦°Å, Goal ÁöÁ¡±îÁö ÀÌµ¿ÇØ »èÁ¦ µî)
+        if (attackTarget == null)
+        {
+            return false;
+        }
 
-		return true;
-	}
+        // targetÀÌ °ø°İ ¹üÀ§ ¾È¿¡ ÀÖ´ÂÁö °Ë»ç (°ø°İ ¹üÀ§¸¦ ¹ş¾î³ª¸é »õ·Î¿î Àû Å½»ö)
+        float distance = Vector3.Distance(attackTarget.position, transform.position);
+        if (distance > towerTemplate.weapon[level].range)
+        {
+            attackTarget = null;
+            return false;
+        }
 
-	// ë°•ê²©í¬ ì´ì•Œ ìƒì„±
-	private void SpawnMortarProjectile()
-	{
-		GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-		// ìƒì„±ëœ ë°œì‚¬ì²´ì—ê²Œ ê³µê²©ëŒ€ìƒ(attackTarget) ì •ë³´ ì œê³µ
-		// ê³µê²©ë ¥ = íƒ€ì›Œ ê¸°ë³¸ ê³µê²©ë ¥ + ë²„í”„ì— ì˜í•´ ì¶”ê°€ëœ ê³µê²©ë ¥
-		float damage = towerTemplate.weapon[level].damage + AddedDamage;
+        return true;
+    }
 
-		clone.GetComponent<ProjectileMortar>().Setup(attackTarget, damage, enemySpawner);
-	}
+    // ¹Ú°İÆ÷ ÃÑ¾Ë »ı¼º
+    private void SpawnMortarProjectile()
+    {
+        GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+        // »ı¼ºµÈ ¹ß»çÃ¼¿¡°Ô °ø°İ´ë»ó(attackTarget) Á¤º¸ Á¦°ø
+        // °ø°İ·Â = Å¸¿ö ±âº» °ø°İ·Â + ¹öÇÁ¿¡ ÀÇÇØ Ãß°¡µÈ °ø°İ·Â
+        float damage = towerTemplate.weapon[level].damage + AddedDamage;
 
-    // ë‹¤ë°œ ì‚¬ê²© Projectile ìƒì„± í•¨ìˆ˜
+        clone.GetComponent<ProjectileMortar>().Setup(attackTarget, damage, enemySpawner);
+    }
+
+    // ´Ù¹ß »ç°İ Projectile »ı¼º ÇÔ¼ö
     private void SpawnProjectile_Multiple()
     {
         if (attackTarget != null)
@@ -395,10 +406,10 @@ public class TowerWeapon : MonoBehaviour
             GameObject clone1 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
             GameObject clone2 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
             GameObject clone3 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-            // ìƒì„±ëœ ë°œì‚¬ì²´ì—ê²Œ ê³µê²©ëŒ€ìƒ(attackTarget) ì •ë³´ ì œê³µ
-            // ê³µê²©ë ¥ = íƒ€ì›Œ ê¸°ë³¸ ê³µê²©ë ¥ + ë²„í”„ì— ì˜í•´ ì¶”ê°€ëœ ê³µê²©ë ¥
+            // »ı¼ºµÈ ¹ß»çÃ¼¿¡°Ô °ø°İ´ë»ó(attackTarget) Á¤º¸ Á¦°ø
+            // °ø°İ·Â = Å¸¿ö ±âº» °ø°İ·Â + ¹öÇÁ¿¡ ÀÇÇØ Ãß°¡µÈ °ø°İ·Â
             float damage = towerTemplate.weapon[level].damage + AddedDamage;
-            // ì„¸ ê°ˆë˜ë¡œ ë‚˜ëˆ„ì–´ì§€ëŠ” ê³µê²©ì„ ìœ„í•´ Vector3.left, rightë¥¼ ë”í•´ì¤Œ
+            // ¼¼ °¥·¡·Î ³ª´©¾îÁö´Â °ø°İÀ» À§ÇØ Vector3.left, right¸¦ ´õÇØÁÜ
             clone1.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage, -1);
             clone2.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage);
             clone3.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage, 1);
@@ -406,164 +417,196 @@ public class TowerWeapon : MonoBehaviour
 
     }
 
-	// ê´€í†µ ì´ì•Œ ìƒì„±
-	private void SpawnProjectile_Spear()
-	{
-		if(attackTarget != null)
+    // °üÅë ÃÑ¾Ë »ı¼º
+    private void SpawnProjectile_Spear()
+    {
+        if (attackTarget != null)
         {
-			GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-			// ìƒì„±ëœ ë°œì‚¬ì²´ì—ê²Œ ê³µê²©ëŒ€ìƒ(attackTarget) ì •ë³´ ì œê³µ
-			// ê³µê²©ë ¥ = íƒ€ì›Œ ê¸°ë³¸ ê³µê²©ë ¥ + ë²„í”„ì— ì˜í•´ ì¶”ê°€ëœ ê³µê²©ë ¥
-			float damage = towerTemplate.weapon[level].damage + AddedDamage;
-			clone.GetComponent<Projectile_Spear>().Setup(attackTarget, damage, Range);
-		}
-	}
+            GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+            // »ı¼ºµÈ ¹ß»çÃ¼¿¡°Ô °ø°İ´ë»ó(attackTarget) Á¤º¸ Á¦°ø
+            // °ø°İ·Â = Å¸¿ö ±âº» °ø°İ·Â + ¹öÇÁ¿¡ ÀÇÇØ Ãß°¡µÈ °ø°İ·Â
+            float damage = towerTemplate.weapon[level].damage + AddedDamage;
+            clone.GetComponent<Projectile_Spear>().Setup(attackTarget, damage, Range);
+        }
+    }
 
-	// í­ë°œ ì´ì•Œ ìƒì„±
-	private void SpawnProjectile_Explosion()
-	{
-		Debug.Log("ë°œì‚¬");
-		if (attackTarget != null)
-		{
-			GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-			// ìƒì„±ëœ ë°œì‚¬ì²´ì—ê²Œ ê³µê²©ëŒ€ìƒ(attackTarget) ì •ë³´ ì œê³µ
-			// ê³µê²©ë ¥ = íƒ€ì›Œ ê¸°ë³¸ ê³µê²©ë ¥ + ë²„í”„ì— ì˜í•´ ì¶”ê°€ëœ ê³µê²©ë ¥
-			float damage = towerTemplate.weapon[level].damage + AddedDamage;
-			clone.GetComponent<Projectile_Explosion>().Setup(attackTarget, damage, Range);
-		}
-	}
+    // Æø¹ß ÃÑ¾Ë »ı¼º
+    private void SpawnProjectile_Explosion()
+    {
+        //Debug.Log("¹ß»ç");
+        if (attackTarget != null)
+        {
+            GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+            // »ı¼ºµÈ ¹ß»çÃ¼¿¡°Ô °ø°İ´ë»ó(attackTarget) Á¤º¸ Á¦°ø
+            // °ø°İ·Â = Å¸¿ö ±âº» °ø°İ·Â + ¹öÇÁ¿¡ ÀÇÇØ Ãß°¡µÈ °ø°İ·Â
+            float damage = towerTemplate.weapon[level].damage + AddedDamage;
+            clone.GetComponent<Projectile_Explosion>().Setup(attackTarget, damage, Range);
+        }
+    }
 
-	private void SpawnProjectile()
-	{
-		GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-		// ìƒì„±ëœ ë°œì‚¬ì²´ì—ê²Œ ê³µê²©ëŒ€ìƒ(attackTarget) ì •ë³´ ì œê³µ
-		// ê³µê²©ë ¥ = íƒ€ì›Œ ê¸°ë³¸ ê³µê²©ë ¥ + ë²„í”„ì— ì˜í•´ ì¶”ê°€ëœ ê³µê²©ë ¥
-		float damage = towerTemplate.weapon[level].damage + AddedDamage;
-		clone.GetComponent<Projectile>().Setup(attackTarget, damage);
-	}
+    private void SpawnProjectile()
+    {
+        GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+        // »ı¼ºµÈ ¹ß»çÃ¼¿¡°Ô °ø°İ´ë»ó(attackTarget) Á¤º¸ Á¦°ø
+        // °ø°İ·Â = Å¸¿ö ±âº» °ø°İ·Â + ¹öÇÁ¿¡ ÀÇÇØ Ãß°¡µÈ °ø°İ·Â
+        float damage = towerTemplate.weapon[level].damage + AddedDamage;
+        clone.GetComponent<Projectile>().Setup(attackTarget, damage);
+    }
 
     private void MeleeAttack()
     {
         GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-        // ìƒì„±ëœ ë°œì‚¬ì²´ì—ê²Œ ê³µê²©ëŒ€ìƒ(attackTarget) ì •ë³´ ì œê³µ
-        // ê³µê²©ë ¥ = íƒ€ì›Œ ê¸°ë³¸ ê³µê²©ë ¥ + ë²„í”„ì— ì˜í•´ ì¶”ê°€ëœ ê³µê²©ë ¥
+        // »ı¼ºµÈ ¹ß»çÃ¼¿¡°Ô °ø°İ´ë»ó(attackTarget) Á¤º¸ Á¦°ø
+        // °ø°İ·Â = Å¸¿ö ±âº» °ø°İ·Â + ¹öÇÁ¿¡ ÀÇÇØ Ãß°¡µÈ °ø°İ·Â
         float damage = towerTemplate.weapon[level].damage + AddedDamage;
         clone.GetComponent<Projectile>().Setup(attackTarget, damage);
     }
 
     private void EnableLaser()
-	{
-		lineRenderer.gameObject.SetActive(true);
-		hitEffect.gameObject.SetActive(true);
-	}
+    {
+        lineRenderer.gameObject.SetActive(true);
+        hitEffect.gameObject.SetActive(true);
+    }
 
-	private void DisableLaser()
-	{
-		lineRenderer.gameObject.SetActive(false);
-		hitEffect.gameObject.SetActive(false);
-	}
+    private void DisableLaser()
+    {
+        lineRenderer.gameObject.SetActive(false);
+        hitEffect.gameObject.SetActive(false);
+    }
 
-	private void SpawnLaser()
-	{
-		Vector3			direction	= attackTarget.position - spawnPoint.position;
-		RaycastHit2D[]	hit			= Physics2D.RaycastAll(spawnPoint.position, direction, towerTemplate.weapon[level].range, targetLayer);
-		
-		// ê°™ì€ ë°©í–¥ìœ¼ë¡œ ì—¬ëŸ¬ ê°œì˜ ê´‘ì„ ì„ ì´ì„œ ê·¸ ì¤‘ í˜„ì¬ attackTargetê³¼ ë™ì¼í•œ ì˜¤ë¸Œì íŠ¸ë¥¼ ê²€ì¶œ
-		for ( int i = 0; i < hit.Length; ++ i )
-		{
-			if ( hit[i].transform == attackTarget )
-			{
-				// ì„ ì˜ ì‹œì‘ì§€ì 
-				lineRenderer.SetPosition(0, spawnPoint.position);
-				// ì„ ì˜ ëª©í‘œì§€ì 
-				lineRenderer.SetPosition(1, new Vector3(hit[i].point.x, hit[i].point.y, 0) + Vector3.back);
-				// íƒ€ê²© íš¨ê³¼ ìœ„ì¹˜ ì„¤ì •
-				hitEffect.position = hit[i].point;
-				// ì  ì²´ë ¥ ê°ì†Œ (1ì´ˆì— damageë§Œí¼ ê°ì†Œ)
-				// ê³µê²©ë ¥ = íƒ€ì›Œ ê¸°ë³¸ ê³µê²©ë ¥ + ë²„í”„ì— ì˜í•´ ì¶”ê°€ëœ ê³µê²©ë ¥
-				float damage = towerTemplate.weapon[level].damage + AddedDamage;
-				attackTarget.GetComponent<EnemyHP>().TakeDamage(damage * Time.deltaTime);
-			}
-		}
-	}
+    private void SpawnLaser()
+    {
+        Vector3 direction = attackTarget.position - spawnPoint.position;
+        RaycastHit2D[] hit = Physics2D.RaycastAll(spawnPoint.position, direction, towerTemplate.weapon[level].range, targetLayer);
+
+        // °°Àº ¹æÇâÀ¸·Î ¿©·¯ °³ÀÇ ±¤¼±À» ½÷¼­ ±× Áß ÇöÀç attackTarget°ú µ¿ÀÏÇÑ ¿ÀºêÁ§Æ®¸¦ °ËÃâ
+        for (int i = 0; i < hit.Length; ++i)
+        {
+            if (hit[i].transform == attackTarget)
+            {
+                // ¼±ÀÇ ½ÃÀÛÁöÁ¡
+                lineRenderer.SetPosition(0, spawnPoint.position);
+                // ¼±ÀÇ ¸ñÇ¥ÁöÁ¡
+                lineRenderer.SetPosition(1, new Vector3(hit[i].point.x, hit[i].point.y, 0) + Vector3.back);
+                // Å¸°İ È¿°ú À§Ä¡ ¼³Á¤
+                hitEffect.position = hit[i].point;
+                // Àû Ã¼·Â °¨¼Ò (1ÃÊ¿¡ damage¸¸Å­ °¨¼Ò)
+                // °ø°İ·Â = Å¸¿ö ±âº» °ø°İ·Â + ¹öÇÁ¿¡ ÀÇÇØ Ãß°¡µÈ °ø°İ·Â
+                float damage = towerTemplate.weapon[level].damage + AddedDamage;
+                attackTarget.GetComponent<EnemyHP>().TakeDamage(damage * Time.deltaTime);
+            }
+        }
+    }
 
 
-	public bool Upgrade()
-	{
-		// íƒ€ì›Œ ì„¤ì¹˜ ì‚¬ìš´ë“œ ì¬ìƒ
-		SoundManager.instance.SFXPlay("TowerUpgrade", upgradeClip);
-		// íƒ€ì›Œ ì—…ê·¸ë ˆì´ë“œì— í•„ìš”í•œ ê³¨ë“œê°€ ì¶©ë¶„í•œì§€ ê²€ì‚¬
-		if ( playerGold.CurrentGold < towerTemplate.weapon[level+1].cost )
-		{
-			return false;
-		}
+    public bool Upgrade_1()
+    {
+        // Å¸¿ö ¼³Ä¡ »ç¿îµå Àç»ı
+        SoundManager.instance.SFXPlay("TowerUpgrade", upgradeClip);
+        // Å¸¿ö ¾÷±×·¹ÀÌµå¿¡ ÇÊ¿äÇÑ °ñµå°¡ ÃæºĞÇÑÁö °Ë»ç
+        if (playerGold.CurrentGold < towerTemplate.weapon[level + 1].cost)
+        {
+            return false;
+        }
 
-		// íƒ€ì›Œ ë ˆë²¨ ì¦ê°€
-		level ++;
-		// íƒ€ì›Œ ì™¸í˜• ë³€ê²½ (Sprite)
-		spriteRenderer.sprite = towerTemplate.weapon[level].sprite;
-		// ê³¨ë“œ ì°¨ê°
-		playerGold.CurrentGold -= towerTemplate.weapon[level].cost;
+        // Å¸¿ö ·¹º§ Áõ°¡
+        level++;
+        // Å¸¿ö ¿ÜÇü º¯°æ (Sprite)
+        spriteRenderer.sprite = towerTemplate.weapon[level].sprite;
+        // °ñµå Â÷°¨
+        playerGold.CurrentGold -= towerTemplate.weapon[level].cost;
 
-		// ë¬´ê¸° ì†ì„±ì´ ë ˆì´ì €ì´ë©´
-		if ( weaponType == WeaponType.Laser )
-		{
-			// ë ˆë²¨ì— ë”°ë¼ ë ˆì´ì €ì˜ êµµê¸° ì„¤ì •
-			lineRenderer.startWidth	= 0.05f + level * 0.05f;
-			lineRenderer.endWidth	= 0.05f;
-		}
-		
-		// íƒ€ì›Œê°€ ì—…ê·¸ë ˆì´ë“œ ë  ë•Œ ëª¨ë“  ë²„í”„ íƒ€ì›Œì˜ ë²„í”„ íš¨ê³¼ ê°±ì‹ 
-		// í˜„ì¬ íƒ€ì›Œê°€ ë²„í”„ íƒ€ì›Œì¸ ê²½ìš°, í˜„ì¬ íƒ€ì›Œê°€ ê³µê²© íƒ€ì›Œì¸ ê²½ìš°
-		towerSpawner.OnBuffAllBuffTowers();
+        // ¹«±â ¼Ó¼ºÀÌ ·¹ÀÌÀúÀÌ¸é
+        if (weaponType == WeaponType.Laser)
+        {
+            // ·¹º§¿¡ µû¶ó ·¹ÀÌÀúÀÇ ±½±â ¼³Á¤
+            lineRenderer.startWidth = 0.05f + level * 0.05f;
+            lineRenderer.endWidth = 0.05f;
+        }
 
-		return true;
-	}
+        // Å¸¿ö°¡ ¾÷±×·¹ÀÌµå µÉ ¶§ ¸ğµç ¹öÇÁ Å¸¿öÀÇ ¹öÇÁ È¿°ú °»½Å
+        // ÇöÀç Å¸¿ö°¡ ¹öÇÁ Å¸¿öÀÎ °æ¿ì, ÇöÀç Å¸¿ö°¡ °ø°İ Å¸¿öÀÎ °æ¿ì
+        towerSpawner.OnBuffAllBuffTowers();
 
-	public void Sell()
-	{
-		// íƒ€ì›Œ íŒë§¤ ì‚¬ìš´ë“œ ì¬ìƒ
-		SoundManager.instance.SFXPlay("TowerSell", sellClip);
-		// ê³¨ë“œ ì¦ê°€
-		playerGold.CurrentGold += towerTemplate.weapon[level].sell;
-		// í˜„ì¬ íƒ€ì¼ì— ë‹¤ì‹œ íƒ€ì›Œ ê±´ì„¤ì´ ê°€ëŠ¥í•˜ë„ë¡ ì„¤ì •
-		ownerTile.IsBuildTower = false;
+        return true;
+    }
 
-		// í˜„ì¬ ë§µì— ë°°ì¹˜ëœ "Tower" íƒœê·¸ë¥¼ ê°€ì§„ ëª¨ë“  ì˜¤ë¸Œì íŠ¸ íƒìƒ‰
-		GameObject[] towers = GameObject.FindGameObjectsWithTag("Tower");
-		
-		for ( int i = 0; i < towers.Length; ++ i )
-		{
-			towers[i].GetComponent<TowerWeapon>().BuffLevel = 0;
-			towers[i].GetComponent<TowerWeapon>().AddedDamage = 0;
-			Debug.Log(towers[i].GetComponent<TowerWeapon>().AddedDamage);
-		}
-		towerSpawner.OnBuffAllBuffTowers();
+    public bool Upgrade_2()
+    {
+        // Å¸¿ö ¼³Ä¡ »ç¿îµå Àç»ı
+        SoundManager.instance.SFXPlay("TowerUpgrade", upgradeClip);
+        // Å¸¿ö ¾÷±×·¹ÀÌµå¿¡ ÇÊ¿äÇÑ °ñµå°¡ ÃæºĞÇÑÁö °Ë»ç
+        if (playerGold.CurrentGold < towerTemplate.weapon[level + 2].cost)
+        {
+            return false;
+        }
 
-		// íƒ€ì›Œ íŒŒê´´
-		Destroy(gameObject);
-	}
+        // Å¸¿ö ·¹º§ Áõ°¡
+        level += 2;
+        // Å¸¿ö ¿ÜÇü º¯°æ (Sprite)
+        spriteRenderer.sprite = towerTemplate.weapon[level].sprite;
+        // °ñµå Â÷°¨
+        playerGold.CurrentGold -= towerTemplate.weapon[level].cost;
+
+        // ¹«±â ¼Ó¼ºÀÌ ·¹ÀÌÀúÀÌ¸é
+        if (weaponType == WeaponType.Laser)
+        {
+            // ·¹º§¿¡ µû¶ó ·¹ÀÌÀúÀÇ ±½±â ¼³Á¤
+            lineRenderer.startWidth = 0.05f + (level) * 0.05f;
+            lineRenderer.endWidth = 0.05f;
+        }
+
+        // Å¸¿ö°¡ ¾÷±×·¹ÀÌµå µÉ ¶§ ¸ğµç ¹öÇÁ Å¸¿öÀÇ ¹öÇÁ È¿°ú °»½Å
+        // ÇöÀç Å¸¿ö°¡ ¹öÇÁ Å¸¿öÀÎ °æ¿ì, ÇöÀç Å¸¿ö°¡ °ø°İ Å¸¿öÀÎ °æ¿ì
+        towerSpawner.OnBuffAllBuffTowers();
+
+        return true;
+    }
+
+    public void Sell()
+    {
+        // Å¸¿ö ÆÇ¸Å »ç¿îµå Àç»ı
+        SoundManager.instance.SFXPlay("TowerSell", sellClip);
+        // °ñµå Áõ°¡
+        playerGold.CurrentGold += towerTemplate.weapon[level].sell;
+        // ÇöÀç Å¸ÀÏ¿¡ ´Ù½Ã Å¸¿ö °Ç¼³ÀÌ °¡´ÉÇÏµµ·Ï ¼³Á¤
+        ownerTile.IsBuildTower = false;
+
+        // ÇöÀç ¸Ê¿¡ ¹èÄ¡µÈ "Tower" ÅÂ±×¸¦ °¡Áø ¸ğµç ¿ÀºêÁ§Æ® Å½»ö
+        GameObject[] towers = GameObject.FindGameObjectsWithTag("Tower");
+
+        for (int i = 0; i < towers.Length; ++i)
+        {
+            towers[i].GetComponent<TowerWeapon>().BuffLevel = 0;
+            towers[i].GetComponent<TowerWeapon>().AddedDamage = 0;
+            Debug.Log(towers[i].GetComponent<TowerWeapon>().AddedDamage);
+        }
+        towerSpawner.OnBuffAllBuffTowers();
+
+        // Å¸¿ö ÆÄ±«
+        Destroy(gameObject);
+    }
 }
 
 
 /*
  * File : TowerWeapon.cs
  * Desc
- *	: ì ì„ ê³µê²©í•˜ëŠ” íƒ€ì›Œ ë¬´ê¸°
+ *	: ÀûÀ» °ø°İÇÏ´Â Å¸¿ö ¹«±â
  *	
  * Functions
- *	: ChangeState() - ì½”ë£¨í‹´ì„ ì´ìš©í•œ FSMì—ì„œ ìƒíƒœ ë³€ê²½ í•¨ìˆ˜
- *	: RotateToTarget() - target ë°©í–¥ìœ¼ë¡œ o
- *	: SearchTarget() - í˜„ì¬ íƒ€ì›Œì— ê°€ì¥ ê·¼ì ‘í•œ ì  íƒìƒ‰
- *	: TryAttackGun() - targetìœ¼ë¡œ ì„¤ì •ëœ ëŒ€ìƒì—ê²Œ ìºë…¼ ê³µê²©
- *	: TryAttackLaser() - targetìœ¼ë¡œ ì„¤ì •ëœ ëŒ€ìƒì—ê²Œ ë ˆì´ì € ê³µê²©
- *	: FindClosestAttackTarget() - í˜„ì¬ íƒ€ì›Œì— ê°€ì¥ ê·¼ì ‘í•œ ê³µê²© ëŒ€ìƒ(ì ) íƒìƒ‰
- *	: IsPossibleToAttackTarget() - AttackTargetì´ ìˆëŠ”ì§€, ê³µê²© ê°€ëŠ¥í•œì§€ ê²€ì‚¬
- *	: SpawnProjectile() - ìºë…¼ ë°œì‚¬ì²´ ìƒì„±
- *	: EnableLaser() - ë ˆì´ì €, ë ˆì´ì € íƒ€ê²© íš¨ê³¼ í™œì„±í™”
- *	: DisableLaser() - ë ˆì´ì €, ë ˆì´ì € íƒ€ê²© íš¨ê³¼ ë¹„í™œì„±í™”
- *	: SpawnLaser() - ë ˆì´ì € ê³µê²©, ë ˆì´ì € íƒ€ê²© íš¨ê³¼, ì  ì²´ë ¥ ê°ì†Œ
- *	: Upgrade() - íƒ€ì›Œ ì—…ê·¸ë ˆì´ë“œ
- *	: Sell() - íƒ€ì›Œ íŒë§¤
+ *	: ChangeState() - ÄÚ·çÆ¾À» ÀÌ¿ëÇÑ FSM¿¡¼­ »óÅÂ º¯°æ ÇÔ¼ö
+ *	: RotateToTarget() - target ¹æÇâÀ¸·Î o
+ *	: SearchTarget() - ÇöÀç Å¸¿ö¿¡ °¡Àå ±ÙÁ¢ÇÑ Àû Å½»ö
+ *	: TryAttackGun() - targetÀ¸·Î ¼³Á¤µÈ ´ë»ó¿¡°Ô Ä³³í °ø°İ
+ *	: TryAttackLaser() - targetÀ¸·Î ¼³Á¤µÈ ´ë»ó¿¡°Ô ·¹ÀÌÀú °ø°İ
+ *	: FindClosestAttackTarget() - ÇöÀç Å¸¿ö¿¡ °¡Àå ±ÙÁ¢ÇÑ °ø°İ ´ë»ó(Àû) Å½»ö
+ *	: IsPossibleToAttackTarget() - AttackTargetÀÌ ÀÖ´ÂÁö, °ø°İ °¡´ÉÇÑÁö °Ë»ç
+ *	: SpawnProjectile() - Ä³³í ¹ß»çÃ¼ »ı¼º
+ *	: EnableLaser() - ·¹ÀÌÀú, ·¹ÀÌÀú Å¸°İ È¿°ú È°¼ºÈ­
+ *	: DisableLaser() - ·¹ÀÌÀú, ·¹ÀÌÀú Å¸°İ È¿°ú ºñÈ°¼ºÈ­
+ *	: SpawnLaser() - ·¹ÀÌÀú °ø°İ, ·¹ÀÌÀú Å¸°İ È¿°ú, Àû Ã¼·Â °¨¼Ò
+ *	: Upgrade() - Å¸¿ö ¾÷±×·¹ÀÌµå
+ *	: Sell() - Å¸¿ö ÆÇ¸Å
  *	
  */

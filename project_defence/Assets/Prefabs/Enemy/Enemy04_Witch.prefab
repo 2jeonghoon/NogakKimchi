@@ -4838,6 +4838,7 @@ GameObject:
   - component: {fileID: -3643329299626539831}
   - component: {fileID: 8499049250408766590}
   - component: {fileID: 7577280758431253331}
+  - component: {fileID: -1021553733344834377}
   m_Layer: 8
   m_Name: Enemy04_Witch
   m_TagString: Enemy
@@ -4854,7 +4855,7 @@ Transform:
   m_GameObject: {fileID: 4286712872766883678}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3501265965735012464}
@@ -4902,7 +4903,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 9653a86a6e048c643849ed3e7d8a1fdf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6989b02804f3675468f7cbc1d0f3296b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4958,8 +4959,6 @@ MonoBehaviour:
   maxHP: 7
   currentHP: 0
   defense: 2
-  heal_effect: {fileID: 1067983694759708551, guid: f4f51504a91138946b7d44a439e90a8b,
-    type: 3}
 --- !u!114 &7577280758431253331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4977,3 +4976,23 @@ MonoBehaviour:
   delay_time: 2
   recovery_amount: 5
   range: 1
+--- !u!95 &-1021553733344834377
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4286712872766883678}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3539020d62953814897fcee5e830aa2c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

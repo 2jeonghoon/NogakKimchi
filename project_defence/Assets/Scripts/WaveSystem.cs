@@ -17,12 +17,31 @@ public class WaveSystem : MonoBehaviour
 	bool isfause = false;
 	float gameSpeed= 1;
 
+	[SerializeField]
+	public GameObject[] _Lock;
 
 	static public int spawnEnemyCount; // 스폰한 몬스터 숫자
 
 	// 웨이브 정보 출력을 위한 Get 프로퍼티 (현재 웨이브, 총 웨이브)
 	public	int				CurrentWave => currentWaveIndex+1;		// 시작이 0이기 때문에 +1
 	public	int				MaxWave => waves.Length;
+
+    private void Start()
+    {
+
+		// 시작 시 열릴 타워 설정, restart해도 타워들은 열려있음.
+		towerSpawner.SetTowerLock(_Lock[0], 0, false);
+		towerSpawner.SetTowerLock(_Lock[1], 1, false);
+		towerSpawner.set_lock(_Lock);
+	}
+
+	public void cheat()
+    {
+		for(int i = 0; i < _Lock.Length; i++)
+        {
+			towerSpawner.SetTowerLock(_Lock[i], i, false);
+		}
+	}
 
     private void Update()
     {
@@ -40,24 +59,11 @@ public class WaveSystem : MonoBehaviour
 			Debug.Log("wave 시작");
 			// 인덱스의 시작이 -1이기 때문에 웨이브 인덱스 증가를 제일 먼저 함
 			currentWaveIndex ++;
-            if (currentWaveIndex == 1)
-			{
-				towerSpawner.SetTowerLock(2, false);
-                towerSpawner.SetTowerLock(3, false);
-            }
-            else if (currentWaveIndex == 2)
-            {
-                towerSpawner.SetTowerLock(4, false);
-                towerSpawner.SetTowerLock(5, false);
-            }
-            else if (currentWaveIndex == 3)
-            {
-                towerSpawner.SetTowerLock(6, false);
-                towerSpawner.SetTowerLock(7, false);
-            }
-            // EnemySpawner의 StartWave() 함수 호출. 현재 웨이브 정보 제공
-            Debug.Log(waves[currentWaveIndex].wave.Length);
+
+			// EnemySpawner의 StartWave() 함수 호출. 현재 웨이브 정보 제공
+			Debug.Log(waves[currentWaveIndex].wave.Length);
 			StartCoroutine("WaveSpawnEnemy");
+			// wave 진행 후 열릴 타워 설정
 		}
 	}
 
@@ -73,11 +79,39 @@ public class WaveSystem : MonoBehaviour
 		}
 		waves[currentWaveIndex].maxEnemyCount = wave_enemy_amount;
 		spawnEnemyCount = 0;
-		enemySpawner.StartWave(waves[currentWaveIndex]);
+		enemySpawner.StartWave(waves[currentWaveIndex], this);
 		// 현재 wave에서 소환이 다 끝날 때까지 기다리기
 		while (waves[currentWaveIndex].maxEnemyCount > spawnEnemyCount)
         {
 			yield return new WaitForSeconds(0.5f);
+		}
+	}
+
+	//wave별 타워 잠금해제 (currentWaveIndex가 끝나면 타워가 열림)
+	public void waveEndTowerLockOff()
+    {
+		if (currentWaveIndex == 1)
+		{
+			towerSpawner.SetTowerLock(_Lock[2], 2, false);
+		}
+		else if(currentWaveIndex == 2)
+		{
+			towerSpawner.SetTowerLock(_Lock[3], 3, false);
+		}
+		else if (currentWaveIndex == 3)
+		{
+			towerSpawner.SetTowerLock(_Lock[4], 4, false);
+		}
+		else if(currentWaveIndex == 4)
+        {
+			towerSpawner.SetTowerLock(_Lock[5], 5, false);
+		}
+		else if (currentWaveIndex == 5)
+		{
+			towerSpawner.SetTowerLock(_Lock[6], 6, false);
+		}else if (currentWaveIndex == 6)
+        {
+			towerSpawner.SetTowerLock(_Lock[7], 7, false);
 		}
 	}
 
