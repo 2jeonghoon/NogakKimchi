@@ -15,7 +15,11 @@ public class Explosion : MonoBehaviour
     {
         // 폭발 사운드 재생
         SoundManager.instance.SFXPlay("boom", clip);
+<<<<<<< HEAD
         Debug.Log("폭발");
+=======
+        //Debug.Log("폭발");
+>>>>>>> origin/Jeonghoon
         this.damage = damage;                       // 타워의 공격력
         this.transform.localScale = new Vector3(1, 1, 1) * scale;
     }

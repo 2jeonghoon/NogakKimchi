@@ -23,7 +23,11 @@ public class SoundManager : MonoBehaviour
     {
         if (instance == null)
         {
+<<<<<<< HEAD
             Debug.Log("持失");
+=======
+            //Debug.Log("持失");
+>>>>>>> origin/Jeonghoon
             instance = this;
             DontDestroyOnLoad(instance);
 

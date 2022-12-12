@@ -38,7 +38,11 @@ public class ProjectileMortar : Projectile
     public void Setup(Transform target, float damage, EnemySpawner enemySpawner)
     {
         // 발사 사운드 재생
+<<<<<<< HEAD
         SoundManager.instance.SFXPlay("Mortar", clip);
+=======
+        //SoundManager.instance.SFXPlay("Mortar", clip);
+>>>>>>> origin/Jeonghoon
         movement2D = GetComponent<Movement2D>();
         this.damage = damage;                       // 타워의 공격력
 

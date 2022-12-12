@@ -18,6 +18,12 @@ public class TowerWeapon : MonoBehaviour
 	private Transform spawnPoint;                               // 발사체 생성 위치
 	[SerializeField]
 	private WeaponType weaponType;                              // 무기 속성 설정
+<<<<<<< HEAD
+=======
+
+	[SerializeField]
+	private TileType tileType;
+>>>>>>> origin/Jeonghoon
 	public TowerWeapon buffTower;
 
 	[Header("Gun")]
@@ -62,6 +68,11 @@ public class TowerWeapon : MonoBehaviour
 	public float Slow => towerTemplate.weapon[level].slow;
 	public float Buff => towerTemplate.weapon[level].buff;
 	public WeaponType WeaponType => weaponType;
+<<<<<<< HEAD
+=======
+	public TileType TileType => tileType;
+
+>>>>>>> origin/Jeonghoon
 	public float AddedDamage
 	{
 		set => addedDamage = Mathf.Max(0, value);
@@ -328,7 +339,13 @@ public class TowerWeapon : MonoBehaviour
 			if (Vector3.Distance(weapon.transform.position, transform.position) <= towerTemplate.weapon[level].range)
 			{
 				// 공격이 가능한 캐논, 레이저 타워이면
+<<<<<<< HEAD
 				if (weapon.WeaponType == WeaponType.Gun || weapon.WeaponType == WeaponType.Laser)
+=======
+				if (weapon.WeaponType == WeaponType.Gun || weapon.WeaponType == WeaponType.Laser ||
+					weapon.WeaponType == WeaponType.Explosion || weapon.WeaponType == WeaponType.Mortar ||
+					weapon.WeaponType == WeaponType.Shotgun || weapon.WeaponType == WeaponType.Spear)
+>>>>>>> origin/Jeonghoon
 				{
 					// 버프에 의해 공격력 증가
 					weapon.AddedDamage = weapon.Damage * (towerTemplate.weapon[level].buff);
@@ -425,7 +442,11 @@ public class TowerWeapon : MonoBehaviour
 	// 폭발 총알 생성
 	private void SpawnProjectile_Explosion()
 	{
+<<<<<<< HEAD
 		Debug.Log("발사");
+=======
+		//Debug.Log("발사");
+>>>>>>> origin/Jeonghoon
 		if (attackTarget != null)
 		{
 			GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
