@@ -23,7 +23,7 @@ public class SoundManager : MonoBehaviour
     {
         if (instance == null)
         {
-            Debug.Log("持失");
+            //Debug.Log("持失");
             instance = this;
             DontDestroyOnLoad(instance);
 

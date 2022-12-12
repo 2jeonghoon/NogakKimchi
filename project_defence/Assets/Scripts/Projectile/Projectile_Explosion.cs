@@ -5,7 +5,6 @@ using UnityEngine;
 public class Projectile_Explosion : Projectile
 {
     //폭발 범위
-    [SerializeField]
     private float explosionRange;
     [SerializeField]
     private GameObject explosionPrefab;
@@ -17,15 +16,16 @@ public class Projectile_Explosion : Projectile
     Vector3 start_position;
 
 
-    public void Setup(Transform target, float damage, float range)
+    public void Setup(Transform target, float damage, float range, float explosionRange)
     {
         // 발사 사운드 재생
-        SoundManager.instance.SFXPlay("ExplosionShot", clip);
-        Debug.Log("발사");
+        //SoundManager.instance.SFXPlay("ExplosionShot", clip);
+        //Debug.Log("발사");
         movement2D = GetComponent<Movement2D>();
         this.damage = damage;                       // 타워의 공격력
         this.target = target;                       // 타워가 설정해준 target
         this.range = range;                         // 타워가 설정해준 range
+        this.explosionRange = explosionRange;
         start_position = transform.position;
         direction = (target.position - transform.position).normalized;
     }

@@ -9,6 +9,8 @@ public class PlayerHP : MonoBehaviour
     [SerializeField]
     private float   maxHP = 20;     // 최대 체력
     private float   currentHP;      // 현재 체력
+    [SerializeField]
+    private GameObject playerHPViewer;
 
     public  float   MaxHP => maxHP;
     public  float   CurrentHP => currentHP;
@@ -16,6 +18,12 @@ public class PlayerHP : MonoBehaviour
     private void Awake()
     {
         currentHP = maxHP;          // 현재 체력을 최대 체력과 같게 설정
+        playerHPViewer.GetComponent<PlayerHPViewer>().setUp(this);
+    }
+
+    public void HealHP(float heal)
+    {
+        currentHP += heal;
     }
 
     public void TakeDamage(float damage)

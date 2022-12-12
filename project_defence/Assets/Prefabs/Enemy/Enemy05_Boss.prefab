@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a7c36ed98a42194788486a6867c2475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 100
+  maxHP: 1000
   currentHP: 0
   defense: 2
 --- !u!114 &1107960611412643031
@@ -148,14 +148,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gold: 100
   clip: {fileID: 8300000, guid: e58d8bd078f188a4ba314e933b98528b, type: 3}
-  delay_time: 10
+  isClone: 0
+  delay_time: 3
   boss_clone: {fileID: 4286712872766883678, guid: 9d131067c8887614cbec9ecbe31bfdb4,
     type: 3}
   enemys:
-  - {fileID: 4286712872766883678, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
-  - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
-  - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
-  - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+  - {fileID: 8058183836366462974, guid: d57c160a2f5d1e644a5a25538c4259fe, type: 3}
+  - {fileID: 4286712872766883678, guid: d12be8b1e4595ab40b647757700f3e05, type: 3}
+  - {fileID: 4286712872766883678, guid: 68e44519e0c27df40b1cbf6c8e1943eb, type: 3}
+  - {fileID: 4286712872766883678, guid: 59cd48bbf503125458eb0ee692874f14, type: 3}
 --- !u!95 &-891777190327215707
 Animator:
   serializedVersion: 4

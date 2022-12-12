@@ -73,7 +73,7 @@ public class Witch : Enemy
             // 자기자신을 제외하고
             if (distance < range && this != enemies[i])
             {
-                Debug.Log(count + " : " + enemies[i]);
+                //Debug.Log(count + " : " + enemies[i]);
                 enemy[count++] = enemies[i];
             }
         }
@@ -83,7 +83,7 @@ public class Witch : Enemy
     // 회복 함수
     private IEnumerator Recovery(float delay_time)
     {
-        Debug.Log("힐!");
+        //Debug.Log("힐!");
         int count = getEnemyHP();
         for (int i = 0; i < count; ++i)
         {

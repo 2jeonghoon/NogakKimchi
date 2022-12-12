@@ -6,9 +6,9 @@ public class TowerTemplate : ScriptableObject
 	public	GameObject	towerPrefab;		// 타워 생성을 위한 프리팹
 	public	GameObject	followTowerPrefab;	// 임시 타워 프리팹
 	public	Weapon[]	weapon;             // 레벨별 타워(무기) 정보
+    public int maxTowerLV; // 최대 타워 레벨
 
-
-	[System.Serializable]
+    [System.Serializable]
 	public struct Weapon
 	{
 		public	Sprite	sprite;	// 보여지는 타워 이미지 (UI)
@@ -21,6 +21,7 @@ public class TowerTemplate : ScriptableObject
 		public	int		sell;   // 타워 판매 시 획득 골드
 		public TileType tileType;
 		public bool isLock; // 라운드 별 잠금 해제를 위한 Lock
+		public float explosionRange;
 	}
 }
 

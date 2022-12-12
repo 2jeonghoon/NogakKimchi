@@ -17,17 +17,18 @@ MonoBehaviour:
   followTowerPrefab: {fileID: 8166587275253779454, guid: 1b4dd4fce3b29f547b568624e1a9c9e3,
     type: 3}
   weapon:
-  - sprite: {fileID: 21300000, guid: 2599fd82a968cca41892c51dc20ee6c1, type: 3}
+  - sprite: {fileID: 21300000, guid: a37e235aa91582e41b2012242dfa7ad2, type: 3}
     damage: 3
     slow: 0
-    buff: 0
+    buff: 2
     rate: 0.5
     range: 4
     cost: 1200
     sell: 960
     tileType: 0
-    isLock: 1
-  - sprite: {fileID: 21300000, guid: 2599fd82a968cca41892c51dc20ee6c1, type: 3}
+    isLock: 0
+    explosionRange: 0
+  - sprite: {fileID: 21300000, guid: a37e235aa91582e41b2012242dfa7ad2, type: 3}
     damage: 3
     slow: 0
     buff: 0
@@ -37,7 +38,8 @@ MonoBehaviour:
     sell: 1200
     tileType: 0
     isLock: 1
-  - sprite: {fileID: 21300000, guid: 2599fd82a968cca41892c51dc20ee6c1, type: 3}
+    explosionRange: 0
+  - sprite: {fileID: 21300000, guid: a37e235aa91582e41b2012242dfa7ad2, type: 3}
     damage: 3
     slow: 0
     buff: 0
@@ -47,3 +49,16 @@ MonoBehaviour:
     sell: 1600
     tileType: 0
     isLock: 1
+    explosionRange: 0
+  - sprite: {fileID: 21300000, guid: a37e235aa91582e41b2012242dfa7ad2, type: 3}
+    damage: 3
+    slow: 0
+    buff: 0
+    rate: 0.3
+    range: 4
+    cost: 800
+    sell: 1600
+    tileType: 0
+    isLock: 1
+    explosionRange: 0
+  maxTowerLV: 3

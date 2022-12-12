@@ -17,6 +17,10 @@ public class Enemy : MonoBehaviour
 	// 적 사망 사운드
 	public AudioClip clip;
 
+	// 클론 여부
+	[SerializeField]
+	public bool isClone;
+
 	// 클론을 위한 셋업
 	public virtual void Setup(EnemySpawner enemySpawner, Enemy enemy)
 	{

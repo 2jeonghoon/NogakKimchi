@@ -6,7 +6,12 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject go_BaseUI; // 일시 정지 UI 패널
 
-    bool isPause;
+    public bool isPause;
+
+    private void Start()
+    {
+        isPause = false;
+    }
 
     public void CallMenu()
     {
