@@ -58,6 +58,8 @@ public class TowerWeapon : MonoBehaviour
     public float Damage => towerTemplate.weapon[level].damage;
     public float Rate => towerTemplate.weapon[level].rate;
     public float Range => towerTemplate.weapon[level].range;
+
+    public float ExplosionRange => towerTemplate.weapon[level].explosionRange;
     public int UpgradeCost => Level < MaxLevel ? towerTemplate.weapon[level + 1].cost : 0;
     public int UpgradeCost2 => Level < MaxLevel ? towerTemplate.weapon[level + 2].cost : 0;
     public int SellCost => towerTemplate.weapon[level].sell;
@@ -395,7 +397,7 @@ public class TowerWeapon : MonoBehaviour
         // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
         float damage = towerTemplate.weapon[level].damage + AddedDamage;
 
-        clone.GetComponent<ProjectileMortar>().Setup(attackTarget, damage, enemySpawner);
+        clone.GetComponent<ProjectileMortar>().Setup(attackTarget, damage, enemySpawner, ExplosionRange);
     }
 
     // 다발 사격 Projectile 생성 함수
@@ -440,7 +442,7 @@ public class TowerWeapon : MonoBehaviour
             // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
             // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
             float damage = towerTemplate.weapon[level].damage + AddedDamage;
-            clone.GetComponent<Projectile_Explosion>().Setup(attackTarget, damage, Range);
+            clone.GetComponent<Projectile_Explosion>().Setup(attackTarget, damage, Range, ExplosionRange);
         }
     }
 
@@ -582,6 +584,11 @@ public class TowerWeapon : MonoBehaviour
             Debug.Log(towers[i].GetComponent<TowerWeapon>().AddedDamage);
         }
         towerSpawner.OnBuffAllBuffTowers();
+
+        // 판매 이펙트 보여주기
+        towerSpawner.sellEffect.SetActive(true);
+        towerSpawner.sellEffect.GetComponent<TowerBuildEffect>().Boom();
+        towerSpawner.sellEffect.transform.position = transform.position + Vector3.down / 2;
 
         // 타워 파괴
         Destroy(gameObject);

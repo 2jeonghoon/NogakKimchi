@@ -20,6 +20,11 @@ public class EnemySpawner : MonoBehaviour
 	private double bonus = 1.0;
 	private WaveSystem waveSystem;
 
+	// 죽을 때 이펙트
+	[SerializeField]
+	private GameObject DIEeffect;
+	private Animator DIEanimator;
+
 	// 적의 생성과 삭제는 EnemySpawner에서 하기 때문에 Set은 필요 없다.
 	public	List<Enemy> EnemyList => enemyList;
 	// 현재 웨이브의 남아있는 적, 최대 적 숫자
@@ -30,6 +35,7 @@ public class EnemySpawner : MonoBehaviour
 	{
 		// 적 리스트 메모리 할당
 		enemyList = new List<Enemy>();
+		DIEanimator = GetComponent<Animator>();
 	}
 
 	public void StartWave(WaveEnemy waves, WaveSystem _waveSystem)
@@ -53,7 +59,7 @@ public class EnemySpawner : MonoBehaviour
 			// 현재 웨이브에서 생성한 적 숫자
 			int spawnEnemyCount = 0;
 			wave = currentWave.wave[i];
-			Debug.Log(wave.maxEnemyCount);
+			//Debug.Log(wave.maxEnemyCount);
 			while (spawnEnemyCount < wave.maxEnemyCount)
 			{
 				// wave에서 count
@@ -81,6 +87,9 @@ public class EnemySpawner : MonoBehaviour
 	
 	public void DestroyEnemy(EnemyDestroyType type, Enemy enemy, int gold)
 	{
+		GameObject clone = Instantiate(DIEeffect);
+		clone.transform.position = enemy.gameObject.transform.position;
+
 		// 적이 목표지점까지 도착했을 때
 		if ( type == EnemyDestroyType.Arrive )
 		{
@@ -92,6 +101,7 @@ public class EnemySpawner : MonoBehaviour
 		{
 			// 적의 종류에 따라 사망 시 골드 획득
 			playerGold.CurrentGold += gold;
+			clone.GetComponent<EnemyDieEffect>().Boom();
 		}
 
 		// 적이 사망할 때마다 현재 웨이브의 생존 적 숫자 감소 (UI 표시용)
@@ -124,6 +134,7 @@ public class EnemySpawner : MonoBehaviour
 		// Slider UI에 자신의 체력 정보를 표시하도록 설정
 		sliderClone.GetComponent<EnemyHPViewer>().Setup(enemy.GetComponent<EnemyHP>());
 	}
+
 }
 
 
