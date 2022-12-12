@@ -15,14 +15,18 @@ public class TowerDataViewer : MonoBehaviour
 	[SerializeField]
 	private	TextMeshProUGUI		textLevel;
 	[SerializeField]
-	private	TextMeshProUGUI		textUpgradeCost;
+	private	TextMeshProUGUI		textUpgradeCost; 
 	[SerializeField]
+    private TextMeshProUGUI textUpgradeCost2;
+    [SerializeField]
 	private	TextMeshProUGUI		textSellCost;
 	[SerializeField]
 	private	TowerAttackRange	towerAttackRange;
 	[SerializeField]
 	private	Button				buttonUpgrade;
-	[SerializeField]
+    [SerializeField]
+    private Button				buttonUpgrade2;
+    [SerializeField]
 	private	SystemTextViewer	systemTextViewer;
 
 	private TowerWeapon			currentTower;
@@ -98,16 +102,26 @@ public class TowerDataViewer : MonoBehaviour
 		textRange.text		 = "Range : " + currentTower.Range;
 		textLevel.text		 = "Level : " + currentTower.Level;
 		textUpgradeCost.text = currentTower.UpgradeCost.ToString();
+		if (currentTower.Level == 2)
+			textUpgradeCost2.text = currentTower.UpgradeCost2.ToString();
 		textSellCost.text	 = currentTower.SellCost.ToString();
+
 
 		// 업그레이드가 불가능해지면 버튼 비활성화
 		buttonUpgrade.interactable = currentTower.Level < currentTower.MaxLevel ? true : false;
-	}
+        buttonUpgrade2.interactable = currentTower.Level < currentTower.MaxLevel ? true : false;
 
-	public void OnClickEventTowerUpgrade()
+        if (currentTower.Level != 2)
+        {
+            buttonUpgrade2.interactable = false;
+        }
+
+    }
+
+    public void OnClickEventTowerUpgrade_1()
 	{
 		// 타워 업그레이드 시도 (성공:true, 실패:false)
-		bool isSuccess = currentTower.Upgrade();
+		bool isSuccess = currentTower.Upgrade_1();
 
 		if ( isSuccess == true )
 		{
@@ -123,7 +137,26 @@ public class TowerDataViewer : MonoBehaviour
 		}
 	}
 
-	public void OnClickEventTowerSell()
+    public void OnClickEventTowerUpgrade_2()
+    {
+        // 타워 업그레이드 시도 (성공:true, 실패:false)
+        bool isSuccess = currentTower.Upgrade_2();
+
+        if (isSuccess == true)
+        {
+            // 타워가 업그레이드 되었기 때문에 타워 정보 갱신
+            UpdateTowerData();
+            // 타워 주변에 보이는 공격범위도 갱신
+            towerAttackRange.OnAttackRange(currentTower.transform.position, currentTower.Range);
+        }
+        else
+        {
+            // 타워 업그레이드에 필요한 비용이 부족하다고 출력
+            systemTextViewer.PrintText(SystemType.Money);
+        }
+    }
+
+    public void OnClickEventTowerSell()
 	{
 		// 타워 판매
 		currentTower.Sell();

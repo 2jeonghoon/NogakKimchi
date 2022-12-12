@@ -59,9 +59,10 @@ public class TowerWeapon : MonoBehaviour
 	public float Rate => towerTemplate.weapon[level].rate;
 	public float Range => towerTemplate.weapon[level].range;
 	public int UpgradeCost => Level < MaxLevel ? towerTemplate.weapon[level + 1].cost : 0;
-	public int SellCost => towerTemplate.weapon[level].sell;
+    public int UpgradeCost2 => Level < MaxLevel ? towerTemplate.weapon[level + 2].cost : 0;
+    public int SellCost => towerTemplate.weapon[level].sell;
 	public int Level => level + 1;
-	public int MaxLevel => towerTemplate.weapon.Length;
+	public int MaxLevel => towerTemplate.maxTowerLV;
 	public float Slow => towerTemplate.weapon[level].slow;
 	public float Buff => towerTemplate.weapon[level].buff;
 	public WeaponType WeaponType => weaponType;
@@ -498,7 +499,7 @@ public class TowerWeapon : MonoBehaviour
 	}
 
 
-	public bool Upgrade()
+	public bool Upgrade_1()
 	{
 		// 타워 설치 사운드 재생
 		SoundManager.instance.SFXPlay("TowerUpgrade", upgradeClip);
@@ -530,7 +531,39 @@ public class TowerWeapon : MonoBehaviour
 		return true;
 	}
 
-	public void Sell()
+    public bool Upgrade_2()
+    {
+        // 타워 설치 사운드 재생
+        SoundManager.instance.SFXPlay("TowerUpgrade", upgradeClip);
+        // 타워 업그레이드에 필요한 골드가 충분한지 검사
+        if (playerGold.CurrentGold < towerTemplate.weapon[level + 2].cost)
+        {
+            return false;
+        }
+
+        // 타워 레벨 증가
+        level += 2;
+        // 타워 외형 변경 (Sprite)
+        spriteRenderer.sprite = towerTemplate.weapon[level].sprite;
+        // 골드 차감
+        playerGold.CurrentGold -= towerTemplate.weapon[level].cost;
+
+        // 무기 속성이 레이저이면
+        if (weaponType == WeaponType.Laser)
+        {
+            // 레벨에 따라 레이저의 굵기 설정
+            lineRenderer.startWidth = 0.05f + (level) * 0.05f;
+            lineRenderer.endWidth = 0.05f;
+        }
+
+        // 타워가 업그레이드 될 때 모든 버프 타워의 버프 효과 갱신
+        // 현재 타워가 버프 타워인 경우, 현재 타워가 공격 타워인 경우
+        towerSpawner.OnBuffAllBuffTowers();
+        
+        return true;
+    }
+
+    public void Sell()
 	{
 		// 타워 판매 사운드 재생
 		SoundManager.instance.SFXPlay("TowerSell", sellClip);
