@@ -62,7 +62,7 @@ public class Boss : Enemy
         // 1페이즈
         if (phase == PHASE.ONE)
         {
-            //Debug.Log("웅크리기");
+            Debug.Log("웅크리기");
             StartCoroutine("crouch", delay_time);
         }
         // 2페이즈
@@ -75,6 +75,7 @@ public class Boss : Enemy
         else if (phase == PHASE.THREE)
         {
             Debug.Log("리콜");
+            //StartCoroutine("hallucination", delay_time);
             StartCoroutine("recall", delay_time);
         }
         yield return new WaitForSeconds(delay_time);

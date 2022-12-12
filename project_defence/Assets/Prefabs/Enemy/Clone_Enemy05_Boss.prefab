@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 191614524568912502}
   - component: {fileID: -893360541288979423}
   m_Layer: 8
-  m_Name: Enemy05_BossClone
+  m_Name: Clone_Enemy05_Boss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,6 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gold: 100
   clip: {fileID: 8300000, guid: e58d8bd078f188a4ba314e933b98528b, type: 3}
+  isClone: 1
 --- !u!95 &-893360541288979423
 Animator:
   serializedVersion: 4
