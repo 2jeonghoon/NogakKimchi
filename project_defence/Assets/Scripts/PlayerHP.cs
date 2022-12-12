@@ -21,6 +21,11 @@ public class PlayerHP : MonoBehaviour
         playerHPViewer.GetComponent<PlayerHPViewer>().setUp(this);
     }
 
+    public void HealHP(float heal)
+    {
+        currentHP += heal;
+    }
+
     public void TakeDamage(float damage)
     {
         // 현재 체력을 damage만큼 감소
