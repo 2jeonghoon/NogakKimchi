@@ -3475,7 +3475,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1593938267}
         m_TargetAssemblyTypeName: TowerDataViewer, Assembly-CSharp
-        m_MethodName: OnClickEventTowerUpgrade
+        m_MethodName: OnClickEventTowerUpgrade_1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -35068,7 +35068,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1593938267}
         m_TargetAssemblyTypeName: TowerDataViewer, Assembly-CSharp
-        m_MethodName: OnClickEventTowerUpgrade
+        m_MethodName: OnClickEventTowerUpgrade_2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
