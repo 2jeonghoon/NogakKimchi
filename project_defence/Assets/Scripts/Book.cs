@@ -66,8 +66,6 @@ public class Book : MonoBehaviour {
     Vector3 ebl;
     //follow point 
     Vector3 f;
-<<<<<<< HEAD
-=======
 
     // 책 넘기는 스피드
     float page_speed = 10;
@@ -75,15 +73,11 @@ public class Book : MonoBehaviour {
     float tmp_time = 0f;
 
 
->>>>>>> origin/Jeonghoon
     bool pageDragging = false;
     //current flip mode
     FlipMode mode;
     IntroText introText;
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/Jeonghoon
     void Start()
     {
         if (!canvas) canvas=GetComponentInParent<Canvas>();
@@ -160,12 +154,9 @@ public class Book : MonoBehaviour {
         if (pageDragging && interactable)
         {
             UpdateBook();
-<<<<<<< HEAD
-=======
             tmp_time += Time.deltaTime;
             //Debug.Log(tmp_time);
             //if(tmp_time >= page_time)
->>>>>>> origin/Jeonghoon
         }
         
         // 다 읽었을 경우 스킵 혹은 넘기기 버튼
@@ -178,13 +169,6 @@ public class Book : MonoBehaviour {
     }
     public void UpdateBook()
     {
-<<<<<<< HEAD
-        f = Vector3.Lerp(f, transformPoint(Input.mousePosition), Time.deltaTime * 10);
-        if (mode == FlipMode.RightToLeft)
-            UpdateBookRTLToPoint(f);
-        else
-            UpdateBookLTRToPoint(f);
-=======
         //f = Vector3.Lerp(f, transformPoint(Input.mousePosition), Time.deltaTime * 10);
         Debug.Log(f);
         f.y = -400f;
@@ -211,7 +195,6 @@ public class Book : MonoBehaviour {
             }
             UpdateBookLTRToPoint(f);
         }
->>>>>>> origin/Jeonghoon
     }
     public void UpdateBookLTRToPoint(Vector3 followLocation)
     {
@@ -408,10 +391,7 @@ public class Book : MonoBehaviour {
     }
     public void OnMouseRelease()
     {
-<<<<<<< HEAD
-=======
         Debug.Log("Release");
->>>>>>> origin/Jeonghoon
         if (interactable)
             ReleasePage();
     }

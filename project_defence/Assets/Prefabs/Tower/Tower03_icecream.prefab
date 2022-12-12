@@ -102,15 +102,9 @@ MonoBehaviour:
   towerTemplate: {fileID: 11400000, guid: fb842126e7923e84ba4c56bf19a41255, type: 2}
   spawnPoint: {fileID: 1467127298981210293}
   weaponType: 7
-<<<<<<< HEAD
-  buffTower: {fileID: 0}
-  tileType: 1
-  projectilePrefab: {fileID: 4461503835666675623, guid: af01022ebb850f141bc49d45ce50d61c,
-=======
   tileType: 1
   buffTower: {fileID: 0}
   projectilePrefab: {fileID: 4461503835666675623, guid: 3ccea99c6a2413e4bb2d3e684afc5e2f,
->>>>>>> origin/Jeonghoon
     type: 3}
   lineRenderer: {fileID: 0}
   hitEffect: {fileID: 0}
@@ -118,11 +112,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   buildClip: {fileID: 8300000, guid: 7c47b20bb9874304a809dc5580d403ba, type: 3}
-<<<<<<< HEAD
-  upgradeClip: {fileID: 8300000, guid: 6cf9c85b5a3b88c468b21b9d21250adf, type: 3}
-=======
   upgradeClip: {fileID: 8300000, guid: c5cb2ac29e89dbf43a9b644caaad45e6, type: 3}
->>>>>>> origin/Jeonghoon
   sellClip: {fileID: 8300000, guid: abdbbfd33a46f4549987385f85c536b5, type: 3}
 --- !u!65 &4897813252131580411
 BoxCollider:
@@ -135,11 +125,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-<<<<<<< HEAD
-  m_Size: {x: 5.4, y: 3, z: 0.2}
-=======
   m_Size: {x: 6, y: 3.2, z: 0.2}
->>>>>>> origin/Jeonghoon
   m_Center: {x: 0, y: -1.5, z: 0}
 --- !u!1 &7091859059920485847
 GameObject:

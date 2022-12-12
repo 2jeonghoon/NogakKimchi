@@ -100,11 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 288d7fee1068849458d43eb560e20942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<<< HEAD:project_defence/Assets/Prefabs/Projectile/ProjectileShotgun.prefab
-  moveSpeed: 8
-========
   moveSpeed: 13
->>>>>>>> origin/Jeonghoon:project_defence/Assets/Prefabs/Projectile/ProjectileJelly.prefab
   moveDirection: {x: 0, y: 0, z: 0}
 --- !u!58 &9129527048580606695
 CircleCollider2D:

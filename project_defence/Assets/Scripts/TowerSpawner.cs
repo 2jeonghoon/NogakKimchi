@@ -24,11 +24,7 @@ public class TowerSpawner : MonoBehaviour
     {
         for(int i = 0; i < towerTemplate.Length; i++)
         {
-<<<<<<< HEAD
-			Debug.Log(towerTemplate[i].weapon[0].isLock);
-=======
 			//Debug.Log(towerTemplate[i].weapon[0].isLock);
->>>>>>> origin/Jeonghoon
 			if (!towerTemplate[i].weapon[0].isLock)
             {
 				_Lock[i].GetComponent<Lock>().LockOff();
@@ -42,23 +38,6 @@ public class TowerSpawner : MonoBehaviour
 		towerType = type;
 		if (!towerTemplate[towerType].weapon[0].isLock)
 		{
-<<<<<<< HEAD
-			// 버튼을 중복해서 누르는 것을 방지하기 위해 필요
-			if (isOnTowerButton == true)
-			{
-				return;
-			}
-
-			// 타워 건설 가능 여부 확인
-			// 타워를 건설할 만큼 돈이 없으면 타워 건설 X
-			if (towerTemplate[towerType].weapon[0].cost > playerGold.CurrentGold)
-			{
-				// 골드가 부족해서 타워 건설이 불가능하다고 출력
-				systemTextViewer.PrintText(SystemType.Money);
-				return;
-			}
-
-=======
 
 			// 버튼을 중복해서 누르는 것을 방지하기 위해 필요
 			if (isOnTowerButton == true)
@@ -78,7 +57,6 @@ public class TowerSpawner : MonoBehaviour
 				return;
 			}
 
->>>>>>> origin/Jeonghoon
 			// 마우스를 따라다니는 임시 타워 생성
 			followTowerClone = Instantiate(towerTemplate[towerType].followTowerPrefab);
 			// 타워 건설 버튼을 눌렀다고 설정
@@ -117,14 +95,10 @@ public class TowerSpawner : MonoBehaviour
 				}
 			}
 		}
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/Jeonghoon
 
 
-			// 다시 타워 건설 버튼을 눌러서 타워를 건설하도록 변수 설정
-			isOnTowerButton = false;
+		// 다시 타워 건설 버튼을 눌러서 타워를 건설하도록 변수 설정
+		isOnTowerButton = false;
 		// 타워가 건설되어 있음으로 설정
 		tile.IsBuildTower = true;
 		// 타워 건설에 필요한 골드만큼 감소
@@ -196,16 +170,12 @@ public class TowerSpawner : MonoBehaviour
 	public void SetTowerLock(GameObject _Lock, int towerType, bool setLock)
 	{
 		towerTemplate[towerType].weapon[0].isLock = setLock;
-<<<<<<< HEAD
-		_Lock.GetComponent<Lock>().LockOff();
-=======
 
 		_Lock.GetComponent<Lock>().LockOff();
 		if (towerType > 1)
 		{
 			_Lock.GetComponent<Lock>().LockOffImage();
 		}
->>>>>>> origin/Jeonghoon
 	}
 }
 

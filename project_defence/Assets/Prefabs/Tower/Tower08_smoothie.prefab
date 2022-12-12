@@ -44,15 +44,7 @@ GameObject:
   - component: {fileID: 2713350932755718766}
   - component: {fileID: -7490905961186918384}
   m_Layer: 0
-<<<<<<< HEAD
   m_Name: Tower08_smoothie
-=======
-<<<<<<<< HEAD:project_defence/Assets/Prefabs/Tower/Tower06_coffee.prefab
-  m_Name: Tower06_coffee
-========
-  m_Name: Tower08_smoothie
->>>>>>>> origin/Jeonghoon:project_defence/Assets/Prefabs/Tower/Tower08_smoothie.prefab
->>>>>>> origin/Jeonghoon
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -115,15 +107,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-<<<<<<< HEAD
-  m_Sprite: {fileID: 21300000, guid: 2599fd82a968cca41892c51dc20ee6c1, type: 3}
-=======
-<<<<<<<< HEAD:project_defence/Assets/Prefabs/Tower/Tower06_coffee.prefab
-  m_Sprite: {fileID: 21300000, guid: 2599fd82a968cca41892c51dc20ee6c1, type: 3}
-========
   m_Sprite: {fileID: 21300000, guid: a37e235aa91582e41b2012242dfa7ad2, type: 3}
->>>>>>>> origin/Jeonghoon:project_defence/Assets/Prefabs/Tower/Tower08_smoothie.prefab
->>>>>>> origin/Jeonghoon
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -148,37 +132,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerTemplate: {fileID: 11400000, guid: 09b088856a5a93c4e83000fd8f12cf26, type: 2}
   spawnPoint: {fileID: 4406233821235667900}
-<<<<<<< HEAD
-=======
-<<<<<<<< HEAD:project_defence/Assets/Prefabs/Tower/Tower06_coffee.prefab
-  weaponType: 3
-  buffTower: {fileID: 0}
-  projectilePrefab: {fileID: 0}
-========
->>>>>>> origin/Jeonghoon
   weaponType: 8
   buffTower: {fileID: 0}
   projectilePrefab: {fileID: 3989452062942650229, guid: 36ee9807713eff04ea5ef99b0edb981e,
     type: 3}
-<<<<<<< HEAD
-=======
->>>>>>>> origin/Jeonghoon:project_defence/Assets/Prefabs/Tower/Tower08_smoothie.prefab
->>>>>>> origin/Jeonghoon
   lineRenderer: {fileID: 0}
   hitEffect: {fileID: 0}
   targetLayer:
     serializedVersion: 2
     m_Bits: 256
   buildClip: {fileID: 8300000, guid: 7c47b20bb9874304a809dc5580d403ba, type: 3}
-<<<<<<< HEAD
-  upgradeClip: {fileID: 8300000, guid: 6cf9c85b5a3b88c468b21b9d21250adf, type: 3}
-=======
-<<<<<<<< HEAD:project_defence/Assets/Prefabs/Tower/Tower06_coffee.prefab
-  upgradeClip: {fileID: 8300000, guid: 6cf9c85b5a3b88c468b21b9d21250adf, type: 3}
-========
   upgradeClip: {fileID: 8300000, guid: c5cb2ac29e89dbf43a9b644caaad45e6, type: 3}
->>>>>>>> origin/Jeonghoon:project_defence/Assets/Prefabs/Tower/Tower08_smoothie.prefab
->>>>>>> origin/Jeonghoon
   sellClip: {fileID: 8300000, guid: abdbbfd33a46f4549987385f85c536b5, type: 3}
 --- !u!65 &-7490905961186918384
 BoxCollider:

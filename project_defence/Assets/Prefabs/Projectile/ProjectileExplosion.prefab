@@ -13,15 +13,9 @@ GameObject:
   - component: {fileID: 3910000170776866425}
   - component: {fileID: 9129527048580606695}
   - component: {fileID: 6339248814932543829}
-<<<<<<<< HEAD:project_defence/Assets/Prefabs/Projectile/ProjectileExplosion.prefab
   - component: {fileID: 295562656517487888}
   m_Layer: 0
   m_Name: ProjectileExplosion
-========
-  - component: {fileID: -8057311060288332458}
-  m_Layer: 0
-  m_Name: ProjectileCoco
->>>>>>>> origin/Jeonghoon:project_defence/Assets/Prefabs/Projectile/ProjectileCoco.prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,11 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-<<<<<<<< HEAD:project_defence/Assets/Prefabs/Projectile/ProjectileExplosion.prefab
   m_Sprite: {fileID: 21300000, guid: 079268cd78686954890231debb4e7a34, type: 3}
-========
-  m_Sprite: {fileID: 21300000, guid: d500e7646586299499f00ca74881878a, type: 3}
->>>>>>>> origin/Jeonghoon:project_defence/Assets/Prefabs/Projectile/ProjectileCoco.prefab
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -149,11 +139,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
-<<<<<<<< HEAD:project_defence/Assets/Prefabs/Projectile/ProjectileExplosion.prefab
 --- !u!114 &295562656517487888
-========
---- !u!114 &-8057311060288332458
->>>>>>>> origin/Jeonghoon:project_defence/Assets/Prefabs/Projectile/ProjectileCoco.prefab
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,7 +148,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4461503835666675623}
   m_Enabled: 1
   m_EditorHideFlags: 0
-<<<<<<<< HEAD:project_defence/Assets/Prefabs/Projectile/ProjectileExplosion.prefab
   m_Script: {fileID: 11500000, guid: 7f55f748cb1f1db48ae2fbd3690c6871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -170,9 +155,3 @@ MonoBehaviour:
   explosionRange: 1
   explosionPrefab: {fileID: 7684957893073054618, guid: 3e17251b17f66474daea65106be1c349,
     type: 3}
-========
-  m_Script: {fileID: 11500000, guid: f02d26d58091fb9449a7ae7efdb82a40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
->>>>>>>> origin/Jeonghoon:project_defence/Assets/Prefabs/Projectile/ProjectileCoco.prefab

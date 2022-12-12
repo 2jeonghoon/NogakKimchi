@@ -73,7 +73,7 @@ public class Witch : Enemy
             // 자기자신을 제외하고
             if (distance < range && this != enemies[i])
             {
-                Debug.Log(count + " : " + enemies[i]);
+                //Debug.Log(count + " : " + enemies[i]);
                 enemy[count++] = enemies[i];
             }
         }

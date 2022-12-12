@@ -2,22 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-<<<<<<< HEAD
-=======
 using UnityEngine.UI;
 using TMPro;
->>>>>>> origin/Jeonghoon
 
 public class ToolTip : MonoBehaviour, 
                                     IPointerEnterHandler, 
                                     IPointerExitHandler
 {
-<<<<<<< HEAD
-    private GameObject tooltip;
-
-    void Start() {
-        tooltip = transform.GetChild(2).gameObject; // tooltip object는 버튼에 idx num 2번에 위치하게 세팅
-=======
     enum Tower { COCOBALL, JELLY, ICECREAM, MELONSODA, MILK, COFFEE, STRAWBERRY, SMOOTHIE };
 
     [SerializeField]
@@ -49,15 +40,11 @@ public class ToolTip : MonoBehaviour,
     public void printTooltip()
     {
         textTooltip.text = tooltipstr[(int)type];
->>>>>>> origin/Jeonghoon
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-<<<<<<< HEAD
-=======
         printTooltip();
->>>>>>> origin/Jeonghoon
         tooltip.SetActive(true);
     }
     public void OnPointerExit(PointerEventData eventData)
@@ -70,10 +57,6 @@ public class ToolTip : MonoBehaviour,
 /*
  * File : ToolTip.cs
  * Desc
-<<<<<<< HEAD
- *	: 타워 정보를 보여주는 툴팁 출력
-=======
  *	: ?�???�보�?보여주는 ?�팁 출력
->>>>>>> origin/Jeonghoon
  *
  */
