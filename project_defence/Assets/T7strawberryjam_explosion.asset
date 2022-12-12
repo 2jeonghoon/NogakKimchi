@@ -47,3 +47,14 @@ MonoBehaviour:
     sell: 736
     tileType: 0
     isLock: 1
+  - sprite: {fileID: 21300000, guid: c364b4e04d3ac96458efc67e2f2cc762, type: 3}
+    damage: 3
+    slow: 10
+    buff: 0
+    rate: 0.3
+    range: 4
+    cost: 360
+    sell: 736
+    tileType: 0
+    isLock: 1
+  maxTowerLV: 3

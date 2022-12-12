@@ -3475,7 +3475,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1593938267}
         m_TargetAssemblyTypeName: TowerDataViewer, Assembly-CSharp
-        m_MethodName: OnClickEventTowerUpgrade
+        m_MethodName: OnClickEventTowerUpgrade_1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10796,7 +10796,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0.85, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13597,7 +13597,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 0000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -31334,9 +31334,11 @@ MonoBehaviour:
   textRange: {fileID: 1984885198}
   textLevel: {fileID: 890134363}
   textUpgradeCost: {fileID: 494727346}
+  textUpgradeCost2: {fileID: 636888541}
   textSellCost: {fileID: 692425350}
   towerAttackRange: {fileID: 1853581399}
-  buttonUpgrade: {fileID: 1778482316}
+  buttonUpgrade: {fileID: 219521382}
+  buttonUpgrade2: {fileID: 1778482316}
   systemTextViewer: {fileID: 1968212483}
 --- !u!1 &1594388550 stripped
 GameObject:
@@ -35066,7 +35068,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1593938267}
         m_TargetAssemblyTypeName: TowerDataViewer, Assembly-CSharp
-        m_MethodName: OnClickEventTowerUpgrade
+        m_MethodName: OnClickEventTowerUpgrade_2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
