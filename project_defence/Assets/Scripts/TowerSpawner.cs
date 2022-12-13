@@ -31,7 +31,7 @@ public class TowerSpawner : MonoBehaviour
         for(int i = 0; i < towerTemplate.Length; i++)
         {
 			//Debug.Log(towerTemplate[i].weapon[0].isLock);
-			if (!towerTemplate[i].weapon[0].isLock)
+			if (!towerTemplate[i].isLock)
             {
 				Debug.Log(i);
 				_Lock[i].GetComponent<Lock>().LockOff();
@@ -43,7 +43,7 @@ public class TowerSpawner : MonoBehaviour
 	{
 		int tmp = towerType;
 		towerType = type;
-		if (!towerTemplate[towerType].weapon[0].isLock)
+		if (!towerTemplate[towerType].isLock)
 		{
 
 			// 버튼을 중복해서 누르는 것을 방지하기 위해 필요
@@ -181,7 +181,7 @@ public class TowerSpawner : MonoBehaviour
 
 	public void SetTowerLock(GameObject _Lock, int towerType, bool setLock)
 	{
-		towerTemplate[towerType].weapon[0].isLock = setLock;
+		towerTemplate[towerType].isLock = setLock;
 
 		_Lock.GetComponent<Lock>().LockOff();
 		if (towerType > 1)
