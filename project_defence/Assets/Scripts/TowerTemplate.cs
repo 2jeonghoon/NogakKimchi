@@ -21,11 +21,7 @@ public class TowerTemplate : ScriptableObject
 		public	int		cost;	// 필요 골드 (0레벨 : 건설, 1~레벨 : 업그레이드)
 		public	int		sell;   // 타워 판매 시 획득 골드
 		public TileType tileType;
-<<<<<<< Updated upstream
-		public bool isLock; // 라운드 별 잠금 해제를 위한 Lock
-=======
 		public float explosionRange;
->>>>>>> Stashed changes
 	}
 }
 
