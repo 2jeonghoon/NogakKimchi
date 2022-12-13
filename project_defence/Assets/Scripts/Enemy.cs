@@ -14,6 +14,10 @@ public class Enemy : MonoBehaviour
 	[SerializeField]
 	protected int				gold;           // 적 사망 시 획득 가능한 골드
 
+	protected int pool_idx;
+	public int Pool_Idx => pool_idx;
+
+
 	// 적 사망 사운드
 	public AudioClip clip;
 
@@ -22,7 +26,7 @@ public class Enemy : MonoBehaviour
 	public bool isClone;
 
 	// 클론을 위한 셋업
-	public virtual void Setup(EnemySpawner enemySpawner, Enemy enemy)
+	public virtual void Setup(EnemySpawner enemySpawner, Enemy enemy, int pool_idx)
 	{
 		movement2D = GetComponent<Movement2D>();
 		this.enemySpawner = enemySpawner;
@@ -31,6 +35,7 @@ public class Enemy : MonoBehaviour
 		this.wayPoints = new Transform[wayPointCount];
 		this.wayPoints = enemy.wayPoints;
 		this.currentIndex = enemy.currentIndex;
+		this.pool_idx = pool_idx;
 		if (currentIndex - 1 >= 0)
         {
 			this.currentIndex = enemy.currentIndex - 1;
@@ -38,11 +43,12 @@ public class Enemy : MonoBehaviour
 
 		// 클론 위치를 복사한 객체 위치로.
 		this.transform.position = enemy.transform.position;
-		// 적 이동/목표지점 설정 코루틴 함수 시작
-		StartCoroutine("OnMove");
+        gameObject.SetActive(true);                 // ObjectPool을 사용하면서 SetActive(true)가 필요해짐
+        // 적 이동/목표지점 설정 코루틴 함수 시작
+        StartCoroutine("OnMove");
 	}
 
-	public virtual void Setup(EnemySpawner enemySpawner, Transform[] wayPoints)
+	public virtual void Setup(EnemySpawner enemySpawner, Transform[] wayPoints, int pool_idx)
 	{
 		movement2D			= GetComponent<Movement2D>();
 		this.enemySpawner	= enemySpawner;
@@ -54,9 +60,9 @@ public class Enemy : MonoBehaviour
 
 		// 적의 위치를 첫번째 wayPoint 위치로 설정
 		transform.position	= wayPoints[currentIndex].position;
-
+        gameObject.SetActive(true);                 // ObjectPool을 사용하면서 SetActive(true)가 필요해짐
 		// 적 이동/목표지점 설정 코루틴 함수 시작
-		StartCoroutine("OnMove");
+        StartCoroutine("OnMove");
 	}
 
 	protected virtual IEnumerator OnMove()

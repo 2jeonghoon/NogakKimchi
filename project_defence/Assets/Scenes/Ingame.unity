@@ -5492,8 +5492,7 @@ MonoBehaviour:
   - wave:
     - spawnTime: 0.5
       maxEnemyCount: 20
-      enemyPrefabs:
-      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      enemyPrefabs: 00000000
     maxEnemyCount: 0
   towerSpawner: {fileID: 240897077}
   enemySpawner: {fileID: 266347680}
@@ -22391,6 +22390,29 @@ MonoBehaviour:
     perfab: {fileID: 3989452062942650229, guid: 36ee9807713eff04ea5ef99b0edb981e,
       type: 3}
     count: 50
+  - objectName: Basic
+    perfab: {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189,
+      type: 3}
+    count: 50
+  - objectName: Tanker
+    perfab: {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5,
+      type: 3}
+    count: 50
+  - objectName: Runner
+    perfab: {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189,
+      type: 3}
+    count: 50
+  - objectName: Witch
+    perfab: {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34,
+      type: 3}
+    count: 20
+  - objectName: Boss
+    perfab: {fileID: 63866560545116346, guid: 4878148eb0d7a8c46b4df9d7202a708c, type: 3}
+    count: 5
+  - objectName: HPSlider
+    perfab: {fileID: 6003947006283470158, guid: bfd6cac2502fb6a4d861fb4c336e937f,
+      type: 3}
+    count: 100
   tfPoolParent: {fileID: 1031197288}
 --- !u!4 &1031197288
 Transform:

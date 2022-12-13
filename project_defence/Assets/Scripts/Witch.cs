@@ -18,7 +18,7 @@ public class Witch : Enemy
     // 사거리 내 enemy오브젝트 
     Enemy[] enemy;
 
-    public override void Setup(EnemySpawner enemySpawner, Transform[] wayPoints)
+    public override void Setup(EnemySpawner enemySpawner, Transform[] wayPoints, int pool_idx)
     {
         movement2D = GetComponent<Movement2D>();
         this.enemySpawner = enemySpawner;
@@ -27,10 +27,10 @@ public class Witch : Enemy
         wayPointCount = wayPoints.Length;
         this.wayPoints = new Transform[wayPointCount];
         this.wayPoints = wayPoints;
-
+        this.pool_idx = pool_idx;
         // 적의 위치를 첫번째 wayPoint 위치로 설정
         transform.position = wayPoints[currentIndex].position;
-
+        gameObject.SetActive(true);					// ObjectPool을 사용하면서 SetActive(true)가 필요해짐
         // 적 이동/목표지점 설정 코루틴 함수 시작
         StartCoroutine("Recovery", delay_time);
         StartCoroutine("OnMove");

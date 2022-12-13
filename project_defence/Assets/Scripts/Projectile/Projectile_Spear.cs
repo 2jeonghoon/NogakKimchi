@@ -10,8 +10,6 @@ public class Projectile_Spear : Projectile
 	private Vector3 start_pos;	// 시작 위치
 	private Vector3 cur_pos;        // 현재 위치
 
-	private int pool_idx = 5;
-
 	public void Setup(Transform target, float damage, float range)
 	{
 		// 발사 사운드 재생
@@ -23,6 +21,7 @@ public class Projectile_Spear : Projectile
 
 		direction = (target.position - transform.position).normalized;
 		start_pos = this.transform.position;
+		this.pool_idx = 5;
         gameObject.SetActive(true);                 // ObjectPool을 사용하면서 SetActive(true)가 필요해짐
     }
 

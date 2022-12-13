@@ -33,7 +33,6 @@ public class ProjectileMortar : Projectile
     private float fTime = 0f; // 흐르는 시간
     private float fMaxTime = 1f; // 최대높이까지 가는 시간
 
-    private int pool_idx = 3;
 
     public void Setup(Transform target, float damage, EnemySpawner enemySpawner, float explosionRange)
     {
@@ -62,6 +61,7 @@ public class ProjectileMortar : Projectile
 
         fV_X = -(vStartPos.x - vEndPos.x)*2.04f / fEndTime;
         fV_Z = -(vStartPos.x - vEndPos.x) / fEndTime;
+        this.pool_idx = 3;
         gameObject.SetActive(true);					// ObjectPool을 사용하면서 SetActive(true)가 필요해짐
     }
 

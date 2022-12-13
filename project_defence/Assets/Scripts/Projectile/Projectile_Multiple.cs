@@ -5,7 +5,6 @@ using Unity.Profiling;
 public class Projectile_Multiple : Projectile
 {
     private Vector3 direction;
-    private int pool_idx = 1;
 
     public void Setup(Vector3 targetPos, float damage)
 	{
@@ -14,6 +13,7 @@ public class Projectile_Multiple : Projectile
         movement2D	= GetComponent<Movement2D>();
 		this.damage	= damage;						// 타워의 공격력
         this.direction = (targetPos - transform.position).normalized;
+        this.pool_idx = 1;
         gameObject.SetActive(true);					// ObjectPool을 사용하면서 SetActive(true)가 필요해짐
     }
 

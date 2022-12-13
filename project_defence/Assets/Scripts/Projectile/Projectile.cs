@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour
 	protected	Movement2D	movement2D;
 	protected	Transform	target;
 	protected float		damage;
-	private int pool_idx = 0; // 풀에서 인덱스로 사용할 값
+	protected int pool_idx; // 풀에서 인덱스로 사용할 값
 	// 총알 발사 사운드
 	public AudioClip clip;
 
@@ -17,6 +17,7 @@ public class Projectile : MonoBehaviour
 		movement2D	= GetComponent<Movement2D>();
 		this.target	= target;						// 타워가 설정해준 target
 		this.damage	= damage;						// 타워의 공격력
+		this.pool_idx = 0;
 		gameObject.SetActive(true);					// ObjectPool을 사용하면서 SetActive(true)가 필요해짐
     }
 

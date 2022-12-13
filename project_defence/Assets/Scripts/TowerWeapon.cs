@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-public enum WeaponType { Gun = 0, Laser, Slow, Buff, Mortar, Shotgun, Spear, Explosion, Melee }
+public enum WeaponType { Gun = 0, Laser, Slow, Buff, Mortar, Shotgun, Spear, Explosion }
 public enum WeaponState
 {
     SearchTarget = 0, TryAttackGun, TryAttackLaser, TryAttackMortar,
-    TryAttackShotgun, TryAttackSpaer, TryAttackExplosion, TryMeleeAttack
+    TryAttackShotgun, TryAttackSpaer, TryAttackExplosion
 }
 public enum TileType { One, Two };
 
@@ -96,7 +96,7 @@ public class TowerWeapon : MonoBehaviour
         // 무기 속성이 캐논, 레이저일 때
         if (weaponType == WeaponType.Gun || weaponType == WeaponType.Laser ||
             weaponType == WeaponType.Mortar || weaponType == WeaponType.Shotgun ||
-            weaponType == WeaponType.Spear || weaponType == WeaponType.Explosion || weaponType == WeaponType.Melee)
+            weaponType == WeaponType.Spear || weaponType == WeaponType.Explosion)
         {
             // 최초 상태를 WeaponState.SearchTarget으로 설정
             ChangeState(WeaponState.SearchTarget);
@@ -159,10 +159,6 @@ public class TowerWeapon : MonoBehaviour
                 else if (weaponType == WeaponType.Explosion)
                 {
                     ChangeState(WeaponState.TryAttackExplosion);
-                }
-                else if (weaponType == WeaponType.Melee)
-                {
-                    ChangeState(WeaponState.TryMeleeAttack);
                 }
             }
 
@@ -291,23 +287,6 @@ public class TowerWeapon : MonoBehaviour
         }
     }
 
-    private IEnumerator TryMeleeAttack()
-    {
-        while (true)
-        {
-            // target을 공격하는게 가능한지 검사
-            if (IsPossibleToAttackTarget() == false)
-            {
-                ChangeState(WeaponState.SearchTarget);
-                break;
-            }
-
-            // attackRate 시간만큼 대기
-            yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
-            MeleeAttack();
-            // 근접 공격
-        }
-    }
 
     public void OnBuffAroundTower()
     {
@@ -369,7 +348,6 @@ public class TowerWeapon : MonoBehaviour
         {
             return false;
         }
-
         // target이 공격 범위 안에 있는지 검사 (공격 범위를 벗어나면 새로운 적 탐색)
         float distance = Vector3.Distance(attackTarget.position, transform.position);
         if (distance > towerTemplate.weapon[level].range)
@@ -377,7 +355,6 @@ public class TowerWeapon : MonoBehaviour
             attackTarget = null;
             return false;
         }
-
         return true;
     }
 
@@ -392,7 +369,8 @@ public class TowerWeapon : MonoBehaviour
             // 생성된 발사체에게 공격대상(attackTarget) 정보 제공   
             // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
             float damage = towerTemplate.weapon[level].damage + AddedDamage;
-            clone.GetComponent<Projectile>().Setup(attackTarget, damage);
+            if(IsPossibleToAttackTarget())
+                clone.GetComponent<Projectile>().Setup(attackTarget, damage);
         }
     }
 
@@ -413,10 +391,12 @@ public class TowerWeapon : MonoBehaviour
             // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
             float damage = towerTemplate.weapon[level].damage + AddedDamage;
             // 세 갈래로 나누어지는 공격을 위해 Vector3.left, right를 더해줌
-
-            clone1.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage, -1);
-            clone2.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage);
-            clone3.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage, 1);
+            if (IsPossibleToAttackTarget())
+            {
+                clone1.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage, -1);
+                clone2.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage);
+                clone3.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage, 1);
+            }
         }
     }
 
@@ -431,7 +411,8 @@ public class TowerWeapon : MonoBehaviour
             // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
             // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
             float damage = towerTemplate.weapon[level].damage + AddedDamage;
-            clone.GetComponent<Projectile_Explosion>().Setup(attackTarget, damage, Range, ExplosionRange);
+            if (IsPossibleToAttackTarget())
+                clone.GetComponent<Projectile_Explosion>().Setup(attackTarget, damage, Range, ExplosionRange);
         }
     }
 
@@ -444,8 +425,8 @@ public class TowerWeapon : MonoBehaviour
         // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
         // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
         float damage = towerTemplate.weapon[level].damage + AddedDamage;
-
-        clone.GetComponent<ProjectileMortar>().Setup(attackTarget, damage, enemySpawner, ExplosionRange);
+        if (IsPossibleToAttackTarget())
+            clone.GetComponent<ProjectileMortar>().Setup(attackTarget, damage, enemySpawner, ExplosionRange);
     }
     private void SpawnProjectile_Spear()
     {
@@ -457,18 +438,9 @@ public class TowerWeapon : MonoBehaviour
             // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
             // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
             float damage = towerTemplate.weapon[level].damage + AddedDamage;
-            clone.GetComponent<Projectile_Spear>().Setup(attackTarget, damage, Range);
+            if (IsPossibleToAttackTarget())
+                clone.GetComponent<Projectile_Spear>().Setup(attackTarget, damage, Range);
         }
-    }
-
-    private void MeleeAttack()
-    {
-        GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-
-        // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
-        // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
-        float damage = towerTemplate.weapon[level].damage + AddedDamage;
-        clone.GetComponent<Projectile>().Setup(attackTarget, damage);
     }
 
     private void EnableLaser()
