@@ -20,39 +20,43 @@ MonoBehaviour:
   - sprite: {fileID: 21300000, guid: a37e235aa91582e41b2012242dfa7ad2, type: 3}
     damage: 3
     slow: 0
-    buff: 2
-    rate: 0.5
-    range: 4
+    buff: 0
+    rate: 1
+    range: 3
     cost: 1200
     sell: 960
     tileType: 0
     isLock: 1
+<<<<<<< Updated upstream
+=======
+    explosionRange: 0
+>>>>>>> Stashed changes
   - sprite: {fileID: 21300000, guid: a37e235aa91582e41b2012242dfa7ad2, type: 3}
     damage: 3
     slow: 0
     buff: 0
-    rate: 0.5
-    range: 4
+    rate: 0.8
+    range: 3
     cost: 300
     sell: 1200
     tileType: 0
     isLock: 1
   - sprite: {fileID: 21300000, guid: a37e235aa91582e41b2012242dfa7ad2, type: 3}
-    damage: 3
+    damage: 5
     slow: 0
     buff: 0
-    rate: 0.3
-    range: 4
+    rate: 0.8
+    range: 3
     cost: 800
     sell: 1600
     tileType: 0
     isLock: 1
   - sprite: {fileID: 21300000, guid: a37e235aa91582e41b2012242dfa7ad2, type: 3}
-    damage: 3
+    damage: 5
     slow: 0
     buff: 0
-    rate: 0.3
-    range: 4
+    rate: 0.8
+    range: 3
     cost: 800
     sell: 1600
     tileType: 0

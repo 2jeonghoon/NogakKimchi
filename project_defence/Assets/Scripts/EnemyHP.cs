@@ -78,7 +78,28 @@ public class EnemyHP : MonoBehaviour
             enemy.OnDie(EnemyDestroyType.Kill);
         }
     }
-    
+
+    //레이저 공격 방어력 무시
+    public void TakeLaserDamage(float damage)
+    {
+        // Tip. 적의 체력이 damage 만큼 감소해서 죽을 상황일 때 여러 타워의 공격을 동시에 받으면
+        // enemy.OnDie() 함수가 여러 번 실행될 수 있다.
+
+        // 현재 적의 상태가 사망 상태이면 아래 코드를 실행하지 않는다.
+        if (isDie == true) return;
+        Debug.Log("레이저 " + damage);
+        StopCoroutine("HitAlphaAnimation");
+        StartCoroutine("HitAlphaAnimation");
+        currentHP -= damage;
+        // 체력이 0이하 = 적 캐릭터 사망
+        if (currentHP <= 0)
+        {
+            isDie = true;
+            // 적 캐릭터 사망
+            enemy.OnDie(EnemyDestroyType.Kill);
+        }
+    }
+
     private IEnumerator HitAlphaAnimation()
     {
         // 현재 적의 색상을 color 변수에 저장

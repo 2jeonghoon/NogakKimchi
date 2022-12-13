@@ -17,12 +17,15 @@ public class Enemy : MonoBehaviour
 	// 적 사망 사운드
 	public AudioClip clip;
 
+	// 클론 여부
+	[SerializeField]
+	public bool isClone;
+
 	// 클론을 위한 셋업
 	public virtual void Setup(EnemySpawner enemySpawner, Enemy enemy)
 	{
 		movement2D = GetComponent<Movement2D>();
 		this.enemySpawner = enemySpawner;
-
 		// 적 이동 경로 WayPoints 정보 설정
 		wayPointCount = enemy.wayPoints.Length;
 		this.wayPoints = new Transform[wayPointCount];
@@ -114,6 +117,7 @@ public class Enemy : MonoBehaviour
 
 	public void OnDie(EnemyDestroyType type)
 	{
+
 		// 적 사망 사운드 재생
 		SoundManager.instance.SFXPlay("EnemyDie", clip);
 

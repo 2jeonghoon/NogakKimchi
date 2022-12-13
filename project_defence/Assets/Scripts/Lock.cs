@@ -23,7 +23,6 @@ public class Lock : MonoBehaviour
     {
         if (isLockOff)
         {
-            Debug.Log("On");
             imageTower.SetActive(true);
             isLockOff = false;
         }

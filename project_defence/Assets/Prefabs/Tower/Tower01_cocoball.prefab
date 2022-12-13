@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3831514109601363417}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.15, y: 1.32, z: 0}
+  m_LocalPosition: {x: -0.976, y: -1.228, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 0.79999995}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -133,6 +133,7 @@ MonoBehaviour:
   towerTemplate: {fileID: 11400000, guid: e404d9b0f96d3d545ad6f63dd6ea4b59, type: 2}
   spawnPoint: {fileID: 82416675691890637}
   weaponType: 0
+  tileType: 0
   buffTower: {fileID: 0}
   projectilePrefab: {fileID: 4461503835666675623, guid: d009f2b9f4d1a734ba1bb4b46c4aad1f,
     type: 3}

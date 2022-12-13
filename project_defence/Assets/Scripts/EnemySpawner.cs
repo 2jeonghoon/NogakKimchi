@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -96,12 +97,15 @@ public class EnemySpawner : MonoBehaviour
 
 		// 적이 사망할 때마다 현재 웨이브의 생존 적 숫자 감소 (UI 표시용)
 		currentEnemyCount --;
-		if (currentEnemyCount ==0)
+		if (currentEnemyCount == 0)
 		{
 			playerGold.CurrentGold += 100*(int)bonus;
 			bonus += 0.2; //5라운드마다 100원씩 증가
 			waveSystem.waveEndTowerLockOff();
-
+			if(waveSystem.CurrentWave == waveSystem.MaxWave)
+			{
+                SceneManager.LoadScene("HappyEnd");
+            }
 		}
 		// 리스트에서 사망하는 적 정보 삭제
 		enemyList.Remove(enemy);
