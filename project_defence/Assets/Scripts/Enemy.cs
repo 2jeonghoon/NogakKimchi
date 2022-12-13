@@ -71,7 +71,7 @@ public class Enemy : MonoBehaviour
 			// 적의 현재위치와 목표위치의 거리가 0.02 * movement2D.MoveSpeed보다 작을 때 if 조건문 실행
 			// Tip. movement2D.MoveSpeed를 곱해주는 이유는 속도가 빠르면 한 프레임에 0.02보다 크게 움직이기 때문에
 			// if 조건문에 걸리지 않고 경로를 탈주하는 오브젝트가 발생할 수 있다.
-			if ( Vector3.Distance(transform.position, wayPoints[currentIndex].position) < 0.08f * movement2D.MoveSpeed )
+			if ( Vector3.Distance(transform.position, wayPoints[currentIndex].position) < 0.02f * movement2D.MoveSpeed )
 			{
 				// 다음 이동 방향 설정
 				NextMoveTo();

@@ -57,7 +57,6 @@ public class Boss : Enemy
         // 체력 30퍼센트 이하 3페이즈
         if (currentHPPercent < 0.3f)
         {
-            Bossanimator.SetTrigger("Phase2");
             this.phase = PHASE.THREE;
         }
         // 체력 70퍼센트 이하 2페이즈

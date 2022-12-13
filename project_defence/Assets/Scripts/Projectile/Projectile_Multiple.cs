@@ -44,9 +44,9 @@ public class Projectile_Multiple : Projectile
         movement2D.MoveTo(direction);
 	}
 
-    // 발사체가 생성된 후 2초가 지나도 삭제가 안된다면 삭제
+    // 발사체가 생성된 후 5초가 지나도 삭제가 안된다면 삭제
     private IEnumerator Destroy_Projectile() {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
         Destroy(gameObject);
     }
 
