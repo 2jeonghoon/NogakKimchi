@@ -18,7 +18,7 @@ public class SliderPositionAutoSetter : MonoBehaviour
     private void LateUpdate()
     {
         // 적이 파괴되어 쫓아다닐 대상이 사라지면 Slider UI도 삭제
-        if ( targetTransform == null || targetTransform.gameObject.activeSelf == false )
+        if ( targetTransform == null )
         {
             Destroy(gameObject);
             return;

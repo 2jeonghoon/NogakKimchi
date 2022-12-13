@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +15,6 @@ public class ObjectPool : MonoBehaviour
 
     [SerializeField]
     ObjectInfo[] objectInfos = null;
-
 
     [Header("오브젝트 풀의 위치")]
     [SerializeField]
@@ -51,15 +49,6 @@ public class ObjectPool : MonoBehaviour
                 objectPoolList.Add(InsertQueue(objectInfos[i]));
             }
         }
-    }
-
-    public void insertQueue(int index)
-    {
-        ObjectInfo perfab_objectInfo = objectInfos[index];
-        GameObject objectClone = Instantiate(perfab_objectInfo.perfab) as GameObject;
-        objectClone.SetActive(false);
-        objectClone.transform.SetParent(tfPoolParent);
-        objectPoolList[index].Enqueue(objectClone);
     }
 
     Queue<GameObject> InsertQueue(ObjectInfo perfab_objectInfo)

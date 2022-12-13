@@ -9,7 +9,7 @@ public class Projectile_Explosion : Projectile
     [SerializeField]
     private GameObject explosionPrefab;
 
-    private int pool_idx = 7;
+    private int pool_idx = 2;
 
     // 사거리가 벗어나면 터지도록 사거리 가져오기
     float range;
@@ -36,7 +36,7 @@ public class Projectile_Explosion : Projectile
     private void Update()
     {
         move_distance = (transform.position - start_position).magnitude;
-        if (move_distance > range)
+        if(move_distance > range)
         {
             boom();
         }
