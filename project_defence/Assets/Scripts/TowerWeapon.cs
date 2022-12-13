@@ -448,11 +448,14 @@ public class TowerWeapon : MonoBehaviour
 
     private void SpawnProjectile()
     {
-        GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-        // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
-        // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
-        float damage = towerTemplate.weapon[level].damage + AddedDamage;
-        clone.GetComponent<Projectile>().Setup(attackTarget, damage);
+        if (attackTarget != null)
+        {
+            GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+            // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
+            // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
+            float damage = towerTemplate.weapon[level].damage + AddedDamage;
+            clone.GetComponent<Projectile>().Setup(attackTarget, damage);
+        }
     }
 
     private void MeleeAttack()

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class Projectile : MonoBehaviour
 {
@@ -18,6 +19,11 @@ public class Projectile : MonoBehaviour
 		this.damage	= damage;						// 타워의 공격력
 	}
 
+	private void Start()
+	{
+		StartCoroutine("Destroy_Projectile");
+	}
+
 	private void Update()
 	{
 		if ( target != null )	// target이 존재하면
@@ -26,14 +32,14 @@ public class Projectile : MonoBehaviour
 			Vector3 direction = (target.position-transform.position).normalized;
 			movement2D.MoveTo(direction);
 		}
-		else					// 여러 이유로 target이 사라지면
-		{
-			// 발사체 오브젝트 삭제
-			Destroy(gameObject);
-		}
 	}
-	
-	private void OnTriggerEnter2D(Collider2D collision)
+    private IEnumerator Destroy_Projectile()
+    {
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if ( !collision.CompareTag("Enemy") )	return;			// 적이 아닌 대상과 부딪히면
 		if ( collision.transform != target )	return;			// 현재 target인 적이 아닐 때

@@ -26,8 +26,12 @@ MonoBehaviour:
     cost: 700
     sell: 560
     tileType: 1
+<<<<<<< Updated upstream
+    isLock: 1
+=======
     isLock: 0
     explosionRange: 1
+>>>>>>> Stashed changes
   - sprite: {fileID: 21300000, guid: 760c75742dc91fc43a92ea995e94ff40, type: 3}
     damage: 5
     slow: 0
@@ -38,7 +42,10 @@ MonoBehaviour:
     sell: 720
     tileType: 1
     isLock: 1
+<<<<<<< Updated upstream
+=======
     explosionRange: 1
+>>>>>>> Stashed changes
   - sprite: {fileID: 21300000, guid: 760c75742dc91fc43a92ea995e94ff40, type: 3}
     damage: 5
     slow: 0
@@ -49,7 +56,10 @@ MonoBehaviour:
     sell: 920
     tileType: 1
     isLock: 1
+<<<<<<< Updated upstream
+=======
     explosionRange: 5
+>>>>>>> Stashed changes
   - sprite: {fileID: 21300000, guid: 760c75742dc91fc43a92ea995e94ff40, type: 3}
     damage: 5
     slow: 0
@@ -60,5 +70,8 @@ MonoBehaviour:
     sell: 920
     tileType: 1
     isLock: 1
+<<<<<<< Updated upstream
+=======
     explosionRange: 5
+>>>>>>> Stashed changes
   maxTowerLV: 3
