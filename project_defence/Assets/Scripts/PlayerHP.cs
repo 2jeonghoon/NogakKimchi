@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
 public class PlayerHP : MonoBehaviour
 {
@@ -38,7 +37,6 @@ public class PlayerHP : MonoBehaviour
         // 체력이 0이 되면 게임오버
         if ( currentHP <= 0 )
         {
-            SceneManager.LoadScene("BadEnd");
         }
     }
 

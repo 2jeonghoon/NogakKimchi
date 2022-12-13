@@ -15,7 +15,7 @@ public class WaveSystem : MonoBehaviour
 	[SerializeField]
 	private TextMeshProUGUI textGameSpeed; // 배속
 	bool isfause = false;
-	float gameSpeed = 1;
+	float gameSpeed= 1;
 
 	[SerializeField]
 	public GameObject[] _Lock;
@@ -75,6 +75,7 @@ public class WaveSystem : MonoBehaviour
 		for(int i = 0; i < waves[currentWaveIndex].wave.Length; i++)
         {
 			wave_enemy_amount += waves[currentWaveIndex].wave[i].maxEnemyCount;
+
 		}
 		waves[currentWaveIndex].maxEnemyCount = wave_enemy_amount;
 		spawnEnemyCount = 0;
