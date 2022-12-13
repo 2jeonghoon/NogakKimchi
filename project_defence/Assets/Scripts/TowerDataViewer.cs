@@ -91,7 +91,7 @@ public class TowerDataViewer : MonoBehaviour
                 textDamage.text = "Buff : " + currentTower.Buff * 100 + "%";
             }
         }
-        Debug.Log(currentTower.TileType);
+        //Debug.Log(currentTower.TileType);
         if (currentTower.TileType == TileType.One)
         {
             imageTower.rectTransform.sizeDelta = new Vector2(100, 200);
