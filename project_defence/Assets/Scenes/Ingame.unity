@@ -4689,94 +4689,375 @@ MonoBehaviour:
   waves:
   - wave:
     - spawnTime: 0.5
-      maxEnemyCount: 5
+      maxEnemyCount: 20
       enemyPrefabs:
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 30
+      enemyPrefabs:
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 40
+      enemyPrefabs:
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.3
+      maxEnemyCount: 50
+      enemyPrefabs:
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 50
+      enemyPrefabs:
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 50
+      enemyPrefabs:
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 50
+      enemyPrefabs:
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 50
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 50
+      enemyPrefabs:
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 50
+      enemyPrefabs:
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 30
+      enemyPrefabs:
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 50
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 50
+      enemyPrefabs:
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 50
+      enemyPrefabs:
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 75
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+    - spawnTime: 0.75
+      maxEnemyCount: 50
+      enemyPrefabs:
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 75
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 75
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 75
+      enemyPrefabs:
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 75
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 100
+      enemyPrefabs:
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+    - spawnTime: 0.5
+      maxEnemyCount: 1
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: 4878148eb0d7a8c46b4df9d7202a708c, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 100
+      enemyPrefabs:
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
       - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
     - spawnTime: 0.5
+      maxEnemyCount: 1
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: 4878148eb0d7a8c46b4df9d7202a708c, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.3
+      maxEnemyCount: 100
+      enemyPrefabs:
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+    - spawnTime: 0.3
+      maxEnemyCount: 2
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: 4878148eb0d7a8c46b4df9d7202a708c, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 100
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+    - spawnTime: 2
+      maxEnemyCount: 6
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: 4878148eb0d7a8c46b4df9d7202a708c, type: 3}
+      - {fileID: 4286712872766883678, guid: 4878148eb0d7a8c46b4df9d7202a708c, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 100
+      enemyPrefabs:
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 4286712872766883678, guid: 4878148eb0d7a8c46b4df9d7202a708c, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+    - spawnTime: 0.3
       maxEnemyCount: 10
       enemyPrefabs:
-      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
-    maxEnemyCount: 0
-  - wave:
-    - spawnTime: 0.5
-      maxEnemyCount: 30
-      enemyPrefabs:
-      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
-    - spawnTime: 0.8
-      maxEnemyCount: 5
-      enemyPrefabs:
-      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
-    maxEnemyCount: 0
-  - wave:
-    - spawnTime: 0.5
-      maxEnemyCount: 30
-      enemyPrefabs:
-      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
-      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
-    maxEnemyCount: 0
-  - wave:
-    - spawnTime: 0.5
-      maxEnemyCount: 30
-      enemyPrefabs:
-      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
       - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
     maxEnemyCount: 0
   - wave:
     - spawnTime: 0.5
-      maxEnemyCount: 30
+      maxEnemyCount: 100
       enemyPrefabs:
       - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
-      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
-      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
-    maxEnemyCount: 0
-  - wave:
-    - spawnTime: 0.5
-      maxEnemyCount: 60
-      enemyPrefabs:
-      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
-      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
-      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
       - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
       - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
-    maxEnemyCount: 0
-  - wave:
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: 4878148eb0d7a8c46b4df9d7202a708c, type: 3}
     - spawnTime: 0.3
-      maxEnemyCount: 60
+      maxEnemyCount: 20
       enemyPrefabs:
-      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
-      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
-      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
-      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
-      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
-    maxEnemyCount: 0
-  - wave:
-    - spawnTime: 0.3
-      maxEnemyCount: 60
-      enemyPrefabs:
-      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
-      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
-      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
-      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
       - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
     maxEnemyCount: 0
   - wave:
-    - spawnTime: 0.2
-      maxEnemyCount: 60
-      enemyPrefabs:
-      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
-      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
-      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
     - spawnTime: 0.5
-      maxEnemyCount: 30
-      enemyPrefabs:
-      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
-    maxEnemyCount: 0
-  - wave:
-    - spawnTime: 0.3
-      maxEnemyCount: 10
+      maxEnemyCount: 100
       enemyPrefabs:
       - {fileID: 4286712872766883678, guid: 4878148eb0d7a8c46b4df9d7202a708c, type: 3}
       - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+    - spawnTime: 0.3
+      maxEnemyCount: 50
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 100
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: 4878148eb0d7a8c46b4df9d7202a708c, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 4286712872766883678, guid: 4878148eb0d7a8c46b4df9d7202a708c, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+    - spawnTime: 0.3
+      maxEnemyCount: 50
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.5
+      maxEnemyCount: 100
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 4286712872766883678, guid: 4878148eb0d7a8c46b4df9d7202a708c, type: 3}
+      - {fileID: 4286712872766883678, guid: 4878148eb0d7a8c46b4df9d7202a708c, type: 3}
+    - spawnTime: 0.3
+      maxEnemyCount: 50
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.3
+      maxEnemyCount: 100
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: 4878148eb0d7a8c46b4df9d7202a708c, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
+    - spawnTime: 0.3
+      maxEnemyCount: 50
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+    maxEnemyCount: 0
+  - wave:
+    - spawnTime: 0.3
+      maxEnemyCount: 100
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: 4878148eb0d7a8c46b4df9d7202a708c, type: 3}
+      - {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34, type: 3}
+      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+    - spawnTime: 0.3
+      maxEnemyCount: 100
+      enemyPrefabs:
+      - {fileID: 4286712872766883678, guid: 4878148eb0d7a8c46b4df9d7202a708c, type: 3}
+      - {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189, type: 3}
+      - {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5, type: 3}
     maxEnemyCount: 0
   towerSpawner: {fileID: 240897077}
   enemySpawner: {fileID: 266347680}
@@ -40474,7 +40755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imageScreen: {fileID: 1701104212}
-  maxHP: 10
+  maxHP: 100
   playerHPViewer: {fileID: 354980077}
 --- !u!4 &2026522983
 Transform:
@@ -40503,7 +40784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61135f547115e3548bd09440203e8a58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentGold: 10000
+  currentGold: 650
 --- !u!1001 &2028308002
 PrefabInstance:
   m_ObjectHideFlags: 0
