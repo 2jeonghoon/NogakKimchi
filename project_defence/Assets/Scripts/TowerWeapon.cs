@@ -106,9 +106,12 @@ public class TowerWeapon : MonoBehaviour
     public void ChangeState(WeaponState newState)
     {
         // 이전에 재생중이던 상태 종료
+        //Debug.Log(weaponState.ToString());
         StopCoroutine(weaponState.ToString());
         // 상태 변경
         weaponState = newState;
+
+        //Debug.Log(weaponState.ToString());
         // 새로운 상태 재생
         StartCoroutine(weaponState.ToString());
     }
@@ -142,7 +145,7 @@ public class TowerWeapon : MonoBehaviour
             // 현재 타워에 가장 가까이 있는 공격 대상(적) 탐색
             attackTarget = FindClosestAttackTarget();
 
-            if (attackTarget != null)
+            if (attackTarget != null && attackTarget.gameObject.activeSelf )
             {
                 if (weaponType == WeaponType.Gun)
                 {
@@ -173,7 +176,6 @@ public class TowerWeapon : MonoBehaviour
                     ChangeState(WeaponState.TryMeleeAttack);
                 }
             }
-
             yield return null;
         }
     }
@@ -355,6 +357,7 @@ public class TowerWeapon : MonoBehaviour
         // 제일 가까이 있는 적을 찾기 위해 최초 거리를 최대한 크게 설정
         float closestDistSqr = Mathf.Infinity;
         // EnemySpawner의 EnemyList에 있는 현재 맵에 존재하는 모든 적 검사
+        //Debug.Log(enemySpawner.EnemyList.Count);
         for (int i = 0; i < enemySpawner.EnemyList.Count; ++i)
         {
             float distance = Vector3.Distance(enemySpawner.EnemyList[i].transform.position, transform.position);
@@ -373,14 +376,14 @@ public class TowerWeapon : MonoBehaviour
     private bool IsPossibleToAttackTarget()
     {
         // target이 있는지 검사 (다른 발사체에 의해 제거, Goal 지점까지 이동해 삭제 등)
-        if (attackTarget == null)
+        if (attackTarget == null || !attackTarget.gameObject.activeSelf)
         {
             return false;
         }
 
         // target이 공격 범위 안에 있는지 검사 (공격 범위를 벗어나면 새로운 적 탐색)
         float distance = Vector3.Distance(attackTarget.position, transform.position);
-        if (distance > towerTemplate.weapon[level].range)
+        if (distance > towerTemplate.weapon[level].range || !attackTarget.gameObject.activeSelf)
         {
             attackTarget = null;
             return false;
@@ -585,7 +588,7 @@ public class TowerWeapon : MonoBehaviour
         {
             towers[i].GetComponent<TowerWeapon>().BuffLevel = 0;
             towers[i].GetComponent<TowerWeapon>().AddedDamage = 0;
-            Debug.Log(towers[i].GetComponent<TowerWeapon>().AddedDamage);
+            //Debug.Log(towers[i].GetComponent<TowerWeapon>().AddedDamage);
         }
         towerSpawner.OnBuffAllBuffTowers();
 

@@ -25,6 +25,10 @@ public class EnemyHP : MonoBehaviour
         spriteRenderer  = GetComponent<SpriteRenderer>();
     }
 
+    public void setSpawnHP()
+    {
+        currentHP = maxHP;
+    }
 
     public float getDefense()
     {
@@ -73,8 +77,17 @@ public class EnemyHP : MonoBehaviour
         // 체력이 0이하 = 적 캐릭터 사망
         if ( currentHP <= 0 )
         {
-            isDie = true;
+            //isDie = true;
             // 적 캐릭터 사망
+            //currentHP = maxHP;
+
+            // 현재 적의 색상을 color 변수에 저장
+            Color color = spriteRenderer.color;
+
+            // 적의 투명도를 0%로 설정
+            color.a = 1f;
+            spriteRenderer.color = color;
+
             enemy.OnDie(EnemyDestroyType.Kill);
         }
     }
@@ -94,8 +107,15 @@ public class EnemyHP : MonoBehaviour
         // 체력이 0이하 = 적 캐릭터 사망
         if (currentHP <= 0)
         {
-            isDie = true;
+            //isDie = true;
             // 적 캐릭터 사망
+            // 현재 적의 색상을 color 변수에 저장
+            Color color = spriteRenderer.color;
+
+            // 적의 투명도를 0%로 설정
+            color.a = 1f;
+            spriteRenderer.color = color;
+
             enemy.OnDie(EnemyDestroyType.Kill);
         }
     }
