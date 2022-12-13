@@ -28,6 +28,8 @@ public class TowerDataViewer : MonoBehaviour
     private Button buttonUpgrade2;
     [SerializeField]
     private SystemTextViewer systemTextViewer;
+    [SerializeField]
+    private GameObject PanelUpgrade;
 
     private TowerWeapon currentTower;
 
@@ -48,7 +50,8 @@ public class TowerDataViewer : MonoBehaviour
     {
         // 출력해야하는 타워 정보를 받아와서 저장
         currentTower = towerWeapon.GetComponent<TowerWeapon>();
-        // 타워 정보 Panel On
+        // 타워 정보 Panel On, 타워업그레이드 Panel on
+        PanelUpgrade.SetActive(true);
         gameObject.SetActive(true);
         // 타워 정보를 갱신
         UpdateTowerData();
@@ -58,7 +61,8 @@ public class TowerDataViewer : MonoBehaviour
 
     public void OffPanel()
     {
-        // 타워 정보 Panel Off
+        // 타워 정보 Panel Off, 타워업그레이드 Panel off
+        PanelUpgrade.SetActive(false);
         gameObject.SetActive(false);
         // 타워 공격범위 Sprite Off
         towerAttackRange.OffAttackRange();
@@ -87,7 +91,7 @@ public class TowerDataViewer : MonoBehaviour
                 textDamage.text = "Buff : " + currentTower.Buff * 100 + "%";
             }
         }
-        Debug.Log(currentTower.TileType);
+        //Debug.Log(currentTower.TileType);
         if (currentTower.TileType == TileType.One)
         {
             imageTower.rectTransform.sizeDelta = new Vector2(100, 200);

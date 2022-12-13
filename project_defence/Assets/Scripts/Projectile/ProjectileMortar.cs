@@ -7,7 +7,6 @@ using UnityEngine;
 public class ProjectileMortar : Projectile
 {
     //폭발 범위
-    [SerializeField]
     private float explosionRange;
     [SerializeField]
     private GameObject explosionPrefab;
@@ -35,13 +34,13 @@ public class ProjectileMortar : Projectile
     private float fMaxTime = 1f; // 최대높이까지 가는 시간
 
 
-    public void Setup(Transform target, float damage, EnemySpawner enemySpawner)
+    public void Setup(Transform target, float damage, EnemySpawner enemySpawner, float explosionRange)
     {
         // 발사 사운드 재생
         //SoundManager.instance.SFXPlay("Mortar", clip);
         movement2D = GetComponent<Movement2D>();
         this.damage = damage;                       // 타워의 공격력
-
+        this.explosionRange = explosionRange;
 
         // 포물선 이동을 위해 필요한 정보
         vStartPos = this.transform.position; // 시작지점

@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 288d7fee1068849458d43eb560e20942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
+  moveSpeed: 5
   moveDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &5241647052692723452
 MonoBehaviour:
@@ -117,6 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gold: 5
   clip: {fileID: 8300000, guid: e58d8bd078f188a4ba314e933b98528b, type: 3}
+  isClone: 0
 --- !u!58 &-3643329299626539831
 CircleCollider2D:
   m_ObjectHideFlags: 0

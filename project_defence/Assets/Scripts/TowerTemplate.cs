@@ -21,6 +21,7 @@ public class TowerTemplate : ScriptableObject
 		public	int		sell;   // 타워 판매 시 획득 골드
 		public TileType tileType;
 		public bool isLock; // 라운드 별 잠금 해제를 위한 Lock
+		public float explosionRange;
 	}
 }
 

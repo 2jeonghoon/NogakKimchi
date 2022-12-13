@@ -118,6 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gold: 1
   clip: {fileID: 8300000, guid: e58d8bd078f188a4ba314e933b98528b, type: 3}
+  isClone: 0
 --- !u!58 &1862614934191037545
 CircleCollider2D:
   m_ObjectHideFlags: 0
