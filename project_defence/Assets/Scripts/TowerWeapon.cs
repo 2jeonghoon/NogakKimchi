@@ -106,9 +106,12 @@ public class TowerWeapon : MonoBehaviour
     public void ChangeState(WeaponState newState)
     {
         // 이전에 재생중이던 상태 종료
+        //Debug.Log(weaponState.ToString());
         StopCoroutine(weaponState.ToString());
         // 상태 변경
         weaponState = newState;
+
+        //Debug.Log(weaponState.ToString());
         // 새로운 상태 재생
         StartCoroutine(weaponState.ToString());
     }
@@ -142,7 +145,7 @@ public class TowerWeapon : MonoBehaviour
             // 현재 타워에 가장 가까이 있는 공격 대상(적) 탐색
             attackTarget = FindClosestAttackTarget();
 
-            if (attackTarget != null)
+            if (attackTarget != null && attackTarget.gameObject.activeSelf )
             {
                 if (weaponType == WeaponType.Gun)
                 {
@@ -173,7 +176,6 @@ public class TowerWeapon : MonoBehaviour
                     ChangeState(WeaponState.TryMeleeAttack);
                 }
             }
-
             yield return null;
         }
     }
@@ -355,6 +357,7 @@ public class TowerWeapon : MonoBehaviour
         // 제일 가까이 있는 적을 찾기 위해 최초 거리를 최대한 크게 설정
         float closestDistSqr = Mathf.Infinity;
         // EnemySpawner의 EnemyList에 있는 현재 맵에 존재하는 모든 적 검사
+        //Debug.Log(enemySpawner.EnemyList.Count);
         for (int i = 0; i < enemySpawner.EnemyList.Count; ++i)
         {
             float distance = Vector3.Distance(enemySpawner.EnemyList[i].transform.position, transform.position);
@@ -373,14 +376,14 @@ public class TowerWeapon : MonoBehaviour
     private bool IsPossibleToAttackTarget()
     {
         // target이 있는지 검사 (다른 발사체에 의해 제거, Goal 지점까지 이동해 삭제 등)
-        if (attackTarget == null)
+        if (attackTarget == null || !attackTarget.gameObject.activeSelf)
         {
             return false;
         }
 
         // target이 공격 범위 안에 있는지 검사 (공격 범위를 벗어나면 새로운 적 탐색)
         float distance = Vector3.Distance(attackTarget.position, transform.position);
-        if (distance > towerTemplate.weapon[level].range)
+        if (distance > towerTemplate.weapon[level].range || !attackTarget.gameObject.activeSelf)
         {
             attackTarget = null;
             return false;
@@ -389,46 +392,40 @@ public class TowerWeapon : MonoBehaviour
         return true;
     }
 
-    // 박격포 총알 생성
-    private void SpawnMortarProjectile()
+    private void SpawnProjectile()
     {
-        GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-        // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
-        // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
-        float damage = towerTemplate.weapon[level].damage + AddedDamage;
-
-        clone.GetComponent<ProjectileMortar>().Setup(attackTarget, damage, enemySpawner, ExplosionRange);
+        if (attackTarget != null)
+        {
+            GameObject clone = ObjectPool.instance.objectPoolList[5].Dequeue();                 // 오브젝트 Pool에서 Dequeue해서 가져옴, 5번 : coco
+            clone.transform.position = spawnPoint.position;                                     // Dequeue해서 가져온 Projectile의 position을 SpawnPoint로 바꾸어 줌
+            // 생성된 발사체에게 공격대상(attackTarget) 정보 제공   
+            // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
+            float damage = towerTemplate.weapon[level].damage + AddedDamage;
+            clone.GetComponent<Projectile>().Setup(attackTarget, damage);
+        }
     }
 
-    // 다발 사격 Projectile 생성 함수
     private void SpawnProjectile_Multiple()
     {
         if (attackTarget != null)
         {
-            GameObject clone1 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-            GameObject clone2 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-            GameObject clone3 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+            // 오브젝트 Pool에서 Dequeue해서 가져옴, 6번 : jelly
+            GameObject clone1 = ObjectPool.instance.objectPoolList[6].Dequeue();
+            GameObject clone2 = ObjectPool.instance.objectPoolList[6].Dequeue();
+            GameObject clone3 = ObjectPool.instance.objectPoolList[6].Dequeue();
+
+            clone1.transform.position = spawnPoint.position;
+            clone2.transform.position = spawnPoint.position;
+            clone3.transform.position = spawnPoint.position;
+
             // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
             // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
             float damage = towerTemplate.weapon[level].damage + AddedDamage;
             // 세 갈래로 나누어지는 공격을 위해 Vector3.left, right를 더해줌
+
             clone1.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage, -1);
             clone2.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage);
             clone3.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage, 1);
-        }
-
-    }
-
-    // 관통 총알 생성
-    private void SpawnProjectile_Spear()
-    {
-        if (attackTarget != null)
-        {
-            GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-            // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
-            // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
-            float damage = towerTemplate.weapon[level].damage + AddedDamage;
-            clone.GetComponent<Projectile_Spear>().Setup(attackTarget, damage, Range);
         }
     }
 
@@ -438,7 +435,8 @@ public class TowerWeapon : MonoBehaviour
         //Debug.Log("발사");
         if (attackTarget != null)
         {
-            GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+            GameObject clone = ObjectPool.instance.objectPoolList[7].Dequeue();            // 오브젝트 Pool에서 Dequeue해서 가져옴, 7번 : icecream
+            clone.transform.position = spawnPoint.position;                                     // Dequeue해서 가져온 Projectile의 position을 SpawnPoint로 바꾸어 줌
             // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
             // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
             float damage = towerTemplate.weapon[level].damage + AddedDamage;
@@ -446,18 +444,31 @@ public class TowerWeapon : MonoBehaviour
         }
     }
 
-    private void SpawnProjectile()
+    // 박격포 총알 생성
+    private void SpawnMortarProjectile()
+    {
+        //GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+        GameObject clone = ObjectPool.instance.objectPoolList[8].Dequeue();            // 오브젝트 Pool에서 Dequeue해서 가져옴, 8번 : milk
+        clone.transform.position = spawnPoint.position;                                     // Dequeue해서 가져온 Projectile의 position을 SpawnPoint로 바꾸어 줌
+        // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
+        // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
+        float damage = towerTemplate.weapon[level].damage + AddedDamage;
+
+        clone.GetComponent<ProjectileMortar>().Setup(attackTarget, damage, enemySpawner, ExplosionRange);
+    }
+    private void SpawnProjectile_Spear()
     {
         if (attackTarget != null)
         {
-            GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+            //GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+            GameObject clone = ObjectPool.instance.objectPoolList[10].Dequeue();            // 오브젝트 Pool에서 Dequeue해서 가져옴, 10번 : spear
+            clone.transform.position = spawnPoint.position;                                     // Dequeue해서 가져온 Projectile의 position을 SpawnPoint로 바꾸어 줌
             // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
             // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
             float damage = towerTemplate.weapon[level].damage + AddedDamage;
-            clone.GetComponent<Projectile>().Setup(attackTarget, damage);
+            clone.GetComponent<Projectile_Spear>().Setup(attackTarget, damage, Range);
         }
     }
-
     private void MeleeAttack()
     {
         GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
@@ -585,7 +596,7 @@ public class TowerWeapon : MonoBehaviour
         {
             towers[i].GetComponent<TowerWeapon>().BuffLevel = 0;
             towers[i].GetComponent<TowerWeapon>().AddedDamage = 0;
-            Debug.Log(towers[i].GetComponent<TowerWeapon>().AddedDamage);
+            //Debug.Log(towers[i].GetComponent<TowerWeapon>().AddedDamage);
         }
         towerSpawner.OnBuffAllBuffTowers();
 
