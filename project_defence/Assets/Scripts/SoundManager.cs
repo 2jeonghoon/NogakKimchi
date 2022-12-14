@@ -26,8 +26,6 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
-
-
         if (instance == null)
         {
             //Debug.Log("생성");
@@ -36,14 +34,14 @@ public class SoundManager : MonoBehaviour
             Scene scene = SceneManager.GetActiveScene();
 
             Debug.Log(scene.name);
-            if (scene.name != "Ingame")
-                DontDestroyOnLoad(instance);
+            DontDestroyOnLoad(instance);
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
             Destroy(gameObject);
         }
+        
     }
 
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
@@ -57,13 +55,6 @@ public class SoundManager : MonoBehaviour
                 BgSoundPlay(bglist[i]);
             }
         }
-        //SceneLoad할 때 slider정보 가져와야 함.
-        MasteraudioSlider.value = -10;
-        BGSoundaudioSlider.value = -10;
-        SFXaudioSlider.value = -10;
-        mixer.SetFloat("Master", -10);
-        mixer.SetFloat("BGsound", -10);
-        mixer.SetFloat("SFX", -10);
     }
 
     public void SFXPlay(string sfxName, AudioClip clip)
@@ -101,6 +92,8 @@ public class SoundManager : MonoBehaviour
 
     public void MasterAudioControl()
     {
+        MasteraudioSlider = GameObject.FindGameObjectWithTag("MasterSlider").GetComponent<Slider>();
+        
         float sound = MasteraudioSlider.value;
 
         if (sound == -40f) mixer.SetFloat("Master", -80);
@@ -109,6 +102,7 @@ public class SoundManager : MonoBehaviour
 
     public void BGsoundAudioControl()
     {
+        BGSoundaudioSlider = GameObject.FindGameObjectWithTag("BGSoundSlider").GetComponent<Slider>();
         float sound = BGSoundaudioSlider.value;
 
         if (sound == -40f) mixer.SetFloat("BGsound", -80);
@@ -116,6 +110,7 @@ public class SoundManager : MonoBehaviour
     }
     public void SFXAudioControl()
     {
+        SFXaudioSlider = GameObject.FindGameObjectWithTag("SFXSlider").GetComponent<Slider>();
         float sound = SFXaudioSlider.value;
 
         if (sound == -40f) mixer.SetFloat("SFX", -80);

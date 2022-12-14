@@ -265,10 +265,11 @@ public class TowerWeapon : MonoBehaviour
                 break;
             }
 
-            // attackRate 시간만큼 대기
-            yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
             // 관통 공격 (발사체 생성)
             SpawnProjectile_Spear();
+            // attackRate 시간만큼 대기
+            yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
+
         }
     }
 
