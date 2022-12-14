@@ -13,11 +13,11 @@ public class TowerWeapon : MonoBehaviour
 {
     [Header("Commons")]
     [SerializeField]
-    private TowerTemplate towerTemplate;                            // Å¸¿ö Á¤º¸ (°ø°Ý·Â, °ø°Ý¼Óµµ µî)
+    private TowerTemplate towerTemplate;                            // Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½Ý·ï¿½, ï¿½ï¿½ï¿½Ý¼Óµï¿½ ï¿½ï¿½)
     [SerializeField]
-    private Transform spawnPoint;                               // ¹ß»çÃ¼ »ý¼º À§Ä¡
+    private Transform spawnPoint;                               // ï¿½ß»ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡
     [SerializeField]
-    private WeaponType weaponType;                              // ¹«±â ¼Ó¼º ¼³Á¤
+    private WeaponType weaponType;                              // ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     [SerializeField]
     private TileType tileType;
@@ -25,33 +25,33 @@ public class TowerWeapon : MonoBehaviour
 
     [Header("Gun")]
     [SerializeField]
-    private GameObject projectilePrefab;                        // ¹ß»çÃ¼ ÇÁ¸®ÆÕ
+    private GameObject projectilePrefab;                        // ï¿½ß»ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
     [Header("Laser")]
     [SerializeField]
-    private LineRenderer lineRenderer;                          // ·¹ÀÌÀú·Î »ç¿ëµÇ´Â ¼±(LineRenderer)
+    private LineRenderer lineRenderer;                          // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½(LineRenderer)
     [SerializeField]
-    private Transform hitEffect;                                // Å¸°Ý È¿°ú
+    private Transform hitEffect;                                // Å¸ï¿½ï¿½ È¿ï¿½ï¿½
     [SerializeField]
-    private LayerMask targetLayer;                          // ±¤¼±¿¡ ºÎµúÈ÷´Â ·¹ÀÌ¾î ¼³Á¤
+    private LayerMask targetLayer;                          // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-    private int level = 0;                              // Å¸¿ö ·¹º§
-    private WeaponState weaponState = WeaponState.SearchTarget; // Å¸¿ö ¹«±âÀÇ »óÅÂ
-    private Transform attackTarget = null;                    // °ø°Ý ´ë»ó
-    private SpriteRenderer spriteRenderer;                          // Å¸¿ö ¿ÀºêÁ§Æ® ÀÌ¹ÌÁö º¯°æ¿ë
+    private int level = 0;                              // Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    private WeaponState weaponState = WeaponState.SearchTarget; // Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    private Transform attackTarget = null;                    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+    private SpriteRenderer spriteRenderer;                          // Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
     private TowerSpawner towerSpawner;
-    private EnemySpawner enemySpawner;                          // °ÔÀÓ¿¡ Á¸ÀçÇÏ´Â Àû Á¤º¸ È¹µæ¿ë
-    private PlayerGold playerGold;                              // ÇÃ·¹ÀÌ¾îÀÇ °ñµå Á¤º¸ È¹µæ ¹× ¼³Á¤
-    private Tile ownerTile;                             // ÇöÀç Å¸¿ö°¡ ¹èÄ¡µÇ¾î ÀÖ´Â Å¸ÀÏ
+    private EnemySpawner enemySpawner;                          // ï¿½ï¿½ï¿½Ó¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È¹ï¿½ï¿½ï¿½
+    private PlayerGold playerGold;                              // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È¹ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    private Tile ownerTile;                             // ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½Ç¾ï¿½ ï¿½Ö´ï¿½ Å¸ï¿½ï¿½
 
-    private float addedDamage;                          // ¹öÇÁ¿¡ ÀÇÇØ Ãß°¡µÈ µ¥¹ÌÁö
-    private int buffLevel;                              // ¹öÇÁ¸¦ ¹Þ´ÂÁö ¿©ºÎ ¼³Á¤ (0 : ¹öÇÁX, 1~3 : ¹Þ´Â ¹öÇÁ ·¹º§)
+    private float addedDamage;                          // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    private int buffLevel;                              // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (0 : ï¿½ï¿½ï¿½ï¿½X, 1~3 : ï¿½Þ´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 
-    // Å¸¿ö ¼³Ä¡ ¿Àµð¿À Å¬¸³
+    // Å¸ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½
     public AudioClip buildClip;
-    // Å¸¿ö ¾÷±×·¹ÀÌµå ¿Àµð¿À Å¬¸³
+    // Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½×·ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½
     public AudioClip upgradeClip;
-    // Å¸¿ö ÆÇ¸Å ¿Àµð¿À Å¬¸³
+    // Å¸ï¿½ï¿½ ï¿½Ç¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½
     public AudioClip sellClip;
 
     public Sprite TowerSprite => towerTemplate.weapon[level].sprite;
@@ -83,48 +83,48 @@ public class TowerWeapon : MonoBehaviour
 
     public void Setup(TowerSpawner towerSpawner, EnemySpawner enemySpawner, PlayerGold playerGold, Tile ownerTile)
     {
-        // Å¸¿ö ¼³Ä¡ »ç¿îµå Àç»ý
+        // Å¸ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         SoundManager.instance.SFXPlay("TowerSetUp", buildClip);
         spriteRenderer = GetComponent<SpriteRenderer>();
         this.towerSpawner = towerSpawner;
         this.enemySpawner = enemySpawner;
         this.playerGold = playerGold;
         this.ownerTile = ownerTile;
-        //yÁÂÇ¥°¡ ³·À»¼ö·Ï ¾ÕÀ¸·Î ³ª¿À°Ô
+        //yï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         this.GetComponent<SpriteRenderer>().sortingOrder = -(int)this.transform.position.y + 10;
-        // ¹«±â ¼Ó¼ºÀÌ Ä³³í, ·¹ÀÌÀúÀÏ ¶§
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         if (weaponType == WeaponType.Gun || weaponType == WeaponType.Laser ||
             weaponType == WeaponType.Mortar || weaponType == WeaponType.Shotgun ||
             weaponType == WeaponType.Spear || weaponType == WeaponType.Explosion || weaponType == WeaponType.Strawberry)
         {
-            // ÃÖÃÊ »óÅÂ¸¦ WeaponState.SearchTargetÀ¸·Î ¼³Á¤
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ WeaponState.SearchTargetï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             ChangeState(WeaponState.SearchTarget);
         }
     }
 
     public void ChangeState(WeaponState newState)
     {
-        // ÀÌÀü¿¡ Àç»ýÁßÀÌ´ø »óÅÂ Á¾·á
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         //Debug.Log(weaponState.ToString());
         StopCoroutine(weaponState.ToString());
-        // »óÅÂ º¯°æ
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         weaponState = newState;
 
         //Debug.Log(weaponState.ToString());
-        // »õ·Î¿î »óÅÂ Àç»ý
+        // ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         StartCoroutine(weaponState.ToString());
     }
 
 
     private void RotateToTarget()
     {
-        // ¿øÁ¡À¸·ÎºÎÅÍÀÇ °Å¸®¿Í ¼öÆòÃàÀ¸·ÎºÎÅÍÀÇ °¢µµ¸¦ ÀÌ¿ëÇØ À§Ä¡¸¦ ±¸ÇÏ´Â ±Ø ÁÂÇ¥°è ÀÌ¿ë
-        // °¢µµ = arctan(y/x)
-        // x, y º¯À§°ª ±¸ÇÏ±â
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½Ì¿ï¿½
+        // ï¿½ï¿½ï¿½ï¿½ = arctan(y/x)
+        // x, y ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï±ï¿½
         float dx = attackTarget.position.x - transform.position.x;
         float dy = attackTarget.position.y - transform.position.y;
-        // x, y º¯À§°ªÀ» ¹ÙÅÁÀ¸·Î °¢µµ ±¸ÇÏ±â
-        // °¢µµ°¡ radian ´ÜÀ§ÀÌ±â ¶§¹®¿¡ Mathf.Rad2Deg¸¦ °öÇØ µµ ´ÜÀ§¸¦ ±¸ÇÔ
+        // x, y ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï±ï¿½
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ radian ï¿½ï¿½ï¿½ï¿½ï¿½Ì±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Mathf.Rad2Degï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         float degree = Mathf.Atan2(dy, dx) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, degree);
     }
@@ -133,7 +133,7 @@ public class TowerWeapon : MonoBehaviour
     {
         while (true)
         {
-            // ÇöÀç Å¸¿ö¿¡ °¡Àå °¡±îÀÌ ÀÖ´Â °ø°Ý ´ë»ó(Àû) Å½»ö
+            // ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½(ï¿½ï¿½) Å½ï¿½ï¿½
             attackTarget = FindClosestAttackTarget();
             if (attackTarget != null && attackTarget.gameObject.activeSelf)
             {
@@ -174,15 +174,15 @@ public class TowerWeapon : MonoBehaviour
     {
         while (true)
         {
-            // targetÀ» °ø°ÝÇÏ´Â°Ô °¡´ÉÇÑÁö °Ë»ç
+            // targetï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
             if (IsPossibleToAttackTarget() == false)
             {
                 ChangeState(WeaponState.SearchTarget);
                 break;
             }
-            // Ä³³í °ø°Ý (¹ß»çÃ¼ »ý¼º)
+            // Ä³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ß»ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½)
             SpawnProjectile();
-            // attackRate ½Ã°£¸¸Å­ ´ë±â
+            // attackRate ï¿½Ã°ï¿½ï¿½ï¿½Å­ ï¿½ï¿½ï¿½
             yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
 
         }
@@ -190,21 +190,21 @@ public class TowerWeapon : MonoBehaviour
 
     private IEnumerator TryAttackLaser()
     {
-        // ·¹ÀÌÀú, ·¹ÀÌÀú Å¸°Ý È¿°ú È°¼ºÈ­
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ È¿ï¿½ï¿½ È°ï¿½ï¿½È­
         EnableLaser();
 
         while (true)
         {
-            // targetÀ» °ø°ÝÇÏ´Â°Ô °¡´ÉÇÑÁö °Ë»ç
+            // targetï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
             if (IsPossibleToAttackTarget() == false)
             {
-                // ·¹ÀÌÀú, ·¹ÀÌÀú Å¸°Ý È¿°ú ºñÈ°¼ºÈ­
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ È¿ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
                 DisableLaser();
                 ChangeState(WeaponState.SearchTarget);
                 break;
             }
 
-            // ·¹ÀÌÀú °ø°Ý
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             SpawnLaser();
 
             yield return null;
@@ -215,73 +215,73 @@ public class TowerWeapon : MonoBehaviour
     {
         while (true)
         {
-            // targetÀ» °ø°ÝÇÏ´Â°Ô °¡´ÉÇÑÁö °Ë»ç
+            // targetï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
             if (IsPossibleToAttackTarget() == false)
             {
                 ChangeState(WeaponState.SearchTarget);
                 break;
             }
-            // ¹Ú°ÝÆ÷ °ø°Ý (¹ß»çÃ¼ »ý¼º)
+            // ï¿½Ú°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ß»ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½)
             if (attackTarget != null)
             {
                 SpawnMortarProjectile();
             }
-            // attackRate ½Ã°£¸¸Å­ ´ë±â
+            // attackRate ï¿½Ã°ï¿½ï¿½ï¿½Å­ ï¿½ï¿½ï¿½
             yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
 
         }
     }
 
-    // ¼¦°Ç Å¸¿ö °ø°Ý
+    // ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     private IEnumerator TryAttackShotgun()
     {
         while (true)
         {
-            // targetÀ» °ø°ÝÇÏ´Â°Ô °¡´ÉÇÑÁö °Ë»ç
+            // targetï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
             if (IsPossibleToAttackTarget() == false)
             {
                 ChangeState(WeaponState.SearchTarget);
                 break;
             }
-            // ¼¦°Ç °ø°Ý (¹ß»çÃ¼ »ý¼º)
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ß»ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½)
             SpawnProjectile_Multiple();
-            // attackRate ½Ã°£¸¸Å­ ´ë±â
+            // attackRate ï¿½Ã°ï¿½ï¿½ï¿½Å­ ï¿½ï¿½ï¿½
             yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
         }
     }
 
-    // °üÅë Å¸¿ö °ø°Ý
+    // ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     private IEnumerator TryAttackSpaer()
     {
         while (true)
         {
-            // targetÀ» °ø°ÝÇÏ´Â°Ô °¡´ÉÇÑÁö °Ë»ç
+            // targetï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
             if (IsPossibleToAttackTarget() == false)
             {
                 ChangeState(WeaponState.SearchTarget);
                 break;
             }
-            // °üÅë °ø°Ý (¹ß»çÃ¼ »ý¼º)
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ß»ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½)
             SpawnProjectile_Spear();
-            // attackRate ½Ã°£¸¸Å­ ´ë±â
+            // attackRate ï¿½Ã°ï¿½ï¿½ï¿½Å­ ï¿½ï¿½ï¿½
             yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
         }
     }
 
-    // Æø¹ß Å¸¿ö °ø°Ý
+    // ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     private IEnumerator TryAttackExplosion()
     {
         while (true)
         {
-            // targetÀ» °ø°ÝÇÏ´Â°Ô °¡´ÉÇÑÁö °Ë»ç
+            // targetï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
             if (IsPossibleToAttackTarget() == false)
             {
                 ChangeState(WeaponState.SearchTarget);
                 break;
             }
-            // °üÅë °ø°Ý (¹ß»çÃ¼ »ý¼º)
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ß»ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½)
             SpawnProjectile_Explosion();
-            // attackRate ½Ã°£¸¸Å­ ´ë±â
+            // attackRate ï¿½Ã°ï¿½ï¿½ï¿½Å­ ï¿½ï¿½ï¿½
             yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
         }
     }
@@ -290,45 +290,45 @@ public class TowerWeapon : MonoBehaviour
     {
         while (true)
         {
-            // targetÀ» °ø°ÝÇÏ´Â°Ô °¡´ÉÇÑÁö °Ë»ç
+            // targetï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
             if (IsPossibleToAttackTarget() == false)
             {
                 ChangeState(WeaponState.SearchTarget);
                 break;
             }
-            // °üÅë °ø°Ý (¹ß»çÃ¼ »ý¼º)
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ß»ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½)
             SpawnProjectile_Strawberry();
-            // attackRate ½Ã°£¸¸Å­ ´ë±â
+            // attackRate ï¿½Ã°ï¿½ï¿½ï¿½Å­ ï¿½ï¿½ï¿½
             yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
         }
     }
 
     public void OnBuffAroundTower()
     {
-        // ÇöÀç ¸Ê¿¡ ¹èÄ¡µÈ "Tower" ÅÂ±×¸¦ °¡Áø ¸ðµç ¿ÀºêÁ§Æ® Å½»ö
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ "Tower" ï¿½Â±×¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® Å½ï¿½ï¿½
         GameObject[] towers = GameObject.FindGameObjectsWithTag("Tower");
 
         for (int i = 0; i < towers.Length; ++i)
         {
             TowerWeapon weapon = towers[i].GetComponent<TowerWeapon>();
 
-            // ÀÌ¹Ì ¹öÇÁ¸¦ ¹Þ°í ÀÖ°í, ÇöÀç ¹öÇÁ Å¸¿öÀÇ ·¹º§º¸´Ù ³ôÀº ¹öÇÁÀÌ¸é ÆÐ½º
+            // ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ°ï¿½ ï¿½Ö°ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½Ð½ï¿½
             if (weapon.BuffLevel > Level)
             {
                 continue;
             }
 
-            // ÇöÀç ¹öÇÁ Å¸¿ö¿Í ´Ù¸¥ Å¸¿öÀÇ °Å¸®¸¦ °Ë»çÇØ¼­ ¹üÀ§ ¾È¿¡ Å¸¿ö°¡ ÀÖÀ¸¸é
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½È¿ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (Vector3.Distance(weapon.transform.position, transform.position) <= towerTemplate.weapon[level].range)
             {
-                // °ø°ÝÀÌ °¡´ÉÇÑ Ä³³í, ·¹ÀÌÀú Å¸¿öÀÌ¸é
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½Ì¸ï¿½
                 if (weapon.WeaponType == WeaponType.Gun || weapon.WeaponType == WeaponType.Laser ||
                     weapon.WeaponType == WeaponType.Explosion || weapon.WeaponType == WeaponType.Mortar ||
                     weapon.WeaponType == WeaponType.Shotgun || weapon.WeaponType == WeaponType.Spear)
                 {
-                    // ¹öÇÁ¿¡ ÀÇÇØ °ø°Ý·Â Áõ°¡
+                    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý·ï¿½ ï¿½ï¿½ï¿½ï¿½
                     weapon.AddedDamage = weapon.Damage * (towerTemplate.weapon[level].buff);
-                    // Å¸¿ö°¡ ¹Þ°í ÀÖ´Â ¹öÇÁ ·¹º§ ¼³Á¤
+                    // Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Þ°ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                     weapon.BuffLevel = Level;
                     weapon.buffTower = this;
                 }
@@ -338,14 +338,14 @@ public class TowerWeapon : MonoBehaviour
 
     private Transform FindClosestAttackTarget()
     {
-        // Á¦ÀÏ °¡±îÀÌ ÀÖ´Â ÀûÀ» Ã£±â À§ÇØ ÃÖÃÊ °Å¸®¸¦ ÃÖ´ëÇÑ Å©°Ô ¼³Á¤
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         // float closestDistSqr = Mathf.Infinity;
-        // EnemySpawnerÀÇ EnemyList¿¡ ÀÖ´Â ÇöÀç ¸Ê¿¡ Á¸ÀçÇÏ´Â ¸ðµç Àû °Ë»ç
+        // EnemySpawnerï¿½ï¿½ EnemyListï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ë»ï¿½
         //Debug.Log(enemySpawner.EnemyList.Count);
         for (int i = 0; i < enemySpawner.EnemyList.Count; ++i)
         {
             float distance = Vector3.Distance(enemySpawner.EnemyList[i].transform.position, transform.position);
-            // ÇöÀç °Ë»çÁßÀÎ Àû°úÀÇ °Å¸®°¡ °ø°Ý¹üÀ§ ³»¿¡ ÀÖ°í, ÇöÀç±îÁö °Ë»çÇÑ Àûº¸´Ù °Å¸®°¡ °¡±î¿ì¸é
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (distance <= towerTemplate.weapon[level].range)// && distance <= closestDistSqr)
             {
                 // closestDistSqr = distance;
@@ -360,12 +360,12 @@ public class TowerWeapon : MonoBehaviour
 
     private bool IsPossibleToAttackTarget()
     {
-        // targetÀÌ ÀÖ´ÂÁö °Ë»ç (´Ù¸¥ ¹ß»çÃ¼¿¡ ÀÇÇØ Á¦°Å, Goal ÁöÁ¡±îÁö ÀÌµ¿ÇØ »èÁ¦ µî)
+        // targetï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ (ï¿½Ù¸ï¿½ ï¿½ß»ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, Goal ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½)
         if (attackTarget == null || !attackTarget.gameObject.activeSelf)
         {
             return false;
         }
-        // targetÀÌ °ø°Ý ¹üÀ§ ¾È¿¡ ÀÖ´ÂÁö °Ë»ç (°ø°Ý ¹üÀ§¸¦ ¹þ¾î³ª¸é »õ·Î¿î Àû Å½»ö)
+        // targetï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½È¿ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½î³ªï¿½ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ Å½ï¿½ï¿½)
         float distance = Vector3.Distance(attackTarget.position, transform.position);
         if (distance > towerTemplate.weapon[level].range || !attackTarget.gameObject.activeSelf)
         {
@@ -381,14 +381,14 @@ public class TowerWeapon : MonoBehaviour
     {
         if (attackTarget != null)
         {
-            GameObject clone;                                                                   // ¿ÀºêÁ§Æ® Pool¿¡¼­ DequeueÇØ¼­ °¡Á®¿È, 0¹ø : coco
+            GameObject clone;                                                                   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® Poolï¿½ï¿½ï¿½ï¿½ Dequeueï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, 0ï¿½ï¿½ : coco
             if (!ObjectPool.instance.objectPoolList[0].TryDequeue(out clone))
             {
                 clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
             }
-            clone.transform.position = spawnPoint.position;                                     // DequeueÇØ¼­ °¡Á®¿Â ProjectileÀÇ positionÀ» SpawnPoint·Î ¹Ù²Ù¾î ÁÜ
-            // »ý¼ºµÈ ¹ß»çÃ¼¿¡°Ô °ø°Ý´ë»ó(attackTarget) Á¤º¸ Á¦°ø   
-            // °ø°Ý·Â = Å¸¿ö ±âº» °ø°Ý·Â + ¹öÇÁ¿¡ ÀÇÇØ Ãß°¡µÈ °ø°Ý·Â
+            clone.transform.position = spawnPoint.position;                                     // Dequeueï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Projectileï¿½ï¿½ positionï¿½ï¿½ SpawnPointï¿½ï¿½ ï¿½Ù²Ù¾ï¿½ ï¿½ï¿½
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý´ï¿½ï¿½(attackTarget) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½   
+            // ï¿½ï¿½ï¿½Ý·ï¿½ = Å¸ï¿½ï¿½ ï¿½âº» ï¿½ï¿½ï¿½Ý·ï¿½ + ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý·ï¿½
             float damage = towerTemplate.weapon[level].damage + AddedDamage;
             if (IsPossibleToAttackTarget())
                 clone.GetComponent<Projectile>().Setup(attackTarget, damage);
@@ -401,7 +401,7 @@ public class TowerWeapon : MonoBehaviour
     {
         if (attackTarget != null)
         {
-            GameObject clone1;                                                                   // ¿ÀºêÁ§Æ® Pool¿¡¼­ DequeueÇØ¼­ °¡Á®¿È, 1¹ø : jelly
+            GameObject clone1;                                                                   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® Poolï¿½ï¿½ï¿½ï¿½ Dequeueï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, 1ï¿½ï¿½ : jelly
             GameObject clone2;
             GameObject clone3;
 
@@ -416,10 +416,10 @@ public class TowerWeapon : MonoBehaviour
             clone2.transform.position = spawnPoint.position;
             clone3.transform.position = spawnPoint.position;
 
-            // »ý¼ºµÈ ¹ß»çÃ¼¿¡°Ô °ø°Ý´ë»ó(attackTarget) Á¤º¸ Á¦°ø
-            // °ø°Ý·Â = Å¸¿ö ±âº» °ø°Ý·Â + ¹öÇÁ¿¡ ÀÇÇØ Ãß°¡µÈ °ø°Ý·Â
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý´ï¿½ï¿½(attackTarget) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            // ï¿½ï¿½ï¿½Ý·ï¿½ = Å¸ï¿½ï¿½ ï¿½âº» ï¿½ï¿½ï¿½Ý·ï¿½ + ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý·ï¿½
             float damage = towerTemplate.weapon[level].damage + AddedDamage;
-            // ¼¼ °¥·¡·Î ³ª´©¾îÁö´Â °ø°ÝÀ» À§ÇØ Vector3.left, right¸¦ ´õÇØÁÜ
+            // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Vector3.left, rightï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (IsPossibleToAttackTarget())
             {
                 Vector3 targetPos = attackTarget.position;
@@ -438,20 +438,20 @@ public class TowerWeapon : MonoBehaviour
         }
     }
 
-    // Æø¹ß ÃÑ¾Ë »ý¼º
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½ï¿½
     private void SpawnProjectile_Explosion()
     {
-        //Debug.Log("¹ß»ç");
+        //Debug.Log("ï¿½ß»ï¿½");
         if (attackTarget != null)
         {
-            GameObject clone;                                                                   // ¿ÀºêÁ§Æ® Pool¿¡¼­ DequeueÇØ¼­ °¡Á®¿È, 2¹ø : icecream
+            GameObject clone;                                                                   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® Poolï¿½ï¿½ï¿½ï¿½ Dequeueï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, 2ï¿½ï¿½ : icecream
             if (!ObjectPool.instance.objectPoolList[2].TryDequeue(out clone))
             {
                 clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
             }
-            clone.transform.position = spawnPoint.position;                                     // DequeueÇØ¼­ °¡Á®¿Â ProjectileÀÇ positionÀ» SpawnPoint·Î ¹Ù²Ù¾î ÁÜ
-            // »ý¼ºµÈ ¹ß»çÃ¼¿¡°Ô °ø°Ý´ë»ó(attackTarget) Á¤º¸ Á¦°ø
-            // °ø°Ý·Â = Å¸¿ö ±âº» °ø°Ý·Â + ¹öÇÁ¿¡ ÀÇÇØ Ãß°¡µÈ °ø°Ý·Â
+            clone.transform.position = spawnPoint.position;                                     // Dequeueï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Projectileï¿½ï¿½ positionï¿½ï¿½ SpawnPointï¿½ï¿½ ï¿½Ù²Ù¾ï¿½ ï¿½ï¿½
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý´ï¿½ï¿½(attackTarget) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            // ï¿½ï¿½ï¿½Ý·ï¿½ = Å¸ï¿½ï¿½ ï¿½âº» ï¿½ï¿½ï¿½Ý·ï¿½ + ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý·ï¿½
             float damage = towerTemplate.weapon[level].damage + AddedDamage;
             if (IsPossibleToAttackTarget())
                 clone.GetComponent<Projectile_Explosion>().Setup(attackTarget, damage, Range, ExplosionRange);
@@ -460,18 +460,18 @@ public class TowerWeapon : MonoBehaviour
         }
     }
 
-    // ¹Ú°ÝÆ÷ ÃÑ¾Ë »ý¼º
+    // ï¿½Ú°ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½ï¿½
     private void SpawnMortarProjectile()
     {
         //GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-        GameObject clone;                                                                   // ¿ÀºêÁ§Æ® Pool¿¡¼­ DequeueÇØ¼­ °¡Á®¿È, 3¹ø : milk
+        GameObject clone;                                                                   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® Poolï¿½ï¿½ï¿½ï¿½ Dequeueï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, 3ï¿½ï¿½ : milk
         if (!ObjectPool.instance.objectPoolList[3].TryDequeue(out clone))
         {
             clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
         }
-        clone.transform.position = spawnPoint.position;                                     // DequeueÇØ¼­ °¡Á®¿Â ProjectileÀÇ positionÀ» SpawnPoint·Î ¹Ù²Ù¾î ÁÜ
-        // »ý¼ºµÈ ¹ß»çÃ¼¿¡°Ô °ø°Ý´ë»ó(attackTarget) Á¤º¸ Á¦°ø
-        // °ø°Ý·Â = Å¸¿ö ±âº» °ø°Ý·Â + ¹öÇÁ¿¡ ÀÇÇØ Ãß°¡µÈ °ø°Ý·Â
+        clone.transform.position = spawnPoint.position;                                     // Dequeueï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Projectileï¿½ï¿½ positionï¿½ï¿½ SpawnPointï¿½ï¿½ ï¿½Ù²Ù¾ï¿½ ï¿½ï¿½
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý´ï¿½ï¿½(attackTarget) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        // ï¿½ï¿½ï¿½Ý·ï¿½ = Å¸ï¿½ï¿½ ï¿½âº» ï¿½ï¿½ï¿½Ý·ï¿½ + ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý·ï¿½
         float damage = towerTemplate.weapon[level].damage + AddedDamage;
         if (IsPossibleToAttackTarget())
             clone.GetComponent<ProjectileMortar>().Setup(attackTarget, damage, enemySpawner, ExplosionRange);
@@ -481,14 +481,14 @@ public class TowerWeapon : MonoBehaviour
 
     private void SpawnProjectile_Strawberry()
     {
-        GameObject clone;                                                                   // ¿ÀºêÁ§Æ® Pool¿¡¼­ DequeueÇØ¼­ °¡Á®¿È, 4¹ø : strawberry
+        GameObject clone;                                                                   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® Poolï¿½ï¿½ï¿½ï¿½ Dequeueï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, 4ï¿½ï¿½ : strawberry
         if (!ObjectPool.instance.objectPoolList[4].TryDequeue(out clone))
         {
             clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
         }
-        clone.transform.position = spawnPoint.position;                                     // DequeueÇØ¼­ °¡Á®¿Â ProjectileÀÇ positionÀ» SpawnPoint·Î ¹Ù²Ù¾î ÁÜ
-        // »ý¼ºµÈ ¹ß»çÃ¼¿¡°Ô °ø°Ý´ë»ó(attackTarget) Á¤º¸ Á¦°ø
-        // °ø°Ý·Â = Å¸¿ö ±âº» °ø°Ý·Â + ¹öÇÁ¿¡ ÀÇÇØ Ãß°¡µÈ °ø°Ý·Â
+        clone.transform.position = spawnPoint.position;                                     // Dequeueï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Projectileï¿½ï¿½ positionï¿½ï¿½ SpawnPointï¿½ï¿½ ï¿½Ù²Ù¾ï¿½ ï¿½ï¿½
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý´ï¿½ï¿½(attackTarget) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        // ï¿½ï¿½ï¿½Ý·ï¿½ = Å¸ï¿½ï¿½ ï¿½âº» ï¿½ï¿½ï¿½Ý·ï¿½ + ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý·ï¿½
         float damage = towerTemplate.weapon[level].damage + AddedDamage;
         if (IsPossibleToAttackTarget())
             clone.GetComponent<ProjectileStrawberry>().Setup(attackTarget, enemySpawner, ExplosionRange);
@@ -500,14 +500,14 @@ public class TowerWeapon : MonoBehaviour
     {
         if (attackTarget != null)
         {
-            GameObject clone;                                                                   // ¿ÀºêÁ§Æ® Pool¿¡¼­ DequeueÇØ¼­ °¡Á®¿È, 5¹ø : spear
+            GameObject clone;                                                                   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® Poolï¿½ï¿½ï¿½ï¿½ Dequeueï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, 5ï¿½ï¿½ : spear
             if (!ObjectPool.instance.objectPoolList[5].TryDequeue(out clone))
             {
                 clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
             }
-            clone.transform.position = spawnPoint.position;                                     // DequeueÇØ¼­ °¡Á®¿Â ProjectileÀÇ positionÀ» SpawnPoint·Î ¹Ù²Ù¾î ÁÜ
-            // »ý¼ºµÈ ¹ß»çÃ¼¿¡°Ô °ø°Ý´ë»ó(attackTarget) Á¤º¸ Á¦°ø
-            // °ø°Ý·Â = Å¸¿ö ±âº» °ø°Ý·Â + ¹öÇÁ¿¡ ÀÇÇØ Ãß°¡µÈ °ø°Ý·Â
+            clone.transform.position = spawnPoint.position;                                     // Dequeueï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Projectileï¿½ï¿½ positionï¿½ï¿½ SpawnPointï¿½ï¿½ ï¿½Ù²Ù¾ï¿½ ï¿½ï¿½
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý´ï¿½ï¿½(attackTarget) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            // ï¿½ï¿½ï¿½Ý·ï¿½ = Å¸ï¿½ï¿½ ï¿½âº» ï¿½ï¿½ï¿½Ý·ï¿½ + ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý·ï¿½
             float damage = towerTemplate.weapon[level].damage + AddedDamage;
             if (IsPossibleToAttackTarget())
                 clone.GetComponent<Projectile_Spear>().Setup(attackTarget, damage, Range);
@@ -533,19 +533,19 @@ public class TowerWeapon : MonoBehaviour
         Vector3 direction = attackTarget.position - spawnPoint.position;
         RaycastHit2D[] hit = Physics2D.RaycastAll(spawnPoint.position, direction, towerTemplate.weapon[level].range, targetLayer);
 
-        // °°Àº ¹æÇâÀ¸·Î ¿©·¯ °³ÀÇ ±¤¼±À» ½÷¼­ ±× Áß ÇöÀç attackTarget°ú µ¿ÀÏÇÑ ¿ÀºêÁ§Æ®¸¦ °ËÃâ
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ attackTargetï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         for (int i = 0; i < hit.Length; ++i)
         {
             if (hit[i].transform == attackTarget)
             {
-                // ¼±ÀÇ ½ÃÀÛÁöÁ¡
+                // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 lineRenderer.SetPosition(0, spawnPoint.position);
-                // ¼±ÀÇ ¸ñÇ¥ÁöÁ¡
+                // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½
                 lineRenderer.SetPosition(1, new Vector3(hit[i].point.x, hit[i].point.y, 0) + Vector3.back);
-                // Å¸°Ý È¿°ú À§Ä¡ ¼³Á¤
+                // Å¸ï¿½ï¿½ È¿ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
                 hitEffect.position = hit[i].point;
-                // Àû Ã¼·Â °¨¼Ò (1ÃÊ¿¡ damage¸¸Å­ °¨¼Ò)
-                // °ø°Ý·Â = Å¸¿ö ±âº» °ø°Ý·Â + ¹öÇÁ¿¡ ÀÇÇØ Ãß°¡µÈ °ø°Ý·Â
+                // ï¿½ï¿½ Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (1ï¿½Ê¿ï¿½ damageï¿½ï¿½Å­ ï¿½ï¿½ï¿½ï¿½)
+                // ï¿½ï¿½ï¿½Ý·ï¿½ = Å¸ï¿½ï¿½ ï¿½âº» ï¿½ï¿½ï¿½Ý·ï¿½ + ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý·ï¿½
                 float damage = towerTemplate.weapon[level].damage + AddedDamage;
 
                 attackTarget.GetComponent<EnemyHP>().TakeLaserDamage(damage * Time.deltaTime);
@@ -556,31 +556,31 @@ public class TowerWeapon : MonoBehaviour
 
     public bool Upgrade_1()
     {
-        // Å¸¿ö ¼³Ä¡ »ç¿îµå Àç»ý
+        // Å¸ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         SoundManager.instance.SFXPlay("TowerUpgrade", upgradeClip);
-        // Å¸¿ö ¾÷±×·¹ÀÌµå¿¡ ÇÊ¿äÇÑ °ñµå°¡ ÃæºÐÇÑÁö °Ë»ç
+        // Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½×·ï¿½ï¿½Ìµå¿¡ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½å°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
         if (playerGold.CurrentGold < towerTemplate.weapon[level + 1].cost)
         {
             return false;
         }
 
-        // Å¸¿ö ·¹º§ Áõ°¡
+        // Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         level++;
-        // Å¸¿ö ¿ÜÇü º¯°æ (Sprite)
+        // Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (Sprite)
         spriteRenderer.sprite = towerTemplate.weapon[level].sprite;
-        // °ñµå Â÷°¨
+        // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         playerGold.CurrentGold -= towerTemplate.weapon[level].cost;
 
-        // ¹«±â ¼Ó¼ºÀÌ ·¹ÀÌÀúÀÌ¸é
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½
         if (weaponType == WeaponType.Laser)
         {
-            // ·¹º§¿¡ µû¶ó ·¹ÀÌÀúÀÇ ±½±â ¼³Á¤
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             lineRenderer.startWidth = 0.05f + level * 0.05f;
             lineRenderer.endWidth = 0.05f;
         }
 
-        // Å¸¿ö°¡ ¾÷±×·¹ÀÌµå µÉ ¶§ ¸ðµç ¹öÇÁ Å¸¿öÀÇ ¹öÇÁ È¿°ú °»½Å
-        // ÇöÀç Å¸¿ö°¡ ¹öÇÁ Å¸¿öÀÎ °æ¿ì, ÇöÀç Å¸¿ö°¡ °ø°Ý Å¸¿öÀÎ °æ¿ì
+        // Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½×·ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        // ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         towerSpawner.OnBuffAllBuffTowers();
 
         return true;
@@ -588,31 +588,31 @@ public class TowerWeapon : MonoBehaviour
 
     public bool Upgrade_2()
     {
-        // Å¸¿ö ¼³Ä¡ »ç¿îµå Àç»ý
+        // Å¸ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         SoundManager.instance.SFXPlay("TowerUpgrade", upgradeClip);
-        // Å¸¿ö ¾÷±×·¹ÀÌµå¿¡ ÇÊ¿äÇÑ °ñµå°¡ ÃæºÐÇÑÁö °Ë»ç
+        // Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½×·ï¿½ï¿½Ìµå¿¡ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½å°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
         if (playerGold.CurrentGold < towerTemplate.weapon[level + 2].cost)
         {
             return false;
         }
 
-        // Å¸¿ö ·¹º§ Áõ°¡
+        // Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         level += 2;
-        // Å¸¿ö ¿ÜÇü º¯°æ (Sprite)
+        // Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (Sprite)
         spriteRenderer.sprite = towerTemplate.weapon[level].sprite;
-        // °ñµå Â÷°¨
+        // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         playerGold.CurrentGold -= towerTemplate.weapon[level].cost;
 
-        // ¹«±â ¼Ó¼ºÀÌ ·¹ÀÌÀúÀÌ¸é
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½
         if (weaponType == WeaponType.Laser)
         {
-            // ·¹º§¿¡ µû¶ó ·¹ÀÌÀúÀÇ ±½±â ¼³Á¤
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             lineRenderer.startWidth = 0.05f + (level) * 0.05f;
             lineRenderer.endWidth = 0.05f;
         }
 
-        // Å¸¿ö°¡ ¾÷±×·¹ÀÌµå µÉ ¶§ ¸ðµç ¹öÇÁ Å¸¿öÀÇ ¹öÇÁ È¿°ú °»½Å
-        // ÇöÀç Å¸¿ö°¡ ¹öÇÁ Å¸¿öÀÎ °æ¿ì, ÇöÀç Å¸¿ö°¡ °ø°Ý Å¸¿öÀÎ °æ¿ì
+        // Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½×·ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        // ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         towerSpawner.OnBuffAllBuffTowers();
 
         return true;
@@ -620,14 +620,14 @@ public class TowerWeapon : MonoBehaviour
 
     public void Sell()
     {
-        // Å¸¿ö ÆÇ¸Å »ç¿îµå Àç»ý
+        // Å¸ï¿½ï¿½ ï¿½Ç¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         SoundManager.instance.SFXPlay("TowerSell", sellClip);
-        // °ñµå Áõ°¡
+        // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         playerGold.CurrentGold += towerTemplate.weapon[level].sell;
-        // ÇöÀç Å¸ÀÏ¿¡ ´Ù½Ã Å¸¿ö °Ç¼³ÀÌ °¡´ÉÇÏµµ·Ï ¼³Á¤
+        // ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½Ï¿ï¿½ ï¿½Ù½ï¿½ Å¸ï¿½ï¿½ ï¿½Ç¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         ownerTile.IsBuildTower = false;
 
-        // ÇöÀç ¸Ê¿¡ ¹èÄ¡µÈ "Tower" ÅÂ±×¸¦ °¡Áø ¸ðµç ¿ÀºêÁ§Æ® Å½»ö
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ "Tower" ï¿½Â±×¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® Å½ï¿½ï¿½
         GameObject[] towers = GameObject.FindGameObjectsWithTag("Tower");
 
         for (int i = 0; i < towers.Length; ++i)
@@ -638,12 +638,12 @@ public class TowerWeapon : MonoBehaviour
         }
         towerSpawner.OnBuffAllBuffTowers();
 
-        // ÆÇ¸Å ÀÌÆåÆ® º¸¿©ÁÖ±â
+        // ï¿½Ç¸ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
         towerSpawner.sellEffect.SetActive(true);
         towerSpawner.sellEffect.GetComponent<TowerBuildEffect>().Boom();
         towerSpawner.sellEffect.transform.position = transform.position + Vector3.down / 2;
 
-        // Å¸¿ö ÆÄ±«
+        // Å¸ï¿½ï¿½ ï¿½Ä±ï¿½
         Destroy(gameObject);
     }
 }
@@ -652,21 +652,21 @@ public class TowerWeapon : MonoBehaviour
 /*
  * File : TowerWeapon.cs
  * Desc
- *	: ÀûÀ» °ø°ÝÇÏ´Â Å¸¿ö ¹«±â
+ *	: ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
  *	
  * Functions
- *	: ChangeState() - ÄÚ·çÆ¾À» ÀÌ¿ëÇÑ FSM¿¡¼­ »óÅÂ º¯°æ ÇÔ¼ö
- *	: RotateToTarget() - target ¹æÇâÀ¸·Î o
- *	: SearchTarget() - ÇöÀç Å¸¿ö¿¡ °¡Àå ±ÙÁ¢ÇÑ Àû Å½»ö
- *	: TryAttackGun() - targetÀ¸·Î ¼³Á¤µÈ ´ë»ó¿¡°Ô Ä³³í °ø°Ý
- *	: TryAttackLaser() - targetÀ¸·Î ¼³Á¤µÈ ´ë»ó¿¡°Ô ·¹ÀÌÀú °ø°Ý
- *	: FindClosestAttackTarget() - ÇöÀç Å¸¿ö¿¡ °¡Àå ±ÙÁ¢ÇÑ °ø°Ý ´ë»ó(Àû) Å½»ö
- *	: IsPossibleToAttackTarget() - AttackTargetÀÌ ÀÖ´ÂÁö, °ø°Ý °¡´ÉÇÑÁö °Ë»ç
- *	: SpawnProjectile() - Ä³³í ¹ß»çÃ¼ »ý¼º
- *	: EnableLaser() - ·¹ÀÌÀú, ·¹ÀÌÀú Å¸°Ý È¿°ú È°¼ºÈ­
- *	: DisableLaser() - ·¹ÀÌÀú, ·¹ÀÌÀú Å¸°Ý È¿°ú ºñÈ°¼ºÈ­
- *	: SpawnLaser() - ·¹ÀÌÀú °ø°Ý, ·¹ÀÌÀú Å¸°Ý È¿°ú, Àû Ã¼·Â °¨¼Ò
- *	: Upgrade() - Å¸¿ö ¾÷±×·¹ÀÌµå
- *	: Sell() - Å¸¿ö ÆÇ¸Å
+ *	: ChangeState() - ï¿½Ú·ï¿½Æ¾ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ FSMï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
+ *	: RotateToTarget() - target ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ o
+ *	: SearchTarget() - ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Å½ï¿½ï¿½
+ *	: TryAttackGun() - targetï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ó¿¡°ï¿½ Ä³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+ *	: TryAttackLaser() - targetï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ó¿¡°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+ *	: FindClosestAttackTarget() - ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½(ï¿½ï¿½) Å½ï¿½ï¿½
+ *	: IsPossibleToAttackTarget() - AttackTargetï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
+ *	: SpawnProjectile() - Ä³ï¿½ï¿½ ï¿½ß»ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
+ *	: EnableLaser() - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ È¿ï¿½ï¿½ È°ï¿½ï¿½È­
+ *	: DisableLaser() - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ È¿ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
+ *	: SpawnLaser() - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ È¿ï¿½ï¿½, ï¿½ï¿½ Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+ *	: Upgrade() - Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½×·ï¿½ï¿½Ìµï¿½
+ *	: Sell() - Å¸ï¿½ï¿½ ï¿½Ç¸ï¿½
  *	
  */
