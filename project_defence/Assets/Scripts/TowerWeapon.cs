@@ -366,9 +366,10 @@ public class TowerWeapon : MonoBehaviour
 
     private void SpawnProjectile()
     {
-        if (attackTarget != null)
+        if (attackTarget != null || attackTarget.gameObject.activeSelf)
         {
             GameObject clone = ObjectPool.instance.objectPoolList[0].Dequeue();                 // 오브젝트 Pool에서 Dequeue해서 가져옴, 0번 : coco
+            Debug.Log("Dequeue : " + ObjectPool.instance.objectPoolList[0].Count);
             clone.transform.position = spawnPoint.position;                                     // Dequeue해서 가져온 Projectile의 position을 SpawnPoint로 바꾸어 줌
             // 생성된 발사체에게 공격대상(attackTarget) 정보 제공   
             // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
@@ -377,6 +378,7 @@ public class TowerWeapon : MonoBehaviour
                 clone.GetComponent<Projectile>().Setup(attackTarget, damage);
             else
                 clone.GetComponent<Projectile>().Setup(FindClosestAttackTarget(), damage);
+
         }
     }
 
@@ -385,6 +387,7 @@ public class TowerWeapon : MonoBehaviour
         if (attackTarget != null)
         {
             // 오브젝트 Pool에서 Dequeue해서 가져옴, 1번 : jelly
+            
             GameObject clone1 = ObjectPool.instance.objectPoolList[1].Dequeue();
             GameObject clone2 = ObjectPool.instance.objectPoolList[1].Dequeue();
             GameObject clone3 = ObjectPool.instance.objectPoolList[1].Dequeue();
