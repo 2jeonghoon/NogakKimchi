@@ -44,7 +44,12 @@ public class ProjectileMortar : Projectile
 
         // 포물선 이동을 위해 필요한 정보
         vStartPos = this.transform.position; // 시작지점
-        vEndPos = target.position;      // 도착지점
+
+        //타겟이 비활성화 상태면 시작지점에 쏘기
+        if (target == null || !target.gameObject.activeSelf) 
+            vEndPos = new Vector3(-10.5f, -1.5f, 0);
+        else
+            vEndPos = target.position;      // 도착지점
         fMaxHeight = vEndPos.y + 10f; // 포물선 최대높이
 
         fEndHeight = vEndPos.y - vStartPos.y;
@@ -77,6 +82,7 @@ public class ProjectileMortar : Projectile
 
         if (fTime >= fMaxTime-0.5f && this.transform.position.y <= vEndPos.y)
         {
+            Debug.Log("업데이트문 Mortar 펑!");
             GameObject clone = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
             clone.GetComponent<Explosion>().Setup(damage, explosionRange);
             ProjectileReturn(pool_idx);
@@ -90,6 +96,7 @@ public class ProjectileMortar : Projectile
         if (!collision.CompareTag("TileRoad")) return;         // 길타일이 아닌 대상과 부딪히면;
         if (collision.transform != Tile.transform) return;          // 현재 맞은게 타겟타일이 아니면
 
+        Debug.Log("트리거문 Mortar 펑!");
         GameObject clone = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
         clone.GetComponent<Explosion>().Setup(damage, explosionRange);
         ProjectileReturn(pool_idx);

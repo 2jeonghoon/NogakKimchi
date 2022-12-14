@@ -7,6 +7,7 @@ public class Movement2D : MonoBehaviour
 	[SerializeField]
 	private	Vector3	moveDirection = Vector3.zero;
 	private	float	baseMoveSpeed;
+	public float BaseMoveSpeed => baseMoveSpeed;
 
 	// moveSpeed 변수의 프로퍼티(Property) (Get 가능)
 	public float MoveSpeed

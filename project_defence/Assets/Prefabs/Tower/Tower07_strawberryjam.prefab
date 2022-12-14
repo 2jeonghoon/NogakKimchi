@@ -132,16 +132,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerTemplate: {fileID: 11400000, guid: 4bfa8f53c8b54c249921602b8dca82eb, type: 2}
   spawnPoint: {fileID: 4406233821235667900}
-  weaponType: 7
+  weaponType: 8
   tileType: 0
   buffTower: {fileID: 0}
-  projectilePrefab: {fileID: 4461503835666675623, guid: af01022ebb850f141bc49d45ce50d61c,
+  projectilePrefab: {fileID: 4461503835666675623, guid: 08519b753ebd80d41998a3e849733409,
     type: 3}
   lineRenderer: {fileID: 0}
   hitEffect: {fileID: 0}
   targetLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   buildClip: {fileID: 8300000, guid: 7c47b20bb9874304a809dc5580d403ba, type: 3}
   upgradeClip: {fileID: 8300000, guid: c5cb2ac29e89dbf43a9b644caaad45e6, type: 3}
   sellClip: {fileID: 8300000, guid: abdbbfd33a46f4549987385f85c536b5, type: 3}

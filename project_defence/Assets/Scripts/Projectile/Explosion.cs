@@ -6,13 +6,13 @@ public class Explosion : MonoBehaviour
 {
     private float damage;
 
-    private float fTime = 0;
-    Animator animator;
+    protected float fTime = 0;
+    protected Animator animator;
 
     // 폭발 사운드
     public AudioClip clip;
 
-    private void Awake()
+    protected void Awake()
     {
         animator = GetComponent<Animator>();
     }
@@ -25,18 +25,17 @@ public class Explosion : MonoBehaviour
         this.damage = damage;                       // 타워의 공격력
         this.transform.localScale = new Vector3(0.2f, 0.2f, 1) * scale;
     }
-    private void Update()
+    protected void Update()
     {
         fTime += Time.deltaTime;
         if(fTime >= 0.2f)
         {
             Boom();
             StartCoroutine("WaitForAnimation");
-            //Destroy(gameObject);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Enemy")) return;         // 적이 아닌 대상과 부딪히면
         collision.GetComponent<EnemyHP>().TakeDamage(damage);   // 적 체력을 damage만큼 감소
@@ -52,7 +51,7 @@ public class Explosion : MonoBehaviour
     }
 
     // 애니메이션 끝날 때 까지 대기 (1초)
-    IEnumerator WaitForAnimation()
+    protected IEnumerator WaitForAnimation()
     {
         float time = 0f;
 

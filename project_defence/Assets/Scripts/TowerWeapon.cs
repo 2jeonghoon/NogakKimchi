@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-public enum WeaponType { Gun = 0, Laser, Slow, Buff, Mortar, Shotgun, Spear, Explosion }
+public enum WeaponType { Gun = 0, Laser, Slow, Buff, Mortar, Shotgun, Spear, Explosion, Strawberry }
 public enum WeaponState
 {
     SearchTarget = 0, TryAttackGun, TryAttackLaser, TryAttackMortar,
-    TryAttackShotgun, TryAttackSpaer, TryAttackExplosion
+    TryAttackShotgun, TryAttackSpaer, TryAttackExplosion, TryAttackStrawberry
 }
 public enum TileType { One, Two };
 
@@ -92,11 +92,10 @@ public class TowerWeapon : MonoBehaviour
         this.ownerTile = ownerTile;
         //y좌표가 낮을수록 앞으로 나오게
         this.GetComponent<SpriteRenderer>().sortingOrder = -(int)this.transform.position.y + 10;
-
         // 무기 속성이 캐논, 레이저일 때
         if (weaponType == WeaponType.Gun || weaponType == WeaponType.Laser ||
             weaponType == WeaponType.Mortar || weaponType == WeaponType.Shotgun ||
-            weaponType == WeaponType.Spear || weaponType == WeaponType.Explosion)
+            weaponType == WeaponType.Spear || weaponType == WeaponType.Explosion || weaponType == WeaponType.Strawberry)
         {
             // 최초 상태를 WeaponState.SearchTarget으로 설정
             ChangeState(WeaponState.SearchTarget);
@@ -106,9 +105,12 @@ public class TowerWeapon : MonoBehaviour
     public void ChangeState(WeaponState newState)
     {
         // 이전에 재생중이던 상태 종료
+        //Debug.Log(weaponState.ToString());
         StopCoroutine(weaponState.ToString());
         // 상태 변경
         weaponState = newState;
+
+        //Debug.Log(weaponState.ToString());
         // 새로운 상태 재생
         StartCoroutine(weaponState.ToString());
     }
@@ -133,8 +135,7 @@ public class TowerWeapon : MonoBehaviour
         {
             // 현재 타워에 가장 가까이 있는 공격 대상(적) 탐색
             attackTarget = FindClosestAttackTarget();
-
-            if (attackTarget != null)
+            if (attackTarget != null && attackTarget.gameObject.activeSelf )
             {
                 if (weaponType == WeaponType.Gun)
                 {
@@ -160,8 +161,11 @@ public class TowerWeapon : MonoBehaviour
                 {
                     ChangeState(WeaponState.TryAttackExplosion);
                 }
+                else if(weaponType == WeaponType.Strawberry)
+                {
+                    ChangeState(WeaponState.TryAttackStrawberry);
+                }
             }
-
             yield return null;
         }
     }
@@ -287,6 +291,23 @@ public class TowerWeapon : MonoBehaviour
         }
     }
 
+    private IEnumerator TryAttackStrawberry()
+    {
+        while (true)
+        {
+            // target을 공격하는게 가능한지 검사
+            if (IsPossibleToAttackTarget() == false)
+            {
+                ChangeState(WeaponState.SearchTarget);
+                break;
+            }
+
+            // attackRate 시간만큼 대기
+            yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
+            // 관통 공격 (발사체 생성)
+            SpawnProjectile_Strawberry();
+        }
+    }
 
     public void OnBuffAroundTower()
     {
@@ -326,6 +347,7 @@ public class TowerWeapon : MonoBehaviour
         // 제일 가까이 있는 적을 찾기 위해 최초 거리를 최대한 크게 설정
        // float closestDistSqr = Mathf.Infinity;
         // EnemySpawner의 EnemyList에 있는 현재 맵에 존재하는 모든 적 검사
+        //Debug.Log(enemySpawner.EnemyList.Count);
         for (int i = 0; i < enemySpawner.EnemyList.Count; ++i)
         {
             float distance = Vector3.Distance(enemySpawner.EnemyList[i].transform.position, transform.position);
@@ -345,13 +367,13 @@ public class TowerWeapon : MonoBehaviour
     private bool IsPossibleToAttackTarget()
     {
         // target이 있는지 검사 (다른 발사체에 의해 제거, Goal 지점까지 이동해 삭제 등)
-        if (attackTarget == null)
+        if (attackTarget == null || !attackTarget.gameObject.activeSelf)
         {
             return false;
         }
         // target이 공격 범위 안에 있는지 검사 (공격 범위를 벗어나면 새로운 적 탐색)
         float distance = Vector3.Distance(attackTarget.position, transform.position);
-        if (distance > towerTemplate.weapon[level].range)
+        if (distance > towerTemplate.weapon[level].range || !attackTarget.gameObject.activeSelf)
         {
             attackTarget = null;
             return false;
@@ -441,6 +463,20 @@ public class TowerWeapon : MonoBehaviour
         else
             clone.GetComponent<ProjectileMortar>().Setup(FindClosestAttackTarget(), damage, enemySpawner, ExplosionRange);
     }
+
+    private void SpawnProjectile_Strawberry()
+    {
+        GameObject clone = ObjectPool.instance.objectPoolList[4].Dequeue();            // 오브젝트 Pool에서 Dequeue해서 가져옴, 4번 : strawberry
+        clone.transform.position = spawnPoint.position;                                     // Dequeue해서 가져온 Projectile의 position을 SpawnPoint로 바꾸어 줌
+        // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
+        // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
+        float damage = towerTemplate.weapon[level].damage + AddedDamage;
+        if (IsPossibleToAttackTarget())
+            clone.GetComponent<ProjectileStrawberry>().Setup(attackTarget, enemySpawner, ExplosionRange);
+        else
+            clone.GetComponent<ProjectileStrawberry>().Setup(FindClosestAttackTarget(), enemySpawner, ExplosionRange);
+    }
+
     private void SpawnProjectile_Spear()
     {
         if (attackTarget != null)
@@ -576,7 +612,7 @@ public class TowerWeapon : MonoBehaviour
         {
             towers[i].GetComponent<TowerWeapon>().BuffLevel = 0;
             towers[i].GetComponent<TowerWeapon>().AddedDamage = 0;
-            Debug.Log(towers[i].GetComponent<TowerWeapon>().AddedDamage);
+            //Debug.Log(towers[i].GetComponent<TowerWeapon>().AddedDamage);
         }
         towerSpawner.OnBuffAllBuffTowers();
 
