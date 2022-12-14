@@ -23,14 +23,14 @@ public class Projectile_Multiple : Projectile
         targetPos.y += y;
         this.damage = damage;           				// ?Ä?åÏùò Í≥µÍ≤©??
         this.direction = (targetPos - transform.position);
-        Debug.Log(direction);
+        //Debug.Log(direction);
         if (y == 1)
         {
-            direction = (direction * Mathf.Cos(45)).normalized;
+            direction = (direction * Mathf.Cos(45));//.normalized;
         }
         else
         {
-            direction = (direction * Mathf.Sin(45)).normalized;
+            direction = (direction * Mathf.Sin(45));//.normalized;
         }
     }
 

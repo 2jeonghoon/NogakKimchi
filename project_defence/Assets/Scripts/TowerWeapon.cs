@@ -418,15 +418,18 @@ public class TowerWeapon : MonoBehaviour
             // 세 갈래로 나누어지는 공격을 위해 Vector3.left, right를 더해줌
             if (IsPossibleToAttackTarget())
             {
+                Debug.Log("Target");
                 clone1.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage, -1);
                 clone2.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage);
                 clone3.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage, 1);
             }
             else
             {
-                clone1.GetComponent<Projectile_Multiple>().Setup(FindClosestAttackTarget().position, damage, -1);
-                clone2.GetComponent<Projectile_Multiple>().Setup(FindClosestAttackTarget().position, damage);
-                clone3.GetComponent<Projectile_Multiple>().Setup(FindClosestAttackTarget().position, damage, 1);
+                Debug.Log("Find");
+                Transform target = FindClosestAttackTarget();
+                clone1.GetComponent<Projectile_Multiple>().Setup(target.position, damage, -1);
+                clone2.GetComponent<Projectile_Multiple>().Setup(target.position, damage);
+                clone3.GetComponent<Projectile_Multiple>().Setup(target.position, damage, 1);
             }
         }
     }

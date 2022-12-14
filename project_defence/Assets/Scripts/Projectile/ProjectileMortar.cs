@@ -85,6 +85,7 @@ public class ProjectileMortar : Projectile
             Debug.Log("업데이트문 Mortar 펑!");
             GameObject clone = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
             clone.GetComponent<Explosion>().Setup(damage, explosionRange);
+            fTime = 0f;
             ProjectileReturn(pool_idx);
         }
     }
@@ -99,6 +100,7 @@ public class ProjectileMortar : Projectile
         Debug.Log("트리거문 Mortar 펑!");
         GameObject clone = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
         clone.GetComponent<Explosion>().Setup(damage, explosionRange);
+        fTime = 0f;
         ProjectileReturn(pool_idx);
     }
 

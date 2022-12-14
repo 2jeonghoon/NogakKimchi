@@ -84,6 +84,7 @@ public class ProjectileStrawberry : Projectile
             Debug.Log("¾÷µ¥ÀÌÆ®¹® Strawberry Æã!");
             GameObject clone = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
             clone.GetComponent<Explosion_Strawberry>().Setup(explosionRange);
+            fTime = 0f;
             ProjectileReturn(pool_idx);
         }
     }
@@ -98,6 +99,7 @@ public class ProjectileStrawberry : Projectile
         Debug.Log("Trigger¹® Strawberry Æã!");
         GameObject clone = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
         clone.GetComponent<Explosion_Strawberry>().Setup(explosionRange);
+        fTime = 0f;
         ProjectileReturn(pool_idx);
     }
 
