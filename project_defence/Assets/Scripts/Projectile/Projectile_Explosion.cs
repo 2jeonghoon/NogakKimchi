@@ -28,6 +28,8 @@ public class Projectile_Explosion : Projectile
         this.explosionRange = explosionRange;
         start_position = transform.position;
         direction = (target.position - transform.position).normalized;
+        this.pool_idx = 2;
+        gameObject.SetActive(true);					// ObjectPool을 사용하면서 SetActive(true)가 필요해짐
     }
 
     private void Update()
@@ -62,7 +64,7 @@ public class Projectile_Explosion : Projectile
         // 적을 맞춘 경우 해당 위치에서 폭발
         GameObject clone = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
         clone.GetComponent<Explosion>().Setup(damage, explosionRange);
-        Destroy(gameObject);                                    // 발사체 오브젝트 삭제
+        ProjectileReturn(pool_idx);
     }
 
 }

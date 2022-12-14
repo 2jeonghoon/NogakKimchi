@@ -56,12 +56,10 @@ public class WaveSystem : MonoBehaviour
 		// 현재 맵에 적이 없고, Wave가 남아있으면
 		if ( enemySpawner.EnemyList.Count == 0 && currentWaveIndex < waves.Length-1 )
 		{
-			Debug.Log("wave 시작");
 			// 인덱스의 시작이 -1이기 때문에 웨이브 인덱스 증가를 제일 먼저 함
 			currentWaveIndex ++;
 
 			// EnemySpawner의 StartWave() 함수 호출. 현재 웨이브 정보 제공
-			Debug.Log(waves[currentWaveIndex].wave.Length);
 			StartCoroutine("WaveSpawnEnemy");
 			// wave 진행 후 열릴 타워 설정
 		}
@@ -140,7 +138,6 @@ public class WaveSystem : MonoBehaviour
 		}
         else
         {
-			Debug.Log("gameSpeed : " + gameSpeed);
 			Time.timeScale = gameSpeed;
 			isfause = false;
 		}
@@ -159,7 +156,7 @@ public struct Wave
 {
     public  float        spawnTime;     // 현재 웨이브 적 생성 주기
     public  int          maxEnemyCount; // 현재 웨이브 적 등장 숫자
-    public  GameObject[] enemyPrefabs;  // 현재 웨이브 적 등장 종류
+    public  int[] enemyPrefabs;  // 현재 웨이브 적 등장 종류
 }
 
 

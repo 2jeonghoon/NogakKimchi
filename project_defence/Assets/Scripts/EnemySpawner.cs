@@ -31,6 +31,7 @@ public class EnemySpawner : MonoBehaviour
 	{
 		// 적 리스트 메모리 할당
 		enemyList = new List<Enemy>();
+		Debug.Log(enemyList);
 	}
 
 	public void StartWave(WaveEnemy waves, WaveSystem _waveSystem)
@@ -54,7 +55,6 @@ public class EnemySpawner : MonoBehaviour
 			// 현재 웨이브에서 생성한 적 숫자
 			int spawnEnemyCount = 0;
 			wave = currentWave.wave[i];
-			Debug.Log(wave.maxEnemyCount);
 			while (spawnEnemyCount < wave.maxEnemyCount)
 			{
 				// wave에서 count
@@ -63,22 +63,11 @@ public class EnemySpawner : MonoBehaviour
 				// 웨이브에 등장하는 적의 종류가 여러 종류일 때 임의의 적이 등장하도록 설정하고, 적 오브젝트 생성
 				int enemyIndex = Random.Range(0, wave.enemyPrefabs.Length);
 				//GameObject clone = Instantiate(wave.enemyPrefabs[enemyIndex]);
-				
-				GameObject clone;
-				if (!ObjectPool.instance.objectPoolList[enemyIndex].TryPeek(out clone))
-				{
-					ObjectPool.instance.insertQueue(enemyIndex);
-				}
-				clone = ObjectPool.instance.objectPoolList[enemyIndex].Dequeue();
-
-				Enemy enemy = clone.GetComponent<Enemy>();  // 방금 생성된 적의 Enemy 컴포넌트
-
-				clone.SetActive(true);
-				clone.transform.position = gameObject.transform.position;
-
+				GameObject clone = ObjectPool.instance.objectPoolList[wave.enemyPrefabs[enemyIndex] + 6].Dequeue();
+                Enemy enemy = clone.GetComponent<Enemy>();  // 방금 생성된 적의 Enemy 컴포넌트
 
 				// this는 나 자신 (자신의 EnemySpawner 정보)
-				enemy.Setup(this, wayPoints);                           // wayPoint 정보를 매개변수로 Setup() 호출
+				enemy.Setup(this, wayPoints, wave.enemyPrefabs[enemyIndex] + 6);                           // wayPoint 정보를 매개변수로 Setup() 호출
 				enemyList.Add(enemy);                                   // 리스트에 방금 생성된 적 정보 저장
 
 				SpawnEnemyHPSlider(clone);                              // 적 체력을 나타내는 Slider UI 생성 및 설정
@@ -91,11 +80,12 @@ public class EnemySpawner : MonoBehaviour
 			}
 		}
 	}
-	
-	public void DestroyEnemy(EnemyDestroyType type, Enemy enemy, int gold)
+
+    public void DestroyEnemy(EnemyDestroyType type, Enemy enemy, int gold)
 	{
-		// 적이 목표지점까지 도착했을 때
-		if ( type == EnemyDestroyType.Arrive )
+        enemyList.Remove(enemy);
+        // 적이 목표지점까지 도착했을 때
+        if ( type == EnemyDestroyType.Arrive )
 		{
 			// 플레이어의 체력 -1
 			playerHP.TakeDamage(1);
@@ -124,14 +114,12 @@ public class EnemySpawner : MonoBehaviour
 		}
 		
 		// 리스트에서 사망하는 적 정보 삭제
-		enemyList.Remove(enemy);
-
-		ObjectPool.instance.objectPoolList[enemy.enemyIndex].Enqueue(enemy.gameObject);
-		enemy.gameObject.SetActive(false);
-		enemy.isTarget = false;
-		// 적 오브젝트 삭제
-		//Destroy(enemy.gameObject);
-	}
+		//enemyList.Remove(enemy);
+        // 적 오브젝트 풀로 리턴
+        enemy.transform.position = ObjectPool.instance.transform.position;
+        enemy.gameObject.SetActive(false);
+        ObjectPool.instance.objectPoolList[enemy.Pool_Idx].Enqueue(enemy.gameObject);
+    }
 
 	public void SpawnEnemyHPSlider(GameObject enemy)
 	{
@@ -147,7 +135,6 @@ public class EnemySpawner : MonoBehaviour
 		sliderClone.GetComponent<SliderPositionAutoSetter>().Setup(enemy.transform);
 		// Slider UI에 자신의 체력 정보를 표시하도록 설정
 		sliderClone.GetComponent<EnemyHPViewer>().Setup(enemy.GetComponent<EnemyHP>());
-		enemy.GetComponent<Enemy>().setupHPSlider(sliderClone);
 	}
 }
 

@@ -5469,11 +5469,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 266347679}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.5, y: -1.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1471571879}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5492,15 +5491,8 @@ MonoBehaviour:
   waves:
   - wave:
     - spawnTime: 0.5
-      maxEnemyCount: 20
-      enemyPrefabs:
-      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
-    maxEnemyCount: 0
-  - wave:
-    - spawnTime: 1
-      maxEnemyCount: 20
-      enemyPrefabs:
-      - {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189, type: 3}
+      maxEnemyCount: 40
+      enemyPrefabs: 00000000
     maxEnemyCount: 0
   towerSpawner: {fileID: 240897077}
   enemySpawner: {fileID: 266347680}
@@ -22344,6 +22336,99 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 352294922}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1031197286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1031197288}
+  - component: {fileID: 1031197287}
+  m_Layer: 0
+  m_Name: ObjectPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1031197287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1031197286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c09ae121f609855499f1744d9c4eb07e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectInfos:
+  - objectName: coco
+    perfab: {fileID: 4461503835666675623, guid: d009f2b9f4d1a734ba1bb4b46c4aad1f,
+      type: 3}
+    count: 100
+  - objectName: jelly
+    perfab: {fileID: 4461503835666675623, guid: 39f676f0c1b70dc4eafb5f2eddbabb70,
+      type: 3}
+    count: 200
+  - objectName: icecream
+    perfab: {fileID: 4461503835666675623, guid: 3ccea99c6a2413e4bb2d3e684afc5e2f,
+      type: 3}
+    count: 50
+  - objectName: milk
+    perfab: {fileID: 4461503835666675623, guid: 5fa79304d91df0640a5005443b0155d0,
+      type: 3}
+    count: 50
+  - objectName: strawberry
+    perfab: {fileID: 4461503835666675623, guid: af01022ebb850f141bc49d45ce50d61c,
+      type: 3}
+    count: 50
+  - objectName: spear
+    perfab: {fileID: 3989452062942650229, guid: 36ee9807713eff04ea5ef99b0edb981e,
+      type: 3}
+    count: 50
+  - objectName: Basic
+    perfab: {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189,
+      type: 3}
+    count: 50
+  - objectName: Tanker
+    perfab: {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5,
+      type: 3}
+    count: 50
+  - objectName: Runner
+    perfab: {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189,
+      type: 3}
+    count: 50
+  - objectName: Witch
+    perfab: {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34,
+      type: 3}
+    count: 20
+  - objectName: Boss
+    perfab: {fileID: 63866560545116346, guid: 4878148eb0d7a8c46b4df9d7202a708c, type: 3}
+    count: 5
+  - objectName: HPSlider
+    perfab: {fileID: 6003947006283470158, guid: bfd6cac2502fb6a4d861fb4c336e937f,
+      type: 3}
+    count: 100
+  tfPoolParent: {fileID: 1031197288}
+--- !u!4 &1031197288
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1031197286}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -40, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1032145899 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3884440095573592033, guid: ae66bb3c4b39a1149ae6107bbc57a39c,
@@ -32292,71 +32377,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1466855388}
   m_CullTransparentMesh: 1
---- !u!1 &1471571878
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1471571879}
-  - component: {fileID: 1471571880}
-  m_Layer: 0
-  m_Name: ObjectPool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1471571879
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1471571878}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 266347681}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1471571880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1471571878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08157122ad0c4ec42baf55e6a3057b91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectInfos:
-  - objectName: Fresh
-    perfab: {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189,
-      type: 3}
-    count: 1
-  - objectName: Homi
-    perfab: {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5,
-      type: 3}
-    count: 1
-  - objectName: Hotcake
-    perfab: {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189,
-      type: 3}
-    count: 1
-  - objectName: Cupcake
-    perfab: {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34,
-      type: 3}
-    count: 1
-  - objectName: Boss
-    perfab: {fileID: 63866560545116346, guid: 4878148eb0d7a8c46b4df9d7202a708c, type: 3}
-    count: 5
-  tfPoolParent: {fileID: 1471571879}
 --- !u!4 &1473005696 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3884440095573592033, guid: ae66bb3c4b39a1149ae6107bbc57a39c,
@@ -44760,7 +44780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61135f547115e3548bd09440203e8a58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentGold: 650
+  currentGold: 10000
 --- !u!1001 &2028308002
 PrefabInstance:
   m_ObjectHideFlags: 0

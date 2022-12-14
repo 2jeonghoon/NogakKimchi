@@ -61,6 +61,8 @@ public class ProjectileMortar : Projectile
 
         fV_X = -(vStartPos.x - vEndPos.x)*2.04f / fEndTime;
         fV_Z = -(vStartPos.x - vEndPos.x) / fEndTime;
+        this.pool_idx = 3;
+        gameObject.SetActive(true);					// ObjectPool을 사용하면서 SetActive(true)가 필요해짐
     }
 
     private void Update()
@@ -77,7 +79,7 @@ public class ProjectileMortar : Projectile
         {
             GameObject clone = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
             clone.GetComponent<Explosion>().Setup(damage, explosionRange);
-            Destroy(gameObject);                                    // 발사체 오브젝트 삭제
+            ProjectileReturn(pool_idx);
         }
     }
 
@@ -90,7 +92,7 @@ public class ProjectileMortar : Projectile
 
         GameObject clone = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
         clone.GetComponent<Explosion>().Setup(damage, explosionRange);
-        Destroy(gameObject);                                    // 발사체 오브젝트 삭제
+        ProjectileReturn(pool_idx);
     }
 
 }
