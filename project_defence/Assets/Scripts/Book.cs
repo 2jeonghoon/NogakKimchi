@@ -18,6 +18,9 @@ public class Book : MonoBehaviour {
     public Canvas canvas;
 
     [SerializeField]
+    public float ypoint;
+
+    [SerializeField]
     RectTransform BookPanel;
     public Sprite background;
     public Sprite[] bookPages;
@@ -171,7 +174,7 @@ public class Book : MonoBehaviour {
     {
         //f = Vector3.Lerp(f, transformPoint(Input.mousePosition), Time.deltaTime * 10);
         Debug.Log(f);
-        f.y = -400f;
+        f.y = ypoint;
         if (mode == FlipMode.RightToLeft)
         {
             f = f - Vector3.right * page_speed;

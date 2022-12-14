@@ -8,8 +8,7 @@ public class Projectile_Spear : Projectile
 	private Vector3 direction;		// 가는 방향
 
 	private Vector3 start_pos;	// 시작 위치
-	private Vector3 cur_pos;		// 현재 위치
-
+	private Vector3 cur_pos;        // 현재 위치
 
 	public void Setup(Transform target, float damage, float range)
 	{
@@ -22,7 +21,9 @@ public class Projectile_Spear : Projectile
 
 		direction = (target.position - transform.position).normalized;
 		start_pos = this.transform.position;
-	}
+		this.pool_idx = 5;
+        gameObject.SetActive(true);                 // ObjectPool을 사용하면서 SetActive(true)가 필요해짐
+    }
 
 	private void Update()
 	{
@@ -31,14 +32,14 @@ public class Projectile_Spear : Projectile
 		// 발사체를 target의 위치로 이동
 		movement2D.MoveTo(direction);
 
-		// 사거리를 벗어났으면 삭제
+		// 사거리를 벗어났으면 반납
 		if (Vector3.Distance(start_pos, cur_pos) >= range)
         {
-			Destroy(gameObject);
+			ProjectileReturn(pool_idx);
         }
 	}
 
-	private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
 	{
 		//Debug.Log("충돌");
 		if (!collision.CompareTag("Enemy")) return;         // 적이 아닌 대상과 부딪히면

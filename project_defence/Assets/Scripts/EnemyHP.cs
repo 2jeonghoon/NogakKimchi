@@ -122,19 +122,23 @@ public class EnemyHP : MonoBehaviour
 
     private IEnumerator HitAlphaAnimation()
     {
-        // 현재 적의 색상을 color 변수에 저장
-        Color color = spriteRenderer.color;
-    
-        // 적의 투명도를 40%로 설정
-        color.a = 0.4f;
-        spriteRenderer.color = color;
-    
-        // 0.05초 동안 대기
-        yield return new WaitForSeconds(0.05f);
-    
-        // 적의 투명도를 100%로 설정
-        color.a = 1.0f;
-        spriteRenderer.color = color;
+        if (gameObject.activeSelf)
+        {
+            // 현재 적의 색상을 color 변수에 저장
+            Color color = spriteRenderer.color;
+
+            // 적의 투명도를 40%로 설정
+            color.a = 0.4f;
+            spriteRenderer.color = color;
+
+            // 0.05초 동안 대기
+            yield return new WaitForSeconds(0.05f);
+
+            // 적의 투명도를 100%로 설정
+            color.a = 1.0f;
+            spriteRenderer.color = color;
+        }
+        yield return new WaitForSeconds(0);
     }
 }
 

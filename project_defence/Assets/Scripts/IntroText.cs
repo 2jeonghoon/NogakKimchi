@@ -25,14 +25,16 @@ public class IntroText : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void NextStory() {
-        if(currentidx >= lastPage) return;
+    public void NextStory()
+    {
+        if (currentidx >= lastPage) return;
         currentidx += 1;
         ScriptText.text = introStoryArr[currentidx];
     }
 
-    public void PreviousStory() {
-        if(currentidx <= 0) return;
+    public void PreviousStory()
+    {
+        if (currentidx <= 0) return;
         currentidx -= 1;
         ScriptText.text = introStoryArr[currentidx];
     }

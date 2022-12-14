@@ -24,20 +24,29 @@ public class Projectile_Explosion : Projectile
         movement2D = GetComponent<Movement2D>();
         this.damage = damage;                       // 타워의 공격력
         this.target = target;                       // 타워가 설정해준 target
+        
         this.range = range;                         // 타워가 설정해준 range
         this.explosionRange = explosionRange;
         start_position = transform.position;
         direction = (target.position - transform.position).normalized;
+        this.pool_idx = 2;
+        if (target.gameObject.activeSelf)
+        {
+            gameObject.SetActive(true);					// ObjectPool을 사용하면서 SetActive(true)가 필요해짐   
+        }
     }
 
     private void Update()
     {
         move_distance = (transform.position - start_position).magnitude;
-        if(move_distance > range)
+        if (!target.gameObject.activeSelf) {
+            ProjectileReturn(pool_idx);
+        }
+        if (move_distance > range)
         {
             boom();
         }
-        if (target != null) // target이 존재하면
+        if (target != null || target.gameObject.activeSelf) // target이 존재하면
         {
             // 발사체를 target의 위치로 이동
             movement2D.MoveTo(direction);
@@ -62,7 +71,7 @@ public class Projectile_Explosion : Projectile
         // 적을 맞춘 경우 해당 위치에서 폭발
         GameObject clone = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
         clone.GetComponent<Explosion>().Setup(damage, explosionRange);
-        Destroy(gameObject);                                    // 발사체 오브젝트 삭제
+        ProjectileReturn(pool_idx);
     }
 
 }

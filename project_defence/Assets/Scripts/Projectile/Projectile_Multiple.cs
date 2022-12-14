@@ -5,17 +5,17 @@ using Unity.Profiling;
 public class Projectile_Multiple : Projectile
 {
     private Vector3 direction;
-    private Vector3 direction2;
 
     public void Setup(Vector3 targetPos, float damage)
 	{
-        // 발사 사운드 재생
+        // 諛쒖궗 ?ъ슫???ъ깮
         SoundManager.instance.SFXPlay("ShotGun", clip);
         movement2D	= GetComponent<Movement2D>();
 		this.damage	= damage;						// 타워의 공격력
         this.direction = (targetPos - transform.position).normalized;
-        direction2 = direction;
-	}
+        this.pool_idx = 1;
+        gameObject.SetActive(true);					// ObjectPool을 사용하면서 SetActive(true)가 필요해짐
+    }
 
     public void Setup(Vector3 targetPos, float damage, int y)
     {
@@ -23,15 +23,19 @@ public class Projectile_Multiple : Projectile
         targetPos.y += y;
         this.damage = damage;           				// 타워의 공격력
         this.direction = (targetPos - transform.position);
-        direction2 = direction;
         if (y == 1)
         {
-            direction = (direction * Mathf.Cos(45)).normalized;
+
+            direction = (direction * Mathf.Cos(45)).normalized;//.normalized;
+            direction.z = 1;
         }
         else
         {
-            direction = (direction * Mathf.Sin(45)).normalized;
-        }
+            direction = (direction * Mathf.Sin(45)).normalized;//.normalized;
+            direction.z = 1;
+        };
+        this.pool_idx = 1;
+        gameObject.SetActive(true);
     }
 
     private void Start() {
@@ -47,16 +51,20 @@ public class Projectile_Multiple : Projectile
     // 발사체가 생성된 후 2초가 지나도 삭제가 안된다면 삭제
     private IEnumerator Destroy_Projectile() {
         yield return new WaitForSeconds(2f);
-        Destroy(gameObject);
+
+        Debug.Log("projectile idx:" + pool_idx);
+        ProjectileReturn(pool_idx);
     }
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if ( !collision.CompareTag("Enemy") )	return;			// 적이 아닌 대상과 부딪히면
-		collision.GetComponent<EnemyHP>().TakeDamage(damage);	// 적 체력을 damage만큼 감소
+		if ( !collision.CompareTag("Enemy") )	return;         // 적이 아닌 대상과 부딪히면
+
         StopCoroutine("Destory_Projectile");
-		Destroy(gameObject);									// 발사체 오브젝트 삭제
-	}
+        collision.GetComponent<EnemyHP>().TakeDamage(damage);	// 적 체력을 damage만큼 감소
+        Debug.Log("OnTrigerPR");
+        ProjectileReturn(pool_idx);                                 
+    }
 }
 
 

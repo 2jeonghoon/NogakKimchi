@@ -5,18 +5,18 @@ using TMPro;
 public class TextTMPViewerTop : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI textPlayerHP;   // Text - TextMeshPro UI [?�레?�어??체력]
+    private TextMeshProUGUI textPlayerHP;   // Text - TextMeshPro UI [플레이어의 체력]
     [SerializeField]
-    private TextMeshProUGUI textWave;       // Text - TextMeshPro UI [?�재 ?�이�?/ �??�이�?
+    private TextMeshProUGUI textWave;       // Text - TextMeshPro UI [현재 웨이브 / 총 웨이브]
 
     [SerializeField]
-    private PlayerHP        playerHP;       // ?�레?�어??체력 ?�보
+    private PlayerHP playerHP;       // 플레이어의 체력 정보
     [SerializeField]
-    private WaveSystem      waveSystem;     // ?�이�??�보
+    private WaveSystem waveSystem;     // 웨이브 정보
 
     void Update()
     {
-        textPlayerHP.text   = playerHP.CurrentHP + "/" + playerHP.MaxHP;
-        textWave.text       = waveSystem.CurrentWave + "/" + waveSystem.MaxWave;
+        textPlayerHP.text = playerHP.CurrentHP + "/" + playerHP.MaxHP;
+        textWave.text = waveSystem.CurrentWave + "/" + waveSystem.MaxWave;
     }
 }
