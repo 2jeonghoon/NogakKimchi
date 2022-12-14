@@ -23376,7 +23376,7 @@ MonoBehaviour:
       type: 3}
     count: 50
   - objectName: strawberry
-    perfab: {fileID: 4461503835666675623, guid: af01022ebb850f141bc49d45ce50d61c,
+    perfab: {fileID: 4461503835666675623, guid: 08519b753ebd80d41998a3e849733409,
       type: 3}
     count: 50
   - objectName: spear
