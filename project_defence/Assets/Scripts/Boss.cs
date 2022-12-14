@@ -27,7 +27,7 @@ public class Boss : Enemy
 
     private PHASE phase = PHASE.ONE;
 
-    public override void Setup(EnemySpawner enemySpawner, Transform[] wayPoints)
+    public override void Setup(EnemySpawner enemySpawner, Transform[] wayPoints, int pool_idx)
     {
         Bossanimator = GetComponent<Animator>();
 
@@ -40,10 +40,10 @@ public class Boss : Enemy
         wayPointCount = wayPoints.Length;
         this.wayPoints = new Transform[wayPointCount];
         this.wayPoints = wayPoints;
-
+        this.pool_idx = pool_idx;
         // 적의 위치를 첫번째 wayPoint 위치로 설정
         transform.position = wayPoints[currentIndex].position;
-
+        gameObject.SetActive(true);					// ObjectPool을 사용하면서 SetActive(true)가 필요해짐
         // 적 이동/목표지점 설정 코루틴 함수 시작
         StartCoroutine("skill", delay_time);
         StartCoroutine("OnMove");
@@ -126,11 +126,12 @@ public class Boss : Enemy
         movement2D.MoveSpeed = 0;
 
         // 복사
-        GameObject clone = Instantiate(boss_clone);
+        //GameObject clone = Instantiate(boss_clone);
+        GameObject clone = ObjectPool.instance.objectPoolList[pool_idx].Dequeue();
         Enemy enemy = clone.GetComponent<Enemy>();	// 방금 생성된 적의 Enemy 컴포넌트
         clone.GetComponent<Animator>().SetBool("isClone", true);
         // 생성된 클론 위치 세팅
-        enemy.Setup(enemySpawner, this);      // 보스의 way데이터를 가지고 클론을 만듬.
+        enemy.Setup(enemySpawner, this, pool_idx);      // 보스의 way데이터를 가지고 클론을 만듬.
         enemy.transform.position = this.transform.position;
         enemy.transform.rotation = this.transform.rotation;
         // HP 바 생성
@@ -160,9 +161,10 @@ public class Boss : Enemy
         // 복사
         for(int i = 0; i < enemys.Length; i++)
         {
-            GameObject clone = Instantiate(enemys[i]);
+            //GameObject clone = Instantiate(enemys[i]);
+            GameObject clone = ObjectPool.instance.objectPoolList[i + 6].Dequeue();
             Enemy enemy = clone.GetComponent<Enemy>();  // 방금 생성된 적의 Enemy 컴포넌트된 클론 위치 세팅
-            enemy.Setup(enemySpawner, this);      // 보스의 way데이터를 가지고 클론을 만듬.
+            enemy.Setup(enemySpawner, this, i+6);      // 보스의 way데이터를 가지고 클론을 만듬.
             enemy.transform.position = this.transform.position;
             enemy.transform.rotation = this.transform.rotation;
 

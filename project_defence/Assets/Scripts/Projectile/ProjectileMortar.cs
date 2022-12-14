@@ -33,7 +33,6 @@ public class ProjectileMortar : Projectile
     private float fTime = 0f; // 흐르는 시간
     private float fMaxTime = 1f; // 최대높이까지 가는 시간
 
-    private int pool_idx = 8;
 
     public void Setup(Transform target, float damage, EnemySpawner enemySpawner, float explosionRange)
     {
@@ -60,8 +59,9 @@ public class ProjectileMortar : Projectile
         fEndTime = Mathf.Abs((-b + Mathf.Sqrt(b * b - 4 * a * c)) / (2 * a));
 
 
-        fV_X = -(vStartPos.x - vEndPos.x) * 2.04f / fEndTime;
+        fV_X = -(vStartPos.x - vEndPos.x)*2.04f / fEndTime;
         fV_Z = -(vStartPos.x - vEndPos.x) / fEndTime;
+        this.pool_idx = 3;
         gameObject.SetActive(true);					// ObjectPool을 사용하면서 SetActive(true)가 필요해짐
     }
 
@@ -75,7 +75,7 @@ public class ProjectileMortar : Projectile
         this.transform.position = vPos;
 
 
-        if (fTime >= fMaxTime - 0.5f && this.transform.position.y <= vEndPos.y)
+        if (fTime >= fMaxTime-0.5f && this.transform.position.y <= vEndPos.y)
         {
             GameObject clone = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
             clone.GetComponent<Explosion>().Setup(damage, explosionRange);

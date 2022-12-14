@@ -33,7 +33,6 @@ public class TowerSpawner : MonoBehaviour
 			//Debug.Log(towerTemplate[i].weapon[0].isLock);
 			if (!towerTemplate[i].weapon[0].isLock)
             {
-				Debug.Log(i);
 				_Lock[i].GetComponent<Lock>().LockOff();
 			}
         }
