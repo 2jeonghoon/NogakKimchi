@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 3910000170776866425}
   - component: {fileID: 9129527048580606695}
   - component: {fileID: 6339248814932543829}
-  - component: {fileID: 6024426147299452030}
+  - component: {fileID: -4289442602319322275}
   m_Layer: 0
-  m_Name: ProjectileMilk
+  m_Name: ProjectileStrawberry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -139,7 +139,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6024426147299452030
+--- !u!114 &-4289442602319322275
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,9 +148,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4461503835666675623}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce045f0a0d328c64c841ec796c4e3549, type: 3}
+  m_Script: {fileID: 11500000, guid: bed841d35fc54c84a92959243e80138d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 8401456349c492a489ed90469e317e43, type: 3}
-  explosionPrefab: {fileID: 7684957893073054618, guid: 3e17251b17f66474daea65106be1c349,
+  explosionPrefab: {fileID: 340548427297262521, guid: c8c3bf1200bcc7b4e904a238dd49312e,
     type: 3}

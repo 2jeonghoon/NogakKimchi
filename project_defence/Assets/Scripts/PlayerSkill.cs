@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerSkill : MonoBehaviour
 {
+    public static ObjectPool instance;
+
     [SerializeField]
     private Image instagram;
     [SerializeField]
@@ -14,16 +16,20 @@ public class PlayerSkill : MonoBehaviour
     [SerializeField]
     private PlayerHP playerHP;
 
-    private bool isInstagramOn;
-    private bool isToiletOn;
+    private bool isInstagramCanUse;
+    private bool isToiletCanUse;
 
     public int instagramCoolTime;
     public int toiletCoolTime;
 
+    private bool isInstagramOn;
+    public bool IsInstagramOn => isInstagramOn;
+
     private void Awake()
     {
-        isInstagramOn = true;
-        isToiletOn = true;
+        isInstagramCanUse = true;
+        isToiletCanUse = true;
+        isInstagramOn = false;
     }
 
     private IEnumerator CoolTime (Image image, float coolTime, int flag)
@@ -37,22 +43,21 @@ public class PlayerSkill : MonoBehaviour
         }
 
         if (flag == 0)
-            isInstagramOn = true;
+            isInstagramCanUse = true;
         else if (flag == 1)
-            isToiletOn = true;
+            isToiletCanUse = true;
     }
 
     private IEnumerator Skill_Instagram()
     {
-       
-
         float[] enemySpeed = new float[enemySpawner.EnemyList.Count];
 
         // enemy의 MoveSpeed를 받아와서 저장하고 0으로 세팅
         int idx = 0;
         foreach (Enemy enemy in enemySpawner.EnemyList)
         {
-            enemySpeed[idx] = enemy.GetMoveSpeed();
+            enemy.isInstagramOn = true;
+            enemySpeed[idx] = enemy.GetBaseMoveSpeed();
             enemy.SetMoveSpeed(0);
             idx++;
         }
@@ -63,6 +68,7 @@ public class PlayerSkill : MonoBehaviour
         foreach (Enemy enemy in enemySpawner.EnemyList)
         {
             enemy.SetMoveSpeed(enemySpeed[idx]);
+            enemy.isInstagramOn = false;
         }
     }
 
@@ -75,18 +81,18 @@ public class PlayerSkill : MonoBehaviour
 
     public void OnSkill_Instagram()
     {
-        if (isInstagramOn)
+        if (isInstagramCanUse)
         {
-            isInstagramOn = false;
+            isInstagramCanUse = false;
             StartCoroutine(Skill_Instagram());
             StartCoroutine(CoolTime(instagram, instagramCoolTime, 0));
         }
     }
     public void OnSkill_Toilet()
     {
-        if (isToiletOn && playerHP.CurrentHP != playerHP.MaxHP)
+        if (isToiletCanUse && playerHP.CurrentHP != playerHP.MaxHP)
         {
-            isToiletOn = false;
+            isToiletCanUse = false;
             Skill_Toilet();
             StartCoroutine(CoolTime(toilet, toiletCoolTime, 1));
         }

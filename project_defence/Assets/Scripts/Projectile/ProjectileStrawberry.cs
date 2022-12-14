@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 // 박격포 총알
-public class ProjectileMortar : Projectile
+public class ProjectileStrawberry : Projectile
 {
     //폭발 범위
     private float explosionRange;
@@ -34,19 +34,18 @@ public class ProjectileMortar : Projectile
     private float fMaxTime = 1f; // 최대높이까지 가는 시간
 
 
-    public void Setup(Transform target, float damage, EnemySpawner enemySpawner, float explosionRange)
+    public void Setup(Transform target, EnemySpawner enemySpawner, float explosionRange)
     {
         // 발사 사운드 재생
         //SoundManager.instance.SFXPlay("Mortar", clip);
         movement2D = GetComponent<Movement2D>();
-        this.damage = damage;                       // 타워의 공격력
         this.explosionRange = explosionRange;
 
         // 포물선 이동을 위해 필요한 정보
         vStartPos = this.transform.position; // 시작지점
 
         //타겟이 비활성화 상태면 시작지점에 쏘기
-        if (target == null || !target.gameObject.activeSelf) 
+        if (target == null || !target.gameObject.activeSelf)
             vEndPos = new Vector3(-10.5f, -1.5f, 0);
         else
             vEndPos = target.position;      // 도착지점
@@ -64,9 +63,9 @@ public class ProjectileMortar : Projectile
         fEndTime = Mathf.Abs((-b + Mathf.Sqrt(b * b - 4 * a * c)) / (2 * a));
 
 
-        fV_X = -(vStartPos.x - vEndPos.x)*2.04f / fEndTime;
+        fV_X = -(vStartPos.x - vEndPos.x) * 2.04f / fEndTime;
         fV_Z = -(vStartPos.x - vEndPos.x) / fEndTime;
-        this.pool_idx = 3;
+        this.pool_idx = 4;
         gameObject.SetActive(true);					// ObjectPool을 사용하면서 SetActive(true)가 필요해짐
     }
 
@@ -80,11 +79,11 @@ public class ProjectileMortar : Projectile
         this.transform.position = vPos;
 
 
-        if (fTime >= fMaxTime-0.5f && this.transform.position.y <= vEndPos.y)
+        if (fTime >= fMaxTime - 0.5f && this.transform.position.y <= vEndPos.y)
         {
-            Debug.Log("업데이트문 Mortar 펑!");
+            Debug.Log("업데이트문 Strawberry 펑!");
             GameObject clone = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
-            clone.GetComponent<Explosion>().Setup(damage, explosionRange);
+            clone.GetComponent<Explosion_Strawberry>().Setup(explosionRange);
             ProjectileReturn(pool_idx);
         }
     }
@@ -95,10 +94,10 @@ public class ProjectileMortar : Projectile
         if (Tile == null) return;
         if (!collision.CompareTag("TileRoad")) return;         // 길타일이 아닌 대상과 부딪히면;
         if (collision.transform != Tile.transform) return;          // 현재 맞은게 타겟타일이 아니면
-
-        Debug.Log("트리거문 Mortar 펑!");
+        
+        Debug.Log("Trigger문 Strawberry 펑!");
         GameObject clone = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
-        clone.GetComponent<Explosion>().Setup(damage, explosionRange);
+        clone.GetComponent<Explosion_Strawberry>().Setup(explosionRange);
         ProjectileReturn(pool_idx);
     }
 

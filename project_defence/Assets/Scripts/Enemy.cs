@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
 	protected	EnemySpawner	enemySpawner;		// 적의 삭제를 본인이 하지 않고 EnemySpawner에 알려서 삭제
 	[SerializeField]
 	protected int				gold;           // 적 사망 시 획득 가능한 골드
+	public bool isInstagramOn;					// 인스타그램을 맞았는지
 
 	protected int pool_idx;
 	public int Pool_Idx => pool_idx;
@@ -36,6 +37,7 @@ public class Enemy : MonoBehaviour
 		this.wayPoints = enemy.wayPoints;
 		this.currentIndex = enemy.currentIndex;
 		this.pool_idx = pool_idx;
+		this.isInstagramOn = false;
 		if (currentIndex - 1 >= 0)
         {
 			this.currentIndex = enemy.currentIndex - 1;
@@ -57,9 +59,10 @@ public class Enemy : MonoBehaviour
 		wayPointCount		= wayPoints.Length;
 		this.wayPoints		= new Transform[wayPointCount];
 		this.wayPoints		= wayPoints;
+        this.isInstagramOn = false;
 
-		// 적의 위치를 첫번째 wayPoint 위치로 설정
-		transform.position	= wayPoints[currentIndex].position;
+        // 적의 위치를 첫번째 wayPoint 위치로 설정
+        transform.position	= wayPoints[currentIndex].position;
         gameObject.SetActive(true);                 // ObjectPool을 사용하면서 SetActive(true)가 필요해짐
 		// 적 이동/목표지점 설정 코루틴 함수 시작
         StartCoroutine("OnMove");
@@ -135,6 +138,10 @@ public class Enemy : MonoBehaviour
 		// EnemySpawner에게 본인이 삭제될 때 필요한 처리를 하도록 DestroyEnemy() 함수 호출
 		enemySpawner.DestroyEnemy(type, this, gold);
 	}
+    public float GetBaseMoveSpeed()
+    {
+        return movement2D.BaseMoveSpeed;
+    }
 
     public float GetMoveSpeed()
     {
