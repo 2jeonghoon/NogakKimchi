@@ -30,7 +30,10 @@ public class Projectile_Explosion : Projectile
         start_position = transform.position;
         direction = (target.position - transform.position).normalized;
         this.pool_idx = 2;
-        gameObject.SetActive(true);					// ObjectPool을 사용하면서 SetActive(true)가 필요해짐
+        if (target.gameObject.activeSelf)
+        {
+            gameObject.SetActive(true);					// ObjectPool을 사용하면서 SetActive(true)가 필요해짐   
+        }
     }
 
     private void Update()
