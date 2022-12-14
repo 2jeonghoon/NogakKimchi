@@ -20,8 +20,9 @@ public class TowerTemplate : ScriptableObject
 		public	float	range;	// 공격 범위
 		public	int		cost;	// 필요 골드 (0레벨 : 건설, 1~레벨 : 업그레이드)
 		public	int		sell;   // 타워 판매 시 획득 골드
-		public TileType tileType;
-		public float explosionRange;
+		public TileType tileType; // 타일 차지 개수(1, 2)
+		public float explosionRange; // 폭발 범위
+		public Sprite projectileSprite; // 총알 스프라이트
 	}
 }
 
