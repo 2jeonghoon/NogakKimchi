@@ -324,16 +324,17 @@ public class TowerWeapon : MonoBehaviour
     private Transform FindClosestAttackTarget()
     {
         // 제일 가까이 있는 적을 찾기 위해 최초 거리를 최대한 크게 설정
-        float closestDistSqr = Mathf.Infinity;
+       // float closestDistSqr = Mathf.Infinity;
         // EnemySpawner의 EnemyList에 있는 현재 맵에 존재하는 모든 적 검사
         for (int i = 0; i < enemySpawner.EnemyList.Count; ++i)
         {
             float distance = Vector3.Distance(enemySpawner.EnemyList[i].transform.position, transform.position);
             // 현재 검사중인 적과의 거리가 공격범위 내에 있고, 현재까지 검사한 적보다 거리가 가까우면
-            if (distance <= towerTemplate.weapon[level].range && distance <= closestDistSqr)
+            if (distance <= towerTemplate.weapon[level].range)// && distance <= closestDistSqr)
             {
-                closestDistSqr = distance;
+               // closestDistSqr = distance;
                 attackTarget = enemySpawner.EnemyList[i].transform;
+                break;
             }
         }
 
@@ -371,6 +372,8 @@ public class TowerWeapon : MonoBehaviour
             float damage = towerTemplate.weapon[level].damage + AddedDamage;
             if(IsPossibleToAttackTarget())
                 clone.GetComponent<Projectile>().Setup(attackTarget, damage);
+            else
+                clone.GetComponent<Projectile>().Setup(FindClosestAttackTarget(), damage);
         }
     }
 
@@ -397,6 +400,12 @@ public class TowerWeapon : MonoBehaviour
                 clone2.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage);
                 clone3.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage, 1);
             }
+            else
+            {
+                clone1.GetComponent<Projectile_Multiple>().Setup(FindClosestAttackTarget().position, damage, -1);
+                clone2.GetComponent<Projectile_Multiple>().Setup(FindClosestAttackTarget().position, damage);
+                clone3.GetComponent<Projectile_Multiple>().Setup(FindClosestAttackTarget().position, damage, 1);
+            }
         }
     }
 
@@ -413,6 +422,8 @@ public class TowerWeapon : MonoBehaviour
             float damage = towerTemplate.weapon[level].damage + AddedDamage;
             if (IsPossibleToAttackTarget())
                 clone.GetComponent<Projectile_Explosion>().Setup(attackTarget, damage, Range, ExplosionRange);
+            else
+                clone.GetComponent<Projectile_Explosion>().Setup(FindClosestAttackTarget(), damage, Range, ExplosionRange);
         }
     }
 
@@ -427,6 +438,8 @@ public class TowerWeapon : MonoBehaviour
         float damage = towerTemplate.weapon[level].damage + AddedDamage;
         if (IsPossibleToAttackTarget())
             clone.GetComponent<ProjectileMortar>().Setup(attackTarget, damage, enemySpawner, ExplosionRange);
+        else
+            clone.GetComponent<ProjectileMortar>().Setup(FindClosestAttackTarget(), damage, enemySpawner, ExplosionRange);
     }
     private void SpawnProjectile_Spear()
     {
@@ -440,6 +453,8 @@ public class TowerWeapon : MonoBehaviour
             float damage = towerTemplate.weapon[level].damage + AddedDamage;
             if (IsPossibleToAttackTarget())
                 clone.GetComponent<Projectile_Spear>().Setup(attackTarget, damage, Range);
+            else
+                clone.GetComponent<Projectile_Spear>().Setup(FindClosestAttackTarget(), damage, Range);
         }
     }
 
