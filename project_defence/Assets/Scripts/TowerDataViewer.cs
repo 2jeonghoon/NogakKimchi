@@ -94,11 +94,11 @@ public class TowerDataViewer : MonoBehaviour
         //Debug.Log(currentTower.TileType);
         if (currentTower.TileType == TileType.One)
         {
-            imageTower.rectTransform.sizeDelta = new Vector2(100, 200);
+            imageTower.rectTransform.sizeDelta = new Vector2(60, 120);
         }
         else if (currentTower.TileType == TileType.Two)
         {
-            imageTower.rectTransform.sizeDelta = new Vector2(200, 200);
+            imageTower.rectTransform.sizeDelta = new Vector2(120, 120);
         }
 
         imageTower.sprite = currentTower.TowerSprite;

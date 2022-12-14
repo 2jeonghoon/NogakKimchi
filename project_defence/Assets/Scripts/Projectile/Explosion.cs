@@ -28,12 +28,12 @@ public class Explosion : MonoBehaviour
     private void Update()
     {
         fTime += Time.deltaTime;
-        if(fTime >= 0.2f)
-        {
+        //if(fTime >= 0.2f)
+        //{
             Boom();
             StartCoroutine("WaitForAnimation");
             //Destroy(gameObject);
-        }
+        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
