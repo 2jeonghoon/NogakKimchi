@@ -44,7 +44,12 @@ public class ProjectileMortar : Projectile
 
         // 포물선 이동을 위해 필요한 정보
         vStartPos = this.transform.position; // 시작지점
-        vEndPos = target.position;      // 도착지점
+
+        //타겟이 비활성화 상태면 시작지점에 쏘기
+        if (target == null || !target.gameObject.activeSelf) 
+            vEndPos = new Vector3(-10.5f, -1.5f, 0);
+        else
+            vEndPos = target.position;      // 도착지점
         fMaxHeight = vEndPos.y + 10f; // 포물선 최대높이
 
         fEndHeight = vEndPos.y - vStartPos.y;

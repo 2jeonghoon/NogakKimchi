@@ -28,7 +28,11 @@ public class Projectile : MonoBehaviour
 
 	private void Update()
 	{
-		if ( target != null && target.gameObject.activeSelf )	// target이 존재하면
+        if (!target.gameObject.activeSelf)
+        {
+			ProjectileReturn(pool_idx);
+        }
+		if ( target != null )	// target이 존재하면
 		{
 			// 발사체를 target의 위치로 이동
 			Vector3 direction = (target.position-transform.position).normalized;
