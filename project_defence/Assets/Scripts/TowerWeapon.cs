@@ -180,12 +180,11 @@ public class TowerWeapon : MonoBehaviour
                 ChangeState(WeaponState.SearchTarget);
                 break;
             }
-
+            // 캐논 공격 (발사체 생성)
+            SpawnProjectile();
             // attackRate 시간만큼 대기
             yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
 
-            // 캐논 공격 (발사체 생성)
-            SpawnProjectile();
         }
     }
 
@@ -222,15 +221,14 @@ public class TowerWeapon : MonoBehaviour
                 ChangeState(WeaponState.SearchTarget);
                 break;
             }
-
-            // attackRate 시간만큼 대기
-            yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
-
             // 박격포 공격 (발사체 생성)
             if (attackTarget != null)
             {
                 SpawnMortarProjectile();
             }
+            // attackRate 시간만큼 대기
+            yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
+
         }
     }
 
@@ -245,11 +243,10 @@ public class TowerWeapon : MonoBehaviour
                 ChangeState(WeaponState.SearchTarget);
                 break;
             }
-
-            // attackRate 시간만큼 대기
-            yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
             // 샷건 공격 (발사체 생성)
             SpawnProjectile_Multiple();
+            // attackRate 시간만큼 대기
+            yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
         }
     }
 
@@ -264,11 +261,10 @@ public class TowerWeapon : MonoBehaviour
                 ChangeState(WeaponState.SearchTarget);
                 break;
             }
-
-            // attackRate 시간만큼 대기
-            yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
             // 관통 공격 (발사체 생성)
             SpawnProjectile_Spear();
+            // attackRate 시간만큼 대기
+            yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
         }
     }
 
@@ -283,11 +279,10 @@ public class TowerWeapon : MonoBehaviour
                 ChangeState(WeaponState.SearchTarget);
                 break;
             }
-
-            // attackRate 시간만큼 대기
-            yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
             // 관통 공격 (발사체 생성)
             SpawnProjectile_Explosion();
+            // attackRate 시간만큼 대기
+            yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
         }
     }
 
@@ -301,11 +296,10 @@ public class TowerWeapon : MonoBehaviour
                 ChangeState(WeaponState.SearchTarget);
                 break;
             }
-
-            // attackRate 시간만큼 대기
-            yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
             // 관통 공격 (발사체 생성)
             SpawnProjectile_Strawberry();
+            // attackRate 시간만큼 대기
+            yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
         }
     }
 
@@ -387,7 +381,11 @@ public class TowerWeapon : MonoBehaviour
     {
         if (attackTarget != null)
         {
-            GameObject clone = ObjectPool.instance.objectPoolList[0].Dequeue();                 // 오브젝트 Pool에서 Dequeue해서 가져옴, 0번 : coco
+            GameObject clone;                                                                   // 오브젝트 Pool에서 Dequeue해서 가져옴, 0번 : coco
+            if (!ObjectPool.instance.objectPoolList[0].TryDequeue(out clone))
+            {
+                clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+            }
             clone.transform.position = spawnPoint.position;                                     // Dequeue해서 가져온 Projectile의 position을 SpawnPoint로 바꾸어 줌
             // 생성된 발사체에게 공격대상(attackTarget) 정보 제공   
             // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
@@ -403,13 +401,16 @@ public class TowerWeapon : MonoBehaviour
     {
         if (attackTarget != null)
         {
-            // 오브젝트 Pool에서 Dequeue해서 가져옴, 1번 : jelly
-            GameObject clone1 = ObjectPool.instance.objectPoolList[1].Dequeue();
-            GameObject clone2 = ObjectPool.instance.objectPoolList[1].Dequeue();
-            GameObject clone3 = ObjectPool.instance.objectPoolList[1].Dequeue();
-            Debug.Log(clone1);
-            Debug.Log(clone2);
-            Debug.Log(clone3);
+            GameObject clone1;                                                                   // 오브젝트 Pool에서 Dequeue해서 가져옴, 1번 : jelly
+            GameObject clone2;
+            GameObject clone3;
+
+            if (!ObjectPool.instance.objectPoolList[1].TryDequeue(out clone1))
+                clone1 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+            if (!ObjectPool.instance.objectPoolList[1].TryDequeue(out clone2))
+                clone2 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+            if (!ObjectPool.instance.objectPoolList[1].TryDequeue(out clone3))
+                clone3 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
 
             clone1.transform.position = spawnPoint.position;
             clone2.transform.position = spawnPoint.position;
@@ -443,7 +444,11 @@ public class TowerWeapon : MonoBehaviour
         //Debug.Log("발사");
         if (attackTarget != null)
         {
-            GameObject clone = ObjectPool.instance.objectPoolList[2].Dequeue();            // 오브젝트 Pool에서 Dequeue해서 가져옴, 2번 : icecream
+            GameObject clone;                                                                   // 오브젝트 Pool에서 Dequeue해서 가져옴, 2번 : icecream
+            if (!ObjectPool.instance.objectPoolList[2].TryDequeue(out clone))
+            {
+                clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+            }
             clone.transform.position = spawnPoint.position;                                     // Dequeue해서 가져온 Projectile의 position을 SpawnPoint로 바꾸어 줌
             // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
             // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
@@ -459,7 +464,11 @@ public class TowerWeapon : MonoBehaviour
     private void SpawnMortarProjectile()
     {
         //GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-        GameObject clone = ObjectPool.instance.objectPoolList[3].Dequeue();            // 오브젝트 Pool에서 Dequeue해서 가져옴, 3번 : milk
+        GameObject clone;                                                                   // 오브젝트 Pool에서 Dequeue해서 가져옴, 3번 : milk
+        if (!ObjectPool.instance.objectPoolList[3].TryDequeue(out clone))
+        {
+            clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+        }
         clone.transform.position = spawnPoint.position;                                     // Dequeue해서 가져온 Projectile의 position을 SpawnPoint로 바꾸어 줌
         // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
         // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
@@ -472,7 +481,11 @@ public class TowerWeapon : MonoBehaviour
 
     private void SpawnProjectile_Strawberry()
     {
-        GameObject clone = ObjectPool.instance.objectPoolList[4].Dequeue();            // 오브젝트 Pool에서 Dequeue해서 가져옴, 4번 : strawberry
+        GameObject clone;                                                                   // 오브젝트 Pool에서 Dequeue해서 가져옴, 4번 : strawberry
+        if (!ObjectPool.instance.objectPoolList[4].TryDequeue(out clone))
+        {
+            clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+        }
         clone.transform.position = spawnPoint.position;                                     // Dequeue해서 가져온 Projectile의 position을 SpawnPoint로 바꾸어 줌
         // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
         // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
@@ -487,8 +500,11 @@ public class TowerWeapon : MonoBehaviour
     {
         if (attackTarget != null)
         {
-            //GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-            GameObject clone = ObjectPool.instance.objectPoolList[5].Dequeue();            // 오브젝트 Pool에서 Dequeue해서 가져옴, 4번 : spear
+            GameObject clone;                                                                   // 오브젝트 Pool에서 Dequeue해서 가져옴, 5번 : spear
+            if (!ObjectPool.instance.objectPoolList[5].TryDequeue(out clone))
+            {
+                clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+            }
             clone.transform.position = spawnPoint.position;                                     // Dequeue해서 가져온 Projectile의 position을 SpawnPoint로 바꾸어 줌
             // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
             // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
