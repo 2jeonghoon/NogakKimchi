@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -19,14 +20,24 @@ public class SoundManager : MonoBehaviour
 
     public static SoundManager instance;
 
+    public Slider MasteraudioSlider;
+    public Slider BGSoundaudioSlider;
+    public Slider SFXaudioSlider;
+
     private void Awake()
     {
+
+
         if (instance == null)
         {
             //Debug.Log("생성");
             instance = this;
-            DontDestroyOnLoad(instance);
+            string name = "";
+            Scene scene = SceneManager.GetActiveScene();
 
+            Debug.Log(scene.name);
+            if (scene.name != "Ingame")
+                DontDestroyOnLoad(instance);
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
@@ -39,12 +50,20 @@ public class SoundManager : MonoBehaviour
     {
         for (int i = 0; i < bglist.Length; i++)
         {
-            if (arg0.name + "BGM" == bglist[i].name)
+            //if (arg0.name + "BGM" == bglist[i].name)
+            if ("Map_1" == bglist[i].name)
             {
                 Debug.Log("bgm 재생");
                 BgSoundPlay(bglist[i]);
             }
         }
+        //SceneLoad할 때 slider정보 가져와야 함.
+        MasteraudioSlider.value = -10;
+        BGSoundaudioSlider.value = -10;
+        SFXaudioSlider.value = -10;
+        mixer.SetFloat("Master", -10);
+        mixer.SetFloat("BGsound", -10);
+        mixer.SetFloat("SFX", -10);
     }
 
     public void SFXPlay(string sfxName, AudioClip clip)
@@ -77,6 +96,36 @@ public class SoundManager : MonoBehaviour
         bgSound.loop = true;
         bgSound.volume = 0.1f;
         bgSound.Play();
+    }
+
+
+    public void MasterAudioControl()
+    {
+        float sound = MasteraudioSlider.value;
+
+        if (sound == -40f) mixer.SetFloat("Master", -80);
+        else mixer.SetFloat("Master", sound);
+    }
+
+    public void BGsoundAudioControl()
+    {
+        float sound = BGSoundaudioSlider.value;
+
+        if (sound == -40f) mixer.SetFloat("BGsound", -80);
+        else mixer.SetFloat("BGsound", sound);
+    }
+    public void SFXAudioControl()
+    {
+        float sound = SFXaudioSlider.value;
+
+        if (sound == -40f) mixer.SetFloat("SFX", -80);
+        else mixer.SetFloat("SFX", sound);
+    }
+
+
+    public void ToggledAudioVolum()
+    {
+        AudioListener.volume = AudioListener.volume == 0 ? 1 : 0;
     }
 
 }

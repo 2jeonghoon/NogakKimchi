@@ -23,12 +23,16 @@ public class Projectile : MonoBehaviour
 
 	private void Start()
 	{
-		StartCoroutine("Destroy_Projectile");
+		//StartCoroutine("Destroy_Projectile");
 	}
 
 	private void Update()
 	{
-		if ( target != null && target.gameObject.activeSelf )	// target이 존재하면
+        if (!target.gameObject.activeSelf)
+        {
+			ProjectileReturn(pool_idx);
+        }
+		if ( target != null )	// target이 존재하면
 		{
 			// 발사체를 target의 위치로 이동
 			Vector3 direction = (target.position-transform.position).normalized;
@@ -41,7 +45,8 @@ public class Projectile : MonoBehaviour
         gameObject.transform.position = ObjectPool.instance.transform.position;
         gameObject.SetActive(false);
         ObjectPool.instance.objectPoolList[idx].Enqueue(gameObject);
-    }
+		Debug.Log(idx + ", Enqueue : " + ObjectPool.instance.objectPoolList[idx].Count);
+	}
 
     private IEnumerator Destroy_Projectile()
     {
@@ -55,7 +60,7 @@ public class Projectile : MonoBehaviour
 	{
 		if ( !collision.CompareTag("Enemy") )	return;         // 적이 아닌 대상과 부딪히면
 
-        StopCoroutine("Destory_Projectile");
+        //StopCoroutine("Destory_Projectile");
         collision.GetComponent<EnemyHP>().TakeDamage(damage);   // 적 체력을 damage만큼 감소
         ProjectileReturn(pool_idx);								        // 발사체 오브젝트 삭제 대신 Pool에 반납
     }
