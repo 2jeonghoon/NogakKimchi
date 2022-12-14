@@ -265,10 +265,11 @@ public class TowerWeapon : MonoBehaviour
                 break;
             }
 
-            // attackRate 시간만큼 대기
-            yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
             // 관통 공격 (발사체 생성)
             SpawnProjectile_Spear();
+            // attackRate 시간만큼 대기
+            yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
+
         }
     }
 
@@ -407,6 +408,9 @@ public class TowerWeapon : MonoBehaviour
             GameObject clone1 = ObjectPool.instance.objectPoolList[1].Dequeue();
             GameObject clone2 = ObjectPool.instance.objectPoolList[1].Dequeue();
             GameObject clone3 = ObjectPool.instance.objectPoolList[1].Dequeue();
+            Debug.Log(clone1);
+            Debug.Log(clone2);
+            Debug.Log(clone3);
 
             clone1.transform.position = spawnPoint.position;
             clone2.transform.position = spawnPoint.position;
@@ -418,18 +422,18 @@ public class TowerWeapon : MonoBehaviour
             // 세 갈래로 나누어지는 공격을 위해 Vector3.left, right를 더해줌
             if (IsPossibleToAttackTarget())
             {
-                Debug.Log("Target");
-                clone1.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage, -1);
-                clone2.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage);
-                clone3.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage, 1);
+                Vector3 targetPos = attackTarget.position;
+                clone1.GetComponent<Projectile_Multiple>().Setup(targetPos, damage, -1);
+                clone2.GetComponent<Projectile_Multiple>().Setup(targetPos, damage);
+                clone3.GetComponent<Projectile_Multiple>().Setup(targetPos, damage, 1);
             }
             else
             {
                 Debug.Log("Find");
-                Transform target = FindClosestAttackTarget();
-                clone1.GetComponent<Projectile_Multiple>().Setup(target.position, damage, -1);
-                clone2.GetComponent<Projectile_Multiple>().Setup(target.position, damage);
-                clone3.GetComponent<Projectile_Multiple>().Setup(target.position, damage, 1);
+                Vector3 targetPos = FindClosestAttackTarget().position;
+                clone1.GetComponent<Projectile_Multiple>().Setup(targetPos, damage, -1);
+                clone2.GetComponent<Projectile_Multiple>().Setup(targetPos, damage);
+                clone3.GetComponent<Projectile_Multiple>().Setup(targetPos, damage, 1);
             }
         }
     }

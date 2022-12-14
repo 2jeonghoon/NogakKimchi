@@ -23,15 +23,19 @@ public class Projectile_Multiple : Projectile
         targetPos.y += y;
         this.damage = damage;           				// ?€?Œì˜ ê³µê²©??
         this.direction = (targetPos - transform.position);
-        //Debug.Log(direction);
         if (y == 1)
         {
-            direction = (direction * Mathf.Cos(45));//.normalized;
+
+            direction = (direction * Mathf.Cos(45)).normalized;//.normalized;
+            direction.z = 1;
         }
         else
         {
-            direction = (direction * Mathf.Sin(45));//.normalized;
-        }
+            direction = (direction * Mathf.Sin(45)).normalized;//.normalized;
+            direction.z = 1;
+        };
+        this.pool_idx = 1;
+        gameObject.SetActive(true);
     }
 
     private void Start() {
@@ -49,15 +53,17 @@ public class Projectile_Multiple : Projectile
         yield return new WaitForSeconds(2f);
 
         // Projectile??Pool?ì„œ ê°€?¸ì˜¨ì§€ 2ì´ˆê? ì§€?˜ë©´ Destroy ?€??ë°˜ë‚©
+        Debug.Log("projectile idx:" + pool_idx);
         ProjectileReturn(pool_idx);
     }
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if ( !collision.CompareTag("Enemy") )	return;         // ?ì´ ?„ë‹Œ ?€?ê³¼ ë¶€?ªíˆë©?
-
+        
         StopCoroutine("Destory_Projectile");
         collision.GetComponent<EnemyHP>().TakeDamage(damage);	// ??ì²´ë ¥??damageë§Œí¼ ê°ì†Œ
+        Debug.Log("OnTrigerPR");
         ProjectileReturn(pool_idx);                                     // ë°œì‚¬ì²??¤ë¸Œ?íŠ¸ ?? œ ?€??Pool??ë°˜ë‚©
     }
 }
