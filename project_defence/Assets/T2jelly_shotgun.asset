@@ -27,6 +27,7 @@ MonoBehaviour:
     sell: 280
     tileType: 0
     explosionRange: 0
+    projectileSprite: {fileID: 21300000, guid: e8fb31ad8a75028409caf8d4e3b084a8, type: 3}
   - sprite: {fileID: 21300000, guid: e59fd75c9f8bc734eb3009d95225de9d, type: 3}
     damage: 5
     slow: 0
@@ -37,6 +38,7 @@ MonoBehaviour:
     sell: 376
     tileType: 0
     explosionRange: 0
+    projectileSprite: {fileID: 21300000, guid: e8fb31ad8a75028409caf8d4e3b084a8, type: 3}
   - sprite: {fileID: 21300000, guid: a0312f0edbf83a748bb27c14467e8ad4, type: 3}
     damage: 6
     slow: 0
@@ -47,6 +49,7 @@ MonoBehaviour:
     sell: 560
     tileType: 0
     explosionRange: 0
+    projectileSprite: {fileID: 21300000, guid: a671c29dd5985f643b0064729a8eed4d, type: 3}
   - sprite: {fileID: 21300000, guid: aa6af2c210255ac41aa54b8e01f223ff, type: 3}
     damage: 6
     slow: 0
@@ -57,5 +60,6 @@ MonoBehaviour:
     sell: 560
     tileType: 0
     explosionRange: 0
+    projectileSprite: {fileID: 21300000, guid: 5388dbbb4c8766144a2171efa25f091c, type: 3}
   maxTowerLV: 3
   isLock: 0
