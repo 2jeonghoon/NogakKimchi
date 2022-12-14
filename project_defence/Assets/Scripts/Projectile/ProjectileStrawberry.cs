@@ -81,9 +81,9 @@ public class ProjectileStrawberry : Projectile
 
         if (fTime >= fMaxTime - 0.5f && this.transform.position.y <= vEndPos.y)
         {
-            Debug.Log("업데이트문 Strawberry 펑!");
             GameObject clone = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
             clone.GetComponent<Explosion_Strawberry>().Setup(explosionRange);
+            fTime = 0f;
             ProjectileReturn(pool_idx);
         }
     }
@@ -95,9 +95,9 @@ public class ProjectileStrawberry : Projectile
         if (!collision.CompareTag("TileRoad")) return;         // 길타일이 아닌 대상과 부딪히면;
         if (collision.transform != Tile.transform) return;          // 현재 맞은게 타겟타일이 아니면
         
-        Debug.Log("Trigger문 Strawberry 펑!");
         GameObject clone = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
         clone.GetComponent<Explosion_Strawberry>().Setup(explosionRange);
+        fTime = 0f;
         ProjectileReturn(pool_idx);
     }
 

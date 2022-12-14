@@ -25,16 +25,16 @@ public class Explosion_Strawberry: Explosion
     {
         if (!collision.CompareTag("Enemy")) return;         // 적이 아닌 대상과 부딪히면
 
-        //float enemyBaseSpeed = collision.GetComponent<Movement2D>().BaseMoveSpeed;   // 적의 BaseMoveSpeed를 가져옴
-        float enemyCurrentSpeed = collision.GetComponent<Movement2D>().MoveSpeed;   // 적의 CurrentMoveSpeed를 가져옴
+        float enemyBaseSpeed = collision.GetComponent<Movement2D>().BaseMoveSpeed;   // 적의 BaseMoveSpeed를 가져옴
+        //float enemyCurrentSpeed = collision.GetComponent<Movement2D>().MoveSpeed;   // 적의 CurrentMoveSpeed를 가져옴
 
-        if (enemyCurrentSpeed == 0) 
+        if (enemyBaseSpeed == 0) 
             return; // 적이 멈춰있을 때는 아무런 효과를 주지 못한다.
         else 
-            StartCoroutine(StrawberryJam(collision, enemyCurrentSpeed));
+            StartCoroutine(StrawberryJam(collision, enemyBaseSpeed));
 
 
-        Debug.Log(" current : " + enemyCurrentSpeed);
+        Debug.Log(" current : " + enemyBaseSpeed);
         Boom();
         StartCoroutine("WaitForAnimation");
         // 적을 맞춘 경우 해당 위치에서 폭발

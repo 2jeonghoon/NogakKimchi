@@ -33,10 +33,9 @@ public class Witch : Enemy
         gameObject.SetActive(true);					// ObjectPool을 사용하면서 SetActive(true)가 필요해짐
         // 적 이동/목표지점 설정 코루틴 함수 시작
         StartCoroutine("Recovery", delay_time);
-        StartCoroutine("OnMove");
     }
 
-
+    /*
     protected override IEnumerator OnMove()
     {
         // 다음 이동 방향 설정
@@ -59,7 +58,7 @@ public class Witch : Enemy
             yield return null;
         }
     }
-
+    */
     // 사거리 내 enemy오브젝트 가져오기
     private int getEnemyHP()
     {

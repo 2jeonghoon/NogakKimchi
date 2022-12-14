@@ -135,7 +135,7 @@ public class TowerWeapon : MonoBehaviour
         {
             // 현재 타워에 가장 가까이 있는 공격 대상(적) 탐색
             attackTarget = FindClosestAttackTarget();
-            if (attackTarget != null && attackTarget.gameObject.activeSelf )
+            if (attackTarget != null && attackTarget.gameObject.activeSelf)
             {
                 if (weaponType == WeaponType.Gun)
                 {
@@ -161,7 +161,7 @@ public class TowerWeapon : MonoBehaviour
                 {
                     ChangeState(WeaponState.TryAttackExplosion);
                 }
-                else if(weaponType == WeaponType.Strawberry)
+                else if (weaponType == WeaponType.Strawberry)
                 {
                     ChangeState(WeaponState.TryAttackStrawberry);
                 }
@@ -345,7 +345,7 @@ public class TowerWeapon : MonoBehaviour
     private Transform FindClosestAttackTarget()
     {
         // 제일 가까이 있는 적을 찾기 위해 최초 거리를 최대한 크게 설정
-       // float closestDistSqr = Mathf.Infinity;
+        // float closestDistSqr = Mathf.Infinity;
         // EnemySpawner의 EnemyList에 있는 현재 맵에 존재하는 모든 적 검사
         //Debug.Log(enemySpawner.EnemyList.Count);
         for (int i = 0; i < enemySpawner.EnemyList.Count; ++i)
@@ -354,7 +354,7 @@ public class TowerWeapon : MonoBehaviour
             // 현재 검사중인 적과의 거리가 공격범위 내에 있고, 현재까지 검사한 적보다 거리가 가까우면
             if (distance <= towerTemplate.weapon[level].range)// && distance <= closestDistSqr)
             {
-               // closestDistSqr = distance;
+                // closestDistSqr = distance;
                 attackTarget = enemySpawner.EnemyList[i].transform;
                 break;
             }
@@ -392,7 +392,7 @@ public class TowerWeapon : MonoBehaviour
             // 생성된 발사체에게 공격대상(attackTarget) 정보 제공   
             // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
             float damage = towerTemplate.weapon[level].damage + AddedDamage;
-            if(IsPossibleToAttackTarget())
+            if (IsPossibleToAttackTarget())
                 clone.GetComponent<Projectile>().Setup(attackTarget, damage);
             else
                 clone.GetComponent<Projectile>().Setup(FindClosestAttackTarget(), damage);
@@ -407,6 +407,9 @@ public class TowerWeapon : MonoBehaviour
             GameObject clone1 = ObjectPool.instance.objectPoolList[1].Dequeue();
             GameObject clone2 = ObjectPool.instance.objectPoolList[1].Dequeue();
             GameObject clone3 = ObjectPool.instance.objectPoolList[1].Dequeue();
+            Debug.Log(clone1);
+            Debug.Log(clone2);
+            Debug.Log(clone3);
 
             clone1.transform.position = spawnPoint.position;
             clone2.transform.position = spawnPoint.position;
@@ -418,15 +421,18 @@ public class TowerWeapon : MonoBehaviour
             // 세 갈래로 나누어지는 공격을 위해 Vector3.left, right를 더해줌
             if (IsPossibleToAttackTarget())
             {
-                clone1.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage, -1);
-                clone2.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage);
-                clone3.GetComponent<Projectile_Multiple>().Setup(attackTarget.position, damage, 1);
+                Vector3 targetPos = attackTarget.position;
+                clone1.GetComponent<Projectile_Multiple>().Setup(targetPos, damage, -1);
+                clone2.GetComponent<Projectile_Multiple>().Setup(targetPos, damage);
+                clone3.GetComponent<Projectile_Multiple>().Setup(targetPos, damage, 1);
             }
             else
             {
-                clone1.GetComponent<Projectile_Multiple>().Setup(FindClosestAttackTarget().position, damage, -1);
-                clone2.GetComponent<Projectile_Multiple>().Setup(FindClosestAttackTarget().position, damage);
-                clone3.GetComponent<Projectile_Multiple>().Setup(FindClosestAttackTarget().position, damage, 1);
+                Debug.Log("Find");
+                Vector3 targetPos = FindClosestAttackTarget().position;
+                clone1.GetComponent<Projectile_Multiple>().Setup(targetPos, damage, -1);
+                clone2.GetComponent<Projectile_Multiple>().Setup(targetPos, damage);
+                clone3.GetComponent<Projectile_Multiple>().Setup(targetPos, damage, 1);
             }
         }
     }
@@ -436,7 +442,7 @@ public class TowerWeapon : MonoBehaviour
     {
         //Debug.Log("발사");
         if (attackTarget != null)
-        {            
+        {
             GameObject clone = ObjectPool.instance.objectPoolList[2].Dequeue();            // 오브젝트 Pool에서 Dequeue해서 가져옴, 2번 : icecream
             clone.transform.position = spawnPoint.position;                                     // Dequeue해서 가져온 Projectile의 position을 SpawnPoint로 바꾸어 줌
             // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
@@ -525,7 +531,7 @@ public class TowerWeapon : MonoBehaviour
                 // 적 체력 감소 (1초에 damage만큼 감소)
                 // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
                 float damage = towerTemplate.weapon[level].damage + AddedDamage;
-                
+
                 attackTarget.GetComponent<EnemyHP>().TakeLaserDamage(damage * Time.deltaTime);
             }
         }

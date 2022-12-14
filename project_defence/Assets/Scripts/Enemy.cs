@@ -64,10 +64,19 @@ public class Enemy : MonoBehaviour
         // 적의 위치를 첫번째 wayPoint 위치로 설정
         transform.position	= wayPoints[currentIndex].position;
         gameObject.SetActive(true);                 // ObjectPool을 사용하면서 SetActive(true)가 필요해짐
-		// 적 이동/목표지점 설정 코루틴 함수 시작
-        StartCoroutine("OnMove");
+													// 적 이동/목표지점 설정 코루틴 함수 시작
+		NextMoveTo();
 	}
 
+	private void FixedUpdate()
+	{
+        if (Vector3.Distance(transform.position, wayPoints[currentIndex].position) < 0.08f * movement2D.MoveSpeed)
+        {
+            // 다음 이동 방향 설정
+            NextMoveTo();
+        }
+    }
+	/*
 	protected virtual IEnumerator OnMove()
 	{
 		// 다음 이동 방향 설정
@@ -89,6 +98,7 @@ public class Enemy : MonoBehaviour
 		}
 	}
 
+	*/
 	protected void NextMoveTo()
 	{
 		// 아직 이동할 wayPoints가 남아있다면

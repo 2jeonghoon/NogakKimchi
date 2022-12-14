@@ -8,29 +8,34 @@ public class Projectile_Multiple : Projectile
 
     public void Setup(Vector3 targetPos, float damage)
 	{
-        // 발사 사운드 재생
+        // 발사 ?�운???�생
         SoundManager.instance.SFXPlay("ShotGun", clip);
         movement2D	= GetComponent<Movement2D>();
-		this.damage	= damage;						// 타워의 공격력
+		this.damage	= damage;						// ?�?�의 공격??
         this.direction = (targetPos - transform.position).normalized;
         this.pool_idx = 1;
-        gameObject.SetActive(true);					// ObjectPool을 사용하면서 SetActive(true)가 필요해짐
+        gameObject.SetActive(true);					// ObjectPool???�용?�면??SetActive(true)가 ?�요?�짐
     }
 
     public void Setup(Vector3 targetPos, float damage, int y)
     {
         movement2D = GetComponent<Movement2D>();
         targetPos.y += y;
-        this.damage = damage;           				// 타워의 공격력
+        this.damage = damage;           				// ?�?�의 공격??
         this.direction = (targetPos - transform.position);
         if (y == 1)
         {
-            direction = (direction * Mathf.Cos(45)).normalized;
+
+            direction = (direction * Mathf.Cos(45)).normalized;//.normalized;
+            direction.z = 1;
         }
         else
         {
-            direction = (direction * Mathf.Sin(45)).normalized;
-        }
+            direction = (direction * Mathf.Sin(45)).normalized;//.normalized;
+            direction.z = 1;
+        };
+        this.pool_idx = 1;
+        gameObject.SetActive(true);
     }
 
     private void Start() {
@@ -39,25 +44,27 @@ public class Projectile_Multiple : Projectile
 
 	private void Update()
 	{
-        // 발사체를 target 위치로 이동
+        // 발사체�? target ?�치�??�동
         movement2D.MoveTo(direction);
 	}
 
-    // 발사체가 생성된 후 2초가 지나도 삭제가 안된다면 삭제
+    // 발사체�? ?�성????2초�? 지?�도 ??��가 ?�된?�면 ??��
     private IEnumerator Destroy_Projectile() {
         yield return new WaitForSeconds(2f);
 
-        // Projectile을 Pool에서 가져온지 2초가 지나면 Destroy 대신 반납
+        // Projectile??Pool?�서 가?�온지 2초�? 지?�면 Destroy ?�??반납
+        Debug.Log("projectile idx:" + pool_idx);
         ProjectileReturn(pool_idx);
     }
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if ( !collision.CompareTag("Enemy") )	return;         // 적이 아닌 대상과 부딪히면
-
+		if ( !collision.CompareTag("Enemy") )	return;         // ?�이 ?�닌 ?�?�과 부?�히�?
+        
         StopCoroutine("Destory_Projectile");
-        collision.GetComponent<EnemyHP>().TakeDamage(damage);	// 적 체력을 damage만큼 감소
-        ProjectileReturn(pool_idx);                                     // 발사체 오브젝트 삭제 대신 Pool에 반납
+        collision.GetComponent<EnemyHP>().TakeDamage(damage);	// ??체력??damage만큼 감소
+        Debug.Log("OnTrigerPR");
+        ProjectileReturn(pool_idx);                                     // 발사�??�브?�트 ??�� ?�??Pool??반납
     }
 }
 
@@ -65,11 +72,11 @@ public class Projectile_Multiple : Projectile
 /*
  * File : Projectile_Multiple.cs
  * Desc
- *	: 타워가 발사하는 기본 발사체에 부착, Projectile과 다르게 단발이 아닌 다발 사격
+ *	: ?�?��? 발사?�는 기본 발사체에 부�? Projectile�??�르�??�발???�닌 ?�발 ?�격
  *	
  * Functions
- *	: Update() - Setup에서 매개변수로 targetPos를 받아 계산한 방향 벡터 방향으로 발사체를 이동시켜줌
- *  : Destory_Projectile() - 발사체가 생성된 후 5초 후에 발사체를 삭제시켜주는 코루틴
- *	: OnTriggerEnter2D() - 타겟으로 설정된 적과 부딪혔을 때 적에게 데미지를 주고 오브젝트 삭제
+ *	: Update() - Setup?�서 매개변?�로 targetPos�?받아 계산??방향 벡터 방향?�로 발사체�? ?�동?�켜�?
+ *  : Destory_Projectile() - 발사체�? ?�성????5�??�에 발사체�? ??��?�켜주는 코루??
+ *	: OnTriggerEnter2D() - ?�겟으�??�정???�과 부?�혔?????�에�??��?지�?주고 ?�브?�트 ??��
  *	
  */

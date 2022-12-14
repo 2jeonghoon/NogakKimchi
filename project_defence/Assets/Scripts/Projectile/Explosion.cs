@@ -6,13 +6,13 @@ public class Explosion : MonoBehaviour
 {
     private float damage;
 
-    protected float fTime = 0;
-    protected Animator animator;
+    private float fTime = 0;
+    Animator animator;
 
     // 폭발 사운드
     public AudioClip clip;
 
-    protected void Awake()
+    private void Awake()
     {
         animator = GetComponent<Animator>();
     }
@@ -25,14 +25,15 @@ public class Explosion : MonoBehaviour
         this.damage = damage;                       // 타워의 공격력
         this.transform.localScale = new Vector3(0.2f, 0.2f, 1) * scale;
     }
-    protected void Update()
+    private void Update()
     {
         fTime += Time.deltaTime;
-        if(fTime >= 0.2f)
-        {
+        //if(fTime >= 0.2f)
+        //{
             Boom();
             StartCoroutine("WaitForAnimation");
-        }
+            //Destroy(gameObject);
+        //}
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
@@ -51,7 +52,7 @@ public class Explosion : MonoBehaviour
     }
 
     // 애니메이션 끝날 때 까지 대기 (1초)
-    protected IEnumerator WaitForAnimation()
+    IEnumerator WaitForAnimation()
     {
         float time = 0f;
 
