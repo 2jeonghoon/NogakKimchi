@@ -453,7 +453,6 @@ MonoBehaviour:
   bgSound: {fileID: 1556868083}
   bglist:
   - {fileID: 8300000, guid: b5b3a955ec1ad4245ac215d636d5b806, type: 3}
-  - {fileID: 8300000, guid: f14e8bfdac498dd4f82766090b48e582, type: 3}
   buttonSoundClip: {fileID: 8300000, guid: 98713b1b7204b49448f6b860bf49de97, type: 3}
   MasteraudioSlider: {fileID: 0}
   BGSoundaudioSlider: {fileID: 0}

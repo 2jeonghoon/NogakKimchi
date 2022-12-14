@@ -32,7 +32,12 @@ public class SoundManager : MonoBehaviour
         {
             //Debug.Log("생성");
             instance = this;
-            DontDestroyOnLoad(instance);
+            string name = "";
+            Scene scene = SceneManager.GetActiveScene();
+
+            Debug.Log(scene.name);
+            if (scene.name != "Ingame")
+                DontDestroyOnLoad(instance);
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
@@ -53,12 +58,12 @@ public class SoundManager : MonoBehaviour
             }
         }
         //SceneLoad할 때 slider정보 가져와야 함.
-        mixer.SetFloat("Master", -10);
-        mixer.SetFloat("BGsound", -10);
-        mixer.SetFloat("SFX", -10);
         MasteraudioSlider.value = -10;
         BGSoundaudioSlider.value = -10;
         SFXaudioSlider.value = -10;
+        mixer.SetFloat("Master", -10);
+        mixer.SetFloat("BGsound", -10);
+        mixer.SetFloat("SFX", -10);
     }
 
     public void SFXPlay(string sfxName, AudioClip clip)
