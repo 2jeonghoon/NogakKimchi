@@ -14,10 +14,12 @@ public class Projectile_Multiple : Projectile
         this.direction = (targetPos - transform.position).normalized;
         this.pool_idx = 1;
         gameObject.SetActive(true);					// ObjectPool을 사용하면서 SetActive(true)가 필요해짐
+        StartCoroutine("Destroy_Projectile");
     }
 
     public void Setup(Vector3 targetPos, float damage, int flags)
     {
+        SoundManager.instance.SFXPlay("ShotGun", clip);
         movement2D = GetComponent<Movement2D>();
         this.damage = damage;           				// 타워의 공격력
         this.direction = (targetPos - transform.position);
@@ -34,10 +36,12 @@ public class Projectile_Multiple : Projectile
         };
         this.pool_idx = 1;
         gameObject.SetActive(true);
+        StartCoroutine("Destroy_Projectile");
     }
 
     public void Setup(float damage, int flags)
     {
+        SoundManager.instance.SFXPlay("ShotGun", clip);
         movement2D = GetComponent<Movement2D>();
         this.damage = damage;           				// 타워의 공격력
         this.direction = new Vector3(0,0,0);
@@ -88,6 +92,7 @@ public class Projectile_Multiple : Projectile
 
         this.pool_idx = 1;
         gameObject.SetActive(true);
+        StartCoroutine("Destroy_Projectile");
     }
 
     private void Start() {
@@ -102,7 +107,7 @@ public class Projectile_Multiple : Projectile
 
     // 발사체가 생성된 후 2초가 지나도 삭제가 안된다면 삭제
     private IEnumerator Destroy_Projectile() {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
 
         Debug.Log("projectile idx:" + pool_idx);
         ProjectileReturn(pool_idx);
