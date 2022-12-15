@@ -52,7 +52,7 @@ MonoBehaviour:
     rate: 1
     range: 4
     cost: 800
-    sell: 1600
+    sell: 1840
     tileType: 0
     explosionRange: 0
     projectileSprite: {fileID: 21300000, guid: 5615530f093d2e246bd60b76b6ca4f74, type: 3}
@@ -65,8 +65,8 @@ MonoBehaviour:
     buff: 0
     rate: 1
     range: 8
-    cost: 800
-    sell: 1600
+    cost: 1600
+    sell: 3120
     tileType: 0
     explosionRange: 0
     projectileSprite: {fileID: 21300000, guid: 5615530f093d2e246bd60b76b6ca4f74, type: 3}
@@ -79,8 +79,8 @@ MonoBehaviour:
     buff: 0
     rate: 1
     range: 4
-    cost: 800
-    sell: 1600
+    cost: 1600
+    sell: 3120
     tileType: 0
     explosionRange: 0
     projectileSprite: {fileID: 21300000, guid: 37e26e5b4efd5ce4086d185f5056d264, type: 3}
