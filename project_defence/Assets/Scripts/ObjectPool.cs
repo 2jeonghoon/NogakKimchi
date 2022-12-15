@@ -65,4 +65,12 @@ public class ObjectPool : MonoBehaviour
 
         return test_queue;
     }
+
+    public void InsertQueue(int index)
+    {
+        GameObject objectClone = Instantiate(objectInfos[index].perfab) as GameObject;
+        objectClone.SetActive(false);
+        objectClone.transform.SetParent(tfPoolParent);
+        objectPoolList[index].Enqueue(objectClone);
+    }
 }

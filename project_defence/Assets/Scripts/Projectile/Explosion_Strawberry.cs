@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Explosion_Strawberry: Explosion
 {
-    private float damage;
 
     public override void Setup(float damage, float scale)
     {

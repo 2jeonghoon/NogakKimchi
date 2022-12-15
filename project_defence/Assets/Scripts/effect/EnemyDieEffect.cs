@@ -25,11 +25,11 @@ public class EnemyDieEffect : MonoBehaviour
     public void BossSkillEffect()
     {
         //Debug.Log("Boom");
-        animator.SetTrigger("Boom");
+        animator.SetTrigger("Die");
     }
 
 
-    // 애니메이션 끝날 때 까지 대기 (1초)
+    // ?좊땲硫붿씠???앸궇 ??源뚯? ?湲?(1珥?
     IEnumerator WaitForAnimation()
     {
         float time = 0f;
