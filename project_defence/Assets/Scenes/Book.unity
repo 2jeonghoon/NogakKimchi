@@ -1525,7 +1525,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4e49858405edc3e4f9599f3de4669ff3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b41dccd337726f84c85421f6869fd56f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1760,16 +1760,19 @@ MonoBehaviour:
   BookPanel: {fileID: 1570245777}
   background: {fileID: 21300000, guid: 5f7d3183c3023624eb6ae023504530c1, type: 3}
   bookPages:
-  - {fileID: 21300000, guid: 4e49858405edc3e4f9599f3de4669ff3, type: 3}
+  - {fileID: 21300000, guid: b41dccd337726f84c85421f6869fd56f, type: 3}
   - {fileID: -1306286864, guid: e40c3c7a224bb29479602f7cd9179e83, type: 3}
   - {fileID: -539193019, guid: e40c3c7a224bb29479602f7cd9179e83, type: 3}
   - {fileID: 213441574, guid: 4141771097514f943ae5d310f31fd856, type: 3}
   - {fileID: -2056064339, guid: 4141771097514f943ae5d310f31fd856, type: 3}
   - {fileID: 1692046961, guid: fe27cdf441d33c249962e970152e9cd1, type: 3}
   - {fileID: 1586981505, guid: fe27cdf441d33c249962e970152e9cd1, type: 3}
+  - {fileID: 1557291511, guid: b9815969a1be24b48b060b20a330fd03, type: 3}
+  - {fileID: -1332024302, guid: b9815969a1be24b48b060b20a330fd03, type: 3}
+  - {fileID: 1426243596, guid: bd3967a43602dda439def8850af8d91f, type: 3}
+  - {fileID: 1330258839, guid: bd3967a43602dda439def8850af8d91f, type: 3}
   - {fileID: 569605747, guid: e51a0f73a16ece64cb5673d2e8b9f459, type: 3}
   - {fileID: -1474697648, guid: e51a0f73a16ece64cb5673d2e8b9f459, type: 3}
-  - {fileID: 21300000, guid: 4e49858405edc3e4f9599f3de4669ff3, type: 3}
   interactable: 1
   enableShadowEffect: 1
   currentPage: 0

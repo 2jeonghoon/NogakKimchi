@@ -161,19 +161,10 @@ public class Book : MonoBehaviour {
             //Debug.Log(tmp_time);
             //if(tmp_time >= page_time)
         }
-        
-        // 다 읽었을 경우 스킵 혹은 넘기기 버튼
-
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            gameObject.SetActive(false);
-            SceneManager.LoadScene("Ingame");
-        }
     }
     public void UpdateBook()
     {
         //f = Vector3.Lerp(f, transformPoint(Input.mousePosition), Time.deltaTime * 10);
-        Debug.Log(f);
         f.y = ypoint;
         if (mode == FlipMode.RightToLeft)
         {
@@ -354,7 +345,9 @@ public class Book : MonoBehaviour {
     }
     public void OnMouseDragRightPage()
     {
-        if (interactable)
+        Debug.Log("current:" + currentPage);
+        Debug.Log("End:" + TotalPageCount);
+        if (interactable && currentPage < TotalPageCount - 1)
         DragRightPageToPoint(transformPoint(Input.mousePosition));
         
     }

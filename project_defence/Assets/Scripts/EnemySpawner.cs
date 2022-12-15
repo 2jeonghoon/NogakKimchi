@@ -118,6 +118,7 @@ public class EnemySpawner : MonoBehaviour
             }
         }
         enemy.isClone = false;
+        enemy.GetComponent<EnemyHP>().setSpawnHP();
         // 적 오브젝트 풀로 리턴
         enemy.transform.position = ObjectPool.instance.transform.position;
         enemy.gameObject.SetActive(false);

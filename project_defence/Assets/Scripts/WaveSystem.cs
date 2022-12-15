@@ -33,7 +33,6 @@ public class WaveSystem : MonoBehaviour
 
         // 시작 시 열릴 타워 설정, restart해도 타워들은 열려있음.
         towerSpawner.SetTowerLock(_Lock[0], 0, false);
-        towerSpawner.SetTowerLock(_Lock[1], 1, false);
         towerSpawner.set_lock(_Lock);
     }
 
@@ -89,27 +88,31 @@ public class WaveSystem : MonoBehaviour
     //wave별 타워 잠금해제 (currentWaveIndex가 끝나면 타워가 열림)
     public void waveEndTowerLockOff()
     {
-        if (currentWaveIndex == 1)
+        if (currentWaveIndex == 3)
+        {
+            towerSpawner.SetTowerLock(_Lock[1], 1, false);
+        }
+        else if (currentWaveIndex == 10)
         {
             towerSpawner.SetTowerLock(_Lock[2], 2, false);
         }
-        else if (currentWaveIndex == 2)
+        else if (currentWaveIndex == 18)
         {
             towerSpawner.SetTowerLock(_Lock[3], 3, false);
         }
-        else if (currentWaveIndex == 3)
+        else if (currentWaveIndex == 24)
         {
             towerSpawner.SetTowerLock(_Lock[4], 4, false);
         }
-        else if (currentWaveIndex == 4)
+        else if (currentWaveIndex == 28)
         {
             towerSpawner.SetTowerLock(_Lock[5], 5, false);
         }
-        else if (currentWaveIndex == 5)
+        else if (currentWaveIndex == 32)
         {
             towerSpawner.SetTowerLock(_Lock[6], 6, false);
         }
-        else if (currentWaveIndex == 6)
+        else if (currentWaveIndex == 37)
         {
             towerSpawner.SetTowerLock(_Lock[7], 7, false);
         }

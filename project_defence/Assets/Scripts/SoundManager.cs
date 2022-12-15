@@ -8,13 +8,13 @@ using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
-    // 오디오 믹서
+    //오디오 믹서
     public AudioMixer mixer;
-    // 배경음악
+    //배경음악
     public AudioSource bgSound;
     public AudioClip[] bglist;
 
-    // 버튼 사운드
+    //버튼사운드
     [SerializeField]
     public AudioClip buttonSoundClip;
 
@@ -46,13 +46,16 @@ public class SoundManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
+        Debug.Log(arg0.name);
         for (int i = 0; i < bglist.Length; i++)
         {
-            //if (arg0.name + "BGM" == bglist[i].name)
-            if ("Map_1" == bglist[i].name)
+            if (arg0.name + "BGM" == bglist[i].name)
             {
-                Debug.Log("bgm 재생");
+                Debug.Log(arg0.name);
                 BgSoundPlay(bglist[i]);
+                mixer.SetFloat("Master", 0);
+                mixer.SetFloat("BGsound", 0);
+                mixer.SetFloat("SFX", 0);
             }
         }
     }
