@@ -111,6 +111,10 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 256
+  LevelUp:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   buildClip: {fileID: 8300000, guid: 7c47b20bb9874304a809dc5580d403ba, type: 3}
   upgradeClip: {fileID: 8300000, guid: c5cb2ac29e89dbf43a9b644caaad45e6, type: 3}
   sellClip: {fileID: 8300000, guid: abdbbfd33a46f4549987385f85c536b5, type: 3}

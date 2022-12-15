@@ -34,6 +34,10 @@ public class TowerWeapon : MonoBehaviour
     [SerializeField]
     private LayerMask targetLayer;                          // 광선에 부딪히는 레이어 설정
 
+    [Header("LevelUPImage")]
+    [SerializeField]
+    private GameObject[] LevelUp;
+
     private int level = 0;                              // 타워 레벨
     private WeaponState weaponState = WeaponState.SearchTarget; // 타워 무기의 상태
     private Transform attackTarget = null;                    // 공격 대상
@@ -102,6 +106,8 @@ public class TowerWeapon : MonoBehaviour
             // 최초 상태를 WeaponState.SearchTarget으로 설정
             ChangeState(WeaponState.SearchTarget);
         }
+        for(int i = 0; i < LevelUp.Length; i++)
+            LevelUp[i].SetActive(false);
     }
 
     public void ChangeState(WeaponState newState)
@@ -582,6 +588,7 @@ public class TowerWeapon : MonoBehaviour
         spriteRenderer.sprite = towerTemplate.weapon[level].sprite;
         // 골드 차감
         playerGold.CurrentGold -= towerTemplate.weapon[level].cost;
+        LevelUp[level-1].SetActive(true);
 
         // 무기 속성이 레이저이면
         if (weaponType == WeaponType.Laser)
@@ -611,6 +618,7 @@ public class TowerWeapon : MonoBehaviour
 
         // 타워 레벨 증가
         level += 2;
+        LevelUp[level - 2].SetActive(true);
         // 타워 외형 변경 (Sprite)
         spriteRenderer.sprite = towerTemplate.weapon[level].sprite;
         // 골드 차감
