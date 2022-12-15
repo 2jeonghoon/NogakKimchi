@@ -18,10 +18,10 @@ MonoBehaviour:
     type: 3}
   weapon:
   - sprite: {fileID: 21300000, guid: 0633646f643a68048bd084595beedc76, type: 3}
-    damage: 3
+    damage: 5
     slow: 0
     buff: 0
-    rate: 0.8
+    rate: 0.5
     range: 2.5
     cost: 200
     sell: 160
@@ -31,10 +31,10 @@ MonoBehaviour:
     upgradeImage1: {fileID: 21300000, guid: 9fd4de77126849246a64fb3e116d4211, type: 3}
     upgradeImage2: {fileID: 21300000, guid: 06ece579de5c55a4e9d2f390bcad73b0, type: 3}
   - sprite: {fileID: 21300000, guid: 0633646f643a68048bd084595beedc76, type: 3}
-    damage: 4
+    damage: 6
     slow: 0
     buff: 0
-    rate: 0.8
+    rate: 0.5
     range: 2.5
     cost: 140
     sell: 272
@@ -44,10 +44,10 @@ MonoBehaviour:
     upgradeImage1: {fileID: 21300000, guid: 63e2a7dc054514c45a73892780c9e98c, type: 3}
     upgradeImage2: {fileID: 21300000, guid: 06ece579de5c55a4e9d2f390bcad73b0, type: 3}
   - sprite: {fileID: 21300000, guid: 0633646f643a68048bd084595beedc76, type: 3}
-    damage: 4
+    damage: 6
     slow: 0
     buff: 0
-    rate: 0.8
+    rate: 0.5
     range: 3.5
     cost: 160
     sell: 400

@@ -408,44 +408,122 @@ public class TowerWeapon : MonoBehaviour
 
     private void SpawnProjectile_Multiple()
     {
-        if (attackTarget != null)
+        if (level < 3) // 타워 레벨이 3보다 작은 경우(특수 능력X) 공격
         {
-            GameObject clone1;                                                                   // 오브젝트 Pool에서 Dequeue해서 가져옴, 1번 : jelly
-            GameObject clone2;
-            GameObject clone3;
-
-            if (!ObjectPool.instance.objectPoolList[1].TryDequeue(out clone1))
-                clone1 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-            if (!ObjectPool.instance.objectPoolList[1].TryDequeue(out clone2))
-                clone2 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-            if (!ObjectPool.instance.objectPoolList[1].TryDequeue(out clone3))
-                clone3 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-
-            clone1.transform.position = spawnPoint.position;
-            clone2.transform.position = spawnPoint.position;
-            clone3.transform.position = spawnPoint.position;
-
-            clone1.GetComponent<SpriteRenderer>().sprite = ProjectileSprite;
-            clone2.GetComponent<SpriteRenderer>().sprite = ProjectileSprite;
-            clone3.GetComponent<SpriteRenderer>().sprite = ProjectileSprite;
-            // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
-            // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
-            float damage = towerTemplate.weapon[level].damage + AddedDamage;
-            // 세 갈래로 나누어지는 공격을 위해 Vector3.left, right를 더해줌
-            if (IsPossibleToAttackTarget())
+            if (attackTarget != null)
             {
-                Vector3 targetPos = attackTarget.position;
-                clone1.GetComponent<Projectile_Multiple>().Setup(targetPos, damage, -1);
-                clone2.GetComponent<Projectile_Multiple>().Setup(targetPos, damage);
-                clone3.GetComponent<Projectile_Multiple>().Setup(targetPos, damage, 1);
+                GameObject clone1;                                                                   // 오브젝트 Pool에서 Dequeue해서 가져옴, 1번 : jelly
+                GameObject clone2;
+                GameObject clone3;
+
+                if (!ObjectPool.instance.objectPoolList[1].TryDequeue(out clone1))
+                    clone1 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+                if (!ObjectPool.instance.objectPoolList[1].TryDequeue(out clone2))
+                    clone2 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+                if (!ObjectPool.instance.objectPoolList[1].TryDequeue(out clone3))
+                    clone3 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+
+                clone1.transform.position = spawnPoint.position;
+                clone2.transform.position = spawnPoint.position;
+                clone3.transform.position = spawnPoint.position;
+
+                clone1.GetComponent<SpriteRenderer>().sprite = ProjectileSprite;
+                clone2.GetComponent<SpriteRenderer>().sprite = ProjectileSprite;
+                clone3.GetComponent<SpriteRenderer>().sprite = ProjectileSprite;
+                // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
+                // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
+                float damage = towerTemplate.weapon[level].damage + AddedDamage;
+                // 세 갈래로 나누어지는 공격을 위해 Vector3.left, right를 더해줌
+                if (IsPossibleToAttackTarget())
+                {
+                    Vector3 targetPos = attackTarget.position;
+                    clone1.GetComponent<Projectile_Multiple>().Setup(targetPos, damage, -1);
+                    clone2.GetComponent<Projectile_Multiple>().Setup(targetPos, damage);
+                    clone3.GetComponent<Projectile_Multiple>().Setup(targetPos, damage, 1);
+                }
+                else
+                {
+                    Debug.Log("Find");
+                    Vector3 targetPos = FindClosestAttackTarget().position;
+                    clone1.GetComponent<Projectile_Multiple>().Setup(targetPos, damage, -1);
+                    clone2.GetComponent<Projectile_Multiple>().Setup(targetPos, damage);
+                    clone3.GetComponent<Projectile_Multiple>().Setup(targetPos, damage, 1);
+                }
             }
-            else
+        }
+        else if(level == 3) // 타워 레벨이 3보다 크고, 어떤 분기를 선택했는지에 따라 공격이 달라짐
+        {
+            if (attackTarget != null)
             {
-                Debug.Log("Find");
-                Vector3 targetPos = FindClosestAttackTarget().position;
-                clone1.GetComponent<Projectile_Multiple>().Setup(targetPos, damage, -1);
-                clone2.GetComponent<Projectile_Multiple>().Setup(targetPos, damage);
-                clone3.GetComponent<Projectile_Multiple>().Setup(targetPos, damage, 1);
+                GameObject clone1;                                                                   // 오브젝트 Pool에서 Dequeue해서 가져옴, 1번 : jelly
+                GameObject clone2;
+                GameObject clone3;
+
+                if (!ObjectPool.instance.objectPoolList[1].TryDequeue(out clone1))
+                    clone1 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+                if (!ObjectPool.instance.objectPoolList[1].TryDequeue(out clone2))
+                    clone2 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+                if (!ObjectPool.instance.objectPoolList[1].TryDequeue(out clone3))
+                    clone3 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+
+                clone1.transform.position = spawnPoint.position;
+                clone2.transform.position = spawnPoint.position;
+                clone3.transform.position = spawnPoint.position;
+
+                clone1.GetComponent<SpriteRenderer>().sprite = towerTemplate.weapon[level].projectileSprites[0];
+                clone2.GetComponent<SpriteRenderer>().sprite = towerTemplate.weapon[level].projectileSprites[1];
+                clone3.GetComponent<SpriteRenderer>().sprite = towerTemplate.weapon[level].projectileSprites[2];
+                // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
+                // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
+                float damage = towerTemplate.weapon[level].damage + AddedDamage;
+                // 세 갈래로 나누어지는 공격을 위해 Vector3.left, right를 더해줌
+                if (IsPossibleToAttackTarget())
+                {
+                    Vector3 targetPos = attackTarget.position;
+                    clone1.GetComponent<Projectile_Multi_IGNDEF>().Setup(targetPos, damage, -1);
+                    clone2.GetComponent<Projectile_Multi_IGNDEF>().Setup(targetPos, damage);
+                    clone3.GetComponent<Projectile_Multi_IGNDEF>().Setup(targetPos, damage, 1);
+                }
+                else
+                {
+                    Debug.Log("Find");
+                    Vector3 targetPos = FindClosestAttackTarget().position;
+                    clone1.GetComponent<Projectile_Multi_IGNDEF>().Setup(targetPos, damage, -1);
+                    clone2.GetComponent<Projectile_Multi_IGNDEF>().Setup(targetPos, damage);
+                    clone3.GetComponent<Projectile_Multi_IGNDEF>().Setup(targetPos, damage, 1);
+                }
+            }
+        }
+        else
+        {
+            if (attackTarget != null)
+            {
+                GameObject[] clone = new GameObject[8];                             // 오브젝트 Pool에서 Dequeue해서 가져옴, 1번 : jelly
+
+                for (int i = 0; i < 8; i++)
+                {
+                    if (!ObjectPool.instance.objectPoolList[1].TryDequeue(out clone[i]))
+                        clone[i] = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+                }
+
+                for(int i = 0; i < 8; i++)
+                {
+                    clone[i].transform.position = spawnPoint.position;
+                    clone[i].GetComponent<SpriteRenderer>().sprite = ProjectileSprite;
+                }
+
+                // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
+                // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
+                float damage = towerTemplate.weapon[level].damage + AddedDamage;
+                // 세 갈래로 나누어지는 공격을 위해 Vector3.left, right를 더해줌
+                if (IsPossibleToAttackTarget())
+                {
+                    Vector3 targetPos = attackTarget.position;
+                    for(int i = 0; i < 8; i++)
+                    {
+                        clone[i].GetComponent<Projectile_Multiple>().Setup(damage, i);
+                    }
+                }
             }
         }
     }

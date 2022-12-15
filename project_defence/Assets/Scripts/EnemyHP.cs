@@ -57,7 +57,7 @@ public class EnemyHP : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, bool isIgnoreDef)
     {
         // Tip. 적의 체력이 damage 만큼 감소해서 죽을 상황일 때 여러 타워의 공격을 동시에 받으면
         // enemy.OnDie() 함수가 여러 번 실행될 수 있다.
@@ -66,9 +66,16 @@ public class EnemyHP : MonoBehaviour
         if (isDie == true) return;
 
         // 현재 체력을 damage - defense(방어력)만큼 감소
-        if (damage - defense >= 0)
+        if (!isIgnoreDef)
         {
-            currentHP -= (damage - defense);
+            if (damage - defense >= 0)
+            {
+                currentHP -= (damage - defense);
+            }
+        }
+        else
+        {
+            currentHP -= damage;
         }
 
         StopCoroutine("HitAlphaAnimation");
