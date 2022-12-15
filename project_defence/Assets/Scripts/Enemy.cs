@@ -46,9 +46,9 @@ public class Enemy : MonoBehaviour
 		// 클론 위치를 복사한 객체 위치로.
 		this.transform.position = enemy.transform.position;
 		gameObject.SetActive(true);                 // ObjectPool을 사용하면서 SetActive(true)가 필요해짐
-													// 적 이동/목표지점 설정 코루틴 함수 시작
-		//StartCoroutine("OnMove");
-	}
+                                                    // 적 이동/목표지점 설정 코루틴 함수 시작
+        NextMoveTo();
+    }
 
 	public virtual void Setup(EnemySpawner enemySpawner, Transform[] wayPoints, int pool_idx)
 	{
@@ -68,7 +68,7 @@ public class Enemy : MonoBehaviour
 		NextMoveTo();
 	}
 
-	private void FixedUpdate()
+	protected void FixedUpdate()
 	{
 		if (Vector3.Distance(transform.position, wayPoints[currentIndex].position) < 0.08f * movement2D.MoveSpeed)
 		{
@@ -76,27 +76,7 @@ public class Enemy : MonoBehaviour
 			NextMoveTo();
 		}
 	}
-	/*
-	protected virtual IEnumerator OnMove()
-	{
-		// 다음 이동 방향 설정
-		NextMoveTo();
-		while ( true )
-		{
-			// 적 오브젝트 회전
-			//transform.Rotate(Vector3.forward * 10);
-			// 적의 현재위치와 목표위치의 거리가 0.02 * movement2D.MoveSpeed보다 작을 때 if 조건문 실행
-			// Tip. movement2D.MoveSpeed를 곱해주는 이유는 속도가 빠르면 한 프레임에 0.02보다 크게 움직이기 때문에
-			// if 조건문에 걸리지 않고 경로를 탈주하는 오브젝트가 발생할 수 있다.
-			if ( Vector3.Distance(transform.position, wayPoints[currentIndex].position) < 0.08f * movement2D.MoveSpeed )
-			{
-				// 다음 이동 방향 설정
-				NextMoveTo();
-			}
-			yield return null;
-		}
-	}
-	*/
+
 	protected void NextMoveTo()
 	{
 		// 아직 이동할 wayPoints가 남아있다면

@@ -46,8 +46,6 @@ public class Projectile : MonoBehaviour
         gameObject.transform.position = ObjectPool.instance.transform.position;
         gameObject.SetActive(false);
         ObjectPool.instance.objectPoolList[idx].Enqueue(gameObject);
-		Debug.Log(gameObject);
-		Debug.Log(idx + ", Enqueue : " + ObjectPool.instance.objectPoolList[idx].Count);
 	}
 
     private IEnumerator Destroy_Projectile()

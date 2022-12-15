@@ -134,6 +134,8 @@ public class Boss : Enemy
         enemy.Setup(enemySpawner, this, pool_idx);      // 보스의 way데이터를 가지고 클론을 만듬.
         enemy.transform.position = this.transform.position;
         enemy.transform.rotation = this.transform.rotation;
+        enemy.isClone = true;
+
         // HP 바 생성
         enemySpawner.SpawnEnemyHPSlider(clone);
 

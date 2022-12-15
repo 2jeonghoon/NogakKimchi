@@ -116,6 +116,9 @@ public class EnemySpawner : MonoBehaviour
                     SceneManager.LoadScene("HappyEnd");
                 }
             }
+        } else
+        {
+            enemy.isClone = false;
         }
 
         // 리스트에서 사망하는 적 정보 삭제

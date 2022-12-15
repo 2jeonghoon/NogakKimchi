@@ -5167,12 +5167,12 @@ MonoBehaviour:
   - {fileID: 63866560545116346, guid: 4878148eb0d7a8c46b4df9d7202a708c, type: 3}
   waves:
   - wave:
-    - spawnTime: 0.5
-      maxEnemyCount: 10
-      enemyPrefabs: 0000000001000000
-    - spawnTime: 10
+    - spawnTime: 1
       maxEnemyCount: 1
-      enemyPrefabs: 03000000
+      enemyPrefabs: 04000000
+    - spawnTime: 0.5
+      maxEnemyCount: 200
+      enemyPrefabs: 000000000100000002000000
     maxEnemyCount: 0
   towerSpawner: {fileID: 240897077}
   enemySpawner: {fileID: 266347680}
@@ -23078,7 +23078,7 @@ MonoBehaviour:
   - objectName: coco
     perfab: {fileID: 4461503835666675623, guid: d009f2b9f4d1a734ba1bb4b46c4aad1f,
       type: 3}
-    count: 50
+    count: 5
   - objectName: jelly
     perfab: {fileID: 4461503835666675623, guid: 39f676f0c1b70dc4eafb5f2eddbabb70,
       type: 3}

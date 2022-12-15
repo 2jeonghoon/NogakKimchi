@@ -392,7 +392,8 @@ public class TowerWeapon : MonoBehaviour
             GameObject clone;                                                                  // 오브젝트 Pool에서 Dequeue해서 가져옴, 0번 : coco
             if (!ObjectPool.instance.objectPoolList[0].TryDequeue(out clone))
             {
-                clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+                ObjectPool.instance.InsertQueue(0);
+                clone = ObjectPool.instance.objectPoolList[0].Dequeue();
             }
             clone.transform.position = spawnPoint.position;                                   // Dequeue해서 가져온 Projectile의 position을 SpawnPoint로 바꾸어 줌
             clone.GetComponent<SpriteRenderer>().sprite = ProjectileSprite;
@@ -417,11 +418,20 @@ public class TowerWeapon : MonoBehaviour
                 GameObject clone3;
 
                 if (!ObjectPool.instance.objectPoolList[1].TryDequeue(out clone1))
-                    clone1 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+                {
+                    ObjectPool.instance.InsertQueue(1);
+                    clone1 = ObjectPool.instance.objectPoolList[1].Dequeue();
+                }
                 if (!ObjectPool.instance.objectPoolList[1].TryDequeue(out clone2))
-                    clone2 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+                {
+                    ObjectPool.instance.InsertQueue(1);
+                    clone2 = ObjectPool.instance.objectPoolList[1].Dequeue();
+                }
                 if (!ObjectPool.instance.objectPoolList[1].TryDequeue(out clone3))
-                    clone3 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+                {
+                    ObjectPool.instance.InsertQueue(1);
+                    clone3 = ObjectPool.instance.objectPoolList[1].Dequeue();
+                }
 
                 clone1.transform.position = spawnPoint.position;
                 clone2.transform.position = spawnPoint.position;
@@ -460,11 +470,20 @@ public class TowerWeapon : MonoBehaviour
                 GameObject clone3;
 
                 if (!ObjectPool.instance.objectPoolList[1].TryDequeue(out clone1))
-                    clone1 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+                {
+                    ObjectPool.instance.InsertQueue(1);
+                    clone1 = ObjectPool.instance.objectPoolList[1].Dequeue();
+                }
                 if (!ObjectPool.instance.objectPoolList[1].TryDequeue(out clone2))
-                    clone2 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+                {
+                    ObjectPool.instance.InsertQueue(1);
+                    clone2 = ObjectPool.instance.objectPoolList[1].Dequeue();
+                }
                 if (!ObjectPool.instance.objectPoolList[1].TryDequeue(out clone3))
-                    clone3 = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+                {
+                    ObjectPool.instance.InsertQueue(1);
+                    clone3 = ObjectPool.instance.objectPoolList[1].Dequeue();
+                }
 
                 clone1.transform.position = spawnPoint.position;
                 clone2.transform.position = spawnPoint.position;
@@ -503,7 +522,10 @@ public class TowerWeapon : MonoBehaviour
                 for (int i = 0; i < 8; i++)
                 {
                     if (!ObjectPool.instance.objectPoolList[1].TryDequeue(out clone[i]))
-                        clone[i] = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+                    {
+                        ObjectPool.instance.InsertQueue(1);
+                        clone[i] = ObjectPool.instance.objectPoolList[1].Dequeue();
+                    }
                 }
 
                 for(int i = 0; i < 8; i++)
@@ -534,10 +556,11 @@ public class TowerWeapon : MonoBehaviour
         //Debug.Log("占쌩삼옙");
         if (attackTarget != null)
         {
-            GameObject clone;                                                                   // 오브젝트 Pool에서 Dequeue해서 가져옴, 2번 : icecream
+            GameObject clone;                                                                    // 오브젝트 Pool에서 Dequeue해서 가져옴, 2번 : r
             if (!ObjectPool.instance.objectPoolList[2].TryDequeue(out clone))
             {
-                clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+                ObjectPool.instance.InsertQueue(2);
+                clone = ObjectPool.instance.objectPoolList[2].Dequeue();
             }
             clone.transform.position = spawnPoint.position;                                     // Dequeue해서 가져온 Projectile의 position을 SpawnPoint로 바꾸어 줌
             clone.GetComponent<SpriteRenderer>().sprite = ProjectileSprite;
@@ -554,11 +577,11 @@ public class TowerWeapon : MonoBehaviour
     // 占쌘곤옙占쏙옙 占싼억옙 占쏙옙占쏙옙
     private void SpawnMortarProjectile()
     {
-        //GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-        GameObject clone;                                                                   // 오브젝트 Pool에서 Dequeue해서 가져옴, 3번 : milk
+        GameObject clone;                                                                    // 오브젝트 Pool에서 Dequeue해서 가져옴, 3번 : milk
         if (!ObjectPool.instance.objectPoolList[3].TryDequeue(out clone))
         {
-            clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+            ObjectPool.instance.InsertQueue(3);
+            clone = ObjectPool.instance.objectPoolList[3].Dequeue();
         }
         clone.transform.position = spawnPoint.position;                                     // Dequeue해서 가져온 Projectile의 position을 SpawnPoint로 바꾸어 줌
         clone.GetComponent<SpriteRenderer>().sprite = ProjectileSprite;
@@ -573,10 +596,11 @@ public class TowerWeapon : MonoBehaviour
 
     private void SpawnProjectile_Strawberry()
     {
-        GameObject clone;                                                                   // 오브젝트 Pool에서 Dequeue해서 가져옴, 4번 : strawberry
+        GameObject clone;                                                                    // 오브젝트 Pool에서 Dequeue해서 가져옴, 4번 : strawberry
         if (!ObjectPool.instance.objectPoolList[4].TryDequeue(out clone))
         {
-            clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+            ObjectPool.instance.InsertQueue(4);
+            clone = ObjectPool.instance.objectPoolList[4].Dequeue();
         }
         clone.transform.position = spawnPoint.position;                                     // Dequeue해서 가져온 Projectile의 position을 SpawnPoint로 바꾸어 줌
         clone.GetComponent<SpriteRenderer>().sprite = ProjectileSprite;
@@ -596,7 +620,8 @@ public class TowerWeapon : MonoBehaviour
             GameObject clone;                                                                    // 오브젝트 Pool에서 Dequeue해서 가져옴, 5번 : spear
             if (!ObjectPool.instance.objectPoolList[5].TryDequeue(out clone))
             {
-                clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+                ObjectPool.instance.InsertQueue(5);
+                clone = ObjectPool.instance.objectPoolList[5].Dequeue();
             }
             clone.transform.position = spawnPoint.position;                                     // Dequeue해서 가져온 Projectile의 position을 SpawnPoint로 바꾸어 줌
 
