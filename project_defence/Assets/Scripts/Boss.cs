@@ -46,7 +46,6 @@ public class Boss : Enemy
         gameObject.SetActive(true);					// ObjectPool을 사용하면서 SetActive(true)가 필요해짐
         // 적 이동/목표지점 설정 코루틴 함수 시작
         StartCoroutine("skill", delay_time);
-        StartCoroutine("OnMove");
     }
 
     private IEnumerator skill(float delay_time)
