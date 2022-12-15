@@ -22,7 +22,7 @@ MonoBehaviour:
     slow: 0
     buff: 1
     rate: 0
-    range: 1
+    range: 2
     cost: 300
     sell: 150
     tileType: 0
@@ -36,7 +36,7 @@ MonoBehaviour:
     slow: 0
     buff: 1
     rate: 0
-    range: 2.5
+    range: 4
     cost: 300
     sell: 450
     tileType: 0
