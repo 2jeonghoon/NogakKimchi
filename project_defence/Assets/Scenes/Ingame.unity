@@ -5168,8 +5168,11 @@ MonoBehaviour:
   waves:
   - wave:
     - spawnTime: 0.5
+      maxEnemyCount: 10
+      enemyPrefabs: 0000000001000000
+    - spawnTime: 10
       maxEnemyCount: 1
-      enemyPrefabs: 04000000
+      enemyPrefabs: 03000000
     maxEnemyCount: 0
   towerSpawner: {fileID: 240897077}
   enemySpawner: {fileID: 266347680}
