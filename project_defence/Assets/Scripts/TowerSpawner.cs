@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class TowerSpawner : MonoBehaviour
@@ -183,7 +183,7 @@ public class TowerSpawner : MonoBehaviour
 		towerTemplate[towerType].isLock = setLock;
 
 		_Lock.GetComponent<Lock>().LockOff();
-		if (towerType > 1)
+		if (towerType >= 1)
 		{
 			_Lock.GetComponent<Lock>().LockOffImage();
 		}

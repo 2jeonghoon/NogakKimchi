@@ -92,31 +92,32 @@ public class WaveSystem : MonoBehaviour
         {
             towerSpawner.SetTowerLock(_Lock[1], 1, false);
         }
-        else if (currentWaveIndex == 10)
+        else if (currentWaveIndex == 5)
         {
             towerSpawner.SetTowerLock(_Lock[2], 2, false);
         }
-        else if (currentWaveIndex == 18)
+        else if (currentWaveIndex == 10)
         {
             towerSpawner.SetTowerLock(_Lock[3], 3, false);
         }
-        else if (currentWaveIndex == 24)
+        else if (currentWaveIndex == 13)
         {
             towerSpawner.SetTowerLock(_Lock[4], 4, false);
         }
-        else if (currentWaveIndex == 28)
+        else if (currentWaveIndex == 15)
         {
             towerSpawner.SetTowerLock(_Lock[5], 5, false);
         }
-        else if (currentWaveIndex == 32)
+        else if (currentWaveIndex == 18)
         {
             towerSpawner.SetTowerLock(_Lock[6], 6, false);
         }
-        else if (currentWaveIndex == 37)
+        else if (currentWaveIndex == 20)
         {
             towerSpawner.SetTowerLock(_Lock[7], 7, false);
         }
     }
+
 
     public void SpeedChange()
     {
@@ -149,7 +150,6 @@ public class WaveSystem : MonoBehaviour
                     GameSpeedImage[2].SetActive(true);
                     break;
                 default:
-                    break;
                     Debug.Log("speedSetError");
                     break;
             }
