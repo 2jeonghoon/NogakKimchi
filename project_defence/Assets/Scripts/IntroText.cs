@@ -44,9 +44,9 @@ public class IntroText : MonoBehaviour
 /*
  * File : IntroText.cs
  * Desc
- *	: Book Scene?�서 ?�트�??�토�??�스?�에???�이지가 ?�어가�??�당 ?�이지??맞는 ?�스?��? 출력?�줌
+ *	: Book Scene에서 인트로 스토리 텍스트에서 페이지가 넘어가면 해당 페이지에 맞는 텍스트를 출력해줌
  *	
  * Functions
- *	NextStory() : Book ?�크립트?�서 참조?�서 ?�이지가 ?�로 ?�어�????�음 ?�스??출력
- *	PrivateStory() : Book ?�크립트?�서 참조?�서 ?�이지가 ?�으�??�어�????�전 ?�스??출력
+ *	NextStory() : Book 스크립트에서 참조해서 페이지가 뒤로 넘어갈 때 다음 텍스트 출력
+ *	PrivateStory() : Book 스크립트에서 참조해서 페이지가 앞으로 넘어갈 때 이전 텍스트 출력
  */
