@@ -21,7 +21,7 @@ MonoBehaviour:
     damage: 5
     slow: 0
     buff: 0
-    rate: 0.7
+    rate: 1
     range: 3
     cost: 350
     sell: 280
@@ -32,7 +32,7 @@ MonoBehaviour:
     damage: 5
     slow: 0
     buff: 0
-    rate: 0.5
+    rate: 0.7
     range: 3
     cost: 120
     sell: 376
@@ -43,7 +43,7 @@ MonoBehaviour:
     damage: 6
     slow: 0
     buff: 0
-    rate: 0.5
+    rate: 0.7
     range: 3
     cost: 230
     sell: 560

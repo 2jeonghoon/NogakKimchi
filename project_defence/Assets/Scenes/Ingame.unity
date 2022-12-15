@@ -5295,9 +5295,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - wave:
-    - spawnTime: 0.5
-      maxEnemyCount: 40
-      enemyPrefabs: 00000000
+    - spawnTime: 1
+      maxEnemyCount: 1
+      enemyPrefabs: 04000000
     maxEnemyCount: 0
   towerSpawner: {fileID: 240897077}
   enemySpawner: {fileID: 266347680}

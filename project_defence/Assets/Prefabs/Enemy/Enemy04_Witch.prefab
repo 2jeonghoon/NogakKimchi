@@ -4926,7 +4926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 288d7fee1068849458d43eb560e20942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1.3
+  moveSpeed: 1.5
   moveDirection: {x: 0, y: 0, z: 0}
 --- !u!58 &-3643329299626539831
 CircleCollider2D:
@@ -4972,6 +4972,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gold: 10
+  isInstagramOn: 0
   clip: {fileID: 8300000, guid: e58d8bd078f188a4ba314e933b98528b, type: 3}
   isClone: 0
   delay_time: 1.5
