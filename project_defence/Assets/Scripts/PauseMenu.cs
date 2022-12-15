@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject go_BaseUI; // 일시 정지 UI 패널
+    [SerializeField] private GameObject sound_BaseUI; // 일시 정지 UI 패널
 
     public bool isPause;
 
@@ -20,11 +21,27 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f; // 시간의 흐름 설정. 0배속. 즉 시간을 멈춤.
     }
 
+    public void CallSound()
+    {
+        // soundsetting is On
+        if (sound_BaseUI.activeSelf)
+        {
+            sound_BaseUI.SetActive(false);
+        }
+        else
+        {
+            sound_BaseUI.SetActive(true);
+        }
+        //isPause = true;
+        //Time.timeScale = 0f; // 시간의 흐름 설정. 0배속. 즉 시간을 멈춤.
+    }
+
     public void CloseMenu()
     {
+        float tmp = Time.timeScale;
         isPause = false;
         go_BaseUI.SetActive(false);
-        Time.timeScale = 1f; // 1배속 (정상 속도)
+        Time.timeScale = tmp; // 기존 속도로
     }
     public void CallReStart()
     {
