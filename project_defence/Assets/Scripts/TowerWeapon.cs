@@ -584,9 +584,9 @@ public class TowerWeapon : MonoBehaviour
         // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
         float damage = towerTemplate.weapon[level].damage + AddedDamage;
         if (IsPossibleToAttackTarget())
-            clone.GetComponent<ProjectileStrawberry>().Setup(attackTarget, enemySpawner, ExplosionRange);
+            clone.GetComponent<ProjectileStrawberry>().Setup(attackTarget, damage, enemySpawner, ExplosionRange);
         else
-            clone.GetComponent<ProjectileStrawberry>().Setup(FindClosestAttackTarget(), enemySpawner, ExplosionRange);
+            clone.GetComponent<ProjectileStrawberry>().Setup(FindClosestAttackTarget(), damage, enemySpawner, ExplosionRange);
     }
 
     private void SpawnProjectile_Spear()

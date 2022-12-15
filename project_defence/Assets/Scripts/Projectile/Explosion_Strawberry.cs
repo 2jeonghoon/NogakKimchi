@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Explosion_Strawberry: Explosion
 {
-    public void Setup(float scale)
+    private float damage;
+
+    public override void Setup(float damage, float scale)
     {
         // 폭발 사운드 재생
         SoundManager.instance.SFXPlay("boom", clip);
+        this.damage = damage;                       // 타워의 공격력
         this.transform.localScale = new Vector3(0.2f, 0.2f, 1) * scale;
     }
 
@@ -24,7 +27,7 @@ public class Explosion_Strawberry: Explosion
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Enemy")) return;         // 적이 아닌 대상과 부딪히면
-
+        collision.GetComponent<EnemyHP>().TakeDamage(damage, false);   // 적 체력을 damage만큼 감소
         float enemyBaseSpeed = collision.GetComponent<Movement2D>().BaseMoveSpeed;   // 적의 BaseMoveSpeed를 가져옴
         //float enemyCurrentSpeed = collision.GetComponent<Movement2D>().MoveSpeed;   // 적의 CurrentMoveSpeed를 가져옴
 

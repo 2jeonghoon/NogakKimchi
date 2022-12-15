@@ -17,7 +17,7 @@ public class Explosion : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void Setup(float damage,float scale)
+    public virtual void Setup(float damage,float scale)
     {
         // 폭발 사운드 재생
         SoundManager.instance.SFXPlay("boom", clip);
