@@ -28,6 +28,8 @@ MonoBehaviour:
     tileType: 0
     explosionRange: 0
     projectileSprite: {fileID: 21300000, guid: d500e7646586299499f00ca74881878a, type: 3}
+    upgradeImage1: {fileID: 21300000, guid: 560ef14e11c1de54380b9645591c7329, type: 3}
+    upgradeImage2: {fileID: 0}
   - sprite: {fileID: 21300000, guid: 0633646f643a68048bd084595beedc76, type: 3}
     damage: 6
     slow: 0
@@ -39,6 +41,8 @@ MonoBehaviour:
     tileType: 0
     explosionRange: 0
     projectileSprite: {fileID: 21300000, guid: d500e7646586299499f00ca74881878a, type: 3}
+    upgradeImage1: {fileID: 21300000, guid: 6231dd8557dc11e4bb41f93c2dfc0715, type: 3}
+    upgradeImage2: {fileID: 21300000, guid: b730697ddab423f4491362626cb0e298, type: 3}
   - sprite: {fileID: 21300000, guid: 6231dd8557dc11e4bb41f93c2dfc0715, type: 3}
     damage: 6
     slow: 0
@@ -50,6 +54,8 @@ MonoBehaviour:
     tileType: 0
     explosionRange: 0
     projectileSprite: {fileID: 21300000, guid: 4b9b5cc56cf0a7242a791103d8604920, type: 3}
+    upgradeImage1: {fileID: 0}
+    upgradeImage2: {fileID: 0}
   - sprite: {fileID: 21300000, guid: b730697ddab423f4491362626cb0e298, type: 3}
     damage: 6
     slow: 0
@@ -61,5 +67,7 @@ MonoBehaviour:
     tileType: 0
     explosionRange: 0
     projectileSprite: {fileID: 21300000, guid: 9406f8e07bba4b14984e8933e1a57e2c, type: 3}
+    upgradeImage1: {fileID: 0}
+    upgradeImage2: {fileID: 0}
   maxTowerLV: 3
   isLock: 0
