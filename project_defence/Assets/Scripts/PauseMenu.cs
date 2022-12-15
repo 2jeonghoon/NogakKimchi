@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject go_BaseUI; // ÀÏ½Ã Á¤Áö UI ÆĞ³Î
+    [SerializeField] private GameObject go_BaseUI; // ì¼ì‹œ ì •ì§€ UI íŒ¨ë„
+    [SerializeField] private GameObject sound_BaseUI; // ì‚¬ìš´ë“œ UI íŒ¨ë„
 
     public bool isPause;
+    public float gamespeed;
 
     private void Start()
     {
@@ -17,27 +19,42 @@ public class PauseMenu : MonoBehaviour
     {
         isPause = true;
         go_BaseUI.SetActive(true);
-        Time.timeScale = 0f; // ½Ã°£ÀÇ Èå¸§ ¼³Á¤. 0¹è¼Ó. Áï ½Ã°£À» ¸ØÃã.
+        gamespeed = Time.timeScale; // ê¸°ì¡´ ì†ë„ ì €ì¥
+        Time.timeScale = 0f; // ì‹œê°„ì˜ íë¦„ ì„¤ì •. 0ë°°ì†. ì¦‰ ì‹œê°„ì„ ë©ˆì¶¤.
     }
 
+    public void CallSound()
+    {
+        // ì‚¬ìš´ë“œì„¸íŒ…ì´ ì¼œì ¸ìˆìœ¼ë©´
+        if (sound_BaseUI.activeSelf)
+        {
+            sound_BaseUI.SetActive(false);
+        }
+        else
+        {
+            sound_BaseUI.SetActive(true);
+        }
+        
+    }
+    
     public void CloseMenu()
     {
         isPause = false;
         go_BaseUI.SetActive(false);
-        Time.timeScale = 1f; // 1¹è¼Ó (Á¤»ó ¼Óµµ)
+        Time.timeScale = gamespeed; // ì €ì¥í•´ë‘” ê²Œì„ìŠ¤í”¼ë“œë¡œ
     }
     public void CallReStart()
     {
         isPause = false;
         go_BaseUI.SetActive(false);
-        Time.timeScale = 1f; // 1¹è¼Ó (Á¤»ó ¼Óµµ)
+        Time.timeScale = gamespeed; // ì €ì¥í•´ë‘” ê²Œì„ìŠ¤í”¼ë“œë¡œ
         SceneManager.LoadScene("Ingame");
 
     }
     public void ClickExit()
     {
-        Debug.Log("°ÔÀÓ Á¾·á");
+        Debug.Log("ê²Œì„ ì¢…ë£Œ");
         SceneManager.LoadScene("MainMenu");
-        //Application.Quit();  // °ÔÀÓ Á¾·á (¿¡µğÅÍ »ó ½ÇÇàÀÌ±â ¶§¹®¿¡ Á¾·á ´­·¯µµ º¯È­ X)
+        //Application.Quit();  // ê²Œì„ ì¢…ë£Œ (ì—ë””í„° ìƒ ì‹¤í–‰ì´ê¸° ë•Œë¬¸ì— ì¢…ë£Œ ëˆŒëŸ¬ë„ ë³€í™” X)
     }
 }
