@@ -452,7 +452,11 @@ MonoBehaviour:
   mixer: {fileID: 24100000, guid: 5266a2f3b526603459cfaca018ac992d, type: 2}
   bgSound: {fileID: 1556868083}
   bglist:
+  - {fileID: 8300000, guid: a72be6dbb33ae1d48b44895f4943bee6, type: 3}
+  - {fileID: 8300000, guid: d9e280ca0b9d3ad4f83da6d4defd2c91, type: 3}
   - {fileID: 8300000, guid: b5b3a955ec1ad4245ac215d636d5b806, type: 3}
+  - {fileID: 8300000, guid: b3e7e068f61b05b43b8defa9dcbbe5ed, type: 3}
+  - {fileID: 8300000, guid: 532daca5960c6eb429376d646f93e9f5, type: 3}
   buttonSoundClip: {fileID: 8300000, guid: 98713b1b7204b49448f6b860bf49de97, type: 3}
   MasteraudioSlider: {fileID: 0}
   BGSoundaudioSlider: {fileID: 0}
