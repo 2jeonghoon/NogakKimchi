@@ -25,7 +25,7 @@ public class WaveSystem : MonoBehaviour
     public GameObject[] _Lock;
 
     static public int spawnEnemyCount; // 스폰한 몬스터 숫자
-    
+
 
     // 웨이브 정보 출력을 위한 Get 프로퍼티 (현재 웨이브, 총 웨이브)
     public int CurrentWave => currentWaveIndex + 1;     // 시작이 0이기 때문에 +1
@@ -58,7 +58,8 @@ public class WaveSystem : MonoBehaviour
     public void StartWave()
     {
         // 현재 맵에 적이 없고, Wave가 남아있으면
-        if (enemySpawner.EnemyList.Count == 0 && currentWaveIndex < waves.Length - 1 && isWaveEnd)
+        //if (enemySpawner.EnemyList.Count == 0 && currentWaveIndex < waves.Length - 1 && isWaveEnd)
+        if (isWaveEnd)
         {
             // 인덱스의 시작이 -1이기 때문에 웨이브 인덱스 증가를 제일 먼저 함
             currentWaveIndex++;
@@ -88,6 +89,7 @@ public class WaveSystem : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
         isWaveEnd = true;
+        Debug.Log("end");
     }
 
     //wave별 타워 잠금해제 (currentWaveIndex가 끝나면 타워가 열림)
