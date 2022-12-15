@@ -9,6 +9,10 @@ TagManager:
   - Tower
   - TileRoad
   - Tooltip
+  - MasterSlider
+  - BGSoundSlider
+  - SFXSlider
+  - SoundManager
   layers:
   - Default
   - TransparentFX

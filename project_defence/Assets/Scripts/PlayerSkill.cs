@@ -12,15 +12,22 @@ public class PlayerSkill : MonoBehaviour
     [SerializeField]
     private Image toilet;
     [SerializeField]
+    private Image friendChance;
+    [SerializeField]
     private EnemySpawner enemySpawner;
     [SerializeField]
     private PlayerHP playerHP;
 
     private bool isInstagramCanUse;
     private bool isToiletCanUse;
+    private bool isFriendChanceCanUse;
 
     public int instagramCoolTime;
     public int toiletCoolTime;
+    public int friendChanceCoolTime;
+
+    [SerializeField]
+    private int deleteEnemyNum_friendChance;
 
     private bool isInstagramOn;
     public bool IsInstagramOn => isInstagramOn;
@@ -29,6 +36,7 @@ public class PlayerSkill : MonoBehaviour
     {
         isInstagramCanUse = true;
         isToiletCanUse = true;
+        isFriendChanceCanUse = true;
         isInstagramOn = false;
     }
 
@@ -46,13 +54,15 @@ public class PlayerSkill : MonoBehaviour
             isInstagramCanUse = true;
         else if (flag == 1)
             isToiletCanUse = true;
+        else
+            isFriendChanceCanUse = true;
     }
 
     private IEnumerator Skill_Instagram()
     {
         float[] enemySpeed = new float[enemySpawner.EnemyList.Count];
 
-        // enemy�� MoveSpeed�� �޾ƿͼ� �����ϰ� 0���� ����
+        // enemy의 MoveSpeed를 받아와서 저장하고 0으로 세팅
         int idx = 0;
         foreach (Enemy enemy in enemySpawner.EnemyList)
         {
@@ -78,6 +88,28 @@ public class PlayerSkill : MonoBehaviour
         Debug.Log(playerHP.CurrentHP);
     }
 
+    // 맵 안 몬스터 3마리 랜덤으로 삭제
+    private void Skill_FriendChance()
+    {
+        
+        Random.InitState((int)(Time.time * 100f));                  // Randome Seed 초기화
+        int maxEnemyIndex = enemySpawner.EnemyList.Count - 1;           // 리스트의 길이
+
+        for (int i = 0; i < deleteEnemyNum_friendChance; i++)
+        {
+            try
+            {
+                Enemy enemy = enemySpawner.EnemyList[Random.Range(0, maxEnemyIndex)];
+                enemySpawner.DestroyEnemy(EnemyDestroyType.Kill, enemy, 0);
+                maxEnemyIndex--;
+            }
+            catch
+            {
+                Debug.Log("몬스터 없음");
+            }
+        }
+        
+    }
 
     public void OnSkill_Instagram()
     {
@@ -95,6 +127,16 @@ public class PlayerSkill : MonoBehaviour
             isToiletCanUse = false;
             Skill_Toilet();
             StartCoroutine(CoolTime(toilet, toiletCoolTime, 1));
+        }
+    }
+
+    public void OnSkill_FriendChance()
+    {
+        if (isFriendChanceCanUse && enemySpawner.EnemyList.Count > 0)
+        {
+            isFriendChanceCanUse = false;
+            Skill_FriendChance();
+            StartCoroutine(CoolTime(friendChance, friendChanceCoolTime, 2));
         }
     }
 }

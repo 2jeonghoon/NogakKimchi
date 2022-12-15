@@ -5,34 +5,34 @@ using UnityEngine;
 public class Projectile_Spear : Projectile
 {
 	private float range;
-	private Vector3 direction;		// °¡´Â ¹æÇâ
+	private Vector3 direction;		// ê°€ëŠ” ë°©í–¥
 
-	private Vector3 start_pos;	// ½ÃÀÛ À§Ä¡
-	private Vector3 cur_pos;        // ÇöÀç À§Ä¡
+	private Vector3 start_pos;	// ì‹œì‘ ìœ„ì¹˜
+	private Vector3 cur_pos;        // í˜„ì¬ ìœ„ì¹˜
 
 	public void Setup(Transform target, float damage, float range)
 	{
-		// ¹ß»ç »ç¿îµå Àç»ı
+		// ë°œì‚¬ ì‚¬ìš´ë“œ ì¬ìƒ
 		SoundManager.instance.SFXPlay("Spear", clip);
 		movement2D = GetComponent<Movement2D>();
-		this.target = target;                       // Å¸¿ö°¡ ¼³Á¤ÇØÁØ target
-		this.damage = damage;                       // Å¸¿öÀÇ °ø°İ·Â
-		this.range = range;                         // Å¸¿ö »ç°Å¸®
+		this.target = target;                       // íƒ€ì›Œê°€ ì„¤ì •í•´ì¤€ target
+		this.damage = damage;                       // íƒ€ì›Œì˜ ê³µê²©ë ¥
+		this.range = range;                         // íƒ€ì›Œ ì‚¬ê±°ë¦¬
 
 		direction = (target.position - transform.position).normalized;
 		start_pos = this.transform.position;
 		this.pool_idx = 5;
-        gameObject.SetActive(true);                 // ObjectPoolÀ» »ç¿ëÇÏ¸é¼­ SetActive(true)°¡ ÇÊ¿äÇØÁü
+        gameObject.SetActive(true);                 // ObjectPoolì„ ì‚¬ìš©í•˜ë©´ì„œ SetActive(true)ê°€ í•„ìš”í•´ì§
     }
 
 	private void Update()
 	{
 		cur_pos = this.transform.position;
 
-		// ¹ß»çÃ¼¸¦ targetÀÇ À§Ä¡·Î ÀÌµ¿
+		// ë°œì‚¬ì²´ë¥¼ targetì˜ ìœ„ì¹˜ë¡œ ì´ë™
 		movement2D.MoveTo(direction);
 
-		// »ç°Å¸®¸¦ ¹ş¾î³µÀ¸¸é ¹İ³³
+		// ì‚¬ê±°ë¦¬ë¥¼ ë²—ì–´ë‚¬ìœ¼ë©´ ë°˜ë‚©
 		if (Vector3.Distance(start_pos, cur_pos) >= range)
         {
 			ProjectileReturn(pool_idx);
@@ -41,8 +41,8 @@ public class Projectile_Spear : Projectile
 
     private void OnTriggerEnter2D(Collider2D collision)
 	{
-		//Debug.Log("Ãæµ¹");
-		if (!collision.CompareTag("Enemy")) return;         // ÀûÀÌ ¾Æ´Ñ ´ë»ó°ú ºÎµúÈ÷¸é
-		collision.GetComponent<EnemyHP>().TakeDamage(damage);   // Àû Ã¼·ÂÀ» damage¸¸Å­ °¨¼Ò
+		//Debug.Log("ì¶©ëŒ");
+		if (!collision.CompareTag("Enemy")) return;         // ì ì´ ì•„ë‹Œ ëŒ€ìƒê³¼ ë¶€ë”ªíˆë©´
+		collision.GetComponent<EnemyHP>().TakeDamage(damage);   // ì  ì²´ë ¥ì„ damageë§Œí¼ ê°ì†Œ
 	}
 }

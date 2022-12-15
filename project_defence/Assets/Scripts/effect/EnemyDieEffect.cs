@@ -15,10 +15,10 @@ public class EnemyDieEffect : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void Boom()
+    public void OnDie()
     {
         //Debug.Log("Boom");
-        animator.SetTrigger("Boom");
+        animator.SetTrigger("Die");
         StartCoroutine("WaitForAnimation");
     }
 
@@ -29,7 +29,7 @@ public class EnemyDieEffect : MonoBehaviour
     }
 
 
-    // ¾Ö´Ï¸ŞÀÌ¼Ç ³¡³¯ ¶§ ±îÁö ´ë±â (1ÃÊ)
+    // ì• ë‹ˆë©”ì´ì…˜ ëë‚  ë•Œ ê¹Œì§€ ëŒ€ê¸° (1ì´ˆ)
     IEnumerator WaitForAnimation()
     {
         float time = 0f;
@@ -40,6 +40,8 @@ public class EnemyDieEffect : MonoBehaviour
             time += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        Destroy(animator.gameObject);
+        this.transform.position = ObjectPool.instance.transform.position;
+        this.gameObject.SetActive(false);
+        ObjectPool.instance.objectPoolList[12].Enqueue(this.gameObject);
     }
 }

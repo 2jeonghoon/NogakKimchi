@@ -1,4 +1,4 @@
-﻿//The implementation is based on this article:http://rbarraza.com/html5-canvas-pageflip/
+//The implementation is based on this article:http://rbarraza.com/html5-canvas-pageflip/
 //As the rbarraza.com website is not live anymore you can get an archived version from web archive 
 //or check an archived version that I uploaded on my website: https://dandarawy.com/html5-canvas-pageflip/
 
@@ -16,6 +16,9 @@ public enum FlipMode
 [ExecuteInEditMode]
 public class Book : MonoBehaviour {
     public Canvas canvas;
+
+    [SerializeField]
+    public float ypoint;
 
     [SerializeField]
     RectTransform BookPanel;
@@ -171,7 +174,7 @@ public class Book : MonoBehaviour {
     {
         //f = Vector3.Lerp(f, transformPoint(Input.mousePosition), Time.deltaTime * 10);
         Debug.Log(f);
-        f.y = -400f;
+        f.y = ypoint;
         if (mode == FlipMode.RightToLeft)
         {
             f = f - Vector3.right * page_speed;

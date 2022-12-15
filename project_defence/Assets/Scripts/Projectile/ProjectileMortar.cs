@@ -3,54 +3,54 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// ¹Ú°İÆ÷ ÃÑ¾Ë
+// ë°•ê²©í¬ ì´ì•Œ
 public class ProjectileMortar : Projectile
 {
-    //Æø¹ß ¹üÀ§
+    //í­ë°œ ë²”ìœ„
     private float explosionRange;
     [SerializeField]
     private GameObject explosionPrefab;
 
-    //µµÂø Å¸ÀÏ
+    //ë„ì°© íƒ€ì¼
     private GameObject Tile;
 
-    // Ãâ¹ßÁö
+    // ì¶œë°œì§€
     private Vector3 vStartPos;
-    // ¸ñÀûÁö
+    // ëª©ì ì§€
     private Vector3 vEndPos;
-    // ÇöÀç À§Ä¡
+    // í˜„ì¬ ìœ„ì¹˜
     private Vector3 vPos;
 
-    private float fV_X; // xÃàÀ¸·Î ¼Óµµ
-    private float fV_Y; // yÃàÀ¸·Î ¼Óµµ
-    private float fV_Z; // zÃàÀ¸·Î ¼Óµµ
+    private float fV_X; // xì¶•ìœ¼ë¡œ ì†ë„
+    private float fV_Y; // yì¶•ìœ¼ë¡œ ì†ë„
+    private float fV_Z; // zì¶•ìœ¼ë¡œ ì†ë„
 
-    private float fg; // YÃàÀ¸·ÎÀÇ Áß·Â°¡¼Óµµ
-    private float fEndTime; // µµÂøÁöÁ¡ µµ´Ş ½Ã°£
-    private float fMaxHeight; // ÃÖ´ë ³ôÀÌ
-    private float fHeight; // ÃÖ´ë ³ôÀÌÀÇ Y - ½ÃÀÛ³ôÀÌÀÇ Y
-    private float fEndHeight; // µµÂøÁöÁ¡ ³ôÀÌ Y - ½ÃÀÛÁöÁ¡ ³ôÀÌ Y
-    private float fTime = 0f; // Èå¸£´Â ½Ã°£
-    private float fMaxTime = 1f; // ÃÖ´ë³ôÀÌ±îÁö °¡´Â ½Ã°£
+    private float fg; // Yì¶•ìœ¼ë¡œì˜ ì¤‘ë ¥ê°€ì†ë„
+    private float fEndTime; // ë„ì°©ì§€ì  ë„ë‹¬ ì‹œê°„
+    private float fMaxHeight; // ìµœëŒ€ ë†’ì´
+    private float fHeight; // ìµœëŒ€ ë†’ì´ì˜ Y - ì‹œì‘ë†’ì´ì˜ Y
+    private float fEndHeight; // ë„ì°©ì§€ì  ë†’ì´ Y - ì‹œì‘ì§€ì  ë†’ì´ Y
+    private float fTime = 0f; // íë¥´ëŠ” ì‹œê°„
+    private float fMaxTime = 1f; // ìµœëŒ€ë†’ì´ê¹Œì§€ ê°€ëŠ” ì‹œê°„
 
 
     public void Setup(Transform target, float damage, EnemySpawner enemySpawner, float explosionRange)
     {
-        // ¹ß»ç »ç¿îµå Àç»ı
+        // ë°œì‚¬ ì‚¬ìš´ë“œ ì¬ìƒ
         //SoundManager.instance.SFXPlay("Mortar", clip);
         movement2D = GetComponent<Movement2D>();
-        this.damage = damage;                       // Å¸¿öÀÇ °ø°İ·Â
+        this.damage = damage;                       // íƒ€ì›Œì˜ ê³µê²©ë ¥
         this.explosionRange = explosionRange;
 
-        // Æ÷¹°¼± ÀÌµ¿À» À§ÇØ ÇÊ¿äÇÑ Á¤º¸
-        vStartPos = this.transform.position; // ½ÃÀÛÁöÁ¡
+        // í¬ë¬¼ì„  ì´ë™ì„ ìœ„í•´ í•„ìš”í•œ ì •ë³´
+        vStartPos = this.transform.position; // ì‹œì‘ì§€ì 
 
-        //Å¸°ÙÀÌ ºñÈ°¼ºÈ­ »óÅÂ¸é ½ÃÀÛÁöÁ¡¿¡ ½î±â
+        //íƒ€ê²Ÿì´ ë¹„í™œì„±í™” ìƒíƒœë©´ ì‹œì‘ì§€ì ì— ì˜ê¸°
         if (target == null || !target.gameObject.activeSelf) 
             vEndPos = new Vector3(-10.5f, -1.5f, 0);
         else
-            vEndPos = target.position;      // µµÂøÁöÁ¡
-        fMaxHeight = vEndPos.y + 10f; // Æ÷¹°¼± ÃÖ´ë³ôÀÌ
+            vEndPos = target.position;      // ë„ì°©ì§€ì 
+        fMaxHeight = vEndPos.y + 10f; // í¬ë¬¼ì„  ìµœëŒ€ë†’ì´
 
         fEndHeight = vEndPos.y - vStartPos.y;
         fHeight = fMaxHeight - vStartPos.y;
@@ -67,38 +67,40 @@ public class ProjectileMortar : Projectile
         fV_X = -(vStartPos.x - vEndPos.x)*2.04f / fEndTime;
         fV_Z = -(vStartPos.x - vEndPos.x) / fEndTime;
         this.pool_idx = 3;
-        gameObject.SetActive(true);					// ObjectPoolÀ» »ç¿ëÇÏ¸é¼­ SetActive(true)°¡ ÇÊ¿äÇØÁü
+        gameObject.SetActive(true);					// ObjectPoolì„ ì‚¬ìš©í•˜ë©´ì„œ SetActive(true)ê°€ í•„ìš”í•´ì§
     }
 
     private void Update()
     {
-        // ¹ß»çÃ¼¸¦ targetÀÇ À§Ä¡·Î ÀÌµ¿
+        // ë°œì‚¬ì²´ë¥¼ targetì˜ ìœ„ì¹˜ë¡œ ì´ë™
         fTime += Time.deltaTime;
         vPos.x = vStartPos.x + fV_X * fTime;
-        vPos.y = vStartPos.y + (fV_Y * fTime) - (1f * fg * fTime * fTime); // ¶³¾îÁö´Â ¼Óµµ
+        vPos.y = vStartPos.y + (fV_Y * fTime) - (1f * fg * fTime * fTime); // ë–¨ì–´ì§€ëŠ” ì†ë„
         vPos.z = 0;
         this.transform.position = vPos;
 
 
         if (fTime >= fMaxTime-0.5f && this.transform.position.y <= vEndPos.y)
         {
-            Debug.Log("¾÷µ¥ÀÌÆ®¹® Mortar Æã!");
+            Debug.Log("ì—…ë°ì´íŠ¸ë¬¸ Mortar í‘!");
             GameObject clone = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
             clone.GetComponent<Explosion>().Setup(damage, explosionRange);
+            fTime = 0f;
             ProjectileReturn(pool_idx);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //if (vPos.y >= 0) return;    // ÃÑ¾ËÀÌ ¶³¾îÁö´Â ÁßÀÌ ¾Æ´Ï¶ó¸é..?
+        //if (vPos.y >= 0) return;    // ì´ì•Œì´ ë–¨ì–´ì§€ëŠ” ì¤‘ì´ ì•„ë‹ˆë¼ë©´..?
         if (Tile == null) return;
-        if (!collision.CompareTag("TileRoad")) return;         // ±æÅ¸ÀÏÀÌ ¾Æ´Ñ ´ë»ó°ú ºÎµúÈ÷¸é;
-        if (collision.transform != Tile.transform) return;          // ÇöÀç ¸ÂÀº°Ô Å¸°ÙÅ¸ÀÏÀÌ ¾Æ´Ï¸é
+        if (!collision.CompareTag("TileRoad")) return;         // ê¸¸íƒ€ì¼ì´ ì•„ë‹Œ ëŒ€ìƒê³¼ ë¶€ë”ªíˆë©´;
+        if (collision.transform != Tile.transform) return;          // í˜„ì¬ ë§ì€ê²Œ íƒ€ê²Ÿíƒ€ì¼ì´ ì•„ë‹ˆë©´
 
-        Debug.Log("Æ®¸®°Å¹® Mortar Æã!");
+        Debug.Log("íŠ¸ë¦¬ê±°ë¬¸ Mortar í‘!");
         GameObject clone = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
         clone.GetComponent<Explosion>().Setup(damage, explosionRange);
+        fTime = 0f;
         ProjectileReturn(pool_idx);
     }
 

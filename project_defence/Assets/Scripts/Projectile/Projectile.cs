@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Projectile : MonoBehaviour
@@ -23,7 +23,7 @@ public class Projectile : MonoBehaviour
 
 	private void Start()
 	{
-		//StartCoroutine("Destroy_Projectile");
+		StartCoroutine("Destroy_Projectile");
 	}
 
 	private void Update()
@@ -45,6 +45,7 @@ public class Projectile : MonoBehaviour
         gameObject.transform.position = ObjectPool.instance.transform.position;
         gameObject.SetActive(false);
         ObjectPool.instance.objectPoolList[idx].Enqueue(gameObject);
+		Debug.Log(gameObject);
 		Debug.Log(idx + ", Enqueue : " + ObjectPool.instance.objectPoolList[idx].Count);
 	}
 

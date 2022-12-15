@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class Witch : Enemy
 {
-    // ½ºÅ³ ÄğÅ¸ÀÓ
+    // ìŠ¤í‚¬ ì¿¨íƒ€ì„
     [SerializeField]
     private float delay_time;
-    // È¸º¹·®
+    // íšŒë³µëŸ‰
     [SerializeField]
     private float recovery_amount;
-    // »ç°Å¸®
+    // ì‚¬ê±°ë¦¬
     [SerializeField]
     private float range;
-    // ÇöÀç À§Ä¡
+    // í˜„ì¬ ìœ„ì¹˜
     private Transform position;
-    // »ç°Å¸® ³» enemy¿ÀºêÁ§Æ® 
+    // ì‚¬ê±°ë¦¬ ë‚´ enemyì˜¤ë¸Œì íŠ¸ 
     Enemy[] enemy;
 
     public override void Setup(EnemySpawner enemySpawner, Transform[] wayPoints, int pool_idx)
@@ -23,44 +23,41 @@ public class Witch : Enemy
         movement2D = GetComponent<Movement2D>();
         this.enemySpawner = enemySpawner;
 
-        // Àû ÀÌµ¿ °æ·Î WayPoints Á¤º¸ ¼³Á¤
+        // ì  ì´ë™ ê²½ë¡œ WayPoints ì •ë³´ ì„¤ì •
         wayPointCount = wayPoints.Length;
         this.wayPoints = new Transform[wayPointCount];
         this.wayPoints = wayPoints;
         this.pool_idx = pool_idx;
-        // ÀûÀÇ À§Ä¡¸¦ Ã¹¹øÂ° wayPoint À§Ä¡·Î ¼³Á¤
+        // ì ì˜ ìœ„ì¹˜ë¥¼ ì²«ë²ˆì§¸ wayPoint ìœ„ì¹˜ë¡œ ì„¤ì •
         transform.position = wayPoints[currentIndex].position;
-        gameObject.SetActive(true);					// ObjectPoolÀ» »ç¿ëÇÏ¸é¼­ SetActive(true)°¡ ÇÊ¿äÇØÁü
-        // Àû ÀÌµ¿/¸ñÇ¥ÁöÁ¡ ¼³Á¤ ÄÚ·çÆ¾ ÇÔ¼ö ½ÃÀÛ
+        gameObject.SetActive(true);					// ObjectPoolì„ ì‚¬ìš©í•˜ë©´ì„œ SetActive(true)ê°€ í•„ìš”í•´ì§
+        // ì  ì´ë™/ëª©í‘œì§€ì  ì„¤ì • ì½”ë£¨í‹´ í•¨ìˆ˜ ì‹œì‘
         StartCoroutine("Recovery", delay_time);
-        StartCoroutine("OnMove");
+        NextMoveTo();
     }
 
-
+    /*
     protected override IEnumerator OnMove()
     {
-        // ´ÙÀ½ ÀÌµ¿ ¹æÇâ ¼³Á¤
+        // ë‹¤ìŒ ì´ë™ ë°©í–¥ ì„¤ì •
         NextMoveTo();
-
         while (true)
         {
-            // Àû ¿ÀºêÁ§Æ® È¸Àü
+            // ì  ì˜¤ë¸Œì íŠ¸ íšŒì „
             //transform.Rotate(Vector3.forward * 10);
-
-            // ÀûÀÇ ÇöÀçÀ§Ä¡¿Í ¸ñÇ¥À§Ä¡ÀÇ °Å¸®°¡ 0.02 * movement2D.MoveSpeedº¸´Ù ÀÛÀ» ¶§ if Á¶°Ç¹® ½ÇÇà
-            // Tip. movement2D.MoveSpeed¸¦ °öÇØÁÖ´Â ÀÌÀ¯´Â ¼Óµµ°¡ ºü¸£¸é ÇÑ ÇÁ·¹ÀÓ¿¡ 0.02º¸´Ù Å©°Ô ¿òÁ÷ÀÌ±â ¶§¹®¿¡
-            // if Á¶°Ç¹®¿¡ °É¸®Áö ¾Ê°í °æ·Î¸¦ Å»ÁÖÇÏ´Â ¿ÀºêÁ§Æ®°¡ ¹ß»ıÇÒ ¼ö ÀÖ´Ù.
+            // ì ì˜ í˜„ì¬ìœ„ì¹˜ì™€ ëª©í‘œìœ„ì¹˜ì˜ ê±°ë¦¬ê°€ 0.02 * movement2D.MoveSpeedë³´ë‹¤ ì‘ì„ ë•Œ if ì¡°ê±´ë¬¸ ì‹¤í–‰
+            // Tip. movement2D.MoveSpeedë¥¼ ê³±í•´ì£¼ëŠ” ì´ìœ ëŠ” ì†ë„ê°€ ë¹ ë¥´ë©´ í•œ í”„ë ˆì„ì— 0.02ë³´ë‹¤ í¬ê²Œ ì›€ì§ì´ê¸° ë•Œë¬¸ì—
+            // if ì¡°ê±´ë¬¸ì— ê±¸ë¦¬ì§€ ì•Šê³  ê²½ë¡œë¥¼ íƒˆì£¼í•˜ëŠ” ì˜¤ë¸Œì íŠ¸ê°€ ë°œìƒí•  ìˆ˜ ìˆë‹¤.
             if (Vector3.Distance(transform.position, wayPoints[currentIndex].position) < 0.02f * movement2D.MoveSpeed)
             {
-                // ´ÙÀ½ ÀÌµ¿ ¹æÇâ ¼³Á¤
+                // ë‹¤ìŒ ì´ë™ ë°©í–¥ ì„¤ì •
                 NextMoveTo();
             }
-
             yield return null;
         }
     }
-
-    // »ç°Å¸® ³» enemy¿ÀºêÁ§Æ® °¡Á®¿À±â
+    */
+    // ì‚¬ê±°ë¦¬ ë‚´ enemyì˜¤ë¸Œì íŠ¸ ê°€ì ¸ì˜¤ê¸°
     private int getEnemyHP()
     {
         int count = 0;
@@ -70,7 +67,7 @@ public class Witch : Enemy
         for (int i = 0; i < enemy_count; ++i)
         {
             float distance = Vector3.Distance(enemies[i].transform.position, transform.position);
-            // ÀÚ±âÀÚ½ÅÀ» Á¦¿ÜÇÏ°í
+            // ìê¸°ìì‹ ì„ ì œì™¸í•˜ê³ 
             if (distance < range && this != enemies[i])
             {
                 //Debug.Log(count + " : " + enemies[i]);
@@ -80,10 +77,10 @@ public class Witch : Enemy
         return count;
     }
 
-    // È¸º¹ ÇÔ¼ö
+    // íšŒë³µ í•¨ìˆ˜
     private IEnumerator Recovery(float delay_time)
     {
-        //Debug.Log("Èú!");
+        //Debug.Log("í!");
         int count = getEnemyHP();
         for (int i = 0; i < count; ++i)
         {

@@ -1,15 +1,15 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile_Explosion : Projectile
 {
-    //Æø¹ß ¹üÀ§
+    //í­ë°œ ë²”ìœ„
     private float explosionRange;
     [SerializeField]
     private GameObject explosionPrefab;
 
-    // »ç°Å¸®°¡ ¹ş¾î³ª¸é ÅÍÁöµµ·Ï »ç°Å¸® °¡Á®¿À±â
+    // ì‚¬ê±°ë¦¬ê°€ ë²—ì–´ë‚˜ë©´ í„°ì§€ë„ë¡ ì‚¬ê±°ë¦¬ ê°€ì ¸ì˜¤ê¸°
     float range;
     float move_distance;
     Vector3 direction;
@@ -18,21 +18,21 @@ public class Projectile_Explosion : Projectile
 
     public void Setup(Transform target, float damage, float range, float explosionRange)
     {
-        // ¹ß»ç »ç¿îµå Àç»ı
+        // ë°œì‚¬ ì‚¬ìš´ë“œ ì¬ìƒ
         //SoundManager.instance.SFXPlay("ExplosionShot", clip);
-        //Debug.Log("¹ß»ç");
+        //Debug.Log("ë°œì‚¬");
         movement2D = GetComponent<Movement2D>();
-        this.damage = damage;                       // Å¸¿öÀÇ °ø°İ·Â
-        this.target = target;                       // Å¸¿ö°¡ ¼³Á¤ÇØÁØ target
+        this.damage = damage;                       // íƒ€ì›Œì˜ ê³µê²©ë ¥
+        this.target = target;                       // íƒ€ì›Œê°€ ì„¤ì •í•´ì¤€ target
         
-        this.range = range;                         // Å¸¿ö°¡ ¼³Á¤ÇØÁØ range
+        this.range = range;                         // íƒ€ì›Œê°€ ì„¤ì •í•´ì¤€ range
         this.explosionRange = explosionRange;
         start_position = transform.position;
         direction = (target.position - transform.position).normalized;
         this.pool_idx = 2;
         if (target.gameObject.activeSelf)
         {
-            gameObject.SetActive(true);					// ObjectPoolÀ» »ç¿ëÇÏ¸é¼­ SetActive(true)°¡ ÇÊ¿äÇØÁü   
+            gameObject.SetActive(true);					// ObjectPoolì„ ì‚¬ìš©í•˜ë©´ì„œ SetActive(true)ê°€ í•„ìš”í•´ì§   
         }
     }
 
@@ -46,12 +46,12 @@ public class Projectile_Explosion : Projectile
         {
             boom();
         }
-        if (target != null || target.gameObject.activeSelf) // targetÀÌ Á¸ÀçÇÏ¸é
+        if (target != null || target.gameObject.activeSelf) // targetì´ ì¡´ì¬í•˜ë©´
         {
-            // ¹ß»çÃ¼¸¦ targetÀÇ À§Ä¡·Î ÀÌµ¿
+            // ë°œì‚¬ì²´ë¥¼ targetì˜ ìœ„ì¹˜ë¡œ ì´ë™
             movement2D.MoveTo(direction);
         }
-        else                    // ¿©·¯ ÀÌÀ¯·Î targetÀÌ »ç¶óÁö¸é
+        else                    // ì—¬ëŸ¬ ì´ìœ ë¡œ targetì´ ì‚¬ë¼ì§€ë©´
         {
             //boom();                    
         }
@@ -59,16 +59,16 @@ public class Projectile_Explosion : Projectile
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Enemy")) return;         // ÀûÀÌ ¾Æ´Ñ ´ë»ó°ú ºÎµúÈ÷¸é
-        if (collision.transform != target) return;          // ÇöÀç targetÀÎ ÀûÀÌ ¾Æ´Ò ¶§
+        if (!collision.CompareTag("Enemy")) return;         // ì ì´ ì•„ë‹Œ ëŒ€ìƒê³¼ ë¶€ë”ªíˆë©´
+        if (collision.transform != target) return;          // í˜„ì¬ targetì¸ ì ì´ ì•„ë‹ ë•Œ
 
         boom();
     }
 
-    // Æø¹ß
+    // í­ë°œ
     private void boom()
     {
-        // ÀûÀ» ¸ÂÃá °æ¿ì ÇØ´ç À§Ä¡¿¡¼­ Æø¹ß
+        // ì ì„ ë§ì¶˜ ê²½ìš° í•´ë‹¹ ìœ„ì¹˜ì—ì„œ í­ë°œ
         GameObject clone = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
         clone.GetComponent<Explosion>().Setup(damage, explosionRange);
         ProjectileReturn(pool_idx);

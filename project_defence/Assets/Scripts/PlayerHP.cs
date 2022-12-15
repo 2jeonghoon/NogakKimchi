@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -63,9 +63,9 @@ public class PlayerHP : MonoBehaviour
 /*
  * File : PlayerHP.cs
  * Desc
- *	: 플레이어 캐릭터의 체력
+ *	:  플레이어 캐릭터의 체력
  *	
  * Functions
- *	: TakeDamage() - 체력 감소
- *	: HitAlphaAnimation() - 전체화면 크기로 배치된 이미지 투명도 변경 (40% -> 0%)
+ * : TakeDamage() - 체력 감소
+ * : HitAlphaAnimation() - 전체화면 크기로 배치된 이미지 투명도 변경 (40% -> 0%)
  */

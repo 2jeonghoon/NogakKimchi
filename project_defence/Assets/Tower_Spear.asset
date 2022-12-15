@@ -27,6 +27,9 @@ MonoBehaviour:
     sell: 480
     tileType: 1
     explosionRange: 0
+    projectileSprite: {fileID: 0}
+    upgradeImage1: {fileID: 0}
+    upgradeImage2: {fileID: 0}
   - sprite: {fileID: 21300000, guid: 9e18076067e103e4297e9f16bb9f6eba, type: 3}
     damage: 3
     slow: 0
@@ -37,6 +40,9 @@ MonoBehaviour:
     sell: 480
     tileType: 1
     explosionRange: 0
+    projectileSprite: {fileID: 0}
+    upgradeImage1: {fileID: 0}
+    upgradeImage2: {fileID: 0}
   - sprite: {fileID: 21300000, guid: 9e18076067e103e4297e9f16bb9f6eba, type: 3}
     damage: 3
     slow: 0
@@ -47,5 +53,21 @@ MonoBehaviour:
     sell: 480
     tileType: 1
     explosionRange: 0
+    projectileSprite: {fileID: 0}
+    upgradeImage1: {fileID: 0}
+    upgradeImage2: {fileID: 0}
+  - sprite: {fileID: 21300000, guid: 9e18076067e103e4297e9f16bb9f6eba, type: 3}
+    damage: 3
+    slow: 0
+    buff: 0
+    rate: 2
+    range: 5
+    cost: 0
+    sell: 480
+    tileType: 1
+    explosionRange: 0
+    projectileSprite: {fileID: 0}
+    upgradeImage1: {fileID: 0}
+    upgradeImage2: {fileID: 0}
   maxTowerLV: 0
   isLock: 1

@@ -6,23 +6,23 @@ public enum PHASE { ONE = 1, TWO = 2, THREE = 3 }
 
 public class Boss : Enemy
 {
-    // ½ºÅ³ µô·¹ÀÌ½Ã°£
+    // ìŠ¤í‚¬ ë”œë ˆì´ì‹œê°„
     [SerializeField]
     private float delay_time;
-    // º¹»çµÇ´Â Å¬·Ğ
+    // ë³µì‚¬ë˜ëŠ” í´ë¡ 
     [SerializeField]
     private GameObject boss_clone;
-    // ¼ÒÈ¯ÇÏ´Â enemy
+    // ì†Œí™˜í•˜ëŠ” enemy
     [SerializeField]
     private GameObject[] enemys;
     [SerializeField]
     private GameObject skillEffect;
     private Animator Bossanimator;
 
-    // ¿õÅ©¸®±â Áö¼Ó½Ã°£
+    // ì›…í¬ë¦¬ê¸° ì§€ì†ì‹œê°„
     [SerializeField]
     private float crouch_time;
-    // º¸½º »óÅÂ
+    // ë³´ìŠ¤ ìƒíƒœ
     private EnemyHP state;
 
     private PHASE phase = PHASE.ONE;
@@ -36,17 +36,17 @@ public class Boss : Enemy
         movement2D = GetComponent<Movement2D>();
         this.enemySpawner = enemySpawner;
 
-        // Àû ÀÌµ¿ °æ·Î WayPoints Á¤º¸ ¼³Á¤
+        // ì  ì´ë™ ê²½ë¡œ WayPoints ì •ë³´ ì„¤ì •
         wayPointCount = wayPoints.Length;
         this.wayPoints = new Transform[wayPointCount];
         this.wayPoints = wayPoints;
         this.pool_idx = pool_idx;
-        // ÀûÀÇ À§Ä¡¸¦ Ã¹¹øÂ° wayPoint À§Ä¡·Î ¼³Á¤
+        // ì ì˜ ìœ„ì¹˜ë¥¼ ì²«ë²ˆì§¸ wayPoint ìœ„ì¹˜ë¡œ ì„¤ì •
         transform.position = wayPoints[currentIndex].position;
-        gameObject.SetActive(true);					// ObjectPoolÀ» »ç¿ëÇÏ¸é¼­ SetActive(true)°¡ ÇÊ¿äÇØÁü
-        // Àû ÀÌµ¿/¸ñÇ¥ÁöÁ¡ ¼³Á¤ ÄÚ·çÆ¾ ÇÔ¼ö ½ÃÀÛ
+        gameObject.SetActive(true);					// ObjectPoolì„ ì‚¬ìš©í•˜ë©´ì„œ SetActive(true)ê°€ í•„ìš”í•´ì§
+        // ì  ì´ë™/ëª©í‘œì§€ì  ì„¤ì • ì½”ë£¨í‹´ í•¨ìˆ˜ ì‹œì‘
         StartCoroutine("skill", delay_time);
-        StartCoroutine("OnMove");
+        NextMoveTo();
     }
 
     private IEnumerator skill(float delay_time)
@@ -54,43 +54,43 @@ public class Boss : Enemy
         float currentHPPercent = state.CurrentHP / state.MaxHP;
 
 
-        // Ã¼·Â 30ÆÛ¼¾Æ® ÀÌÇÏ 3ÆäÀÌÁî
+        // ì²´ë ¥ 30í¼ì„¼íŠ¸ ì´í•˜ 3í˜ì´ì¦ˆ
         if (currentHPPercent < 0.3f)
         {
             Bossanimator.SetTrigger("Phase2");
             this.phase = PHASE.THREE;
         }
-        // Ã¼·Â 70ÆÛ¼¾Æ® ÀÌÇÏ 2ÆäÀÌÁî
+        // ì²´ë ¥ 70í¼ì„¼íŠ¸ ì´í•˜ 2í˜ì´ì¦ˆ
         else if (currentHPPercent < 0.7f)
         {
             Bossanimator.SetTrigger("Phase2");
             this.phase = PHASE.TWO;
         }
 
-        //Debug.Log("º¸½º ½ºÅ³!");
-        // 1ÆäÀÌÁî
+        //Debug.Log("ë³´ìŠ¤ ìŠ¤í‚¬!");
+        // 1í˜ì´ì¦ˆ
         skillEffect.SetActive(true);
-        
+
         skillEffect.GetComponent<EnemyDieEffect>().BossSkillEffect();
         if (phase == PHASE.ONE)
         {
             Bossanimator.SetTrigger("Phase1_skill");
-            Debug.Log("¿õÅ©¸®±â");
+            Debug.Log("ì›…í¬ë¦¬ê¸°");
             //StartCoroutine("hallucination", delay_time);
             StartCoroutine("crouch", delay_time);
         }
-        // 2ÆäÀÌÁî
+        // 2í˜ì´ì¦ˆ
         else if (phase == PHASE.TWO)
         {
             Bossanimator.SetTrigger("Phase2_skill");
-            Debug.Log("ÇÒ·ç½Ã³×ÀÌ¼Ç");
+            Debug.Log("í• ë£¨ì‹œë„¤ì´ì…˜");
             StartCoroutine("hallucination", delay_time);
         }
-        // 3ÆäÀÌÁî
+        // 3í˜ì´ì¦ˆ
         else if (phase == PHASE.THREE)
         {
             Bossanimator.SetTrigger("Phase2_skill");
-            Debug.Log("¸®Äİ");
+            Debug.Log("ë¦¬ì½œ");
             //StartCoroutine("hallucination", delay_time);
             StartCoroutine("recall", delay_time);
         }
@@ -109,7 +109,7 @@ public class Boss : Enemy
         float defense = state.getDefense();
 
         movement2D.MoveSpeed = 0;
-        // ¹æ¾î·Â ¿Ã·Á¼­ µ¥¹ÌÁö0
+        // ë°©ì–´ë ¥ ì˜¬ë ¤ì„œ ë°ë¯¸ì§€0
         state.SetDefense(1000f);
         yield return new WaitForSeconds(crouch_time);
         Bossanimator.SetTrigger("Phase1_idle");
@@ -125,22 +125,22 @@ public class Boss : Enemy
 
         movement2D.MoveSpeed = 0;
 
-        // º¹»ç
+        // ë³µì‚¬
         //GameObject clone = Instantiate(boss_clone);
         GameObject clone = ObjectPool.instance.objectPoolList[pool_idx].Dequeue();
-        Enemy enemy = clone.GetComponent<Enemy>();	// ¹æ±İ »ı¼ºµÈ ÀûÀÇ Enemy ÄÄÆ÷³ÍÆ®
+        Enemy enemy = clone.GetComponent<Enemy>();	// ë°©ê¸ˆ ìƒì„±ëœ ì ì˜ Enemy ì»´í¬ë„ŒíŠ¸
         clone.GetComponent<Animator>().SetBool("isClone", true);
-        // »ı¼ºµÈ Å¬·Ğ À§Ä¡ ¼¼ÆÃ
-        enemy.Setup(enemySpawner, this, pool_idx);      // º¸½ºÀÇ wayµ¥ÀÌÅÍ¸¦ °¡Áö°í Å¬·ĞÀ» ¸¸µë.
+        // ìƒì„±ëœ í´ë¡  ìœ„ì¹˜ ì„¸íŒ…
+        enemy.Setup(enemySpawner, this, pool_idx);      // ë³´ìŠ¤ì˜ wayë°ì´í„°ë¥¼ ê°€ì§€ê³  í´ë¡ ì„ ë§Œë“¬.
         enemy.transform.position = this.transform.position;
         enemy.transform.rotation = this.transform.rotation;
-        // HP ¹Ù »ı¼º
+        // HP ë°” ìƒì„±
         enemySpawner.SpawnEnemyHPSlider(clone);
 
-        // Àû ¸®½ºÆ®¿¡ Ãß°¡
+        // ì  ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
         enemySpawner.EnemyList.Add(enemy);
 
-        // ¼ÒÈ¯µÈ Å¬·Ğ Ã¼·Â ±ğ±â
+        // ì†Œí™˜ëœ í´ë¡  ì²´ë ¥ ê¹ê¸°
         enemy.GetComponent<EnemyHP>().TakeDamage((this.GetComponent<EnemyHP>().MaxHP * 0.5f));
         enemy.GetComponent<EnemyHP>().SetDefense(GetComponent<EnemyHP>().getDefense() * 0.5f);
 
@@ -158,20 +158,20 @@ public class Boss : Enemy
 
         movement2D.MoveSpeed = 0;
 
-        // º¹»ç
-        for(int i = 0; i < enemys.Length; i++)
+        // ë³µì‚¬
+        for (int i = 0; i < enemys.Length; i++)
         {
             //GameObject clone = Instantiate(enemys[i]);
             GameObject clone = ObjectPool.instance.objectPoolList[i + 6].Dequeue();
-            Enemy enemy = clone.GetComponent<Enemy>();  // ¹æ±İ »ı¼ºµÈ ÀûÀÇ Enemy ÄÄÆ÷³ÍÆ®µÈ Å¬·Ğ À§Ä¡ ¼¼ÆÃ
-            enemy.Setup(enemySpawner, this, i+6);      // º¸½ºÀÇ wayµ¥ÀÌÅÍ¸¦ °¡Áö°í Å¬·ĞÀ» ¸¸µë.
+            Enemy enemy = clone.GetComponent<Enemy>();  // ë°©ê¸ˆ ìƒì„±ëœ ì ì˜ Enemy ì»´í¬ë„ŒíŠ¸ëœ í´ë¡  ìœ„ì¹˜ ì„¸íŒ…
+            enemy.Setup(enemySpawner, this, i + 6);      // ë³´ìŠ¤ì˜ wayë°ì´í„°ë¥¼ ê°€ì§€ê³  í´ë¡ ì„ ë§Œë“¬.
             enemy.transform.position = this.transform.position;
             enemy.transform.rotation = this.transform.rotation;
 
-            // HP ¹Ù »ı¼º
+            // HP ë°” ìƒì„±
             enemySpawner.SpawnEnemyHPSlider(clone);
 
-            // Àû ¸®½ºÆ®¿¡ Ãß°¡
+            // ì  ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
             enemySpawner.EnemyList.Add(enemy);
         }
 

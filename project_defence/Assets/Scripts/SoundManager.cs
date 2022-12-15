@@ -8,13 +8,13 @@ using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
-    // ¿Àµğ¿À ¹Í¼­
+    // ì˜¤ë””ì˜¤ ë¯¹ì„œ
     public AudioMixer mixer;
-    // ¹è°æÀ½¾Ç
+    // ë°°ê²½ìŒì•…
     public AudioSource bgSound;
     public AudioClip[] bglist;
 
-    // ¹öÆ° »ç¿îµå
+    // ë²„íŠ¼ ì‚¬ìš´ë“œ
     [SerializeField]
     public AudioClip buttonSoundClip;
 
@@ -26,24 +26,22 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
-
-
         if (instance == null)
         {
-            //Debug.Log("»ı¼º");
+            //Debug.Log("ìƒì„±");
             instance = this;
             string name = "";
             Scene scene = SceneManager.GetActiveScene();
 
             Debug.Log(scene.name);
-            if (scene.name != "Ingame")
-                DontDestroyOnLoad(instance);
+            DontDestroyOnLoad(instance);
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
             Destroy(gameObject);
         }
+        
     }
 
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
@@ -53,17 +51,10 @@ public class SoundManager : MonoBehaviour
             //if (arg0.name + "BGM" == bglist[i].name)
             if ("Map_1" == bglist[i].name)
             {
-                Debug.Log("bgm Àç»ı");
+                Debug.Log("bgm ì¬ìƒ");
                 BgSoundPlay(bglist[i]);
             }
         }
-        //SceneLoadÇÒ ¶§ sliderÁ¤º¸ °¡Á®¿Í¾ß ÇÔ.
-        MasteraudioSlider.value = -10;
-        BGSoundaudioSlider.value = -10;
-        SFXaudioSlider.value = -10;
-        mixer.SetFloat("Master", -10);
-        mixer.SetFloat("BGsound", -10);
-        mixer.SetFloat("SFX", -10);
     }
 
     public void SFXPlay(string sfxName, AudioClip clip)
@@ -77,7 +68,7 @@ public class SoundManager : MonoBehaviour
         Destroy(go, clip.length);
     }
 
-    // ¹öÆ° »ç¿îµå Ãâ·Â
+    // ë²„íŠ¼ ì‚¬ìš´ë“œ ì¶œë ¥
     public void onClickButton()
     {
         Debug.Log("button click");
@@ -101,6 +92,8 @@ public class SoundManager : MonoBehaviour
 
     public void MasterAudioControl()
     {
+        MasteraudioSlider = GameObject.FindGameObjectWithTag("MasterSlider").GetComponent<Slider>();
+        
         float sound = MasteraudioSlider.value;
 
         if (sound == -40f) mixer.SetFloat("Master", -80);
@@ -109,6 +102,7 @@ public class SoundManager : MonoBehaviour
 
     public void BGsoundAudioControl()
     {
+        BGSoundaudioSlider = GameObject.FindGameObjectWithTag("BGSoundSlider").GetComponent<Slider>();
         float sound = BGSoundaudioSlider.value;
 
         if (sound == -40f) mixer.SetFloat("BGsound", -80);
@@ -116,6 +110,7 @@ public class SoundManager : MonoBehaviour
     }
     public void SFXAudioControl()
     {
+        SFXaudioSlider = GameObject.FindGameObjectWithTag("SFXSlider").GetComponent<Slider>();
         float sound = SFXaudioSlider.value;
 
         if (sound == -40f) mixer.SetFloat("SFX", -80);

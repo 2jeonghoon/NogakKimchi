@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -57,13 +57,18 @@ public class EnemySpawner : MonoBehaviour
             wave = currentWave.wave[i];
             while (spawnEnemyCount < wave.maxEnemyCount)
             {
+                GameObject clone;
                 // wave에서 count
                 WaveSystem.spawnEnemyCount++;
 
                 // 웨이브에 등장하는 적의 종류가 여러 종류일 때 임의의 적이 등장하도록 설정하고, 적 오브젝트 생성
                 int enemyIndex = Random.Range(0, wave.enemyPrefabs.Length);
                 //GameObject clone = Instantiate(wave.enemyPrefabs[enemyIndex]);
-                GameObject clone = ObjectPool.instance.objectPoolList[wave.enemyPrefabs[enemyIndex] + 6].Dequeue();
+                if (!ObjectPool.instance.objectPoolList[wave.enemyPrefabs[enemyIndex] + 6].TryDequeue(out clone))
+                {
+                    clone = Instantiate(waveSystem.enemyPrefabs[enemyIndex]);
+                }
+
                 Enemy enemy = clone.GetComponent<Enemy>();  // 방금 생성된 적의 Enemy 컴포넌트
 
                 // this는 나 자신 (자신의 EnemySpawner 정보)
@@ -118,7 +123,7 @@ public class EnemySpawner : MonoBehaviour
         // 적 오브젝트 풀로 리턴
         enemy.transform.position = ObjectPool.instance.transform.position;
         enemy.gameObject.SetActive(false);
-        ObjectPool.instance.objectPoolList[enemy.Pool_Idx+7].Enqueue(enemy.gameObject);
+        ObjectPool.instance.objectPoolList[enemy.Pool_Idx + 6].Enqueue(enemy.gameObject);
     }
 
     public void SpawnEnemyHPSlider(GameObject enemy)
