@@ -22706,7 +22706,7 @@ MonoBehaviour:
   - objectName: coco
     perfab: {fileID: 4461503835666675623, guid: d009f2b9f4d1a734ba1bb4b46c4aad1f,
       type: 3}
-    count: 5
+    count: 30
   - objectName: jelly
     perfab: {fileID: 4461503835666675623, guid: 39f676f0c1b70dc4eafb5f2eddbabb70,
       type: 3}

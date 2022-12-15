@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScriptText: {fileID: 41131008}
-  lastPage: 0
+  lastPage: 6
   currentidx: 0
   isClear: 0
   isEnding: 0
