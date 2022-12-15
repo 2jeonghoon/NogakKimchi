@@ -52,7 +52,7 @@ public class PlayerSkill : MonoBehaviour
     {
         float[] enemySpeed = new float[enemySpawner.EnemyList.Count];
 
-        // enemyÀÇ MoveSpeed¸¦ ¹Ş¾Æ¿Í¼­ ÀúÀåÇÏ°í 0À¸·Î ¼¼ÆÃ
+        // enemyì˜ MoveSpeedë¥¼ ë°›ì•„ì™€ì„œ ì €ì¥í•˜ê³  0ìœ¼ë¡œ ì„¸íŒ…
         int idx = 0;
         foreach (Enemy enemy in enemySpawner.EnemyList)
         {

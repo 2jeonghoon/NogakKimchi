@@ -9,7 +9,7 @@ public class Explosion : MonoBehaviour
     private float fTime = 0;
     Animator animator;
 
-    // Æø¹ß »ç¿îµå
+    // í­ë°œ ì‚¬ìš´ë“œ
     public AudioClip clip;
 
     private void Awake()
@@ -19,10 +19,10 @@ public class Explosion : MonoBehaviour
 
     public void Setup(float damage,float scale)
     {
-        // Æø¹ß »ç¿îµå Àç»ı
+        // í­ë°œ ì‚¬ìš´ë“œ ì¬ìƒ
         SoundManager.instance.SFXPlay("boom", clip);
-        //Debug.Log("Æø¹ß");
-        this.damage = damage;                       // Å¸¿öÀÇ °ø°İ·Â
+        //Debug.Log("í­ë°œ");
+        this.damage = damage;                       // íƒ€ì›Œì˜ ê³µê²©ë ¥
         this.transform.localScale = new Vector3(0.2f, 0.2f, 1) * scale;
     }
     private void Update()
@@ -38,11 +38,11 @@ public class Explosion : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Enemy")) return;         // ÀûÀÌ ¾Æ´Ñ ´ë»ó°ú ºÎµúÈ÷¸é
-        collision.GetComponent<EnemyHP>().TakeDamage(damage);   // Àû Ã¼·ÂÀ» damage¸¸Å­ °¨¼Ò
+        if (!collision.CompareTag("Enemy")) return;         // ì ì´ ì•„ë‹Œ ëŒ€ìƒê³¼ ë¶€ë”ªíˆë©´
+        collision.GetComponent<EnemyHP>().TakeDamage(damage);   // ì  ì²´ë ¥ì„ damageë§Œí¼ ê°ì†Œ
         Boom();
         StartCoroutine("WaitForAnimation");
-        // ÀûÀ» ¸ÂÃá °æ¿ì ÇØ´ç À§Ä¡¿¡¼­ Æø¹ß
+        // ì ì„ ë§ì¶˜ ê²½ìš° í•´ë‹¹ ìœ„ì¹˜ì—ì„œ í­ë°œ
     }
 
     public void Boom()
@@ -51,7 +51,7 @@ public class Explosion : MonoBehaviour
         animator.SetTrigger("Boom");
     }
 
-    // ¾Ö´Ï¸ŞÀÌ¼Ç ³¡³¯ ¶§ ±îÁö ´ë±â (1ÃÊ)
+    // ì• ë‹ˆë©”ì´ì…˜ ëë‚  ë•Œ ê¹Œì§€ ëŒ€ê¸° (1ì´ˆ)
     IEnumerator WaitForAnimation()
     {
         float time = 0f;

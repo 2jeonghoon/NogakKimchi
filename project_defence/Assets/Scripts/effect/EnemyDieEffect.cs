@@ -29,7 +29,7 @@ public class EnemyDieEffect : MonoBehaviour
     }
 
 
-    // ¾Ö´Ï¸ŞÀÌ¼Ç ³¡³¯ ¶§ ±îÁö ´ë±â (1ÃÊ)
+    // ì• ë‹ˆë©”ì´ì…˜ ëë‚  ë•Œ ê¹Œì§€ ëŒ€ê¸° (1ì´ˆ)
     IEnumerator WaitForAnimation()
     {
         float time = 0f;
