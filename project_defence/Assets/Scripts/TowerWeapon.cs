@@ -106,7 +106,7 @@ public class TowerWeapon : MonoBehaviour
             // 최초 상태를 WeaponState.SearchTarget으로 설정
             ChangeState(WeaponState.SearchTarget);
         }
-        for(int i = 0; i < LevelUp.Length; i++)
+        for (int i = 0; i < LevelUp.Length; i++)
             LevelUp[i].SetActive(false);
     }
 
@@ -521,8 +521,8 @@ public class TowerWeapon : MonoBehaviour
                 clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
             }
             clone.transform.position = spawnPoint.position;                                     // Dequeue해서 가져온 Projectile의 position을 SpawnPoint로 바꾸어 줌
-            
-            if(clone.GetComponent<SpriteRenderer>() != null)
+
+            if (clone.GetComponent<SpriteRenderer>() != null)
                 clone.GetComponent<SpriteRenderer>().sprite = ProjectileSprite;
             // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
             // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
@@ -550,8 +550,8 @@ public class TowerWeapon : MonoBehaviour
     {
         Vector3 direction = attackTarget.position - spawnPoint.position;
         RaycastHit2D[] hit = Physics2D.RaycastAll(spawnPoint.position, direction, towerTemplate.weapon[level].range, targetLayer);
-
-        // 같은 방향으로 여러 개의 광선을 쏴서 그 중 현재 attackTarget과 동일한 오브젝트를 검출
+        
+        // 같은 방향으로 여러 의 광선을 쏴서 그 중 현재 attackTarget과 동개일한 오브젝트를 검출
         for (int i = 0; i < hit.Length; ++i)
         {
             if (hit[i].transform == attackTarget)
@@ -566,9 +566,23 @@ public class TowerWeapon : MonoBehaviour
                 // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
                 float damage = towerTemplate.weapon[level].damage + AddedDamage;
 
-                attackTarget.GetComponent<EnemyHP>().TakeLaserDamage(damage * Time.deltaTime);
+                // 레이저 타워 레벨이 4면 시간이 지속되면 공격력 증가
+                if(level == 4)
+                {
+                    //attackTarget.GetComponent<EnemyHP>().TakeLaserDamage(damage * time);
+                }
+                // 레벨 5 적 이동속도 감소
+                else if(level == 5)
+                {
+                    attackTarget.GetComponent<Enemy>().SetMoveSpeed(attackTarget.GetComponent<Enemy>().GetMoveSpeed() / 2);
+                }
+                else
+                {
+                    attackTarget.GetComponent<EnemyHP>().TakeLaserDamage(damage * Time.deltaTime);
+                }
             }
         }
+        //attackTarget.GetComponent<Enemy>().SetMoveSpeed(enemy_speed);
     }
 
 
@@ -588,7 +602,7 @@ public class TowerWeapon : MonoBehaviour
         spriteRenderer.sprite = towerTemplate.weapon[level].sprite;
         // 골드 차감
         playerGold.CurrentGold -= towerTemplate.weapon[level].cost;
-        LevelUp[level-1].SetActive(true);
+        LevelUp[level - 1].SetActive(true);
 
         // 무기 속성이 레이저이면
         if (weaponType == WeaponType.Laser)

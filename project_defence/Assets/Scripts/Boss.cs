@@ -46,7 +46,7 @@ public class Boss : Enemy
         gameObject.SetActive(true);					// ObjectPool을 사용하면서 SetActive(true)가 필요해짐
         // 적 이동/목표지점 설정 코루틴 함수 시작
         StartCoroutine("skill", delay_time);
-        StartCoroutine("OnMove");
+        NextMoveTo();
     }
 
     private IEnumerator skill(float delay_time)
@@ -70,7 +70,7 @@ public class Boss : Enemy
         //Debug.Log("보스 스킬!");
         // 1페이즈
         skillEffect.SetActive(true);
-        
+
         skillEffect.GetComponent<EnemyDieEffect>().BossSkillEffect();
         if (phase == PHASE.ONE)
         {
@@ -159,12 +159,12 @@ public class Boss : Enemy
         movement2D.MoveSpeed = 0;
 
         // 복사
-        for(int i = 0; i < enemys.Length; i++)
+        for (int i = 0; i < enemys.Length; i++)
         {
             //GameObject clone = Instantiate(enemys[i]);
             GameObject clone = ObjectPool.instance.objectPoolList[i + 6].Dequeue();
             Enemy enemy = clone.GetComponent<Enemy>();  // 방금 생성된 적의 Enemy 컴포넌트된 클론 위치 세팅
-            enemy.Setup(enemySpawner, this, i+6);      // 보스의 way데이터를 가지고 클론을 만듬.
+            enemy.Setup(enemySpawner, this, i + 6);      // 보스의 way데이터를 가지고 클론을 만듬.
             enemy.transform.position = this.transform.position;
             enemy.transform.rotation = this.transform.rotation;
 
