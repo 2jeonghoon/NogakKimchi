@@ -62,7 +62,7 @@ public class Projectile : MonoBehaviour
 		if ( !collision.CompareTag("Enemy") )	return;         // 적이 아닌 대상과 부딪히면
 
         //StopCoroutine("Destory_Projectile");
-        collision.GetComponent<EnemyHP>().TakeDamage(damage);   // 적 체력을 damage만큼 감소
+        collision.GetComponent<EnemyHP>().TakeDamage(damage, false);   // 적 체력을 damage만큼 감소
         ProjectileReturn(pool_idx);								        // 발사체 오브젝트 삭제 대신 Pool에 반납
     }
 }

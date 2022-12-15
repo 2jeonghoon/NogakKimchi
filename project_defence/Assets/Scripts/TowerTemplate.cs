@@ -23,7 +23,8 @@ public class TowerTemplate : ScriptableObject
 		public TileType tileType; // 타일 차지 개수(1, 2)
 		public float explosionRange; // 폭발 범위
 		public Sprite projectileSprite; // 총알 스프라이트
-		public Sprite upgradeImage1;	// 업그레이드 버튼1 이미지 
+        public Sprite[] projectileSprites; // 총알 스프라이트
+        public Sprite upgradeImage1;	// 업그레이드 버튼1 이미지 
 		public Sprite upgradeImage2; // 업그레이드 버튼2 이미지 
 	}
 }

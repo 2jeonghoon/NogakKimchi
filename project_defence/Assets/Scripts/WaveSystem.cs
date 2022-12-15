@@ -15,7 +15,7 @@ public class WaveSystem : MonoBehaviour
     private EnemySpawner enemySpawner;
     private int currentWaveIndex = -1;  // 현재 웨이브 인덱스
     [SerializeField]
-    private TextMeshProUGUI textGameSpeed; // 배속
+    private GameObject[] GameSpeedImage; // 배속
     bool isfause = false;
     float gameSpeed = 1;
 
@@ -129,7 +129,27 @@ public class WaveSystem : MonoBehaviour
                 Time.timeScale = 0.5f;
             }
             gameSpeed = Time.timeScale;
-            textGameSpeed.text = "x" + Time.timeScale.ToString();
+
+
+            GameSpeedImage[0].SetActive(false);
+            GameSpeedImage[1].SetActive(false);
+            GameSpeedImage[2].SetActive(false);
+            switch (gameSpeed)
+            {
+                case 0.5f:
+                    GameSpeedImage[0].SetActive(true);
+                    break;
+                case 1:
+                    GameSpeedImage[1].SetActive(true);
+                    break;
+                case 2:
+                    GameSpeedImage[2].SetActive(true);
+                    break;
+                default:
+                    break;
+                    Debug.Log("speedSetError");
+                    break;
+            }
         }
     }
 

@@ -39,7 +39,7 @@ public class Explosion : MonoBehaviour
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Enemy")) return;         // 적이 아닌 대상과 부딪히면
-        collision.GetComponent<EnemyHP>().TakeDamage(damage);   // 적 체력을 damage만큼 감소
+        collision.GetComponent<EnemyHP>().TakeDamage(damage, false);   // 적 체력을 damage만큼 감소
         Boom();
         StartCoroutine("WaitForAnimation");
         // 적을 맞춘 경우 해당 위치에서 폭발
