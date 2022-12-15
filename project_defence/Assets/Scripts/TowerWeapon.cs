@@ -13,11 +13,11 @@ public class TowerWeapon : MonoBehaviour
 {
     [Header("Commons")]
     [SerializeField]
-    private TowerTemplate towerTemplate;                            // Ÿ�� ���� (���ݷ�, ���ݼӵ� ��)
+    private TowerTemplate towerTemplate;                            // 타워 정보 (공격력, 공격속도 등)
     [SerializeField]
-    private Transform spawnPoint;                               // �߻�ü ���� ��ġ
+    private Transform spawnPoint;                               // 발사체 생성 위치
     [SerializeField]
-    private WeaponType weaponType;                              // ���� �Ӽ� ����
+    private WeaponType weaponType;                              // 무기 속성 설정
 
     [SerializeField]
     private TileType tileType;
@@ -25,33 +25,33 @@ public class TowerWeapon : MonoBehaviour
 
     [Header("Gun")]
     [SerializeField]
-    private GameObject projectilePrefab;                        // �߻�ü ������
+    private GameObject projectilePrefab;                        // 발사체 프리팹
 
     [Header("Laser")]
     [SerializeField]
-    private LineRenderer lineRenderer;                          // �������� ���Ǵ� ��(LineRenderer)
+    private LineRenderer lineRenderer;                          // 레이저로 사용되는 선(LineRenderer)
     [SerializeField]
-    private Transform hitEffect;                                // Ÿ�� ȿ��
+    private Transform hitEffect;                                // 타격 효과
     [SerializeField]
-    private LayerMask targetLayer;                          // ������ �ε����� ���̾� ����
+    private LayerMask targetLayer;                          // 광선에 부딪히는 레이어 설정
 
-    private int level = 0;                              // Ÿ�� ����
-    private WeaponState weaponState = WeaponState.SearchTarget; // Ÿ�� ������ ����
-    private Transform attackTarget = null;                    // ���� ���?
-    private SpriteRenderer spriteRenderer;                          // Ÿ�� ������Ʈ �̹��� �����?                         
+    private int level = 0;                              // 타워 레벨
+    private WeaponState weaponState = WeaponState.SearchTarget; // 타워 무기의 상태
+    private Transform attackTarget = null;                    // 공격 대상
+    private SpriteRenderer spriteRenderer;                          // 타워 오브젝트 이미지 변경용
     private TowerSpawner towerSpawner;
-    private EnemySpawner enemySpawner;                          // ���ӿ� �����ϴ� �� ���� ȹ���?
-    private PlayerGold playerGold;                              // �÷��̾��� ���?���� ȹ�� �� ����
-    private Tile ownerTile;                             // ���� Ÿ���� ��ġ�Ǿ� �ִ� Ÿ��
+    private EnemySpawner enemySpawner;                          // 게임에 존재하는 적 정보 획득용
+    private PlayerGold playerGold;                              // 플레이어의 골드 정보 획득 및 설정
+    private Tile ownerTile;                             // 현재 타워가 배치되어 있는 타일
 
-    private float addedDamage;                          // ������ ���� �߰��� ������
-    private int buffLevel;                              // ������ �޴��� ���� ���� (0 : ����X, 1~3 : �޴� ���� ����)
+    private float addedDamage;                          // 버프에 의해 추가된 데미지
+    private int buffLevel;                              // 버프를 받는지 여부 설정 (0 : 버프X, 1~3 : 받는 버프 레벨)
 
-    // Ÿ�� ��ġ �����?Ŭ��
+    // 타워 설치 오디오 클립
     public AudioClip buildClip;
-    // Ÿ�� ���׷��̵� �����?Ŭ��
+    // 타워 업그레이드 오디오 클립
     public AudioClip upgradeClip;
-    // Ÿ�� �Ǹ� �����?Ŭ��
+    // 타워 판매 오디오 클립
     public AudioClip sellClip;
 
     public Sprite TowerSprite => towerTemplate.weapon[level].sprite;
@@ -84,48 +84,48 @@ public class TowerWeapon : MonoBehaviour
 
     public void Setup(TowerSpawner towerSpawner, EnemySpawner enemySpawner, PlayerGold playerGold, Tile ownerTile)
     {
-        // Ÿ�� ��ġ ���� ���?
+        // 타워 설치 사운드 재생
         SoundManager.instance.SFXPlay("TowerSetUp", buildClip);
         spriteRenderer = GetComponent<SpriteRenderer>();
         this.towerSpawner = towerSpawner;
         this.enemySpawner = enemySpawner;
         this.playerGold = playerGold;
         this.ownerTile = ownerTile;
-        //y��ǥ�� �������� ������ ������
+        //y좌표가 낮을수록 앞으로 나오게
         this.GetComponent<SpriteRenderer>().sortingOrder = -(int)this.transform.position.y + 10;
-        // ���� �Ӽ��� ĳ��, �������� ��
+        // 무기 속성이 캐논, 레이저일 때
         if (weaponType == WeaponType.Gun || weaponType == WeaponType.Laser ||
             weaponType == WeaponType.Mortar || weaponType == WeaponType.Shotgun ||
             weaponType == WeaponType.Spear || weaponType == WeaponType.Explosion || weaponType == WeaponType.Strawberry)
         {
-            // ���� ���¸� WeaponState.SearchTarget���� ����
+            // 최초 상태를 WeaponState.SearchTarget으로 설정
             ChangeState(WeaponState.SearchTarget);
         }
     }
 
     public void ChangeState(WeaponState newState)
     {
-        // ������ ������̴�?���� ����
+        // 이전에 재생중이던 상태 종료
         //Debug.Log(weaponState.ToString());
         StopCoroutine(weaponState.ToString());
-        // ���� ����
+        // 상태 변경
         weaponState = newState;
 
         //Debug.Log(weaponState.ToString());
-        // ���ο� ���� ���?
+        // 새로운 상태 재생
         StartCoroutine(weaponState.ToString());
     }
 
 
     private void RotateToTarget()
     {
-        // �������κ����� �Ÿ��� ���������κ����� ������ �̿��� ��ġ�� ���ϴ� �� ��ǥ�� �̿�
-        // ���� = arctan(y/x)
-        // x, y ������ ���ϱ�
+        // 원점으로부터의 거리와 수평축으로부터의 각도를 이용해 위치를 구하는 극 좌표계 이용
+        // 각도 = arctan(y/x)
+        // x, y 변위값 구하기
         float dx = attackTarget.position.x - transform.position.x;
         float dy = attackTarget.position.y - transform.position.y;
-        // x, y �������� �������� ���� ���ϱ�
-        // ������ radian �����̱� ������ Mathf.Rad2Deg�� ���� �� ������ ����
+        // x, y 변위값을 바탕으로 각도 구하기
+        // 각도가 radian 단위이기 때문에 Mathf.Rad2Deg를 곱해 도 단위를 구함
         float degree = Mathf.Atan2(dy, dx) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, degree);
     }
@@ -134,7 +134,7 @@ public class TowerWeapon : MonoBehaviour
     {
         while (true)
         {
-            // ���� Ÿ���� ���� ������ �ִ� ���� ���?��) Ž��
+            // 현재 타워에 가장 가까이 있는 공격 대상(적) 탐색
             attackTarget = FindClosestAttackTarget();
             if (attackTarget != null && attackTarget.gameObject.activeSelf)
             {
@@ -175,15 +175,15 @@ public class TowerWeapon : MonoBehaviour
     {
         while (true)
         {
-            // target�� �����ϴ°� �������� �˻�
+            // target을 공격하는게 가능한지 검사
             if (IsPossibleToAttackTarget() == false)
             {
                 ChangeState(WeaponState.SearchTarget);
                 break;
             }
-            // ĳ�� ���� (�߻�ü ����)
+            // 캐논 공격 (발사체 생성)
             SpawnProjectile();
-            // attackRate �ð���ŭ ���?
+            // attackRate 시간만큼 대기
             yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
 
         }
@@ -191,21 +191,21 @@ public class TowerWeapon : MonoBehaviour
 
     private IEnumerator TryAttackLaser()
     {
-        // ������, ������ Ÿ�� ȿ�� Ȱ��ȭ
+        // 레이저, 레이저 타격 효과 활성화
         EnableLaser();
 
         while (true)
         {
-            // target�� �����ϴ°� �������� �˻�
+            // target을 공격하는게 가능한지 검사
             if (IsPossibleToAttackTarget() == false)
             {
-                // ������, ������ Ÿ�� ȿ�� ��Ȱ��ȭ
+                // 레이저, 레이저 타격 효과 비활성화
                 DisableLaser();
                 ChangeState(WeaponState.SearchTarget);
                 break;
             }
 
-            // ������ ����
+            // 레이저 공격
             SpawnLaser();
 
             yield return null;
@@ -216,73 +216,73 @@ public class TowerWeapon : MonoBehaviour
     {
         while (true)
         {
-            // target�� �����ϴ°� �������� �˻�
+            // target을 공격하는게 가능한지 검사
             if (IsPossibleToAttackTarget() == false)
             {
                 ChangeState(WeaponState.SearchTarget);
                 break;
             }
-            // �ڰ��� ���� (�߻�ü ����)
+            // 박격포 공격 (발사체 생성)
             if (attackTarget != null)
             {
                 SpawnMortarProjectile();
             }
-            // attackRate �ð���ŭ ���?
+            // attackRate 시간만큼 대기
             yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
 
         }
     }
 
-    // ���� Ÿ�� ����
+    // 샷건 타워 공격
     private IEnumerator TryAttackShotgun()
     {
         while (true)
         {
-            // target�� �����ϴ°� �������� �˻�
+            // target을 공격하는게 가능한지 검사
             if (IsPossibleToAttackTarget() == false)
             {
                 ChangeState(WeaponState.SearchTarget);
                 break;
             }
-            // ���� ���� (�߻�ü ����)
+            // 샷건 공격 (발사체 생성)
             SpawnProjectile_Multiple();
-            // attackRate �ð���ŭ ���?
+            // attackRate 시간만큼 대기
             yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
         }
     }
 
-    // ���� Ÿ�� ����
+    // 관통 타워 공격
     private IEnumerator TryAttackSpaer()
     {
         while (true)
         {
-            // target�� �����ϴ°� �������� �˻�
+            // target을 공격하는게 가능한지 검사
             if (IsPossibleToAttackTarget() == false)
             {
                 ChangeState(WeaponState.SearchTarget);
                 break;
             }
-            // ���� ���� (�߻�ü ����)
+            // 관통 공격 (발사체 생성)
             SpawnProjectile_Spear();
-            // attackRate �ð���ŭ ���?
+            // attackRate 시간만큼 대기
             yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
         }
     }
 
-    // ���� Ÿ�� ����
+    // 폭발 타워 공격
     private IEnumerator TryAttackExplosion()
     {
         while (true)
         {
-            // target�� �����ϴ°� �������� �˻�
+            // target을 공격하는게 가능한지 검사
             if (IsPossibleToAttackTarget() == false)
             {
                 ChangeState(WeaponState.SearchTarget);
                 break;
             }
-            // ���� ���� (�߻�ü ����)
+            // 관통 공격 (발사체 생성)
             SpawnProjectile_Explosion();
-            // attackRate �ð���ŭ ���?
+            // attackRate 시간만큼 대기
             yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
         }
     }
@@ -291,45 +291,45 @@ public class TowerWeapon : MonoBehaviour
     {
         while (true)
         {
-            // target�� �����ϴ°� �������� �˻�
+            // target을 공격하는게 가능한지 검사
             if (IsPossibleToAttackTarget() == false)
             {
                 ChangeState(WeaponState.SearchTarget);
                 break;
             }
-            // ���� ���� (�߻�ü ����)
+            // 관통 공격 (발사체 생성)
             SpawnProjectile_Strawberry();
-            // attackRate �ð���ŭ ���?
+            // attackRate 시간만큼 대기
             yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
         }
     }
 
     public void OnBuffAroundTower()
     {
-        // ���� �ʿ� ��ġ�� "Tower" �±׸� ���� ���?������Ʈ Ž��
+        // 현재 맵에 배치된 "Tower" 태그를 가진 모든 오브젝트 탐색
         GameObject[] towers = GameObject.FindGameObjectsWithTag("Tower");
 
         for (int i = 0; i < towers.Length; ++i)
         {
             TowerWeapon weapon = towers[i].GetComponent<TowerWeapon>();
 
-            // �̹� ������ �ް� �ְ�, ���� ���� Ÿ���� �������� ���� �����̸� �н�
+            // 이미 버프를 받고 있고, 현재 버프 타워의 레벨보다 높은 버프이면 패스
             if (weapon.BuffLevel > Level)
             {
                 continue;
             }
 
-            // ���� ���� Ÿ���� �ٸ� Ÿ���� �Ÿ��� �˻��ؼ� ���� �ȿ� Ÿ���� ������
+            // 현재 버프 타워와 다른 타워의 거리를 검사해서 범위 안에 타워가 있으면
             if (Vector3.Distance(weapon.transform.position, transform.position) <= towerTemplate.weapon[level].range)
             {
-                // ������ ������ ĳ��, ������ Ÿ���̸�
+                // 공격이 가능한 캐논, 레이저 타워이면
                 if (weapon.WeaponType == WeaponType.Gun || weapon.WeaponType == WeaponType.Laser ||
                     weapon.WeaponType == WeaponType.Explosion || weapon.WeaponType == WeaponType.Mortar ||
                     weapon.WeaponType == WeaponType.Shotgun || weapon.WeaponType == WeaponType.Spear)
                 {
-                    // ������ ���� ���ݷ� ����
+                    // 버프에 의해 공격력 증가
                     weapon.AddedDamage = weapon.Damage * (towerTemplate.weapon[level].buff);
-                    // Ÿ���� �ް� �ִ� ���� ���� ����
+                    // 타워가 받고 있는 버프 레벨 설정
                     weapon.BuffLevel = Level;
                     weapon.buffTower = this;
                 }
@@ -339,14 +339,14 @@ public class TowerWeapon : MonoBehaviour
 
     private Transform FindClosestAttackTarget()
     {
-        // ���� ������ �ִ� ���� ã�� ���� ���� �Ÿ��� �ִ��� ũ�� ����
+        // 제일 가까이 있는 적을 찾기 위해 최초 거리를 최대한 크게 설정
         // float closestDistSqr = Mathf.Infinity;
-        // EnemySpawner�� EnemyList�� �ִ� ���� �ʿ� �����ϴ� ���?�� �˻�
+        // EnemySpawner의 EnemyList에 있는 현재 맵에 존재하는 모든 적 검사
         //Debug.Log(enemySpawner.EnemyList.Count);
         for (int i = 0; i < enemySpawner.EnemyList.Count; ++i)
         {
             float distance = Vector3.Distance(enemySpawner.EnemyList[i].transform.position, transform.position);
-            // ���� �˻����� ������ �Ÿ��� ���ݹ��� ���� �ְ�, �������?�˻��� ������ �Ÿ��� ������
+            // 현재 검사중인 적과의 거리가 공격범위 내에 있고, 현재까지 검사한 적보다 거리가 가까우면
             if (distance <= towerTemplate.weapon[level].range)// && distance <= closestDistSqr)
             {
                 // closestDistSqr = distance;
@@ -361,12 +361,12 @@ public class TowerWeapon : MonoBehaviour
 
     private bool IsPossibleToAttackTarget()
     {
-        // target�� �ִ��� �˻� (�ٸ� �߻�ü�� ���� ����, Goal �������� �̵��� ���� ��)
+        // target이 있는지 검사 (다른 발사체에 의해 제거, Goal 지점까지 이동해 삭제 등)
         if (attackTarget == null || !attackTarget.gameObject.activeSelf)
         {
             return false;
         }
-        // target�� ���� ���� �ȿ� �ִ��� �˻� (���� ������ ����� ���ο� �� Ž��)
+        // target이 공격 범위 안에 있는지 검사 (공격 범위를 벗어나면 새로운 적 탐색)
         float distance = Vector3.Distance(attackTarget.position, transform.position);
         if (distance > towerTemplate.weapon[level].range || !attackTarget.gameObject.activeSelf)
         {
@@ -382,15 +382,15 @@ public class TowerWeapon : MonoBehaviour
     {
         if (attackTarget != null)
         {
-            GameObject clone;                                                                   // ������Ʈ Pool���� Dequeue�ؼ� ������, 0�� : coco
+            GameObject clone;                                                                  // 오브젝트 Pool에서 Dequeue해서 가져옴, 0번 : coco
             if (!ObjectPool.instance.objectPoolList[0].TryDequeue(out clone))
             {
                 clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
             }
-            clone.transform.position = spawnPoint.position;                                   // Dequeue�ؼ� ������ Projectile�� position�� SpawnPoint�� �ٲپ� ��
+            clone.transform.position = spawnPoint.position;                                   // Dequeue해서 가져온 Projectile의 position을 SpawnPoint로 바꾸어 줌
             clone.GetComponent<SpriteRenderer>().sprite = ProjectileSprite;
-            // ������ �߻�ü���� ���ݴ��?attackTarget) ���� ����   
-            // ���ݷ� = Ÿ�� �⺻ ���ݷ� + ������ ���� �߰��� ���ݷ�
+            // 생성된 발사체에게 공격대상(attackTarget) 정보 제공   
+            // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
             float damage = towerTemplate.weapon[level].damage + AddedDamage;
             if (IsPossibleToAttackTarget())
                 clone.GetComponent<Projectile>().Setup(attackTarget, damage);
@@ -403,7 +403,7 @@ public class TowerWeapon : MonoBehaviour
     {
         if (attackTarget != null)
         {
-            GameObject clone1;                                                                   // ������Ʈ Pool���� Dequeue�ؼ� ������, 1�� : jelly
+            GameObject clone1;                                                                   // 오브젝트 Pool에서 Dequeue해서 가져옴, 1번 : jelly
             GameObject clone2;
             GameObject clone3;
 
@@ -421,10 +421,10 @@ public class TowerWeapon : MonoBehaviour
             clone1.GetComponent<SpriteRenderer>().sprite = ProjectileSprite;
             clone2.GetComponent<SpriteRenderer>().sprite = ProjectileSprite;
             clone3.GetComponent<SpriteRenderer>().sprite = ProjectileSprite;
-            // ������ �߻�ü���� ���ݴ��?attackTarget) ���� ����
-            // ���ݷ� = Ÿ�� �⺻ ���ݷ� + ������ ���� �߰��� ���ݷ�
+            // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
+            // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
             float damage = towerTemplate.weapon[level].damage + AddedDamage;
-            // �� ������ ���������� ������ ���� Vector3.left, right�� ������
+            // 세 갈래로 나누어지는 공격을 위해 Vector3.left, right를 더해줌
             if (IsPossibleToAttackTarget())
             {
                 Vector3 targetPos = attackTarget.position;
@@ -443,21 +443,21 @@ public class TowerWeapon : MonoBehaviour
         }
     }
 
-    // ���� �Ѿ� ����
+    // 占쏙옙占쏙옙 占싼억옙 占쏙옙占쏙옙
     private void SpawnProjectile_Explosion()
     {
-        //Debug.Log("�߻�");
+        //Debug.Log("占쌩삼옙");
         if (attackTarget != null)
         {
-            GameObject clone;                                                                   // ������Ʈ Pool���� Dequeue�ؼ� ������, 2�� : icecream
+            GameObject clone;                                                                   // 오브젝트 Pool에서 Dequeue해서 가져옴, 2번 : icecream
             if (!ObjectPool.instance.objectPoolList[2].TryDequeue(out clone))
             {
                 clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
             }
-            clone.transform.position = spawnPoint.position;                                     // Dequeue�ؼ� ������ Projectile�� position�� SpawnPoint�� �ٲپ� ��
+            clone.transform.position = spawnPoint.position;                                     // Dequeue해서 가져온 Projectile의 position을 SpawnPoint로 바꾸어 줌
             clone.GetComponent<SpriteRenderer>().sprite = ProjectileSprite;
-            // ������ �߻�ü���� ���ݴ��?attackTarget) ���� ����
-            // ���ݷ� = Ÿ�� �⺻ ���ݷ� + ������ ���� �߰��� ���ݷ�
+            // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
+            // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
             float damage = towerTemplate.weapon[level].damage + AddedDamage;
             if (IsPossibleToAttackTarget())
                 clone.GetComponent<Projectile_Explosion>().Setup(attackTarget, damage, Range, ExplosionRange);
@@ -466,19 +466,19 @@ public class TowerWeapon : MonoBehaviour
         }
     }
 
-    // �ڰ��� �Ѿ� ����
+    // 占쌘곤옙占쏙옙 占싼억옙 占쏙옙占쏙옙
     private void SpawnMortarProjectile()
     {
         //GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-        GameObject clone;                                                                   // ������Ʈ Pool���� Dequeue�ؼ� ������, 3�� : milk
+        GameObject clone;                                                                   // 오브젝트 Pool에서 Dequeue해서 가져옴, 3번 : milk
         if (!ObjectPool.instance.objectPoolList[3].TryDequeue(out clone))
         {
             clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
         }
-        clone.transform.position = spawnPoint.position;                                     // Dequeue�ؼ� ������ Projectile�� position�� SpawnPoint�� �ٲپ� ��
+        clone.transform.position = spawnPoint.position;                                     // Dequeue해서 가져온 Projectile의 position을 SpawnPoint로 바꾸어 줌
         clone.GetComponent<SpriteRenderer>().sprite = ProjectileSprite;
-        // ������ �߻�ü���� ���ݴ��?attackTarget) ���� ����
-        // ���ݷ� = Ÿ�� �⺻ ���ݷ� + ������ ���� �߰��� ���ݷ�
+        // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
+        // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
         float damage = towerTemplate.weapon[level].damage + AddedDamage;
         if (IsPossibleToAttackTarget())
             clone.GetComponent<ProjectileMortar>().Setup(attackTarget, damage, enemySpawner, ExplosionRange);
@@ -488,15 +488,15 @@ public class TowerWeapon : MonoBehaviour
 
     private void SpawnProjectile_Strawberry()
     {
-        GameObject clone;                                                                   // ������Ʈ Pool���� Dequeue�ؼ� ������, 4�� : strawberry
+        GameObject clone;                                                                   // 오브젝트 Pool에서 Dequeue해서 가져옴, 4번 : strawberry
         if (!ObjectPool.instance.objectPoolList[4].TryDequeue(out clone))
         {
             clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
         }
-        clone.transform.position = spawnPoint.position;                                     // Dequeue�ؼ� ������ Projectile�� position�� SpawnPoint�� �ٲپ� ��
+        clone.transform.position = spawnPoint.position;                                     // Dequeue해서 가져온 Projectile의 position을 SpawnPoint로 바꾸어 줌
         clone.GetComponent<SpriteRenderer>().sprite = ProjectileSprite;
-        // ������ �߻�ü���� ���ݴ��?attackTarget) ���� ����
-        // ���ݷ� = Ÿ�� �⺻ ���ݷ� + ������ ���� �߰��� ���ݷ�
+        // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
+        // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
         float damage = towerTemplate.weapon[level].damage + AddedDamage;
         if (IsPossibleToAttackTarget())
             clone.GetComponent<ProjectileStrawberry>().Setup(attackTarget, enemySpawner, ExplosionRange);
@@ -508,15 +508,15 @@ public class TowerWeapon : MonoBehaviour
     {
         if (attackTarget != null)
         {
-            GameObject clone;                                                                   // ������Ʈ Pool���� Dequeue�ؼ� ������, 5�� : spear
+            GameObject clone;                                                                    // 오브젝트 Pool에서 Dequeue해서 가져옴, 5번 : spear
             if (!ObjectPool.instance.objectPoolList[5].TryDequeue(out clone))
             {
                 clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
             }
-            clone.transform.position = spawnPoint.position;                                     // Dequeue�ؼ� ������ Projectile�� position�� SpawnPoint�� �ٲپ� ��
+            clone.transform.position = spawnPoint.position;                                     // Dequeue해서 가져온 Projectile의 position을 SpawnPoint로 바꾸어 줌
             clone.GetComponent<SpriteRenderer>().sprite = ProjectileSprite;
-            // ������ �߻�ü���� ���ݴ��?attackTarget) ���� ����
-            // ���ݷ� = Ÿ�� �⺻ ���ݷ� + ������ ���� �߰��� ���ݷ�
+            // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
+            // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
             float damage = towerTemplate.weapon[level].damage + AddedDamage;
             if (IsPossibleToAttackTarget())
                 clone.GetComponent<Projectile_Spear>().Setup(attackTarget, damage, Range);
@@ -542,19 +542,19 @@ public class TowerWeapon : MonoBehaviour
         Vector3 direction = attackTarget.position - spawnPoint.position;
         RaycastHit2D[] hit = Physics2D.RaycastAll(spawnPoint.position, direction, towerTemplate.weapon[level].range, targetLayer);
 
-        // ���� �������� ���� ���� ������ ���� �� �� ���� attackTarget�� ������ ������Ʈ�� ����
+        // 같은 방향으로 여러 개의 광선을 쏴서 그 중 현재 attackTarget과 동일한 오브젝트를 검출
         for (int i = 0; i < hit.Length; ++i)
         {
             if (hit[i].transform == attackTarget)
             {
-                // ���� ��������
+                // 선의 시작지점
                 lineRenderer.SetPosition(0, spawnPoint.position);
-                // ���� ��ǥ����
+                // 선의 목표지점
                 lineRenderer.SetPosition(1, new Vector3(hit[i].point.x, hit[i].point.y, 0) + Vector3.back);
-                // Ÿ�� ȿ�� ��ġ ����
+                // 타격 효과 위치 설정
                 hitEffect.position = hit[i].point;
-                // �� ü�� ���� (1�ʿ� damage��ŭ ����)
-                // ���ݷ� = Ÿ�� �⺻ ���ݷ� + ������ ���� �߰��� ���ݷ�
+                // 적 체력 감소 (1초에 damage만큼 감소)
+                // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
                 float damage = towerTemplate.weapon[level].damage + AddedDamage;
 
                 attackTarget.GetComponent<EnemyHP>().TakeLaserDamage(damage * Time.deltaTime);
@@ -565,78 +565,78 @@ public class TowerWeapon : MonoBehaviour
 
     public bool Upgrade_1()
     {
-        // Ÿ�� ��ġ ���� ���?
+        // 타워 설치 사운드 재생
         SoundManager.instance.SFXPlay("TowerUpgrade", upgradeClip);
-        // Ÿ�� ���׷��̵忡 �ʿ��� ���?�������?�˻�
+        // 타워 업그레이드에 필요한 골드가 충분한지 검사
         if (playerGold.CurrentGold < towerTemplate.weapon[level + 1].cost)
         {
             return false;
         }
 
-        // Ÿ�� ���� ����
+        // 타워 레벨 증가
         level++;
-        // Ÿ�� ���� ���� (Sprite)
+        // 타워 외형 변경 (Sprite)
         spriteRenderer.sprite = towerTemplate.weapon[level].sprite;
-        // ���?����
+        // 골드 차감
         playerGold.CurrentGold -= towerTemplate.weapon[level].cost;
 
-        // ���� �Ӽ��� �������̸�
+        // 무기 속성이 레이저이면
         if (weaponType == WeaponType.Laser)
         {
-            // ������ ���� �������� ���� ����
+            // 레벨에 따라 레이저의 굵기 설정
             lineRenderer.startWidth = 0.05f + level * 0.05f;
             lineRenderer.endWidth = 0.05f;
         }
 
-        // Ÿ���� ���׷��̵� �� �� ���?���� Ÿ���� ���� ȿ�� ����
-        // ���� Ÿ���� ���� Ÿ���� ���? ���� Ÿ���� ���� Ÿ���� ���?
+        // 타워가 업그레이드 될 때 모든 버프 타워의 버프 효과 갱신
+        // 현재 타워가 버프 타워인 경우, 현재 타워가 공격 타워인 경우
         towerSpawner.OnBuffAllBuffTowers();
 
         return true;
     }
 
+
     public bool Upgrade_2()
     {
-        // Ÿ�� ��ġ ���� ���?
+        // 타워 설치 사운드 재생
         SoundManager.instance.SFXPlay("TowerUpgrade", upgradeClip);
-        // Ÿ�� ���׷��̵忡 �ʿ��� ���?�������?�˻�
+        // 타워 업그레이드에 필요한 골드가 충분한지 검사
         if (playerGold.CurrentGold < towerTemplate.weapon[level + 2].cost)
         {
             return false;
         }
 
-        // Ÿ�� ���� ����
+        // 타워 레벨 증가
         level += 2;
-        // Ÿ�� ���� ���� (Sprite)
+        // 타워 외형 변경 (Sprite)
         spriteRenderer.sprite = towerTemplate.weapon[level].sprite;
-        // ���?����
+        // 골드 차감
         playerGold.CurrentGold -= towerTemplate.weapon[level].cost;
 
-        // ���� �Ӽ��� �������̸�
+        // 무기 속성이 레이저이면
         if (weaponType == WeaponType.Laser)
         {
-            // ������ ���� �������� ���� ����
+            // 레벨에 따라 레이저의 굵기 설정
             lineRenderer.startWidth = 0.05f + (level) * 0.05f;
             lineRenderer.endWidth = 0.05f;
         }
 
-        // Ÿ���� ���׷��̵� �� �� ���?���� Ÿ���� ���� ȿ�� ����
-        // ���� Ÿ���� ���� Ÿ���� ���? ���� Ÿ���� ���� Ÿ���� ���?
+        // 타워가 업그레이드 될 때 모든 버프 타워의 버프 효과 갱신
+        // 현재 타워가 버프 타워인 경우, 현재 타워가 공격 타워인 경우
         towerSpawner.OnBuffAllBuffTowers();
 
         return true;
     }
-
     public void Sell()
     {
-        // Ÿ�� �Ǹ� ���� ���?
+        // 타워 판매 사운드 재생
         SoundManager.instance.SFXPlay("TowerSell", sellClip);
-        // ���?����
+        // 골드 증가
         playerGold.CurrentGold += towerTemplate.weapon[level].sell;
-        // ���� Ÿ�Ͽ� �ٽ� Ÿ�� �Ǽ��� �����ϵ��� ����
+        // 현재 타일에 다시 타워 건설이 가능하도록 설정
         ownerTile.IsBuildTower = false;
 
-        // ���� �ʿ� ��ġ�� "Tower" �±׸� ���� ���?������Ʈ Ž��
+        // 현재 맵에 배치된 "Tower" 태그를 가진 모든 오브젝트 탐색
         GameObject[] towers = GameObject.FindGameObjectsWithTag("Tower");
 
         for (int i = 0; i < towers.Length; ++i)
@@ -647,35 +647,34 @@ public class TowerWeapon : MonoBehaviour
         }
         towerSpawner.OnBuffAllBuffTowers();
 
-        // �Ǹ� ����Ʈ �����ֱ�
+        // 판매 이펙트 보여주기
         towerSpawner.sellEffect.SetActive(true);
         towerSpawner.sellEffect.GetComponent<TowerBuildEffect>().Boom();
         towerSpawner.sellEffect.transform.position = transform.position + Vector3.down / 2;
 
-        // Ÿ�� �ı�
+        // 타워 파괴
         Destroy(gameObject);
     }
 }
 
-
 /*
  * File : TowerWeapon.cs
  * Desc
- *	: ���� �����ϴ� Ÿ�� ����
+ *	: 적을 공격하는 타워 무기
  *	
  * Functions
- *	: ChangeState() - �ڷ�ƾ�� �̿��� FSM���� ���� ���� �Լ�
- *	: RotateToTarget() - target �������� o
- *	: SearchTarget() - ���� Ÿ���� ���� ������ �� Ž��
- *	: TryAttackGun() - target���� ������ ��󿡰�?ĳ�� ����
- *	: TryAttackLaser() - target���� ������ ��󿡰�?������ ����
- *	: FindClosestAttackTarget() - ���� Ÿ���� ���� ������ ���� ���?��) Ž��
- *	: IsPossibleToAttackTarget() - AttackTarget�� �ִ���, ���� �������� �˻�
- *	: SpawnProjectile() - ĳ�� �߻�ü ����
- *	: EnableLaser() - ������, ������ Ÿ�� ȿ�� Ȱ��ȭ
- *	: DisableLaser() - ������, ������ Ÿ�� ȿ�� ��Ȱ��ȭ
- *	: SpawnLaser() - ������ ����, ������ Ÿ�� ȿ��, �� ü�� ����
- *	: Upgrade() - Ÿ�� ���׷��̵�
- *	: Sell() - Ÿ�� �Ǹ�
+ *	: ChangeState() - 코루틴을 이용한 FSM에서 상태 변경 함수
+ *	: RotateToTarget() - target 방향으로 o
+ *	: SearchTarget() - 현재 타워에 가장 근접한 적 탐색
+ *	: TryAttackGun() - target으로 설정된 대상에게 캐논 공격
+ *	: TryAttackLaser() - target으로 설정된 대상에게 레이저 공격
+ *	: FindClosestAttackTarget() - 현재 타워에 가장 근접한 공격 대상(적) 탐색
+ *	: IsPossibleToAttackTarget() - AttackTarget이 있는지, 공격 가능한지 검사
+ *	: SpawnProjectile() - 캐논 발사체 생성
+ *	: EnableLaser() - 레이저, 레이저 타격 효과 활성화
+ *	: DisableLaser() - 레이저, 레이저 타격 효과 비활성화
+ *	: SpawnLaser() - 레이저 공격, 레이저 타격 효과, 적 체력 감소
+ *	: Upgrade() - 타워 업그레이드
+ *	: Sell() - 타워 판매
  *	
  */
