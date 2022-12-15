@@ -21,18 +21,17 @@ public class Projectile_Multiple : Projectile
     {
         SoundManager.instance.SFXPlay("ShotGun", clip);
         movement2D = GetComponent<Movement2D>();
-        this.damage = damage;           				// 타워의 공격력
+        this.damage = damage;                       // 타워의 공격력
         this.direction = (targetPos - transform.position);
         if (flags == 1)
         {
-
-            direction = (direction * Mathf.Cos(45)).normalized;//.normalized;
-            direction.z = 1;
+            direction.y -= 1;
+            direction = direction.normalized;
         }
         else
         {
-            direction = (direction * Mathf.Sin(45)).normalized;//.normalized;
-            direction.z = 1;
+            direction.y += 1;
+            direction = direction.normalized;
         };
         this.pool_idx = 1;
         gameObject.SetActive(true);
