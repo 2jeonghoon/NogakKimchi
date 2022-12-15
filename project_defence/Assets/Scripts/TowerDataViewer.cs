@@ -118,7 +118,7 @@ public class TowerDataViewer : MonoBehaviour
         buttonUpgrade2.interactable = currentTower.Level < currentTower.MaxLevel ? true : false;
         if (currentTower.UpgradeImage2 != null)
             buttonUpgrade2.image.sprite = currentTower.UpgradeImage2;
-        if(currentTower.Level >= 2)
+        if(currentTower.Level == 3)
         {
             buttonUpgrade.transform.localScale = new Vector3(0.5f, 1, 1);
             buttonUpgrade2.transform.localScale = new Vector3(0.5f, 1, 1);
@@ -128,7 +128,7 @@ public class TowerDataViewer : MonoBehaviour
             buttonUpgrade.transform.localScale = new Vector3(1, 1, 1);
             buttonUpgrade2.transform.localScale = new Vector3(1, 1, 1);
         }
-        if (currentTower.Level != 2)
+        if (currentTower.Level != 3)
         {
             buttonUpgrade2.interactable = false;
         }

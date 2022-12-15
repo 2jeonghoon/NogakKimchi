@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 public enum WeaponType { Gun = 0, Laser, Slow, Buff, Mortar, Shotgun, Spear, Explosion, Strawberry }
 public enum WeaponState
 {
@@ -516,7 +515,9 @@ public class TowerWeapon : MonoBehaviour
                 clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
             }
             clone.transform.position = spawnPoint.position;                                     // Dequeue해서 가져온 Projectile의 position을 SpawnPoint로 바꾸어 줌
-            clone.GetComponent<SpriteRenderer>().sprite = ProjectileSprite;
+            
+            if(clone.GetComponent<SpriteRenderer>() != null)
+                clone.GetComponent<SpriteRenderer>().sprite = ProjectileSprite;
             // 생성된 발사체에게 공격대상(attackTarget) 정보 제공
             // 공격력 = 타워 기본 공격력 + 버프에 의해 추가된 공격력
             float damage = towerTemplate.weapon[level].damage + AddedDamage;
