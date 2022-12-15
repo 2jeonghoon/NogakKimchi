@@ -16,7 +16,7 @@ public class ObjectPool : MonoBehaviour
     [SerializeField]
     ObjectInfo[] objectInfos = null;
 
-    [Header("¿ÀºêÁ§Æ® Ç®ÀÇ À§Ä¡")]
+    [Header("ì˜¤ë¸Œì íŠ¸ í’€ì˜ ìœ„ì¹˜")]
     [SerializeField]
     Transform tfPoolParent;
 

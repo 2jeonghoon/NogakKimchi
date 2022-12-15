@@ -8,13 +8,13 @@ using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
-    // ¿Àµğ¿À ¹Í¼­
+    // ì˜¤ë””ì˜¤ ë¯¹ì„œ
     public AudioMixer mixer;
-    // ¹è°æÀ½¾Ç
+    // ë°°ê²½ìŒì•…
     public AudioSource bgSound;
     public AudioClip[] bglist;
 
-    // ¹öÆ° »ç¿îµå
+    // ë²„íŠ¼ ì‚¬ìš´ë“œ
     [SerializeField]
     public AudioClip buttonSoundClip;
 
@@ -28,7 +28,7 @@ public class SoundManager : MonoBehaviour
     {
         if (instance == null)
         {
-            //Debug.Log("»ı¼º");
+            //Debug.Log("ìƒì„±");
             instance = this;
             string name = "";
             Scene scene = SceneManager.GetActiveScene();
@@ -51,7 +51,7 @@ public class SoundManager : MonoBehaviour
             //if (arg0.name + "BGM" == bglist[i].name)
             if ("Map_1" == bglist[i].name)
             {
-                Debug.Log("bgm Àç»ı");
+                Debug.Log("bgm ì¬ìƒ");
                 BgSoundPlay(bglist[i]);
             }
         }
@@ -68,7 +68,7 @@ public class SoundManager : MonoBehaviour
         Destroy(go, clip.length);
     }
 
-    // ¹öÆ° »ç¿îµå Ãâ·Â
+    // ë²„íŠ¼ ì‚¬ìš´ë“œ ì¶œë ¥
     public void onClickButton()
     {
         Debug.Log("button click");
