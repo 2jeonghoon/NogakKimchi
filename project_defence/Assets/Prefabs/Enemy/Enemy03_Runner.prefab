@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 5
-  currentHP: 0
+  currentHP: 5
   defense: 1
 --- !u!95 &-4092852644163617880
 Animator:

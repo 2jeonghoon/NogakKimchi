@@ -4957,7 +4957,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 10
-  currentHP: 0
+  currentHP: 10
   defense: 2
 --- !u!114 &7577280758431253331
 MonoBehaviour:
@@ -4972,6 +4972,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gold: 10
+  isInstagramOn: 0
   clip: {fileID: 8300000, guid: e58d8bd078f188a4ba314e933b98528b, type: 3}
   isClone: 0
   delay_time: 1.5

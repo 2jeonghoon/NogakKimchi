@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gold: 10
+  isInstagramOn: 0
   clip: {fileID: 8300000, guid: e58d8bd078f188a4ba314e933b98528b, type: 3}
   isClone: 1
 --- !u!58 &-3643329299626539831
@@ -148,7 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 20
   currentHP: 0
-  defense: 4
+  defense: 3
 --- !u!95 &2974300217112406154
 Animator:
   serializedVersion: 4
