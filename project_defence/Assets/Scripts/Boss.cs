@@ -127,13 +127,19 @@ public class Boss : Enemy
 
         // 복사
         //GameObject clone = Instantiate(boss_clone);
-        GameObject clone = ObjectPool.instance.objectPoolList[pool_idx].Dequeue();
+        GameObject clone;
+        if (!ObjectPool.instance.objectPoolList[pool_idx].TryDequeue(out clone))
+        {
+            ObjectPool.instance.InsertQueue(pool_idx);
+            clone = ObjectPool.instance.objectPoolList[pool_idx].Dequeue();
+        }
         Enemy enemy = clone.GetComponent<Enemy>();	// 방금 생성된 적의 Enemy 컴포넌트
         clone.GetComponent<Animator>().SetBool("isClone", true);
         // 생성된 클론 위치 세팅
         enemy.Setup(enemySpawner, this, pool_idx);      // 보스의 way데이터를 가지고 클론을 만듬.
         enemy.transform.position = this.transform.position;
         enemy.transform.rotation = this.transform.rotation;
+        enemy.isClone = true;
         // HP 바 생성
         enemySpawner.SpawnEnemyHPSlider(clone);
 
@@ -162,11 +168,17 @@ public class Boss : Enemy
         for (int i = 0; i < enemys.Length; i++)
         {
             //GameObject clone = Instantiate(enemys[i]);
-            GameObject clone = ObjectPool.instance.objectPoolList[i + 6].Dequeue();
+            GameObject clone;
+            if (!ObjectPool.instance.objectPoolList[i + 6].TryDequeue(out clone))
+            {
+                ObjectPool.instance.InsertQueue(i+6);
+                clone = ObjectPool.instance.objectPoolList[1].Dequeue();
+            }
             Enemy enemy = clone.GetComponent<Enemy>();  // 방금 생성된 적의 Enemy 컴포넌트된 클론 위치 세팅
             enemy.Setup(enemySpawner, this, i + 6);      // 보스의 way데이터를 가지고 클론을 만듬.
             enemy.transform.position = this.transform.position;
             enemy.transform.rotation = this.transform.rotation;
+            enemy.isClone = true;
 
             // HP 바 생성
             enemySpawner.SpawnEnemyHPSlider(clone);

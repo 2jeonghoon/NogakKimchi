@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
-    private float damage;
+    protected float damage;
 
     private float fTime = 0;
     Animator animator;
