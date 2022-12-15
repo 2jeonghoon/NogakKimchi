@@ -18,6 +18,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     public AudioClip buttonSoundClip;
 
+
     public static SoundManager instance;
 
     public Slider MasteraudioSlider;
@@ -74,7 +75,6 @@ public class SoundManager : MonoBehaviour
     // 버튼 사운드 출력
     public void onClickButton()
     {
-        Debug.Log("button click");
         GameObject go = new GameObject("ButtonSound");
         AudioSource audiosource = go.AddComponent<AudioSource>();
         audiosource.outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];

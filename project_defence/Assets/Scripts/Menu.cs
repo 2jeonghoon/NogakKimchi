@@ -24,4 +24,8 @@ public class Menu : MonoBehaviour
 
         SceneManager.LoadScene("Book");
     }
+    public void OnClickQuit()
+    {
+        Application.Quit();
+    }
 }
