@@ -15,21 +15,21 @@ public class EnemyDieEffect : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void Boom()
+    public void OnDie()
     {
         //Debug.Log("Boom");
-        animator.SetTrigger("Boom");
+        animator.SetTrigger("Die");
         StartCoroutine("WaitForAnimation");
     }
 
     public void BossSkillEffect()
     {
         //Debug.Log("Boom");
-        animator.SetTrigger("Boom");
+        animator.SetTrigger("Die");
     }
 
 
-    // 애니메이션 끝날 때 까지 대기 (1초)
+    // ?좊땲硫붿씠???앸궇 ??源뚯? ?湲?(1珥?
     IEnumerator WaitForAnimation()
     {
         float time = 0f;
@@ -40,6 +40,8 @@ public class EnemyDieEffect : MonoBehaviour
             time += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        Destroy(animator.gameObject);
+        this.transform.position = ObjectPool.instance.transform.position;
+        this.gameObject.SetActive(false);
+        ObjectPool.instance.objectPoolList[12].Enqueue(this.gameObject);
     }
 }

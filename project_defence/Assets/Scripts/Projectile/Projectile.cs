@@ -18,7 +18,8 @@ public class Projectile : MonoBehaviour
 		this.target	= target;						// 타워가 설정해준 target
 		this.damage	= damage;						// 타워의 공격력
 		this.pool_idx = 0;
-		gameObject.SetActive(true);					// ObjectPool을 사용하면서 SetActive(true)가 필요해짐
+		gameObject.SetActive(true);                 // ObjectPool을 사용하면서 SetActive(true)가 필요해짐
+        StartCoroutine("Destroy_Projectile");
     }
 
 	private void Start()
@@ -45,8 +46,6 @@ public class Projectile : MonoBehaviour
         gameObject.transform.position = ObjectPool.instance.transform.position;
         gameObject.SetActive(false);
         ObjectPool.instance.objectPoolList[idx].Enqueue(gameObject);
-		Debug.Log(gameObject);
-		Debug.Log(idx + ", Enqueue : " + ObjectPool.instance.objectPoolList[idx].Count);
 	}
 
     private IEnumerator Destroy_Projectile()
@@ -61,8 +60,8 @@ public class Projectile : MonoBehaviour
 	{
 		if ( !collision.CompareTag("Enemy") )	return;         // 적이 아닌 대상과 부딪히면
 
-        //StopCoroutine("Destory_Projectile");
-        collision.GetComponent<EnemyHP>().TakeDamage(damage);   // 적 체력을 damage만큼 감소
+        StopCoroutine("Destory_Projectile");
+        collision.GetComponent<EnemyHP>().TakeDamage(damage, false);   // 적 체력을 damage만큼 감소
         ProjectileReturn(pool_idx);								        // 발사체 오브젝트 삭제 대신 Pool에 반납
     }
 }

@@ -21,45 +21,74 @@ MonoBehaviour:
     damage: 5
     slow: 0
     buff: 0
-    rate: 0.7
+    rate: 1.2
     range: 3
     cost: 350
     sell: 280
     tileType: 0
     explosionRange: 0
     projectileSprite: {fileID: 21300000, guid: e8fb31ad8a75028409caf8d4e3b084a8, type: 3}
+    projectileSprites: []
+    upgradeImage1: {fileID: 21300000, guid: b78a185632ec9ea4e9648b5a3c210d0b, type: 3}
+    upgradeImage2: {fileID: 21300000, guid: 06ece579de5c55a4e9d2f390bcad73b0, type: 3}
   - sprite: {fileID: 21300000, guid: e59fd75c9f8bc734eb3009d95225de9d, type: 3}
     damage: 5
     slow: 0
     buff: 0
-    rate: 0.5
+    rate: 1
     range: 3
     cost: 120
     sell: 376
     tileType: 0
     explosionRange: 0
     projectileSprite: {fileID: 21300000, guid: e8fb31ad8a75028409caf8d4e3b084a8, type: 3}
-  - sprite: {fileID: 21300000, guid: a0312f0edbf83a748bb27c14467e8ad4, type: 3}
+    projectileSprites: []
+    upgradeImage1: {fileID: 21300000, guid: 9fd4de77126849246a64fb3e116d4211, type: 3}
+    upgradeImage2: {fileID: 21300000, guid: 06ece579de5c55a4e9d2f390bcad73b0, type: 3}
+  - sprite: {fileID: 21300000, guid: e59fd75c9f8bc734eb3009d95225de9d, type: 3}
     damage: 6
     slow: 0
     buff: 0
-    rate: 0.5
+    rate: 1
     range: 3
     cost: 230
     sell: 560
     tileType: 0
     explosionRange: 0
-    projectileSprite: {fileID: 21300000, guid: a671c29dd5985f643b0064729a8eed4d, type: 3}
+    projectileSprite: {fileID: 21300000, guid: e8fb31ad8a75028409caf8d4e3b084a8, type: 3}
+    projectileSprites: []
+    upgradeImage1: {fileID: 21300000, guid: a0312f0edbf83a748bb27c14467e8ad4, type: 3}
+    upgradeImage2: {fileID: 21300000, guid: aa6af2c210255ac41aa54b8e01f223ff, type: 3}
+  - sprite: {fileID: 21300000, guid: a0312f0edbf83a748bb27c14467e8ad4, type: 3}
+    damage: 6
+    slow: 0
+    buff: 0
+    rate: 1
+    range: 3.5
+    cost: 900
+    sell: 1280
+    tileType: 0
+    explosionRange: 0
+    projectileSprite: {fileID: 21300000, guid: 7a973e11cd43f354e9ee5173b4bddf13, type: 3}
+    projectileSprites:
+    - {fileID: 21300000, guid: 7a973e11cd43f354e9ee5173b4bddf13, type: 3}
+    - {fileID: 21300000, guid: a671c29dd5985f643b0064729a8eed4d, type: 3}
+    - {fileID: 21300000, guid: 625b13c598de2d341b03207a6b59959f, type: 3}
+    upgradeImage1: {fileID: 21300000, guid: 06ece579de5c55a4e9d2f390bcad73b0, type: 3}
+    upgradeImage2: {fileID: 21300000, guid: 06ece579de5c55a4e9d2f390bcad73b0, type: 3}
   - sprite: {fileID: 21300000, guid: aa6af2c210255ac41aa54b8e01f223ff, type: 3}
     damage: 6
     slow: 0
     buff: 0
-    rate: 0.5
+    rate: 1.5
     range: 3.5
-    cost: 230
-    sell: 560
+    cost: 900
+    sell: 1280
     tileType: 0
     explosionRange: 0
     projectileSprite: {fileID: 21300000, guid: 5388dbbb4c8766144a2171efa25f091c, type: 3}
-  maxTowerLV: 3
+    projectileSprites: []
+    upgradeImage1: {fileID: 21300000, guid: 06ece579de5c55a4e9d2f390bcad73b0, type: 3}
+    upgradeImage2: {fileID: 21300000, guid: 06ece579de5c55a4e9d2f390bcad73b0, type: 3}
+  maxTowerLV: 4
   isLock: 0

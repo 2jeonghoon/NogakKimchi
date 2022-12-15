@@ -4,25 +4,25 @@ using UnityEngine;
 public class EnemyHP : MonoBehaviour
 {
     [SerializeField]
-    private float           maxHP;          // 최대 체력
+    private float maxHP;          // 최대 체력
     [SerializeField]
-    private float           currentHP;      // 현재 체력
-    private bool            isDie = false;  // 적이 사망 상태이면 isDie를 true로 설정
+    private float currentHP;      // 현재 체력
+    private bool isDie = false;  // 적이 사망 상태이면 isDie를 true로 설정
     [SerializeField]
-    private float             defense;        // 방어력
-    private Enemy           enemy;
-    private SpriteRenderer  spriteRenderer;
+    private float defense;        // 방어력
+    private Enemy enemy;
+    private SpriteRenderer spriteRenderer;
 
 
 
-    public  float MaxHP => maxHP;
-    public  float CurrentHP => currentHP;
-    
+    public float MaxHP => maxHP;
+    public float CurrentHP => currentHP;
+
     private void Awake()
     {
-        currentHP       = maxHP;            // 현재 체력을 최대 체력과 같게 설정
-        enemy           = GetComponent<Enemy>();
-        spriteRenderer  = GetComponent<SpriteRenderer>();
+        currentHP = maxHP;            // 현재 체력을 최대 체력과 같게 설정
+        enemy = GetComponent<Enemy>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void setSpawnHP()
@@ -47,7 +47,7 @@ public class EnemyHP : MonoBehaviour
         if (isDie == true) return;
 
         // 체력이 최대 체력을 넘어가지 않도록
-        if (currentHP+heal >= maxHP)
+        if (currentHP + heal >= maxHP)
         {
             currentHP = maxHP;
         }
@@ -57,25 +57,32 @@ public class EnemyHP : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, bool isIgnoreDef)
     {
         // Tip. 적의 체력이 damage 만큼 감소해서 죽을 상황일 때 여러 타워의 공격을 동시에 받으면
         // enemy.OnDie() 함수가 여러 번 실행될 수 있다.
 
         // 현재 적의 상태가 사망 상태이면 아래 코드를 실행하지 않는다.
-        if ( isDie == true ) return;
-    
+        if (isDie == true) return;
+
         // 현재 체력을 damage - defense(방어력)만큼 감소
-        if(damage - defense >= 0)
+        if (!isIgnoreDef)
         {
-            currentHP -= (damage - defense);
+            if (damage - defense >= 0)
+            {
+                currentHP -= (damage - defense);
+            }
         }
-    
+        else
+        {
+            currentHP -= damage;
+        }
+
         StopCoroutine("HitAlphaAnimation");
         StartCoroutine("HitAlphaAnimation");
-    
+
         // 체력이 0이하 = 적 캐릭터 사망
-        if ( currentHP <= 0 )
+        if (currentHP <= 0)
         {
             //isDie = true;
             // 적 캐릭터 사망

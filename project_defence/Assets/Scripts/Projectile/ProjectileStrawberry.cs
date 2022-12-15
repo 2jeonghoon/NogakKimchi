@@ -34,7 +34,7 @@ public class ProjectileStrawberry : Projectile
     private float fMaxTime = 1f; // 최대높이까지 가는 시간
 
 
-    public void Setup(Transform target, EnemySpawner enemySpawner, float explosionRange)
+    public void Setup(Transform target, float damage, EnemySpawner enemySpawner, float explosionRange)
     {
         // 발사 사운드 재생
         //SoundManager.instance.SFXPlay("Mortar", clip);
@@ -43,6 +43,7 @@ public class ProjectileStrawberry : Projectile
 
         // 포물선 이동을 위해 필요한 정보
         vStartPos = this.transform.position; // 시작지점
+        this.damage = damage;
 
         //타겟이 비활성화 상태면 시작지점에 쏘기
         if (target == null || !target.gameObject.activeSelf)
@@ -82,7 +83,7 @@ public class ProjectileStrawberry : Projectile
         if (fTime >= fMaxTime - 0.5f && this.transform.position.y <= vEndPos.y)
         {
             GameObject clone = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
-            clone.GetComponent<Explosion_Strawberry>().Setup(explosionRange);
+            clone.GetComponent<Explosion_Strawberry>().Setup(damage, explosionRange);
             fTime = 0f;
             ProjectileReturn(pool_idx);
         }
@@ -96,7 +97,7 @@ public class ProjectileStrawberry : Projectile
         if (collision.transform != Tile.transform) return;          // 현재 맞은게 타겟타일이 아니면
         
         GameObject clone = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
-        clone.GetComponent<Explosion_Strawberry>().Setup(explosionRange);
+        clone.GetComponent<Explosion_Strawberry>().Setup(damage, explosionRange);
         fTime = 0f;
         ProjectileReturn(pool_idx);
     }

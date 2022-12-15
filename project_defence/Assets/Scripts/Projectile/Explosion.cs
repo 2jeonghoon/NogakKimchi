@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
-    private float damage;
+    protected float damage;
 
     private float fTime = 0;
     Animator animator;
@@ -17,7 +17,7 @@ public class Explosion : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void Setup(float damage,float scale)
+    public virtual void Setup(float damage,float scale)
     {
         // 폭발 사운드 재생
         SoundManager.instance.SFXPlay("boom", clip);
@@ -39,7 +39,7 @@ public class Explosion : MonoBehaviour
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Enemy")) return;         // 적이 아닌 대상과 부딪히면
-        collision.GetComponent<EnemyHP>().TakeDamage(damage);   // 적 체력을 damage만큼 감소
+        collision.GetComponent<EnemyHP>().TakeDamage(damage, false);   // 적 체력을 damage만큼 감소
         Boom();
         StartCoroutine("WaitForAnimation");
         // 적을 맞춘 경우 해당 위치에서 폭발

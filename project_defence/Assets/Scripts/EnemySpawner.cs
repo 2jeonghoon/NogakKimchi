@@ -117,9 +117,7 @@ public class EnemySpawner : MonoBehaviour
                 }
             }
         }
-
-        // 리스트에서 사망하는 적 정보 삭제
-        //enemyList.Remove(enemy);
+        enemy.isClone = false;
         // 적 오브젝트 풀로 리턴
         enemy.transform.position = ObjectPool.instance.transform.position;
         enemy.gameObject.SetActive(false);
