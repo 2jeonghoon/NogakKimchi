@@ -19,10 +19,13 @@ public class WaveSystem : MonoBehaviour
     bool isfause = false;
     float gameSpeed = 1;
 
+    bool isWaveEnd = true;
+
     [SerializeField]
     public GameObject[] _Lock;
 
     static public int spawnEnemyCount; // 스폰한 몬스터 숫자
+    
 
     // 웨이브 정보 출력을 위한 Get 프로퍼티 (현재 웨이브, 총 웨이브)
     public int CurrentWave => currentWaveIndex + 1;     // 시작이 0이기 때문에 +1
@@ -55,7 +58,7 @@ public class WaveSystem : MonoBehaviour
     public void StartWave()
     {
         // 현재 맵에 적이 없고, Wave가 남아있으면
-        if (enemySpawner.EnemyList.Count == 0 && currentWaveIndex < waves.Length - 1)
+        if (enemySpawner.EnemyList.Count == 0 && currentWaveIndex < waves.Length - 1 && isWaveEnd)
         {
             // 인덱스의 시작이 -1이기 때문에 웨이브 인덱스 증가를 제일 먼저 함
             currentWaveIndex++;
@@ -70,6 +73,7 @@ public class WaveSystem : MonoBehaviour
 
     private IEnumerator WaveSpawnEnemy()
     {
+        isWaveEnd = false;
         int wave_enemy_amount = 0;
         for (int i = 0; i < waves[currentWaveIndex].wave.Length; i++)
         {
@@ -83,6 +87,7 @@ public class WaveSystem : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
         }
+        isWaveEnd = true;
     }
 
     //wave별 타워 잠금해제 (currentWaveIndex가 끝나면 타워가 열림)
@@ -92,31 +97,32 @@ public class WaveSystem : MonoBehaviour
         {
             towerSpawner.SetTowerLock(_Lock[1], 1, false);
         }
-        else if (currentWaveIndex == 10)
+        else if (currentWaveIndex == 5)
         {
             towerSpawner.SetTowerLock(_Lock[2], 2, false);
         }
-        else if (currentWaveIndex == 18)
+        else if (currentWaveIndex == 10)
         {
             towerSpawner.SetTowerLock(_Lock[3], 3, false);
         }
-        else if (currentWaveIndex == 24)
+        else if (currentWaveIndex == 13)
         {
             towerSpawner.SetTowerLock(_Lock[4], 4, false);
         }
-        else if (currentWaveIndex == 28)
+        else if (currentWaveIndex == 15)
         {
             towerSpawner.SetTowerLock(_Lock[5], 5, false);
         }
-        else if (currentWaveIndex == 32)
+        else if (currentWaveIndex == 18)
         {
             towerSpawner.SetTowerLock(_Lock[6], 6, false);
         }
-        else if (currentWaveIndex == 37)
+        else if (currentWaveIndex == 20)
         {
             towerSpawner.SetTowerLock(_Lock[7], 7, false);
         }
     }
+
 
     public void SpeedChange()
     {
@@ -149,7 +155,6 @@ public class WaveSystem : MonoBehaviour
                     GameSpeedImage[2].SetActive(true);
                     break;
                 default:
-                    break;
                     Debug.Log("speedSetError");
                     break;
             }
