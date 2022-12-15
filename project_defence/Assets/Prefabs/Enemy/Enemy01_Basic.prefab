@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 5
-  currentHP: 0
+  currentHP: 5
   defense: 0
 --- !u!82 &4832626043873031897
 AudioSource:

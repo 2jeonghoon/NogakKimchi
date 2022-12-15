@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 200
-  currentHP: 0
+  currentHP: 200
   defense: 5
 --- !u!114 &191614524568912502
 MonoBehaviour:
