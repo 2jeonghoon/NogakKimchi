@@ -26,7 +26,9 @@ public class TowerTemplate : ScriptableObject
         public Sprite[] projectileSprites; // 총알 스프라이트
         public Sprite upgradeImage1;	// 업그레이드 버튼1 이미지 
 		public Sprite upgradeImage2; // 업그레이드 버튼2 이미지 
-	}
+
+        public bool isLock { get; internal set; }
+    }
 }
 
 
