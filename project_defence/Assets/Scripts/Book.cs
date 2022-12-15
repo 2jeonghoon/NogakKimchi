@@ -18,6 +18,9 @@ public class Book : MonoBehaviour {
     public Canvas canvas;
 
     [SerializeField]
+    public AudioClip bookSoundClip;
+
+    [SerializeField]
     public float ypoint;
 
     [SerializeField]
@@ -110,6 +113,11 @@ public class Book : MonoBehaviour {
         ShadowLTR.rectTransform.sizeDelta = new Vector2(pageWidth, shadowPageHeight);
         ShadowLTR.rectTransform.pivot = new Vector2(0, (pageWidth / 2) / shadowPageHeight);
 
+    }
+
+    public void OnClickLRButton()
+    {
+        SoundManager.instance.SFXPlay("bookSoundClip", bookSoundClip);
     }
 
     private void CalcCurlCriticalPoints()
