@@ -141,7 +141,7 @@ public class Boss : Enemy
         enemySpawner.EnemyList.Add(enemy);
 
         // 소환된 클론 체력 깎기
-        enemy.GetComponent<EnemyHP>().TakeDamage((this.GetComponent<EnemyHP>().MaxHP * 0.5f));
+        enemy.GetComponent<EnemyHP>().TakeDamage((this.GetComponent<EnemyHP>().MaxHP * 0.5f), true);
         enemy.GetComponent<EnemyHP>().SetDefense(GetComponent<EnemyHP>().getDefense() * 0.5f);
 
 
