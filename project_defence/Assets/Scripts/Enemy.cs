@@ -46,9 +46,9 @@ public class Enemy : MonoBehaviour
 		// 클론 위치를 복사한 객체 위치로.
 		this.transform.position = enemy.transform.position;
 		gameObject.SetActive(true);                 // ObjectPool을 사용하면서 SetActive(true)가 필요해짐
-                                                    // 적 이동/목표지점 설정 코루틴 함수 시작
-        NextMoveTo();
-    }
+													// 적 이동/목표지점 설정 코루틴 함수 시작
+		NextMoveTo();
+	}
 
 	public virtual void Setup(EnemySpawner enemySpawner, Transform[] wayPoints, int pool_idx)
 	{
@@ -57,6 +57,7 @@ public class Enemy : MonoBehaviour
 
 		// 적 이동 경로 WayPoints 정보 설정
 		wayPointCount = wayPoints.Length;
+		currentIndex = 0;
 		this.wayPoints = new Transform[wayPointCount];
 		this.wayPoints = wayPoints;
 		this.isInstagramOn = false;

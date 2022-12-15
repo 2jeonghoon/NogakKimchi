@@ -66,7 +66,7 @@ public class EnemySpawner : MonoBehaviour
                 //GameObject clone = Instantiate(wave.enemyPrefabs[enemyIndex]);
                 if (!ObjectPool.instance.objectPoolList[wave.enemyPrefabs[enemyIndex] + 6].TryDequeue(out clone))
                 {
-                    ObjectPool.instance.InsertQueue(enemyIndex + 6);
+                    ObjectPool.instance.InsertQueue(wave.enemyPrefabs[enemyIndex] + 6);
                     clone = ObjectPool.instance.objectPoolList[wave.enemyPrefabs[enemyIndex] + 6].Dequeue();
                 }
 
