@@ -23317,7 +23317,7 @@ MonoBehaviour:
   - objectName: jelly
     perfab: {fileID: 4461503835666675623, guid: 39f676f0c1b70dc4eafb5f2eddbabb70,
       type: 3}
-    count: 200
+    count: 100
   - objectName: icecream
     perfab: {fileID: 4461503835666675623, guid: 3ccea99c6a2413e4bb2d3e684afc5e2f,
       type: 3}
@@ -23325,7 +23325,7 @@ MonoBehaviour:
   - objectName: milk
     perfab: {fileID: 4461503835666675623, guid: 5fa79304d91df0640a5005443b0155d0,
       type: 3}
-    count: 5
+    count: 40
   - objectName: strawberry
     perfab: {fileID: 4461503835666675623, guid: 08519b753ebd80d41998a3e849733409,
       type: 3}
@@ -23337,22 +23337,22 @@ MonoBehaviour:
   - objectName: Basic
     perfab: {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189,
       type: 3}
-    count: 120
+    count: 50
   - objectName: Tanker
     perfab: {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5,
       type: 3}
-    count: 200
+    count: 50
   - objectName: Runner
     perfab: {fileID: 4286712872766883678, guid: e66bd49005d852243b1e122a08a8e189,
       type: 3}
-    count: 100
+    count: 50
   - objectName: Witch
     perfab: {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34,
       type: 3}
-    count: 200
+    count: 20
   - objectName: Boss
     perfab: {fileID: 63866560545116346, guid: 4878148eb0d7a8c46b4df9d7202a708c, type: 3}
-    count: 5
+    count: 10
   - objectName: HPSlider
     perfab: {fileID: 6003947006283470158, guid: bfd6cac2502fb6a4d861fb4c336e937f,
       type: 3}
@@ -47424,7 +47424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imageScreen: {fileID: 1701104212}
-  maxHP: 1000
+  maxHP: 10
   playerHPViewer: {fileID: 354980077}
 --- !u!4 &2026522983
 Transform:
@@ -47453,7 +47453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61135f547115e3548bd09440203e8a58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentGold: 10000
+  currentGold: 650
 --- !u!1001 &2028308002
 PrefabInstance:
   m_ObjectHideFlags: 0
