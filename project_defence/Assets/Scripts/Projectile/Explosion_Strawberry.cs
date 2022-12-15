@@ -6,7 +6,7 @@ public class Explosion_Strawberry: Explosion
 {
     public void Setup(float scale)
     {
-        // Æø¹ß »ç¿îµå Àç»ı
+        // í­ë°œ ì‚¬ìš´ë“œ ì¬ìƒ
         SoundManager.instance.SFXPlay("boom", clip);
         this.transform.localScale = new Vector3(0.2f, 0.2f, 1) * scale;
     }
@@ -17,19 +17,19 @@ public class Explosion_Strawberry: Explosion
         collision.GetComponent<Movement2D>().MoveSpeed = enemyCurrentSpeed * 0.5f;
         yield return new WaitForSeconds(1f);
         if (collision.GetComponent<Enemy>().isInstagramOn)
-            yield break;                                    // ¸¸¾à Instagram SkillÀ» »ç¿ëÇß´Ù¸é ¼Óµµ¸¦ ¹Ù²Ù¾îÁÖÁö ¾ÊÀ½, Instagram ½ºÅ³ÀÌ ´õ ¿ìÀ§¿¡ ÀÖ±â ¶§¹®
+            yield break;                                    // ë§Œì•½ Instagram Skillì„ ì‚¬ìš©í–ˆë‹¤ë©´ ì†ë„ë¥¼ ë°”ê¾¸ì–´ì£¼ì§€ ì•ŠìŒ, Instagram ìŠ¤í‚¬ì´ ë” ìš°ìœ„ì— ìˆê¸° ë•Œë¬¸
         collision.GetComponent<Movement2D>().MoveSpeed = enemyCurrentSpeed;
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Enemy")) return;         // ÀûÀÌ ¾Æ´Ñ ´ë»ó°ú ºÎµúÈ÷¸é
+        if (!collision.CompareTag("Enemy")) return;         // ì ì´ ì•„ë‹Œ ëŒ€ìƒê³¼ ë¶€ë”ªíˆë©´
 
-        float enemyBaseSpeed = collision.GetComponent<Movement2D>().BaseMoveSpeed;   // ÀûÀÇ BaseMoveSpeed¸¦ °¡Á®¿È
-        //float enemyCurrentSpeed = collision.GetComponent<Movement2D>().MoveSpeed;   // ÀûÀÇ CurrentMoveSpeed¸¦ °¡Á®¿È
+        float enemyBaseSpeed = collision.GetComponent<Movement2D>().BaseMoveSpeed;   // ì ì˜ BaseMoveSpeedë¥¼ ê°€ì ¸ì˜´
+        //float enemyCurrentSpeed = collision.GetComponent<Movement2D>().MoveSpeed;   // ì ì˜ CurrentMoveSpeedë¥¼ ê°€ì ¸ì˜´
 
         if (enemyBaseSpeed == 0) 
-            return; // ÀûÀÌ ¸ØÃçÀÖÀ» ¶§´Â ¾Æ¹«·± È¿°ú¸¦ ÁÖÁö ¸øÇÑ´Ù.
+            return; // ì ì´ ë©ˆì¶°ìˆì„ ë•ŒëŠ” ì•„ë¬´ëŸ° íš¨ê³¼ë¥¼ ì£¼ì§€ ëª»í•œë‹¤.
         else 
             StartCoroutine(StrawberryJam(collision, enemyBaseSpeed));
 
@@ -37,6 +37,6 @@ public class Explosion_Strawberry: Explosion
         Debug.Log(" current : " + enemyBaseSpeed);
         Boom();
         StartCoroutine("WaitForAnimation");
-        // ÀûÀ» ¸ÂÃá °æ¿ì ÇØ´ç À§Ä¡¿¡¼­ Æø¹ß
+        // ì ì„ ë§ì¶˜ ê²½ìš° í•´ë‹¹ ìœ„ì¹˜ì—ì„œ í­ë°œ
     }
 }

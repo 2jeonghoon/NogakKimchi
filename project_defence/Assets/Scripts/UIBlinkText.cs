@@ -8,7 +8,7 @@ public class UIBlinkText : MonoBehaviour
     // Start is called before the first frame update
     private TextMeshProUGUI text;
 
-    // fade È½¼ö ÁöÁ¤
+    // fade íšŸìˆ˜ ì§€ì •
     [SerializeField]
     int fadeCount;
     void Start()
@@ -42,7 +42,7 @@ public class UIBlinkText : MonoBehaviour
             text.color = new Color(255, 255, 255, fadeTime);
         }
 
-        // fade È½¼ö¸¸Å­ fade ¹İº¹ ÈÄ gameObject ºñÈ°¼ºÈ­
+        // fade íšŸìˆ˜ë§Œí¼ fade ë°˜ë³µ í›„ gameObject ë¹„í™œì„±í™”
         if(fadeCount > 0)
         {
             fadeCount--;
@@ -57,9 +57,9 @@ public class UIBlinkText : MonoBehaviour
 /*
  * File : UIBlinkText
  * Desc
- *	: Text ±ôºıÀÓ È¿°ú
+ *	: Text ê¹œë¹¡ì„ íš¨ê³¼
  *	
  * Functions
- *	FadeInCoroutine : FadeIn ÈÄ ´ÙÀ½ ÄÚ·çÆ¾À¸·Î FadeOutÄÚ·çÆ¾ È£Ãâ
- *	FadeOutCoroutine : FadeOut ÈÄ fadeCount¸¸Å­ ´ÙÀ½ ÄÚ·çÆ¾À¸·Î FadeIn ÄÚ·çÆ¾ È£Ãâ ÈÄ gameObject ºñÈ°¼ºÈ­
+ *	FadeInCoroutine : FadeIn í›„ ë‹¤ìŒ ì½”ë£¨í‹´ìœ¼ë¡œ FadeOutì½”ë£¨í‹´ í˜¸ì¶œ
+ *	FadeOutCoroutine : FadeOut í›„ fadeCountë§Œí¼ ë‹¤ìŒ ì½”ë£¨í‹´ìœ¼ë¡œ FadeIn ì½”ë£¨í‹´ í˜¸ì¶œ í›„ gameObject ë¹„í™œì„±í™”
  */
