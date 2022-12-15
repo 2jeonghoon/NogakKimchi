@@ -139,14 +139,17 @@ public class Enemy : MonoBehaviour
 
 		// 적 사망 사운드 재생
 		SoundManager.instance.SFXPlay("EnemyDie", clip);
+        GameObject enemyDieEffect = ObjectPool.instance.objectPoolList[12].Dequeue();
+        enemyDieEffect.SetActive(true);
+        enemyDieEffect.transform.position = this.gameObject.transform.position;
+        enemyDieEffect.GetComponent<EnemyDieEffect>().OnDie();
 
-
-		// Enemy
-		//
-		//
-		// er에서 리스트로 적 정보를 관리하기 때문에 Destroy()를 직접하지 않고
-		// EnemySpawner에게 본인이 삭제될 때 필요한 처리를 하도록 DestroyEnemy() 함수 호출
-		currentIndex = 0;
+        // Enemy
+        //
+        //
+        // er에서 리스트로 적 정보를 관리하기 때문에 Destroy()를 직접하지 않고
+        // EnemySpawner에게 본인이 삭제될 때 필요한 처리를 하도록 DestroyEnemy() 함수 호출
+        currentIndex = 0;
 		enemySpawner.DestroyEnemy(type, this, gold);
 	}
     public float GetBaseMoveSpeed()
