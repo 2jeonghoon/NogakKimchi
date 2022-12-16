@@ -107,23 +107,44 @@ public class EnemyHP : MonoBehaviour
 
         // 현재 적의 상태가 사망 상태이면 아래 코드를 실행하지 않는다.
         if (isDie == true) return;
-        Debug.Log("레이저 " + damage);
-        StopCoroutine("HitAlphaAnimation");
-        StartCoroutine("HitAlphaAnimation");
-        currentHP -= damage;
-        // 체력이 0이하 = 적 캐릭터 사망
-        if (currentHP <= 0)
+        try
         {
-            //isDie = true;
-            // 적 캐릭터 사망
-            // 현재 적의 색상을 color 변수에 저장
-            Color color = spriteRenderer.color;
+            StartCoroutine("HitAlphaAnimation");
+            // 체력이 0이하 = 적 캐릭터 사망
+            if (currentHP <= 0)
+            {
+                //isDie = true;
+                // 적 캐릭터 사망
+                //currentHP = maxHP;
 
-            // 적의 투명도를 0%로 설정
-            color.a = 1f;
-            spriteRenderer.color = color;
+                // 현재 적의 색상을 color 변수에 저장
+                Color color = spriteRenderer.color;
 
-            enemy.OnDie(EnemyDestroyType.Kill);
+                // 적의 투명도를 0%로 설정
+                color.a = 1f;
+                spriteRenderer.color = color;
+
+                enemy.OnDie(EnemyDestroyType.Kill);
+            }
+        }
+        catch
+        {
+            // 체력이 0이하 = 적 캐릭터 사망
+            if (currentHP <= 0)
+            {
+                //isDie = true;
+                // 적 캐릭터 사망
+                //currentHP = maxHP;
+
+                // 현재 적의 색상을 color 변수에 저장
+                Color color = spriteRenderer.color;
+
+                // 적의 투명도를 0%로 설정
+                color.a = 1f;
+                spriteRenderer.color = color;
+
+                enemy.OnDie(EnemyDestroyType.Kill);
+            }
         }
     }
 

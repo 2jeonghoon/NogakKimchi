@@ -2916,7 +2916,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: -879.9, y: 945.01}
-  m_SizeDelta: {x: 200, y: 80}
+  m_SizeDelta: {x: 109.2719, y: 80}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &186652377
 MonoBehaviour:
@@ -17648,7 +17648,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 123, y: 0}
-  m_SizeDelta: {x: 200, y: 80}
+  m_SizeDelta: {x: 111.9144, y: 80}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &780071987
 MonoBehaviour:
@@ -22999,11 +22999,11 @@ MonoBehaviour:
   - objectName: coco
     perfab: {fileID: 4461503835666675623, guid: d009f2b9f4d1a734ba1bb4b46c4aad1f,
       type: 3}
-    count: 30
+    count: 50
   - objectName: jelly
     perfab: {fileID: 4461503835666675623, guid: 39f676f0c1b70dc4eafb5f2eddbabb70,
       type: 3}
-    count: 100
+    count: 50
   - objectName: icecream
     perfab: {fileID: 4461503835666675623, guid: 3ccea99c6a2413e4bb2d3e684afc5e2f,
       type: 3}
@@ -23011,7 +23011,7 @@ MonoBehaviour:
   - objectName: milk
     perfab: {fileID: 4461503835666675623, guid: 5fa79304d91df0640a5005443b0155d0,
       type: 3}
-    count: 40
+    count: 50
   - objectName: strawberry
     perfab: {fileID: 4461503835666675623, guid: 08519b753ebd80d41998a3e849733409,
       type: 3}
@@ -23023,7 +23023,7 @@ MonoBehaviour:
   - objectName: Basic
     perfab: {fileID: 8058183836366462974, guid: 81118206d8fcce44db375cf14a01b189,
       type: 3}
-    count: 5
+    count: 50
   - objectName: Tanker
     perfab: {fileID: 4286712872766883678, guid: e195a367537c11247822702ee8235dd5,
       type: 3}
@@ -23035,7 +23035,7 @@ MonoBehaviour:
   - objectName: Witch
     perfab: {fileID: 4286712872766883678, guid: 16cac5256a48d264584ee5bb3d52ea34,
       type: 3}
-    count: 20
+    count: 50
   - objectName: Boss
     perfab: {fileID: 63866560545116346, guid: 4878148eb0d7a8c46b4df9d7202a708c, type: 3}
     count: 10
@@ -47916,7 +47916,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1351791638}
+      - m_Target: {fileID: 1768455920}
         m_TargetAssemblyTypeName: Lock, Assembly-CSharp
         m_MethodName: ImageTowerOff
         m_Mode: 1

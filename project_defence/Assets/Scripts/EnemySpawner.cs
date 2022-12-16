@@ -66,7 +66,8 @@ public class EnemySpawner : MonoBehaviour
                 //GameObject clone = Instantiate(wave.enemyPrefabs[enemyIndex]);
                 if (!ObjectPool.instance.objectPoolList[wave.enemyPrefabs[enemyIndex] + 6].TryDequeue(out clone))
                 {
-                    clone = Instantiate(waveSystem.enemyPrefabs[enemyIndex]);
+                    ObjectPool.instance.InsertQueue(wave.enemyPrefabs[enemyIndex] + 6);
+                    clone = ObjectPool.instance.objectPoolList[wave.enemyPrefabs[enemyIndex] + 6].Dequeue();
                 }
 
                 Enemy enemy = clone.GetComponent<Enemy>();  // 방금 생성된 적의 Enemy 컴포넌트
@@ -122,6 +123,7 @@ public class EnemySpawner : MonoBehaviour
         // 적 오브젝트 풀로 리턴
         enemy.transform.position = ObjectPool.instance.transform.position;
         enemy.gameObject.SetActive(false);
+     
         ObjectPool.instance.objectPoolList[enemy.Pool_Idx + 6].Enqueue(enemy.gameObject);
     }
 

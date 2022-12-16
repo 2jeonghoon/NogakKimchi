@@ -46,6 +46,7 @@ public class Boss : Enemy
         gameObject.SetActive(true);					// ObjectPool을 사용하면서 SetActive(true)가 필요해짐
         // 적 이동/목표지점 설정 코루틴 함수 시작
         StartCoroutine("skill", delay_time);
+        NextMoveTo();
     }
 
     private IEnumerator skill(float delay_time)
@@ -170,7 +171,7 @@ public class Boss : Enemy
             GameObject clone;
             if (!ObjectPool.instance.objectPoolList[i + 6].TryDequeue(out clone))
             {
-                ObjectPool.instance.InsertQueue(i+6);
+                ObjectPool.instance.InsertQueue(i + 6);
                 clone = ObjectPool.instance.objectPoolList[1].Dequeue();
             }
             Enemy enemy = clone.GetComponent<Enemy>();  // 방금 생성된 적의 Enemy 컴포넌트된 클론 위치 세팅
