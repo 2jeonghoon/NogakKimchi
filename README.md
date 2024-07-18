@@ -4,10 +4,10 @@
 > Development completed
 
 ## Information
-2학년 2학기 게임소프트웨어개발1 과목 프로젝트
+- 2학년 2학기 게임소프트웨어개발1 과목 프로젝트
 
 ### Developer
-Team NOGAK-KIMCHI, Department of Game Design and Development, Sangmyung University
+- Team NOGAK-KIMCHI, Department of Game Design and Development, Sangmyung University
 
 ### Platform
 - Windows
@@ -18,5 +18,3 @@ Team NOGAK-KIMCHI, Department of Game Design and Development, Sangmyung Universi
 
 ### Engine
 - Unreal Engine 4.27.2
-
-
