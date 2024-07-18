@@ -17,6 +17,6 @@ Team NOGAK-KIMCHI, Department of Game Design and Development, Sangmyung Universi
 - Tower Defense
 
 ### Engine
-Unreal Engine 4.27.2
+- Unreal Engine 4.27.2
 
 
