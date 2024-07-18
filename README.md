@@ -2,6 +2,7 @@
 
 > [!NOTE]
 > Development completed
+> 2학년 2학기 게임소프트웨어개발I
 
 ## Information
 
