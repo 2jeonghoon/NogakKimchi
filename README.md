@@ -1,4 +1,4 @@
-# PROJECT: ROSSINANTE
+# PROJECT: BREAD_DEFENSE
 
 > [!NOTE]
 > Development completed
@@ -12,8 +12,8 @@ Team NOGAK-KIMCHI, Department of Game Design and Development, Sangmyung Universi
 - Windows
 
 ### Genre
-- Third-Person Shooter
-- Role Playing
+- Tile-based
+- Tower Defense
 
 ### Engine
 Unreal Engine 4.27.2
